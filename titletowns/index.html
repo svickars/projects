@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en-US" class="no-js no-svg">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Titletowns</title>
+
+    <meta name="description" content="Information artist, graphic designer, story teller." />
+
+    <link href="https://fonts.googleapis.com/css?family=Cormorant+Garamond:300,400,500|Roboto:100,400" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" rel="stylesheet">
+
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <script src="http://d3js.org/queue.v1.min.js"></script>
+    <script src="//d3js.org/d3-geo-projection.v1.min.js"></script>
+    <script src="//d3js.org/topojson.v1.min.js"></script>
+    <script src='https://unpkg.com/intersection-observer'></script>
+    <script src='js/scrollama-min.js'></script>
+
+    <script>
+      (function(i, s, o, g, r, a, m) {
+        i['GoogleAnalyticsObject'] = r;
+        i[r] = i[r] || function() {
+          (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date();
+        a = s.createElement(o),
+          m = s.getElementsByTagName(o)[0];
+        a.async = 1;
+        a.src = g;
+        m.parentNode.insertBefore(a, m)
+      })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+
+      ga('create', 'UA-72865926-2', 'auto');
+      ga('send', 'pageview');
+    </script>
+
+  </head>
+
+  <body>
+
+    <header>
+      <div class="left">
+        <a href="http://samvickars.is">Sam Vickars</a>
+      </div>
+    </header>
+
+    <div class="title-wrapper">
+      <div class="title">
+        <h1><span class="title-main">&nbsp;Titletowns&nbsp;</span></h1>
+        <h2>The Winningest Cities in America</h2>
+      </div>
+    </div>
+
+    <div class="story">
+      <p>Since 1870, 311 distinct professional sports franchises have existed in North America<sup>1</sup>. In 2017, 1917 NCAA Div I teams represented 352 colleges and universities in women's basketball, soccer, and volleyball, and men's football, basketball
+        and baseball<sup>2</sup>. In all, these teams have represented 154 cities across Canada and the United States and have competed for 1000 titles since 1870.</p>
+      <p>Here, I look at the last 148 years of sport to find North America's <strong>Titletowns</strong> &mdash; its winningest cities, the places which have known the most athletic success, the capitals of championship.</p>
+      <p>Scroll on to find them for yourself. </p>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus mollis erat non sapien blandit tempor. Suspendisse ultricies gravida tellus id sollicitudin. Cras vel dapibus sapien. Nullam semper ipsum tellus, vel semper tortor scelerisque at.
+        Mauris varius ornare risus a malesuada. Sed fringilla lectus velit, id sodales nibh sodales ac. Sed commodo velit ac elementum mattis. Cras sit amet eros non elit ullamcorper euismod.
+
+        <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Praesent viverra augue augue, sit amet rhoncus urna luctus sit amet. Nulla porta, nisl at convallis sollicitudin, dolor enim lobortis quam, id consectetur
+          orci quam et tellus. Praesent urna arcu, ullamcorper eu sollicitudin id, congue vel nibh. Nulla facilisi. Etiam congue varius est tincidunt placerat. Nunc at mollis dui. Donec vitae odio magna. Vestibulum dapibus arcu eros, at feugiat diam commodo
+          sit amet. Donec rutrum mattis tortor ac maximus.
+
+          <p>Ut mattis velit elit, sed commodo nibh vulputate et. Aenean ultrices nec velit sed rutrum. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam convallis, turpis in fringilla eleifend, nibh eros
+            dignissim nisl, sit amet maximus dolor sapien at elit. Nunc tristique venenatis sem a vehicula. Nullam interdum magna sed mauris varius, et posuere est aliquam. Sed quis lacinia velit. Ut posuere lobortis vulputate. Morbi sed nunc auctor,
+            pellentesque massa at, hendrerit mi. Phasellus at purus mattis nisi venenatis rutrum sit amet quis elit. Suspendisse potenti. Nullam convallis odio urna, non ultricies tellus gravida ut. Maecenas porta enim eleifend iaculis dignissim. Mauris
+            sapien nisi, viverra id ornare vel, cursus eu massa. Vestibulum vitae nisi in tortor rutrum egestas. Suspendisse vel rutrum nisi.</p>
+    </div>
+
+    <div class="map-container" id="firstMap">
+      <svg class="map" id="map0"></svg>
+      <button class="paused" id="play-button">Play</button>
+    </div>
+
+    <div class="map-container" id="secondMap">
+      <svg class="map" id="map1"></svg>
+    </div>
+
+    <div style="height: 500px; width: 100%;"></div>
+
+    <footer>
+      <div class="left">
+        Like this? <a href="#">Let me know</a>.
+      </div>
+      <div class="right">
+        <a href="https://twitter.com/samvickars">Twitter</a>
+        <a href="https://github.com/svickars">Github</a>
+        <a href="https://samvickars.is">Home</a>
+      </div>
+    </footer>
+
+    <script src=" //ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js "></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.5/ScrollMagic.min.js "></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.5/plugins/debug.addIndicators.min.js "></script>
+    <script src="js/main.js"></script>
+  </body>
+
+</html>
