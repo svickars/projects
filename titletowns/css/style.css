@@ -11,8 +11,12 @@ html {
 body {
   height: 100%;
   font-size: 1rem;
-  font-family: "Roboto", Arial, sans-serif;
-  color: #333; }
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color: #333;
+  background-color: white;
+  -webkit-transition: background-color 250ms linear;
+  -ms-transition: background-color 250ms linear;
+  transition: background-color 250ms linear; }
 
 input:focus,
 select:focus,
@@ -21,15 +25,25 @@ button:focus {
   outline: none; }
 
 h1 {
-  font-family: "Roboto", Arial, sans-serif;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 3em;
-  font-weight: 100;
-  text-transform: uppercase;
-  letter-spacing: 3px; }
+  font-weight: 400; }
 
 h2 {
-  font-family: "Cormorant Garamond", Georgia, serif;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 1.5em;
+  font-weight: 300; }
+
+h3 {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 2em;
+  font-weight: 500;
+  margin-bottom: 0px;
+  line-height: 1; }
+
+h5 {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 1em;
   font-weight: 300; }
 
 @media (min-width: 650px) {
@@ -37,11 +51,20 @@ h2 {
     font-size: 5em; } }
 
 p {
-  font-family: "Cormorant Garamond", Georgia, serif; }
+  line-height: 1.5em;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; }
 
 a {
   color: inherit;
   text-decoration: inherit; }
+
+sup {
+  vertical-align: baseline;
+  position: relative;
+  top: -0.4em; }
+
+sup a {
+  color: #E00000; }
 
 header {
   position: absolute;
@@ -110,41 +133,91 @@ footer > .right {
   text-align: center; }
 
 .title-main {
-  border-top: 1px solid white;
-  border-bottom: 1px solid white; }
+  border-bottom: 6px solid white; }
 
 .story {
+  width: 40%;
+  min-width: 345px;
+  margin: 50px auto 75px auto; }
+
+.divider {
+  width: 100px;
+  border-bottom: 3px solid #333;
+  margin-bottom: -25px; }
+
+.map-header {
   width: 50%;
   min-width: 350px;
-  margin: auto; }
+  margin: 25px auto 25px auto; }
+
+.map-header h5 {
+  margin: 5px 0 10px 0;
+  color: #b5b5b5; }
+
+.map-footer {
+  text-align: center;
+  width: 50%;
+  min-width: 350px;
+  margin: 25px auto 25px auto;
+  border-top: 1px solid #b5b5b5; }
+
+.map-footer-p {
+  font-family: "Roboto Mono", monospace;
+  margin-top: 10px;
+  font-size: .75em; }
 
 .map-container {
   margin-top: 50px;
   margin-bottom: 50px;
   position: relative; }
 
-.mapLabel {
-  font-size: 9px;
-  font-family: "Roboto", Arial, sans-serif;
-  font-weight: 400;
-  fill: #666; }
+.smallmap-container {
+  margin-top: 50px;
+  margin-bottom: 50px; }
+
+.mediummap-container {
+  margin-top: 50px;
+  margin-bottom: 50px; }
+
+.smallmap-wrapper {
+  display: inline-block;
+  position: relative; }
+
+.mapcaption {
+  border-top: 1px solid #b5b5b5;
+  position: relative;
+  margin-top: 8px;
+  margin-bottom: 8px;
+  text-align: center;
+  font-family: "Roboto Mono", monospace;
+  font-size: .8em; }
+
+.labelTrophy {
+  width: 1.25em;
+  height: 1.25em;
+  display: inline-block;
+  margin-right: 8px; }
+
+.labelTrophy img {
+  height: 95%;
+  position: absolute;
+  bottom: 0; }
+
+.slider {
+  width: 250px;
+  height: 15px;
+  display: inline;
+  overflow: visible; }
 
 #play-button {
-  position: absolute;
-  border-radius: 3px;
-  border: #333 1px solid;
-  border-bottom-width: 3px;
+  position: relative;
+  border: none;
   color: rgba(51, 51, 51, 0);
   margin: 0;
-  padding: 0 12px;
   width: 45px;
   cursor: pointer;
   height: 30px;
   font-size: 1em; }
-
-#play-button:hover {
-  border: #666 1px solid;
-  border-bottom-width: 3px; }
 
 .paused:before {
   content: "\f04b";
@@ -178,6 +251,22 @@ footer > .right {
 .played:hover:before {
   color: #666; }
 
+.ended:before {
+  content: "\f01e";
+  font-family: FontAwesome;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -moz-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  -o-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  color: #333333; }
+
+.ended:hover:before {
+  color: #666; }
+
 .ticks {
   font-size: 10px; }
 
@@ -187,12 +276,7 @@ footer > .right {
   stroke-linecap: round; }
 
 .track {
-  stroke: #000;
-  stroke-opacity: 0.3;
-  stroke-width: 3px; }
-
-.track-inset {
-  stroke: #dcdcdc;
+  stroke: #666;
   stroke-width: 3px; }
 
 .track-overlay {
@@ -202,10 +286,21 @@ footer > .right {
   cursor: pointer; }
 
 .handle {
-  fill: #fff;
-  stroke: #000;
-  stroke-opacity: 0.5;
-  stroke-width: 1.25px; }
+  fill: #666;
+  stroke: #fff;
+  stroke-width: 3px; }
+
+.handleStroke {
+  fill: none;
+  stroke: #666;
+  stroke-width: .5px; }
+
+.slider-tick {
+  font-size: .8em;
+  font-weight: 500; }
+
+#sliderYear {
+  font-size: 1.2em; }
 
 .label {
   position: absolute;
@@ -245,3 +340,105 @@ footer > .right {
   border-top-color: #333;
   border-width: 4px;
   margin-left: -4px; }
+
+#c1story {
+  margin-top: 150px;
+  margin-bottom: 25px;
+  display: none;
+  color: white; }
+
+.chart-container {
+  margin-top: 200px;
+  margin-bottom: 50px;
+  position: relative; }
+
+.chart-wrapper {
+  display: inline-block;
+  position: relative; }
+
+.chart-overtext {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 300px;
+  color: #fff;
+  padding: 10px;
+  background-color: #333;
+  opacity: 0; }
+
+.cityline {
+  stroke: #666;
+  stroke-width: 1.5px;
+  opacity: .5;
+  fill: none; }
+
+.yAxis path {
+  display: none; }
+
+.yAxis .tick line {
+  stroke: #efefef;
+  stroke-dasharray: 2,4;
+  opacity: .5; }
+
+.yAxis text {
+  fill: #fff;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; }
+
+.xAxis path {
+  stroke: #efefef;
+  stroke-dasharray: 2,4;
+  opacity: .5; }
+
+.xAxis text {
+  fill: #fff;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; }
+
+#chart1-losAngelesCalifornia, #chart1-newYorkNewYork, #chart1-torontoOntario, #chart1-bostonMassachusetts {
+  opacity: .75;
+  stroke: #fff;
+  stroke-width: 2px; }
+
+.c1ttbg {
+  fill: #333; }
+
+.c1ttmain {
+  fill: white;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 12px; }
+
+.c1ttsub {
+  fill: white;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 12px;
+  font-style: italic; }
+
+.colourdot {
+  display: inline-block;
+  background-color: black;
+  margin-right: 5px;
+  margin-top: 1px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  opacity: .75; }
+
+#lMLB {
+  background-color: #beaed4; }
+
+#lCFL {
+  background-color: #7fc97f; }
+
+#lMLS {
+  background-color: #fdc086; }
+
+#lNBA {
+  background-color: #ffff99; }
+
+#lNFL {
+  background-color: #f0027f; }
+
+#lNHL {
+  background-color: #bf5b17; }
+
+#lNCAA {
+  background-color: #386cb0; }
