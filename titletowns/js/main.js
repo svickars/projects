@@ -75,7 +75,7 @@ function handleResize() {
   medium_screen = false
   small_screen = false
 
-  if (windowW >= 900) {
+  if (windowW >= 1025) {
     large_screen = true;
   } else if (windowW >= 650) {
     medium_screen = true;
@@ -95,6 +95,17 @@ function handleResize() {
     smallmapD.h = windowW * .66
     mediummapD.w = (windowW - 20)
     mediummapD.h = windowW * .66
+  } else if (medium_screen) {
+    margin.left = (windowW * .125) - 8
+    margin.right = (windowW * .125) - 8
+    mapD.w = windowW * .75
+    mapD.h = (windowW * .75) * .66
+    c1D.w = windowW * .75 - c1m.left - c1m.right
+    c1D.h = (windowW * .75) * .66 - c1m.top - c1m.bottom
+    smallmapD.w = (windowW * .75) / 2
+    smallmapD.h = ((windowW * .75) / 2) * .66
+    mediummapD.w = (windowW * .75) / 2
+    mediummapD.h = ((windowW * .75) / 2) * .66
   } else {
     margin.left = (windowW * .125) - 8
     margin.right = (windowW * .125) - 8
@@ -355,7 +366,7 @@ function drawMap0(titles) {
 
   // -----SLIDER----- // https://bl.ocks.org/officeofjane/47d2b0bfeecfcb41d2212d06d095c763
   var moving = false;
-  var currentValue = 30;
+  var currentValue = 15;
 
   // var playButton = d3.select("#play-button")
   var playButton = d3.select("#play-button");
@@ -467,9 +478,41 @@ function drawMap0(titles) {
     return d;
   }
 
+  document.onkeydown = checkKey;
+
+  function checkKey(e) {
+    e = e || window.event;
+    if (e.which == "32") {
+      e.preventDefault();
+      if (!map0) {
+        map0 = true;
+        $("#play-button").click();
+      } else {
+        map0 = false;
+        $("#play-button").click();
+      }
+    } else if (e.which == "39") {
+      step();
+    } else if (e.which == "37") {
+      stepBack()
+    }
+  }
+
   function step() {
     update(x.invert(currentValue));
     currentValue = currentValue + (targetValue / 151);
+    if (currentValue > targetValue) {
+      moving = false;
+      currentValue = 0;
+      clearInterval(timer);
+      // timer = 0;
+      playButton.text("Play");
+    }
+  } // end step
+
+  function stepBack() {
+    currentValue = currentValue - (targetValue / 151);
+    update(x.invert(currentValue));
     if (currentValue > targetValue) {
       moving = false;
       currentValue = 0;
