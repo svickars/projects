@@ -440,12 +440,12 @@ function drawMap0(titles) {
   //   });
 
   var handle = slider.insert("circle", ".track-overlay")
-    .attr("class", "handle")
+    .attr("class", "slider-handle")
     .attr("r", 5)
     .attr("cx", x(startDate));
 
   var handleStroke = slider.insert("circle", ".track-overlay")
-    .attr("class", "handleStroke")
+    .attr("class", "slider-handleStroke")
     .attr("r", 7)
     .attr("cx", x(startDate));
 
@@ -596,6 +596,7 @@ function drawMap0small(titles) {
   var g = svg.append("g").attr("transform", "translate(" + mapD.m + "," + mapD.m + ")");
   d3.select("#play-button").style("display", "none")
   d3.select("#sliderYear").style("display", "none")
+  d3.selectAll(".hide").style("display", "none")
 
   var cities = g.selectAll(".cityNFL")
     .data(data);
