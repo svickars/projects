@@ -151,7 +151,14 @@ footer > .right {
   margin: 25px auto 25px auto; }
 
 .map-header h5 {
-  margin: 5px 0 10px 0;
+  margin: 5px 0 5px 0;
+  color: #b5b5b5; }
+
+.map-header p {
+  font-family: "Roboto Mono", monospace;
+  font-size: .75em;
+  font-weight: 400;
+  margin: 0;
   color: #b5b5b5; }
 
 .map-footer {
@@ -442,3 +449,12 @@ footer > .right {
 
 #lNCAA {
   background-color: #386cb0; }
+
+.key {
+  font-size: .8em;
+  padding: 2px 3px 0 3px;
+  border: 1px solid #666;
+  color: #666;
+  border-radius: 3px;
+  border-bottom-width: 3px;
+  border-right-width: 2px; }
