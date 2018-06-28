@@ -458,3 +458,40 @@ footer > .right {
   border-radius: 3px;
   border-bottom-width: 3px;
   border-right-width: 2px; }
+
+.annotation-note-title {
+  font-size: 1em;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  fill: #E00000 !important; }
+
+.annotation-note-label {
+  font-size: .75em;
+  font-family: "Roboto Mono", monospace;
+  fill: #333 !important; }
+
+.annotation-connector .connector {
+  stroke: #333 !important; }
+
+.annotation-connector .connector-end {
+  fill: #333 !important;
+  stroke: none; }
+
+.annotation-end {
+  text-anchor: end; }
+
+.annotation-start {
+  text-anchor: start; }
+
+.map0Annotation {
+  opacity: 0;
+  -webkit-transition: opacity .15s ease-in-out;
+  -moz-transition: opacity .5s ease-in-out;
+  -ms-transition: opacity .5s ease-in-out;
+  -o-transition: opacity .5s ease-in-out;
+  transition: opacity .5s ease-in-out; }
+
+.map0AnnotationCurrent .annotation-note-title, .map0AnnotationCurrent .annotation-note-label {
+  fill: #b5b5b5 !important; }
+
+.map0AnnotationCurrent .annotation-connector .connector {
+  stroke: #E00000 !important; }
