@@ -38,6 +38,9 @@ var margin = {
   smallmapCount = 4,
   mediummapCount = 2;
 
+var userCoord = [],
+  userPlace;
+
 var large_screen = false,
   medium_screen = false,
   small_screen = false,
@@ -218,11 +221,14 @@ function loadData() {
     .defer(d3.csv, "data/cities.csv")
     .defer(d3.csv, "data/matrix.csv")
     .await(processData);
+
+  ipLookUp()
 } // end loadData
 
 function processData(error, world, us, canada, titles, places, matrix) {
   handleResize();
   window.addEventListener("resize", handleResize);
+  findClosest(places);
   drawMaps(world, us, canada);
   if (small_screen) drawMap0small(titles);
   if (!small_screen) drawMap0(titles);
@@ -545,7 +551,7 @@ function drawMap0(titles) {
         return d.colour
       })
       .style("opacity", function(d) {
-        return opacityScale(d.nth) / 2
+        return opacityScale(d.nth)
       })
       .attr("r", 0)
       .transition().duration(400)
@@ -579,11 +585,305 @@ function drawMap0(titles) {
       $("#play-button").removeClass("paused").removeClass("played").addClass("ended")
     }
 
+    if (parseInt(d3.select("#sliderYear").html()) < 1875) {
+      d3.selectAll(".map0Annotation").style("opacity", "0")
+    }
+    if (parseInt(d3.select("#sliderYear").html()) > 1874) {
+      d3.select(".map0Annotation1875").style("opacity", "1")
+    }
+    if (parseInt(d3.select("#sliderYear").html()) < 1903) {
+      d3.select(".map0Annotation1903").style("opacity", "0")
+    }
+    if (parseInt(d3.select("#sliderYear").html()) > 1902) {
+      d3.select(".map0Annotation1875").style("opacity", "0")
+      d3.select(".map0Annotation1903").style("opacity", "1")
+    }
+    if (parseInt(d3.select("#sliderYear").html()) < 1918) {
+      d3.select(".map0Annotation1918").style("opacity", "0")
+    }
+    if (parseInt(d3.select("#sliderYear").html()) > 1917) {
+      d3.select(".map0Annotation1903").style("opacity", "0")
+      d3.select(".map0Annotation1918").style("opacity", "1")
+    }
+    if (parseInt(d3.select("#sliderYear").html()) < 1921) {
+      d3.select(".map0Annotation1921").style("opacity", "0")
+    }
+    if (parseInt(d3.select("#sliderYear").html()) > 1920) {
+      d3.select(".map0Annotation1921").style("opacity", "1")
+    }
+    if (parseInt(d3.select("#sliderYear").html()) < 1939) {
+      d3.select(".map0Annotation1939").style("opacity", "0")
+    }
+    if (parseInt(d3.select("#sliderYear").html()) > 1938) {
+      d3.select(".map0Annotation1918").style("opacity", "0")
+      d3.select(".map0Annotation1921").style("opacity", "0")
+      d3.select(".map0Annotation1939").style("opacity", "1")
+    }
+    if (parseInt(d3.select("#sliderYear").html()) > 1950) {
+      d3.select(".map0Annotation1939").style("opacity", "0")
+    }
+    if (parseInt(d3.select("#sliderYear").html()) < 1967) {
+      d3.select(".map0Annotation1967").style("opacity", "0")
+    }
+    if (parseInt(d3.select("#sliderYear").html()) > 1966) {
+      d3.select(".map0Annotation1967").style("opacity", "1")
+    }
+    if (parseInt(d3.select("#sliderYear").html()) > 1977) {
+      d3.select(".map0Annotation1967").style("opacity", "0")
+    }
+    if (parseInt(d3.select("#sliderYear").html()) < 1985) {
+      d3.select(".map0Annotation1985").style("opacity", "0")
+    }
+    if (parseInt(d3.select("#sliderYear").html()) > 1984) {
+      d3.select(".map0Annotation1985").style("opacity", "1")
+    }
+    if (parseInt(d3.select("#sliderYear").html()) < 2002) {
+      d3.select(".map0Annotation2002").style("opacity", "0")
+    }
+    if (parseInt(d3.select("#sliderYear").html()) > 2001) {
+      d3.select(".map0Annotation1985").style("opacity", "0")
+      d3.select(".map0Annotation2002").style("opacity", "1")
+    }
+    if (parseInt(d3.select("#sliderYear").html()) < 2018) {
+      d3.selectAll(".map0Annotation2018").style("opacity", "0")
+    }
+    if (parseInt(d3.select("#sliderYear").html()) > 2017) {
+      d3.select(".map0Annotation2002").style("opacity", "0")
+      d3.selectAll(".map0Annotation2018").style("opacity", "1")
+    }
+
+
     var newData = titles.filter(function(d) {
       return d.year <= formatDateIntoYear(h);
     })
     drawPlot(newData);
   } //end update
+
+  // annotations, thank you Susie Lu
+  // const type = d3.annotationCustomType(
+  //   d3.annotationCalloutCurve, {
+  //     "className": "custom",
+  //     "connector": {},
+  //     "note": {}
+  //   })
+  const type = d3.annotationCalloutElbow
+
+  const map0Annotations = [{
+      note: {
+        label: "Titletowns of the late 1800s centred around the NE United States, home to a good chunk of early NCAA Div 1 football championships.",
+        orientation: "leftRight",
+        lineType: "none",
+        align: "middle"
+      },
+      className: "map0Annotation annotation-end map0Annotation1875",
+      x: projection([-72.9642011, 41.2983476])[0],
+      y: projection([-72.9642011, 41.2983476])[1],
+      dy: -75,
+      dx: -100
+    },
+    {
+      note: {
+        label: "Professional sports championships began with baseball's World Series landing in Boston, the first of their nine Major League titles, and quickly shifting to New York and then Chicago.",
+        orientation: "leftRight",
+        lineType: "none",
+        align: "middle"
+      },
+      className: "map0Annotation annotation-end map0Annotation1903",
+      x: projection([-71.0588801, 42.3600825])[0] + 8,
+      y: projection([-71.0588801, 42.3600825])[1] + 8,
+      dy: -75,
+      dx: -100
+    },
+    {
+      note: {
+        label: "The first professional Stanley Cup was won in 1918 by Toronto, the first of their 13. Hockey championships account for more than 30% of Toronto's titles.",
+        orientation: "leftRight",
+        lineType: "none",
+        align: "middle"
+      },
+      className: "map0Annotation annotation-end map0Annotation1918",
+      x: projection([-79.3831843, 43.653226])[0] + 8,
+      y: projection([-79.3831843, 43.653226])[1] + 8,
+      dy: -85,
+      dx: -105
+    },
+    {
+      note: {
+        label: "The first city on the West Coast to join the party was Berkeley, when the University of California Berkeley won its first of six NCAA titles.",
+        orientation: "leftRight",
+        lineType: "none",
+        align: "middle"
+      },
+      className: "map0Annotation annotation-start map0Annotation1921",
+      x: projection([-122.272747, 37.8715926])[0] + 8,
+      y: projection([-122.272747, 37.8715926])[1] + 8,
+      dy: 75,
+      dx: 90
+    },
+    {
+      note: {
+        label: "The inaugural March Madness, also known as the NCAA Division I Men's Basketball Tournament, was played in 1939 and won by the University of Oregon, bringing just the seventh title (all NCAA) to the West Coast.",
+        orientation: "leftRight",
+        lineType: "none",
+        align: "middle"
+      },
+      className: "map0Annotation annotation-start map0Annotation1939",
+      x: projection([-123.0867536, 44.0520691])[0] + 8,
+      y: projection([-123.0867536, 44.0520691])[1] + 8,
+      dy: -75,
+      dx: 90
+    },
+    {
+      note: {
+        label: "The first Superbowl (previously the NFL Championships) was won by Titletown USA, or Green Bay, Wisconsin, in 1967. Green Bay has won 13 NFL championships, the most of any city.",
+        orientation: "leftRight",
+        lineType: "none",
+        align: "middle"
+      },
+      className: "map0Annotation annotation-end map0Annotation1967",
+      x: projection([-88.0132958, 44.5133188])[0] + 8,
+      y: projection([-88.0132958, 44.5133188])[1] + 8,
+      dy: 65,
+      dx: -120
+    },
+    {
+      note: {
+        label: "By the mid-1980s, New York City was far and away the winningest city around, having claimed 43 professional titles (and just one college ship), mostly in baseball.",
+        orientation: "leftRight",
+        lineType: "none",
+        align: "middle"
+      },
+      className: "map0Annotation annotation-end map0Annotation1985",
+      x: projection([-74.0059728, 40.7127753])[0] + 8,
+      y: projection([-74.0059728, 40.7127753])[1] + 8,
+      dy: -90,
+      dx: -115
+    },
+    {
+      note: {
+        label: "In 2002, LA surpassed NYC in total championships, having won nine in the previous decade. They continue to be America's winningest city. West Coast, Best Coast.",
+        orientation: "leftRight",
+        lineType: "none",
+        align: "middle"
+      },
+      className: "map0Annotation annotation-start map0Annotation2002",
+      x: projection([-118.2436849, 34.0522342])[0] + 8,
+      y: projection([-118.2436849, 34.0522342])[1] + 8,
+      dy: -60,
+      dx: 85
+    },
+    {
+      note: {
+        title: "1. Los Angeles",
+        label: "27 PRO/39 NCAA",
+        orientation: "leftRight",
+        lineType: "none",
+        align: "middle"
+      },
+      className: "map0Annotation annotation-start map0Annotation2018",
+      x: projection([-118.2436849, 34.0522342])[0] + 8,
+      y: projection([-118.2436849, 34.0522342])[1] + 8,
+      dy: -40,
+      dx: 50
+    },
+    {
+      note: {
+        title: "2. New York",
+        label: "54 PRO/1 NCAA",
+        orientation: "leftRight",
+        lineType: "none",
+        align: "middle"
+      },
+      className: "map0Annotation annotation-end map0Annotation2018",
+      x: projection([-74.0059728, 40.7127753])[0] + 8,
+      y: projection([-74.0059728, 40.7127753])[1] + 8,
+      dy: 100,
+      dx: -110
+    },
+    {
+      note: {
+        title: "3. Toronto",
+        label: "40 PRO",
+        orientation: "leftRight",
+        lineType: "none",
+        align: "middle"
+      },
+      className: "map0Annotation annotation-end map0Annotation2018",
+      x: projection([-79.3831843, 43.653226])[0] + 8,
+      y: projection([-79.3831843, 43.653226])[1] + 8,
+      dy: -40,
+      dx: -50
+    },
+    {
+      note: {
+        title: "4. Boston",
+        label: "37 PRO",
+        orientation: "leftRight",
+        lineType: "none",
+        align: "middle"
+      },
+      className: "map0Annotation annotation-end map0Annotation2018",
+      x: projection([-71.0588801, 42.3600825])[0] + 8,
+      y: projection([-71.0588801, 42.3600825])[1] + 8,
+      dy: -40,
+      dx: -50
+    },
+    {
+      note: {
+        title: "5. Montreal",
+        label: "36 PRO",
+        orientation: "leftRight",
+        lineType: "none",
+        align: "middle"
+      },
+      className: "map0Annotation annotation-end map0Annotation2018",
+      x: projection([-73.567256, 45.5016889])[0] + 8,
+      y: projection([-73.567256, 45.5016889])[1] + 8,
+      dy: -40,
+      dx: -50
+    }
+  ]
+
+  const map0MakeAnnotations = d3.annotation()
+    .textWrap(250)
+    .type(type)
+    .annotations(map0Annotations);
+
+  svg.append("g")
+    .attr("class", "annotation-group")
+    .call(map0MakeAnnotations);
+
+  if (userPlace != undefined && userPlace.city != "Los Angeles" && userPlace.city != "New York" && userPlace.city != "Toronto" && userPlace.city != "Boston" && userPlace.city != "Montreal") {
+    const map0CurrentAnnotations = [{
+      note: {
+        title: userPlace.rank + ". " + userPlace.city,
+        label: userPlace.count + " TITLES",
+        orientation: "leftRight",
+        lineType: "none",
+        align: "middle"
+      },
+      className: "map0Annotation annotation-end map0Annotation2018 map0AnnotationCurrent",
+      x: projection(parseCoord(userPlace.lngLat))[0] + 8,
+      y: projection(parseCoord(userPlace.lngLat))[1] + 8,
+      dy: -20,
+      dx: -30
+    }]
+
+    const map0MakeCurrentAnnotations = d3.annotation()
+      .textWrap(250)
+      .type(type)
+      .annotations(map0CurrentAnnotations);
+
+    svg.append("g")
+      .attr("class", "annotation-group")
+      .call(map0MakeCurrentAnnotations);
+
+  }
+
+  // end annotations
+
+
+
 } // end drawMap0
 
 function drawMap0small(titles) {
@@ -912,4 +1212,44 @@ function countThis(array, value) {
 
 function parseCoord(value) {
   return JSON.parse("[" + value + "]")[0]
+}
+
+function Deg2Rad(deg) {
+  return deg * Math.PI / 180;
+}
+
+function PythagorasEquirectangular(lat1, lon1, lat2, lon2) {
+  lat1 = Deg2Rad(lat1);
+  lat2 = Deg2Rad(lat2);
+  lon1 = Deg2Rad(lon1);
+  lon2 = Deg2Rad(lon2);
+  var R = 6371; // km
+  var x = (lon2 - lon1) * Math.cos((lat1 + lat2) / 2);
+  var y = (lat2 - lat1);
+  var d = Math.sqrt(x * x + y * y) * R;
+  return d;
+}
+
+function ipLookUp() {
+  $.ajax('http://ip-api.com/json')
+    .then(
+      function success(response) {
+        userCoord.push(response.lat, response.lon)
+      }
+    );
+}
+
+function findClosest(places) {
+  var mindif = 99999;
+  var closest;
+
+  for (i = 0; i < places.length; ++i) {
+    var dif = PythagorasEquirectangular(userCoord[0], userCoord[1], places[i].Latitude, places[i].Longitude);
+    if (dif < mindif) {
+      closest = i;
+      mindif = dif;
+    }
+  }
+  userPlace = places[closest]
+  console.log(userPlace)
 }
