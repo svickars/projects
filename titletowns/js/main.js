@@ -197,9 +197,9 @@ function handleResize() {
   }
 
   if (small_screen) {
-    d3.select("#chart-overtext1").style("display", "none")
-    d3.select("#c1story").style("display", "block")
-    d3.select(".chart-container").style("margin-top", "25px")
+    // d3.select("#chart-overtext1").style("display", "none")
+    // d3.select("#c1story").style("display", "block")
+    // d3.select(".chart-container").style("margin-top", "25px")
   }
 
   // SLIDER
@@ -233,7 +233,7 @@ function processData(error, world, us, canada, titles, places, matrix) {
   if (small_screen) drawMap0small(titles);
   if (!small_screen) drawMap0(titles);
   drawProMaps(titles);
-  drawProVsCollegeMaps(titles);
+  drawProVsCollegeMaps(titles, places);
   drawChart1(matrix);
   detectView();
 } // end processData
@@ -659,14 +659,14 @@ function drawMap0(titles) {
     drawPlot(newData);
   } //end update
 
-  // annotations, thank you Susie Lu
-  // const type = d3.annotationCustomType(
-  //   d3.annotationCalloutCurve, {
-  //     "className": "custom",
-  //     "connector": {},
-  //     "note": {}
-  //   })
-  const type = d3.annotationCalloutElbow
+  // Annotations -- thank you Susie Lu
+  const type = d3.annotationCustomType(
+    d3.annotationCalloutElbow, {
+      "connector": {
+        "type": "elbow",
+        "end": "dot"
+      }
+    })
 
   const map0Annotations = [{
       note: {
@@ -676,8 +676,8 @@ function drawMap0(titles) {
         align: "middle"
       },
       className: "map0Annotation annotation-end map0Annotation1875",
-      x: projection([-72.9642011, 41.2983476])[0],
-      y: projection([-72.9642011, 41.2983476])[1],
+      x: projection([-72.9642011, 41.2983476])[0] + 8,
+      y: projection([-72.9642011, 41.2983476])[1] + 8,
       dy: -75,
       dx: -100
     },
@@ -825,8 +825,8 @@ function drawMap0(titles) {
       className: "map0Annotation annotation-end map0Annotation2018",
       x: projection([-71.0588801, 42.3600825])[0] + 8,
       y: projection([-71.0588801, 42.3600825])[1] + 8,
-      dy: -40,
-      dx: -50
+      dy: -30,
+      dx: -40
     },
     {
       note: {
@@ -850,13 +850,13 @@ function drawMap0(titles) {
     .annotations(map0Annotations);
 
   svg.append("g")
-    .attr("class", "annotation-group")
+    .attr("class", "map0annotation-group")
     .call(map0MakeAnnotations);
 
   if (userPlace != undefined && userPlace.city != "Los Angeles" && userPlace.city != "New York" && userPlace.city != "Toronto" && userPlace.city != "Boston" && userPlace.city != "Montreal") {
     const map0CurrentAnnotations = [{
       note: {
-        title: userPlace.rank + ". " + userPlace.city,
+        title: userPlace.rank_all + ". " + userPlace.city,
         label: userPlace.count + " TITLES",
         orientation: "leftRight",
         lineType: "none",
@@ -875,11 +875,11 @@ function drawMap0(titles) {
       .annotations(map0CurrentAnnotations);
 
     svg.append("g")
-      .attr("class", "annotation-group")
+      .attr("class", "map0currentannotation-group")
       .call(map0MakeCurrentAnnotations);
 
-  }
 
+  }
   // end annotations
 
 
@@ -949,7 +949,7 @@ function drawProMaps(titles) {
 
     cities.enter()
       .append("circle")
-      .attr("class", "city" + league)
+      .attr("class", "promapCity city" + league)
       .attr("cx", function(d) {
         return smallprojection(parseCoord(d.t1coord))[0]
       })
@@ -975,22 +975,7 @@ function drawProMaps(titles) {
   }
 
   window.addEventListener("resize", function() {
-    d3.selectAll(".cityMLB").attr("cx", function(d) {
-      return smallprojection(parseCoord(d.t1coord))[0]
-    }).attr("cy", function(d) {
-      return smallprojection(parseCoord(d.t1coord))[1]
-    })
-    d3.selectAll(".cityNBA").attr("cx", function(d) {
-      return smallprojection(parseCoord(d.t1coord))[0]
-    }).attr("cy", function(d) {
-      return smallprojection(parseCoord(d.t1coord))[1]
-    })
-    d3.selectAll(".cityNFL").attr("cx", function(d) {
-      return smallprojection(parseCoord(d.t1coord))[0]
-    }).attr("cy", function(d) {
-      return smallprojection(parseCoord(d.t1coord))[1]
-    })
-    d3.selectAll(".cityNHL").attr("cx", function(d) {
+    d3.selectAll(".promapCity").attr("cx", function(d) {
       return smallprojection(parseCoord(d.t1coord))[0]
     }).attr("cy", function(d) {
       return smallprojection(parseCoord(d.t1coord))[1]
@@ -1000,7 +985,7 @@ function drawProMaps(titles) {
 
 } // end drawProMaps
 
-function drawProVsCollegeMaps(titles) {
+function drawProVsCollegeMaps(titles, placeData) {
 
   for (var i = 0; i < levelList.length; i++) {
     var level = levelList[i]
@@ -1013,13 +998,14 @@ function drawProVsCollegeMaps(titles) {
 
     var svg = d3.select("#mediummap" + i);
     var g = svg.append("g").attr("transform", "translate(" + mediummapD.m + "," + mediummapD.m + ")");
+    var annoG = svg.append("g").attr("class", "medMap" + i + "Annotations-group");
 
     var cities = g.selectAll(".city" + level)
       .data(data);
 
     cities.enter()
       .append("circle")
-      .attr("class", "city" + level)
+      .attr("class", "proVsmapCity city" + level)
       .attr("cx", function(d) {
         return mediumprojection(parseCoord(d.t1coord))[0]
       })
@@ -1039,18 +1025,358 @@ function drawProVsCollegeMaps(titles) {
         var t1loc = camelize(d.t1loc)
         cityList.push(t1loc)
         var nth = countThis(cityList, t1loc)
-        if (small_screen) return nth / 4
-        if (!small_screen) return nth / 2
+        if (small_screen) return nth / 5
+        if (!small_screen) return nth / 4
       })
+
+    var places = g.selectAll(".place" + level)
+      .data(placeData);
+
+    places.enter()
+      .append("circle")
+      .attr("class", "proVsmapcity place" + level)
+      .attr("id", function(d) {
+        return level + "-" + camelize(d.cityState)
+      })
+      .attr("cx", function(d) {
+        return mediumprojection(parseCoord(d.lngLat))[0]
+      })
+      .attr("cy", function(d) {
+        return mediumprojection(parseCoord(d.lngLat))[1]
+      })
+      .attr("r", function(d) {
+        if (small_screen) return d[level] / 3
+        if (!small_screen) return d[level] / 2
+      })
+      .style("fill", "#333")
+      .style("opacity", 0)
   }
 
-  window.addEventListener("resize", function() {
-    d3.selectAll(".citypro").attr("cx", function(d) {
-      return mediumprojection(parseCoord(d.t1coord))[0]
-    }).attr("cy", function(d) {
-      return mediumprojection(parseCoord(d.t1coord))[1]
+  var svg0 = d3.select("#mediummap0"),
+    svg1 = d3.select("#mediummap1")
+
+  d3.selectAll(".placepro")
+    .on("mouseover", function(d) {
+      svg0.append("text")
+        .attr("class", "cityAnnoBG cityAnno-" + camelize(d.cityState))
+        .attr("x", mediumprojection(parseCoord(d.lngLat))[0] + 8)
+        .attr("y", mediumprojection(parseCoord(d.lngLat))[1] + 8)
+        .attr("text-anchor", "middle")
+        .attr("dy", function() {
+          if (small_screen) return (d[level] / 5) * 2
+          if (!small_screen) return (d[level] / 4) * 2
+        })
+        .text(d.city + " (" + d.pro + ")")
+
+      svg0.append("text")
+        .attr("class", "mainAnno cityAnno-" + camelize(d.cityState))
+        .attr("x", mediumprojection(parseCoord(d.lngLat))[0] + 8)
+        .attr("y", mediumprojection(parseCoord(d.lngLat))[1] + 8)
+        .attr("text-anchor", "middle")
+        .attr("dy", function() {
+          if (small_screen) return (d[level] / 5) * 2
+          if (!small_screen) return (d[level] / 4) * 2
+        })
+        .text(d.city + " (" + d.pro + ")")
+
+      svg1.append("text")
+        .attr("class", "cityAnnoBG cityAnno-" + camelize(d.cityState))
+        .attr("x", mediumprojection(parseCoord(d.lngLat))[0] + 8)
+        .attr("y", mediumprojection(parseCoord(d.lngLat))[1] + 8)
+        .attr("text-anchor", "middle")
+        .attr("dy", function() {
+          if (small_screen) return (d[level] / 5) * 2
+          if (!small_screen) return (d[level] / 4) * 2
+        })
+        .text(d.city + " (" + d.NCAA + ")")
+
+      svg1.append("text")
+        .attr("class", "mainAnno cityAnno-" + camelize(d.cityState))
+        .attr("x", mediumprojection(parseCoord(d.lngLat))[0] + 8)
+        .attr("y", mediumprojection(parseCoord(d.lngLat))[1] + 8)
+        .attr("text-anchor", "middle")
+        .attr("dy", function() {
+          if (small_screen) return (d[level] / 5) * 2
+          if (!small_screen) return (d[level] / 4) * 2
+        })
+        .text(d.city + " (" + d.NCAA + ")")
     })
-    d3.selectAll(".cityNCAA").attr("cx", function(d) {
+    .on("mouseout", function(d) {
+      d3.selectAll(".cityAnno-" + camelize(d.cityState)).transition().delay(200).duration(200).style("opacity", 0).remove();
+    })
+
+  d3.selectAll(".placeNCAA")
+    .on("mouseover", function(d) {
+      svg0.append("text")
+        .attr("class", "cityAnnoBG cityAnno-" + camelize(d.cityState))
+        .attr("x", mediumprojection(parseCoord(d.lngLat))[0] + 8)
+        .attr("y", mediumprojection(parseCoord(d.lngLat))[1] + 8)
+        .attr("text-anchor", "middle")
+        .attr("dy", function() {
+          if (small_screen) return (d[level] / 5) * 2
+          if (!small_screen) return (d[level] / 4) * 2
+        })
+        .text(d.city + " (" + d.pro + ")")
+
+      svg0.append("text")
+        .attr("class", "mainAnno cityAnno-" + camelize(d.cityState))
+        .attr("x", mediumprojection(parseCoord(d.lngLat))[0] + 8)
+        .attr("y", mediumprojection(parseCoord(d.lngLat))[1] + 8)
+        .attr("text-anchor", "middle")
+        .attr("dy", function() {
+          if (small_screen) return (d[level] / 5) * 2
+          if (!small_screen) return (d[level] / 4) * 2
+        })
+        .text(d.city + " (" + d.pro + ")")
+
+      svg1.append("text")
+        .attr("class", "cityAnnoBG cityAnno-" + camelize(d.cityState))
+        .attr("x", mediumprojection(parseCoord(d.lngLat))[0] + 8)
+        .attr("y", mediumprojection(parseCoord(d.lngLat))[1] + 8)
+        .attr("text-anchor", "middle")
+        .attr("dy", function() {
+          if (small_screen) return (d[level] / 5) * 2
+          if (!small_screen) return (d[level] / 4) * 2
+        })
+        .text(d.city + " (" + d.NCAA + ")")
+
+      svg1.append("text")
+        .attr("class", "mainAnno cityAnno-" + camelize(d.cityState))
+        .attr("x", mediumprojection(parseCoord(d.lngLat))[0] + 8)
+        .attr("y", mediumprojection(parseCoord(d.lngLat))[1] + 8)
+        .attr("text-anchor", "middle")
+        .attr("dy", function() {
+          if (small_screen) return (d[level] / 5) * 2
+          if (!small_screen) return (d[level] / 4) * 2
+        })
+        .text(d.city + " (" + d.NCAA + ")")
+    })
+    .on("mouseout", function(d) {
+      d3.selectAll(".cityAnno-" + camelize(d.cityState)).transition().delay(200).duration(200).style("opacity", 0).remove();
+    })
+
+  svg0.on("mouseover", function() {
+    // d3.selectAll(".medMap0Hide").transition().duration(200).style("opacity", 0).style("display", "none")
+    d3.selectAll(".medMap0Hide").transition().duration(200).style("opacity", 0)
+  }).on("mouseout", function() {
+    // d3.selectAll(".medMap0Hide").style("display", "block").transition().duration(400).style("opacity", 1)
+    d3.selectAll(".medMap0Hide").transition().duration(400).style("opacity", 1)
+  })
+
+  svg1.on("mouseover", function() {
+    // d3.selectAll(".medMap0Hide").transition().duration(200).style("opacity", 0).style("display", "none")
+    d3.selectAll(".medMap0Hide").transition().duration(200).style("opacity", 0)
+  }).on("mouseout", function() {
+    // d3.selectAll(".medMap0Hide").style("display", "block").transition().duration(400).style("opacity", 1)
+    d3.selectAll(".medMap0Hide").transition().duration(400).style("opacity", 1)
+  })
+
+  var cityMainAnnos0 = {
+      cities: ["1. New York", "3. Boston", "6. Los Angeles", "5. Chicago"],
+      ranks: [54, 37, 27, 29],
+      coords: [
+        [-74.0059728, 40.7127753],
+        [-71.0588801, 42.3600825],
+        [-118.2436849, 34.0522342],
+        [-87.6297982, 41.8781136]
+      ]
+    },
+    cityMainAnnos1 = {
+      cities: ["1. Los Angeles", "2. Chapel Hill", "3. Notre Dame", "3. New Haven", "5. Tuscaloosa"],
+      ranks: [39, 28, 18, 18, 15],
+      coords: [
+        [-118.2436849, 34.0522342],
+        [-79.0558445, 35.9131996],
+        [-86.2379328, 41.7001908],
+        [-72.9278835, 41.308274],
+        [-87.5691734999999, 33.2098407]
+      ]
+    },
+    cityAnnos0 = {
+      cities: ["Chapel Hill", "Tuscaloosa", "Notre Dame"],
+      ranks: [0, 0, 0],
+      coords: [
+        [-79.0558445, 35.9131996],
+        [-87.5691734999999, 33.2098407],
+        [-86.2379328, 41.7001908]
+      ]
+    },
+    cityAnnos1 = {
+      cities: ["New York", "Boston", "Chicago"],
+      ranks: [1, 0, 3],
+      coords: [
+        [-74.0059728, 40.7127753],
+        [-71.0588801, 42.3600825],
+        [-87.6297982, 41.8781136]
+      ]
+    }
+
+  for (var i = 0; i < cityAnnos0.cities.length; i++) {
+    svg0.append("circle")
+      .attr("class", "medMap0Hide")
+      .attr("cx", mediumprojection(cityAnnos0.coords[i])[0] + 8)
+      .attr("cy", mediumprojection(cityAnnos0.coords[i])[1] + 8)
+      .attr("r", 4)
+      .style("stroke", "#fff")
+
+    svg0.append("circle")
+      .attr("class", "medMap0Hide")
+      .attr("cx", mediumprojection(cityAnnos0.coords[i])[0] + 8)
+      .attr("cy", mediumprojection(cityAnnos0.coords[i])[1] + 8)
+      .attr("r", 4)
+      .style("fill", "#b5b5b5")
+
+    svg1.append("circle")
+      .attr("class", "medMap0Hide")
+      .attr("cx", mediumprojection(cityAnnos1.coords[i])[0] + 8)
+      .attr("cy", mediumprojection(cityAnnos1.coords[i])[1] + 8)
+      .attr("r", 4)
+      .style("stroke", "#fff")
+
+    svg1.append("circle")
+      .attr("class", "medMap0Hide")
+      .attr("cx", mediumprojection(cityAnnos1.coords[i])[0] + 8)
+      .attr("cy", mediumprojection(cityAnnos1.coords[i])[1] + 8)
+      .attr("r", 4)
+      .style("fill", "#b5b5b5")
+
+    svg0.append("text")
+      .attr("class", "cityAnnoBG medMap0Hide")
+      .attr("x", mediumprojection(cityAnnos0.coords[i])[0] + 8)
+      .attr("y", mediumprojection(cityAnnos0.coords[i])[1] + 8)
+      .attr("text-anchor", "middle")
+      .attr("dy", function() {
+        if (cityAnnos0.cities[i] === "Notre Dame") return -13
+        return 13
+      })
+      .text(cityAnnos0.cities[i] + " (" + cityAnnos0.ranks[i] + ")")
+
+    svg1.append("text")
+      .attr("class", "cityAnnoBG medMap0Hide")
+      .attr("x", mediumprojection(cityAnnos1.coords[i])[0] + 8)
+      .attr("y", mediumprojection(cityAnnos1.coords[i])[1] + 8)
+      .attr("text-anchor", "middle")
+      .attr("dy", function() {
+        if (cityAnnos1.cities[i] === "Chicago" || cityAnnos1.cities[i] === "Boston") return -13
+        return 13
+      })
+      .text(cityAnnos1.cities[i] + " (" + cityAnnos1.ranks[i] + ")")
+
+    svg0.append("text")
+      .attr("class", "cityAnno medMap0Hide")
+      .attr("x", mediumprojection(cityAnnos0.coords[i])[0] + 8)
+      .attr("y", mediumprojection(cityAnnos0.coords[i])[1] + 8)
+      .attr("text-anchor", "middle")
+      .attr("dy", function() {
+        if (cityAnnos0.cities[i] === "Notre Dame") return -13
+        return 13
+      })
+      .text(cityAnnos0.cities[i] + " (" + cityAnnos0.ranks[i] + ")")
+
+    svg1.append("text")
+      .attr("class", "cityAnno medMap0Hide")
+      .attr("x", mediumprojection(cityAnnos1.coords[i])[0] + 8)
+      .attr("y", mediumprojection(cityAnnos1.coords[i])[1] + 8)
+      .attr("text-anchor", "middle")
+      .attr("dy", function() {
+        if (cityAnnos1.cities[i] === "Chicago" || cityAnnos1.cities[i] === "Boston") return -13
+        return 13
+      })
+      .text(cityAnnos1.cities[i] + " (" + cityAnnos1.ranks[i] + ")")
+  }
+
+  for (var i = 0; i < cityMainAnnos0.cities.length; i++) {
+    svg0.append("text")
+      .attr("class", "mainAnnoBG medMap0Hide")
+      .attr("x", mediumprojection(cityMainAnnos0.coords[i])[0] + 8)
+      .attr("y", mediumprojection(cityMainAnnos0.coords[i])[1] + 8)
+      .attr("text-anchor", "middle")
+      .attr("dy", (cityMainAnnos0.ranks[i] / 4) * 2)
+      .text(cityMainAnnos0.cities[i] + " (" + cityMainAnnos0.ranks[i] + ")")
+
+    svg0.append("text")
+      .attr("class", "mainAnno medMap0Hide")
+      .attr("x", mediumprojection(cityMainAnnos0.coords[i])[0] + 8)
+      .attr("y", mediumprojection(cityMainAnnos0.coords[i])[1] + 8)
+      .attr("text-anchor", "middle")
+      .attr("dy", cityMainAnnos0.ranks[i] / 4 * 2)
+      .text(cityMainAnnos0.cities[i] + " (" + cityMainAnnos0.ranks[i] + ")")
+  }
+
+  for (var i = 0; i < cityMainAnnos1.cities.length; i++) {
+    svg1.append("text")
+      .attr("class", "mainAnnoBG medMap0Hide")
+      .attr("x", mediumprojection(cityMainAnnos1.coords[i])[0] + 8)
+      .attr("y", mediumprojection(cityMainAnnos1.coords[i])[1] + 8)
+      .attr("text-anchor", "middle")
+      .attr("dy", (cityMainAnnos1.ranks[i] / 4) * 2)
+      .text(cityMainAnnos1.cities[i] + " (" + cityMainAnnos1.ranks[i] + ")")
+
+    svg1.append("text")
+      .attr("class", "mainAnno medMap0Hide")
+      .attr("x", mediumprojection(cityMainAnnos1.coords[i])[0] + 8)
+      .attr("y", mediumprojection(cityMainAnnos1.coords[i])[1] + 8)
+      .attr("text-anchor", "middle")
+      .attr("dy", cityMainAnnos1.ranks[i] / 4 * 2)
+      .text(cityMainAnnos1.cities[i] + " (" + cityMainAnnos1.ranks[i] + ")")
+  }
+
+
+
+
+  if (userPlace != undefined && userPlace.city != "Los Angeles" && userPlace.city != "New York" && userPlace.city != "Boston" && userPlace.city != "Chapel Hill" && userPlace.city != "Tuscaloosa" && userPlace.city != "Notre Dame") {
+
+    svg0.append("circle")
+      .attr("class", "medMap0Hide")
+      .attr("cx", mediumprojection(parseCoord(userPlace.lngLat))[0] + 8)
+      .attr("cy", mediumprojection(parseCoord(userPlace.lngLat))[1] + 8)
+      .attr("r", 4)
+      .style("fill", "#b5b5b5")
+
+    svg1.append("circle")
+      .attr("class", "medMap0Hide")
+      .attr("cx", mediumprojection(parseCoord(userPlace.lngLat))[0] + 8)
+      .attr("cy", mediumprojection(parseCoord(userPlace.lngLat))[1] + 8)
+      .attr("r", 4)
+      .style("fill", "#b5b5b5")
+
+    svg0.append("text")
+      .attr("class", "cityAnnoBG medMap0Hide")
+      .attr("x", mediumprojection(parseCoord(userPlace.lngLat))[0] + 8)
+      .attr("y", mediumprojection(parseCoord(userPlace.lngLat))[1] + 8)
+      .attr("text-anchor", "middle")
+      .attr("dy", 13)
+      .text(userPlace.city + " (" + userPlace.count + ")")
+
+    svg1.append("text")
+      .attr("class", "cityAnnoBG medMap0Hide")
+      .attr("x", mediumprojection(parseCoord(userPlace.lngLat))[0] + 8)
+      .attr("y", mediumprojection(parseCoord(userPlace.lngLat))[1] + 8)
+      .attr("text-anchor", "middle")
+      .attr("dy", 13)
+      .text(userPlace.city + " (" + userPlace.NCAA + ")")
+
+    svg0.append("text")
+      .attr("class", "cityAnno medMap0Hide")
+      .attr("x", mediumprojection(parseCoord(userPlace.lngLat))[0] + 8)
+      .attr("y", mediumprojection(parseCoord(userPlace.lngLat))[1] + 8)
+      .attr("text-anchor", "middle")
+      .attr("dy", 13)
+      .text(userPlace.city + " (" + userPlace.count + ")")
+
+    svg1.append("text")
+      .attr("class", "cityAnno medMap0Hide")
+      .attr("x", mediumprojection(parseCoord(userPlace.lngLat))[0] + 8)
+      .attr("y", mediumprojection(parseCoord(userPlace.lngLat))[1] + 8)
+      .attr("text-anchor", "middle")
+      .attr("dy", 13)
+      .text(userPlace.city + " (" + userPlace.NCAA + ")")
+  }
+  // end annotations
+
+
+  window.addEventListener("resize", function() {
+    d3.selectAll(".proVsmapCity").attr("cx", function(d) {
       return mediumprojection(parseCoord(d.t1coord))[0]
     }).attr("cy", function(d) {
       return mediumprojection(parseCoord(d.t1coord))[1]
@@ -1251,5 +1577,4 @@ function findClosest(places) {
     }
   }
   userPlace = places[closest]
-  console.log(userPlace)
 }

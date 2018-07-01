@@ -127,6 +127,15 @@ footer > .right {
   background-color: black;
   color: white; }
 
+.grey-wrapper {
+  width: 100%;
+  height: -moz-calc(100% - 16px);
+  height: -webkit-calc(100% - 16px);
+  height: calc(100% - 16px);
+  padding-top: 5px;
+  background-color: #333;
+  color: white; }
+
 .title {
   width: 100%;
   margin: auto;
@@ -189,6 +198,12 @@ footer > .right {
 .smallmap-wrapper {
   display: inline-block;
   position: relative; }
+
+#smallmap-wrapperMed0 {
+  z-index: 1; }
+
+#smallmap-wrapperMed1 {
+  z-index: 0; }
 
 .mapcaption {
   border-top: 1px solid #b5b5b5;
@@ -355,7 +370,6 @@ footer > .right {
   color: white; }
 
 .chart-container {
-  margin-top: 200px;
   margin-bottom: 50px;
   position: relative; }
 
@@ -464,10 +478,47 @@ footer > .right {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   fill: #E00000 !important; }
 
+.proVsmapAnnotation .annotation-note-title {
+  font-size: .8em; }
+
 .annotation-note-label {
   font-size: .75em;
   font-family: "Roboto Mono", monospace;
   fill: #333 !important; }
+
+.proVsmapAnnotation .annotation-note-label {
+  font-size: .5em; }
+
+.proVsmapAnnotation {
+  pointer-events: none; }
+
+.mainAnno {
+  font-size: .5em;
+  font-family: "Roboto Mono", monospace;
+  fill: #333;
+  pointer-events: none; }
+
+.cityAnno {
+  font-size: .5em;
+  font-family: "Roboto Mono", monospace;
+  fill: #b5b5b5;
+  pointer-events: none; }
+
+.cityAnnoBG {
+  font-size: .5em;
+  font-family: "Roboto Mono", monospace;
+  fill: white;
+  stroke: white;
+  stroke-width: 2;
+  pointer-events: none; }
+
+.mainAnnoBG {
+  font-size: .5em;
+  font-family: "Roboto Mono", monospace;
+  fill: white;
+  stroke: white;
+  stroke-width: 2;
+  pointer-events: none; }
 
 .annotation-connector .connector {
   stroke: #333 !important; }
