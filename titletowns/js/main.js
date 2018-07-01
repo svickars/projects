@@ -231,7 +231,7 @@ function processData(error, world, us, canada, titles, places, matrix) {
   findClosest(places);
   drawMaps(world, us, canada);
   if (small_screen) drawMap0small(titles);
-  if (!small_screen) drawMap0(titles);
+  if (!small_screen) drawMap0(titles, places);
   drawProMaps(titles);
   drawProVsCollegeMaps(titles, places);
   drawChart1(matrix);
@@ -342,11 +342,15 @@ function detectView() {
   // })
 } // end detectView
 
-function drawMap0(titles) {
+function drawMap0(titles, placeData) {
 
   var svg = d3.select("#map0");
   var gCircle = svg.append("g").attr("transform", "translate(" + mapD.m + "," + mapD.m + ")"),
     gTrophy = svg.append("g").attr("transform", "translate(" + mapD.m + "," + mapD.m + ")");
+  svg.append("g")
+    .attr("class", "map0annotation-group");
+  var gTT = svg.append("g").attr("transform", "translate(" + mapD.m + "," + mapD.m + ")");
+
 
   for (var i = 0; i < trophyList.length; i++) {
     gTrophy.append("svg:image")
@@ -528,7 +532,7 @@ function drawMap0(titles) {
     }
   } // end step
 
-  function drawPlot(data) {
+  function drawPlot(data, placeData) {
     var cities = gCircle.selectAll(".city")
       .data(data);
 
@@ -541,7 +545,6 @@ function drawMap0(titles) {
           .attr("x", projection(parseCoord(d.t1coord))[0] - 25)
           .attr("y", projection(parseCoord(d.t1coord))[1] - 25)
           .style("opacity", "1");
-
         return projection(parseCoord(d.t1coord))[0]
       })
       .attr("cy", function(d) {
@@ -557,6 +560,54 @@ function drawMap0(titles) {
       .transition().duration(400)
       .attr("r", function(d) {
         return d.nth
+      })
+
+    var placeCircles = gTT.selectAll(".placeCircles")
+      .data(placeData);
+
+    placeCircles.enter()
+      .append("circle")
+      .attr("class", "map0city placeCircles")
+      .attr("id", function(d) {
+        return "map0place" + "-" + camelize(d.cityState)
+      })
+      .attr("cx", function(d) {
+        return projection(parseCoord(d.lngLat))[0]
+      })
+      .attr("cy", function(d) {
+        return projection(parseCoord(d.lngLat))[1]
+      })
+      .attr("r", function(d) {
+        return d.count
+      })
+      .style("fill", "#333")
+      .style("opacity", 0)
+
+    d3.selectAll(".placeCircles")
+      .on("mouseover", function(d) {
+        // d3.select(this).style("opacity", 1)
+        svg.append("text")
+          .attr("class", "cityAnnoBG cityAnno-" + camelize(d.cityState))
+          .attr("x", projection(parseCoord(d.lngLat))[0] + 8)
+          .attr("y", projection(parseCoord(d.lngLat))[1] + 8)
+          .attr("text-anchor", "middle")
+          .attr("dy", function() {
+            return (d.count / 3) * 2
+          })
+          .text(d.city + " (" + d.count + ")")
+
+        svg.append("text")
+          .attr("class", "mainAnno cityAnno-" + camelize(d.cityState))
+          .attr("x", projection(parseCoord(d.lngLat))[0] + 8)
+          .attr("y", projection(parseCoord(d.lngLat))[1] + 8)
+          .attr("text-anchor", "middle")
+          .attr("dy", function() {
+            return (d.count / 3) * 2
+          })
+          .text(d.city + " (" + d.count + ")")
+      })
+      .on("mouseout", function(d) {
+        d3.selectAll(".cityAnno-" + camelize(d.cityState)).transition().delay(200).duration(200).style("opacity", 0).remove();
       })
 
     cities.exit()
@@ -650,13 +701,21 @@ function drawMap0(titles) {
     if (parseInt(d3.select("#sliderYear").html()) > 2017) {
       d3.select(".map0Annotation2002").style("opacity", "0")
       d3.selectAll(".map0Annotation2018").style("opacity", "1")
+
+      svg.on("mouseover", function() {
+        // d3.selectAll(".medMap0Hide").transition().duration(200).style("opacity", 0).style("display", "none")
+        d3.selectAll(".map0Annotation2018").transition().duration(200).style("opacity", 0)
+      }).on("mouseout", function() {
+        // d3.selectAll(".medMap0Hide").style("display", "block").transition().duration(400).style("opacity", 1)
+        d3.selectAll(".map0Annotation2018").transition().duration(400).style("opacity", 1)
+      })
     }
 
 
     var newData = titles.filter(function(d) {
       return d.year <= formatDateIntoYear(h);
     })
-    drawPlot(newData);
+    drawPlot(newData, placeData);
   } //end update
 
   // Annotations -- thank you Susie Lu
@@ -675,7 +734,7 @@ function drawMap0(titles) {
         lineType: "none",
         align: "middle"
       },
-      className: "map0Annotation annotation-end map0Annotation1875",
+      className: "map0hide map0Annotation annotation-end map0Annotation1875",
       x: projection([-72.9642011, 41.2983476])[0] + 8,
       y: projection([-72.9642011, 41.2983476])[1] + 8,
       dy: -75,
@@ -688,7 +747,7 @@ function drawMap0(titles) {
         lineType: "none",
         align: "middle"
       },
-      className: "map0Annotation annotation-end map0Annotation1903",
+      className: "map0hide map0Annotation annotation-end map0Annotation1903",
       x: projection([-71.0588801, 42.3600825])[0] + 8,
       y: projection([-71.0588801, 42.3600825])[1] + 8,
       dy: -75,
@@ -701,7 +760,7 @@ function drawMap0(titles) {
         lineType: "none",
         align: "middle"
       },
-      className: "map0Annotation annotation-end map0Annotation1918",
+      className: "map0hide map0Annotation annotation-end map0Annotation1918",
       x: projection([-79.3831843, 43.653226])[0] + 8,
       y: projection([-79.3831843, 43.653226])[1] + 8,
       dy: -85,
@@ -714,7 +773,7 @@ function drawMap0(titles) {
         lineType: "none",
         align: "middle"
       },
-      className: "map0Annotation annotation-start map0Annotation1921",
+      className: "map0hide map0Annotation annotation-start map0Annotation1921",
       x: projection([-122.272747, 37.8715926])[0] + 8,
       y: projection([-122.272747, 37.8715926])[1] + 8,
       dy: 75,
@@ -727,7 +786,7 @@ function drawMap0(titles) {
         lineType: "none",
         align: "middle"
       },
-      className: "map0Annotation annotation-start map0Annotation1939",
+      className: "map0hide map0Annotation annotation-start map0Annotation1939",
       x: projection([-123.0867536, 44.0520691])[0] + 8,
       y: projection([-123.0867536, 44.0520691])[1] + 8,
       dy: -75,
@@ -740,7 +799,7 @@ function drawMap0(titles) {
         lineType: "none",
         align: "middle"
       },
-      className: "map0Annotation annotation-end map0Annotation1967",
+      className: "map0hide map0Annotation annotation-end map0Annotation1967",
       x: projection([-88.0132958, 44.5133188])[0] + 8,
       y: projection([-88.0132958, 44.5133188])[1] + 8,
       dy: 65,
@@ -753,7 +812,7 @@ function drawMap0(titles) {
         lineType: "none",
         align: "middle"
       },
-      className: "map0Annotation annotation-end map0Annotation1985",
+      className: "map0hide map0Annotation annotation-end map0Annotation1985",
       x: projection([-74.0059728, 40.7127753])[0] + 8,
       y: projection([-74.0059728, 40.7127753])[1] + 8,
       dy: -90,
@@ -766,7 +825,7 @@ function drawMap0(titles) {
         lineType: "none",
         align: "middle"
       },
-      className: "map0Annotation annotation-start map0Annotation2002",
+      className: "map0hide map0Annotation annotation-start map0Annotation2002",
       x: projection([-118.2436849, 34.0522342])[0] + 8,
       y: projection([-118.2436849, 34.0522342])[1] + 8,
       dy: -60,
@@ -780,7 +839,7 @@ function drawMap0(titles) {
         lineType: "none",
         align: "middle"
       },
-      className: "map0Annotation annotation-start map0Annotation2018",
+      className: "map0hide map0Annotation annotation-start map0Annotation2018",
       x: projection([-118.2436849, 34.0522342])[0] + 8,
       y: projection([-118.2436849, 34.0522342])[1] + 8,
       dy: -40,
@@ -794,7 +853,7 @@ function drawMap0(titles) {
         lineType: "none",
         align: "middle"
       },
-      className: "map0Annotation annotation-end map0Annotation2018",
+      className: "map0hide map0Annotation annotation-end map0Annotation2018",
       x: projection([-74.0059728, 40.7127753])[0] + 8,
       y: projection([-74.0059728, 40.7127753])[1] + 8,
       dy: 100,
@@ -808,7 +867,7 @@ function drawMap0(titles) {
         lineType: "none",
         align: "middle"
       },
-      className: "map0Annotation annotation-end map0Annotation2018",
+      className: "map0hide map0Annotation annotation-end map0Annotation2018",
       x: projection([-79.3831843, 43.653226])[0] + 8,
       y: projection([-79.3831843, 43.653226])[1] + 8,
       dy: -40,
@@ -822,7 +881,7 @@ function drawMap0(titles) {
         lineType: "none",
         align: "middle"
       },
-      className: "map0Annotation annotation-end map0Annotation2018",
+      className: "map0hide map0Annotation annotation-end map0Annotation2018",
       x: projection([-71.0588801, 42.3600825])[0] + 8,
       y: projection([-71.0588801, 42.3600825])[1] + 8,
       dy: -30,
@@ -836,7 +895,7 @@ function drawMap0(titles) {
         lineType: "none",
         align: "middle"
       },
-      className: "map0Annotation annotation-end map0Annotation2018",
+      className: "map0hide map0Annotation annotation-end map0Annotation2018",
       x: projection([-73.567256, 45.5016889])[0] + 8,
       y: projection([-73.567256, 45.5016889])[1] + 8,
       dy: -40,
@@ -849,9 +908,7 @@ function drawMap0(titles) {
     .type(type)
     .annotations(map0Annotations);
 
-  svg.append("g")
-    .attr("class", "map0annotation-group")
-    .call(map0MakeAnnotations);
+  d3.select("g.map0annotation-group").call(map0MakeAnnotations)
 
   if (userPlace != undefined && userPlace.city != "Los Angeles" && userPlace.city != "New York" && userPlace.city != "Toronto" && userPlace.city != "Boston" && userPlace.city != "Montreal") {
     const map0CurrentAnnotations = [{
@@ -875,10 +932,7 @@ function drawMap0(titles) {
       .annotations(map0CurrentAnnotations);
 
     svg.append("g")
-      .attr("class", "map0currentannotation-group")
-      .call(map0MakeCurrentAnnotations);
-
-
+      .attr("class", "map0currentannotation-group").call(map0MakeCurrentAnnotations)
   }
   // end annotations
 
@@ -1320,9 +1374,6 @@ function drawProVsCollegeMaps(titles, placeData) {
       .attr("dy", cityMainAnnos1.ranks[i] / 4 * 2)
       .text(cityMainAnnos1.cities[i] + " (" + cityMainAnnos1.ranks[i] + ")")
   }
-
-
-  console.log(userPlace)
 
   if (userPlace != undefined && userPlace.city != "Los Angeles" && userPlace.city != "New York" && userPlace.city != "Boston" && userPlace.city != "Chapel Hill" && userPlace.city != "Tuscaloosa" && userPlace.city != "Notre Dame") {
 

@@ -473,10 +473,14 @@ footer > .right {
   border-bottom-width: 3px;
   border-right-width: 2px; }
 
+.annotation {
+  pointer-events: none; }
+
 .annotation-note-title {
   font-size: 1em;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  fill: #E00000 !important; }
+  fill: #E00000 !important;
+  pointer-events: none; }
 
 .proVsmapAnnotation .annotation-note-title {
   font-size: .8em; }
@@ -484,7 +488,8 @@ footer > .right {
 .annotation-note-label {
   font-size: .75em;
   font-family: "Roboto Mono", monospace;
-  fill: #333 !important; }
+  fill: #333 !important;
+  pointer-events: none; }
 
 .proVsmapAnnotation .annotation-note-label {
   font-size: .5em; }
