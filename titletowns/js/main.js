@@ -1322,7 +1322,7 @@ function drawProVsCollegeMaps(titles, placeData) {
   }
 
 
-
+  console.log(userPlace)
 
   if (userPlace != undefined && userPlace.city != "Los Angeles" && userPlace.city != "New York" && userPlace.city != "Boston" && userPlace.city != "Chapel Hill" && userPlace.city != "Tuscaloosa" && userPlace.city != "Notre Dame") {
 
