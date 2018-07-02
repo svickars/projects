@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="css/style.css">
     <link href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/d3-annotation/1.17.0/d3-annotation.min.css" rel="stylesheet">
+    <link href="css/easy-autocomplete.css" rel="stylesheet" />
 
     <script src="https://d3js.org/d3.v4.min.js"></script>
     <script src="http://d3js.org/queue.v1.min.js"></script>
@@ -49,6 +50,7 @@
       <div class="title">
         <h1><span class="title-main">Titletowns</span></h1>
         <h2>The Winningest Cities in America</h2>
+        <p>Data updated July 2018 | by Sam Vickars</p>
       </div>
     </div>
 
@@ -78,7 +80,7 @@
         <!-- <div class="divider"></div> -->
         <h3>The Capitals of Championship</h3>
         <h5>The hotspots of success in the continental United States and Canada, 1870-2018</h5>
-        <p class="hide">Use the timeline controls below or the <span class="key">SPACE</span> <span class="key" style="padding: 2px 5px 0 5px"><i class="fas fa-chevron-right"></i></span> <span class="key" style="padding: 2px 6px 0 5px"><i class="fas fa-chevron-left"></i></span>          keys to play/pause, or move forward or back</p>
+        <p class="hide">Use the timeline controls below or the <span class="key">ENTER</span> <span class="key" style="padding: 2px 5px 0 5px"><i class="fas fa-chevron-right"></i></span> <span class="key" style="padding: 2px 6px 0 5px"><i class="fas fa-chevron-left"></i></span>          keys to play/pause, or move forward or back</p>
       </div>
       <svg class="map" id="map0"></svg>
       <div class="map-footer">
@@ -186,18 +188,66 @@
         </div>
         <div class="chart-wrapper">
           <svg class="chart" id="chart1"></svg>
-          <div class="chart-overtext" id="chart-overtext1">
-            <h4>The Winningest Cities</h4>
-            <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Praesent viverra augue augue, sit amet rhoncus urna luctus sit amet. Nulla porta, nisl at convallis sollicitudin, dolor enim lobortis quam, id consectetur.</p>
+        </div>
+      </div>
+
+      <div class="chart-container" id="secondChart">
+        <div class="map-header" id="c2">
+          <!-- <div class="divider"></div> -->
+          <h3>The Winningest Cities in <span id="chart2headertext">Sports</span></h3>
+          <h5>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. </h5>
+          <div class="c2top">
+            <div class="chart2rightP">Select a level and sport to see the most successful cities in each.</div>
+            <div class="c2filter">
+              <span class="c2option c2optionActive" key="count">All</span> <span class="c2option" key="pro">Pro</span> <span class="c2option" key="ncaa">College</span>
+            </div>
+            <div class="c2searchWrapper">
+              <input type="text" id="search-bar" class="search-bar" placeholder="Search for a city" />
+              <i id="searchsubmit" class="fas fa-search"></i>
+            </div>
+          </div>
+        </div>
+        <div class="chart2-wrapper">
+          <div class="chart2" id="chart2">
+            <div class="chart2left">
+              <div class="chart2header">
+                <div class="chart2rank"></div>
+                <div class="chart2city">
+                  City
+                </div>
+                <div class="chart2legend">
+                  <div class="chart2legendEntry" id="lMLB">MLB</div>
+                  <div class="chart2legendEntry" id="lNBA" style="color: #333">NBA</div>
+                  <div class="chart2legendEntry" id="lNFL">NFL</div>
+                  <div class="chart2legendEntry" id="lNHL">NHL</div>
+                  <div class="chart2legendEntry" id="lMLS" style="color: #333">MLS</div>
+                  <div class="chart2legendEntry" id="lCFL">CFL</div>
+                  <div class="chart2legendEntry" id="lNCAA">NCAA</div>
+                </div>
+              </div>
+            </div>
+            <div class="chart2right">
+              <div class="chart2city" style="opacity: 0">
+                City
+              </div>
+              <div class="chart2rightP">Select a level and sport to see the most successful cities in each.</div>
+              <div class="c2filter">
+                <span class="c2option c2optionActive" key="count">All</span> <span class="c2option" key="pro">Pro</span> <span class="c2option" key="ncaa">College</span>
+              </div>
+              <div class="c2searchWrapper">
+                <input type="text" id="search-bar" class="search-bar" placeholder="Search for a city" />
+                <i id="searchsubmit" class="fas fa-search"></i>
+              </div>
+            </div>
           </div>
         </div>
       </div>
 
     </div>
 
-    <hr></hr>
+    <!-- <hr></hr>
 
-    <sup id="fn1">1. [Text of footnote 1]<a href="#ref1" title="Jump back to footnote 1 in the text.">↩</a></sup>
+    <sup id="fn1">1. [Text of footnote 1]<a href="#ref1" title="Jump back to footnote 1 in the text.">↩</a></sup> -->
 
     <div style="height: 500px; width: 100%;"></div>
 
@@ -216,6 +266,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-annotation/1.17.0/d3-annotation.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.5/ScrollMagic.min.js "></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.5/plugins/debug.addIndicators.min.js "></script>
+    <script src="js/jquery.easy-autocomplete.js"></script>
     <script src="js/main.js"></script>
   </body>
 

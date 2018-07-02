@@ -1,3 +1,19 @@
+var cLeagues = {
+  mlb: "#beaed4",
+  cfl: "#7fc97f",
+  mls: "#fdc086",
+  nba: "#ffff99",
+  nfl: "#f0027f",
+  nhl: "#bf5b17",
+  ncaa: "#386cb0",
+  "ncaa-baseball-m": "#386cb0",
+  "ncaa-basketball-m": "#386cb0",
+  "ncaa-basketball-w": "#386cb0",
+  "ncaa-football-m": "#386cb0",
+  "ncaa-soccer-w": "#386cb0",
+  "ncaa-volleyball-w": "#386cb0"
+}
+
 var margin = {
     top: 0,
     right: 0,
@@ -39,7 +55,8 @@ var margin = {
   mediummapCount = 2;
 
 var userCoord = [],
-  userPlace;
+  userPlace,
+  searchArray = [];
 
 var large_screen = false,
   medium_screen = false,
@@ -70,6 +87,8 @@ var x = d3.scaleTime(),
   yscale = d3.scaleLinear().range([c1D.h, 0]);
 
 function handleResize() {
+
+  d3.select(".title-wrapper").style("background-image", "url('/img/backgrounds/" + getRandomInt(1, 7) + ".jpg')")
 
   windowW = window.innerWidth;
   windowH = window.innerHeight;
@@ -235,6 +254,7 @@ function processData(error, world, us, canada, titles, places, matrix) {
   drawProMaps(titles);
   drawProVsCollegeMaps(titles, places);
   drawChart1(matrix);
+  drawChart2(titles, places);
   detectView();
 } // end processData
 
@@ -319,12 +339,16 @@ function detectView() {
     })
     .addTo(controller);
 
-  // map0scene.on("enter", function() {
-  //   if (!map0) {
-  //     map0 = true;
-  //     $("#play-button").click();
-  //   }
-  // })
+  map0scene.on("enter", function() {
+    if (!map0) {
+      map0 = true;
+      // $("#play-button").click();
+    }
+  }).on("exit", function() {
+    if (map0) {
+      map0 = false;
+    }
+  })
 
   // var chart1scene = new ScrollMagic.Scene({
   //     triggerElement: "#chart1"
@@ -492,8 +516,8 @@ function drawMap0(titles, placeData) {
 
   function checkKey(e) {
     e = e || window.event;
-    if (e.which == "32") {
-      e.preventDefault();
+    if (e.which == "13") {
+      // e.preventDefault();
       if (!map0) {
         map0 = true;
         $("#play-button").click();
@@ -1569,6 +1593,356 @@ function drawChart1(matrix) {
 
 } // end drawChart1
 
+function drawChart2(titleData, placeData) {
+
+  var w, h, c2x, term;
+
+  placeData.forEach(function(placeData) {
+    searchArray.push(placeData.city + ", " + placeData.stateAbb)
+  })
+
+  var options = {
+    data: searchArray,
+    list: {
+      maxNumberOfElements: 5,
+      sort: {
+        enabled: true
+      },
+      match: {
+        enabled: true
+      },
+      onClickEvent: function() {
+        term = $(".search-bar").val()
+        $(".search-bar").val("")
+        addLast(term, key, metrics[key], titleData, placeData);
+      },
+      onKeyEnterEvent: function() {
+        term = $(".search-bar").val()
+        $(".search-bar").val("")
+        addLast(term, key, metrics[key], titleData, placeData);
+      }
+    }
+  };
+
+  // if (small_screen) $("#search-barS").easyAutocomplete(options);
+  // if (!small_screen) $("#search-bar").easyAutocomplete(options);
+
+  $(".search-bar").easyAutocomplete(options);
+
+  var key = "count",
+    metrics = {
+      count: ["mlb", "nba", "nfl", "nhl", "mls", "cfl", "ncaa"],
+      pro: ["mlb", "nba", "nfl", "nhl", "mls", "cfl"],
+      ncaa: ["ncaa-baseball-m", "ncaa-basketball-m", "ncaa-basketball-w", "ncaa-football-m", "ncaa-soccer-w", "ncaa-volleyball-w"]
+    },
+    subfilters = {
+      professional: ["MLB", "NBA", "NFL", "NHL", "MLS", "CFL"],
+      college: ["Baseball (M)", "Basketball (M)", "Basketball (W)", "Football (M)", "Soccer (W)", "Volleyball (W)"]
+    };
+
+  if (userPlace != undefined) {
+    term = userPlace.city + ", " + userPlace.stateAbb;
+  } else {
+    term = "Minneapolis, MN";
+  }
+
+  chart2(key, metrics[key], titleData, placeData);
+  addLast(term, key, metrics[key], titleData, placeData);
+
+  $(".c2option").click(function() {
+    $(".c2option").removeClass("c2optionActive")
+    $(this).addClass("c2optionActive")
+    key = $(this).attr("key")
+    if (key === "count") $("#chart2headertext").text("Sports")
+    if (key === "pro") $("#chart2headertext").text("Pro Sports")
+    if (key === "ncaa") $("#chart2headertext").text("College Sports")
+    d3.selectAll(".c2remove").remove();
+    d3.selectAll(".c2subfilter").remove();
+    drawSubfilter(key, metrics[key], titleData, placeData)
+    chart2(key, metrics[key], titleData, placeData);
+    addLast(term, key, metrics[key], titleData, placeData);
+  })
+
+  function drawSubfilter(key, metrics, titleData, placeData) {
+    if (key === "pro") {
+      var subfilter = d3.selectAll(".c2filter").append("div").attr("class", "c2subfilter");
+      subfilter.append("span").attr("class", "c2subOption c2subOptionActive").attr("key", "pro").text("All")
+
+      for (var n = 0; n < subfilters.professional.length; n++) {
+        subfilter.append("span").attr("class", "c2subOption").attr("key", metrics[n]).text(subfilters.professional[n])
+      }
+
+      $(".c2subOption").click(function() {
+        $(".c2subOption").removeClass("c2subOptionActive")
+        $(this).addClass("c2subOptionActive")
+        key = $(this).attr("key")
+        if (key === "pro") $("#chart2headertext").text("Pro Sports")
+        if (key === "mlb") $("#chart2headertext").text("Pro Baseball")
+        if (key === "nba") $("#chart2headertext").text("Pro Basketball")
+        if (key === "nfl") $("#chart2headertext").text("Pro Football")
+        if (key === "nhl") $("#chart2headertext").text("Pro Hockey")
+        if (key === "mls") $("#chart2headertext").text("Pro Soccer")
+        if (key === "cfl") $("#chart2headertext").text("Canadian Football")
+        d3.selectAll(".c2remove").remove();
+        if (key != "pro") var newMetric = [key]
+        if (key === "pro") var newMetric = metrics;
+        chart2(key, newMetric, titleData, placeData);
+        addLast(term, key, newMetric, titleData, placeData);
+      })
+    }
+
+    if (key === "ncaa") {
+      var subfilter = d3.selectAll(".c2filter").append("div").attr("class", "c2subfilter");
+      subfilter.append("span").attr("class", "c2subOption c2subOptionActive").attr("key", "ncaa").text("All")
+
+      for (var n = 0; n < subfilters.college.length; n++) {
+        subfilter.append("span").attr("class", "c2subOption").attr("key", metrics[n]).text(subfilters.college[n])
+      }
+
+      $(".c2subOption").click(function() {
+        $(".c2subOption").removeClass("c2subOptionActive")
+        $(this).addClass("c2subOptionActive")
+        key = $(this).attr("key")
+        if (key === "ncaa") $("#chart2headertext").text("College Sports")
+        if (key === "ncaa-baseball-m") $("#chart2headertext").text("Men's College Baseball")
+        if (key === "ncaa-basketball-m") $("#chart2headertext").text("Men's College Basketball")
+        if (key === "ncaa-basketball-w") $("#chart2headertext").text("Women's College Basketball")
+        if (key === "ncaa-football-m") $("#chart2headertext").text("Men's College Football")
+        if (key === "ncaa-soccer-w") $("#chart2headertext").text("Women's College Soccer")
+        if (key === "ncaa-volleyball-w") $("#chart2headertext").text("Women's College Volleyball")
+        d3.selectAll(".c2remove").remove();
+        if (key != "ncaa") var newMetric = [key]
+        if (key === "ncaa") var newMetric = metrics;
+        chart2(key, newMetric, titleData, placeData);
+        addLast(term, key, newMetric, titleData, placeData);
+      })
+    }
+
+  }
+
+  function chart2(key, metrics, titleData, placeData) {
+    var data;
+
+    data = placeData.sort(function(a, b) {
+      return d3.descending(+a[key], +b[key]);
+    }).slice(0, 10);
+
+    var max = d3.max(data, function(d) {
+      return +d[key]; //<-- convert to number
+    })
+
+    c2x = d3.scaleLinear().domain([0, 66])
+
+    for (var i = 0; i < data.length; i++) {
+
+      var row = d3.select(".chart2left").append("div").attr("class", "c2remove chart2row");
+
+      h = 15
+      w = $(".chart2row").width() - 160;
+
+      c2x.range([1, w - 15])
+
+      var rank = i + 1
+
+      if (i > 0) {
+        if (data[i][key] === data[i - 1][key]) rank = i
+      }
+
+      if (i > 2) {
+        if (data[i][key] === data[i - 2][key]) rank = i - 1
+      }
+
+      if (i > 4) {
+        if (data[i][key] === data[i - 3][key]) rank = i - 2
+      }
+
+      if (i > 4) {
+        if (data[i][key] === data[i - 4][key]) rank = i - 3
+      }
+
+      row.append("div").attr("class", "c2remove chart2rank").text(rank)
+      row.append("div").attr("class", "c2remove chart2city").text(data[i].city + ", " + data[i].stateAbb)
+      var svg = row.append("svg").attr("class", "c2remove chart2svg").attr("height", h).attr("width", w);
+
+      for (var j = 0; j < metrics.length; j++) {
+
+        var x1 = 0;
+
+        for (var k = 0; k < j; k++) {
+          if (data[i][metrics[k]] > 0) x1 += c2x(data[i][metrics[k]])
+        }
+
+        if (data[i][metrics[j]] > 0) {
+          svg.append("rect")
+            .attr("class", "c2rect c2remove")
+            .attr("id", "c2text" + camelize(data[i].city) + "-" + camelize(metrics[j]))
+            .attr("x", x1)
+            .attr("y", 3)
+            .attr("height", h - 3)
+            .attr("width", c2x(data[i][metrics[j]] - 1))
+            .style("fill", "#333")
+            .style("stroke", function() {
+              if (key === "ncaa") return cLeagues["ncaa"]
+              return cLeagues[metrics[j]]
+            })
+            .style("stroke-width", 2)
+            .style("opacity", 0)
+            .on("mouseover", function(i, j) {
+              d3.select(this).style("opacity", 1)
+              d3.selectAll("." + $(this).attr("id")).style("opacity", 1)
+            })
+            .on("mouseout", function() {
+              d3.select(this).style("opacity", 0)
+              d3.selectAll("." + $(this).attr("id")).style("opacity", 0)
+            })
+
+          for (var n = 0; n < data[i][metrics[j]]; n++) {
+            svg.append("rect")
+              .attr("class", "c2ticks c2remove")
+              .attr("x", (x1 + c2x(n)) - 2)
+              .attr("y", 3)
+              .attr("width", 2)
+              .attr("height", h - 3)
+              .style("fill", function() {
+                if (key === "ncaa") return cLeagues["ncaa"]
+                return cLeagues[metrics[j]]
+              })
+          }
+
+          if (metrics.length > 1) {
+            svg.append("text")
+              .attr("class", "c2text c2remove chart2label c2text" + camelize(data[i].city) + "-" + camelize(metrics[j]))
+              .attr("x", x1)
+              .attr("y", 0)
+              .attr("dy", -3)
+              .attr("dx", 0)
+              .text(data[i][metrics[j]] + " (" + metrics[j] + ")")
+              .style("fill", "none")
+              .style("stroke", "#333")
+              .style("stroke-width", 4)
+              .style("opacity", 0)
+
+            svg.append("text")
+              .attr("class", "c2text c2remove chart2label c2text" + camelize(data[i].city) + "-" + camelize(metrics[j]))
+              .attr("x", x1)
+              .attr("y", 0)
+              .attr("dy", -3)
+              .attr("dx", 0)
+              .text(data[i][metrics[j]] + " (" + metrics[j] + ")")
+              .style("fill", "#efefef")
+              .style("opacity", 0)
+          }
+        }
+      }
+
+      svg.append("text")
+        .attr("class", "c2remove chart2label")
+        .attr("x", c2x(data[i][key]))
+        .attr("y", 3)
+        .attr("dy", 9)
+        .attr("dx", 7)
+        .text(data[i][key])
+        .style("fill", "#efefef")
+
+    }
+  } //end chart2
+
+  function addLast(term, key, metrics, titleData, placeData) {
+
+    d3.selectAll(".lastRemove").remove()
+
+    var lastData = placeData.filter(function(placeData) {
+      return camelize(placeData.city + ", " + placeData.stateAbb) === camelize(term);
+    })
+
+    var row = d3.select(".chart2left").append("div").attr("class", "lastRemove chart2row c2remove chart2lastrow");
+    row.append("div").attr("class", "lastRemove c2remove chart2rank").text("")
+    row.append("div").attr("class", "lastRemove c2remove chart2city").text(lastData[0].city + ", " + lastData[0].stateAbb)
+    var lastsvg = row.append("svg").attr("class", "lastRemove c2remove chart2svg").attr("height", h).attr("width", w);
+
+    for (var j = 0; j < metrics.length; j++) {
+
+      var x1 = 0;
+
+      for (var k = 0; k < j; k++) {
+        if (lastData[0][metrics[k]] > 0) x1 += c2x(lastData[0][metrics[k]])
+      }
+
+      if (lastData[0][metrics[j]] > 0) {
+        lastsvg.append("rect")
+          .attr("class", "c2rect c2remove")
+          .attr("id", "c2text" + camelize(lastData[0].city) + "-" + camelize(metrics[j]))
+          .attr("x", x1)
+          .attr("y", 3)
+          .attr("height", h - 3)
+          .attr("width", c2x(lastData[0][metrics[j]] - 1))
+          .style("fill", "#333")
+          .style("stroke", function() {
+            if (key === "ncaa") return cLeagues["ncaa"]
+            return cLeagues[metrics[j]]
+          })
+          .style("stroke-width", 2)
+          .style("opacity", 0)
+          .on("mouseover", function(i, j) {
+            d3.select(this).style("opacity", 1)
+            d3.selectAll("." + $(this).attr("id")).style("opacity", 1)
+          })
+          .on("mouseout", function() {
+            d3.select(this).style("opacity", 0)
+            d3.selectAll("." + $(this).attr("id")).style("opacity", 0)
+          })
+
+        for (var n = 0; n < lastData[0][metrics[j]]; n++) {
+          lastsvg.append("rect")
+            .attr("class", "c2ticks c2remove")
+            .attr("x", (x1 + c2x(n)) - 2)
+            .attr("y", 3)
+            .attr("width", 2)
+            .attr("height", h - 3)
+            .style("fill", function() {
+              if (key === "ncaa") return cLeagues["ncaa"]
+              return cLeagues[metrics[j]]
+            })
+        }
+
+        if (metrics.length > 1) {
+          lastsvg.append("text")
+            .attr("class", "c2text c2remove chart2label c2text" + camelize(lastData[0].city) + "-" + camelize(metrics[j]))
+            .attr("x", x1)
+            .attr("y", 0)
+            .attr("dy", 0)
+            .attr("dx", 0)
+            .text(lastData[0][metrics[j]] + " (" + metrics[j] + ")")
+            .style("fill", "none")
+            .style("stroke", "#333")
+            .style("stroke-width", 4)
+            .style("opacity", 0)
+
+          lastsvg.append("text")
+            .attr("class", "c2text c2remove chart2label c2text" + camelize(lastData[0].city) + "-" + camelize(metrics[j]))
+            .attr("x", x1)
+            .attr("y", 0)
+            .attr("dy", 0)
+            .attr("dx", 0)
+            .text(lastData[0][metrics[j]] + " (" + metrics[j] + ")")
+            .style("fill", "#efefef")
+            .style("opacity", 0)
+        }
+      }
+    }
+
+    lastsvg.append("text")
+      .attr("class", "c2remove chart2label")
+      .attr("x", c2x(lastData[0][key]))
+      .attr("y", 3)
+      .attr("dy", 9)
+      .attr("dx", 7)
+      .text(lastData[0][key])
+      .style("fill", "#efefef")
+  } // end addLast
+
+} // end drawChart2
+
 // supplementary functions
 function camelize(str) {
   return str.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g, "").replace(/(?:^\w|[A-Z]|\b\w)/g, function(letter, index) {
@@ -1628,4 +2002,8 @@ function findClosest(places) {
     }
   }
   userPlace = places[closest]
+}
+
+function getRandomInt(min, max) {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
 }

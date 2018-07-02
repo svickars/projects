@@ -70,7 +70,7 @@ header {
   position: absolute;
   font-family: 'Roboto', Arial, sans-serif;
   font-size: 1em;
-  color: #333 !important; }
+  color: #fff !important; }
 
 header a:hover {
   color: #E00000 !important; }
@@ -124,15 +124,14 @@ footer > .right {
   /* Safari 7.0+ */
   display: flex;
   align-items: center;
-  background-color: black;
+  background: black no-repeat fixed center;
+  background-size: cover;
   color: white; }
 
 .grey-wrapper {
   width: 100%;
-  height: -moz-calc(100% - 16px);
-  height: -webkit-calc(100% - 16px);
-  height: calc(100% - 16px);
   padding-top: 5px;
+  padding-bottom: 150px;
   background-color: #333;
   color: white; }
 
@@ -140,6 +139,11 @@ footer > .right {
   width: 100%;
   margin: auto;
   text-align: center; }
+
+.title p {
+  color: #666;
+  margin-top: 30px;
+  font-size: .8em; }
 
 .title-main {
   border-bottom: 6px solid white; }
@@ -387,6 +391,129 @@ footer > .right {
   background-color: #333;
   opacity: 0; }
 
+#chart2 {
+  width: 75%;
+  min-width: 345px;
+  margin: 50px auto 200px auto; }
+
+.chart2left {
+  display: inline-block;
+  width: 66%; }
+
+.chart2right {
+  display: inline-block;
+  float: right;
+  width: 25%; }
+
+.chart2rightP {
+  font-family: "Roboto Mono", monospace;
+  font-size: .8em;
+  margin-bottom: 10px; }
+
+.c2top {
+  display: none; }
+
+@media (max-width: 768px) {
+  .chart2left {
+    width: 100%; }
+  .chart2right {
+    display: none; }
+  .c2top {
+    display: block; }
+  body {
+    width: 100%;
+    margin: 0; } }
+
+.chart2city {
+  display: inline-block;
+  padding: 5px 0 5px 3px;
+  width: 130px;
+  font-weight: 300; }
+
+.chart2header .chart2city, .chart2right .chart2city {
+  font-size: .75em;
+  font-weight: 500 !important;
+  color: #efefef;
+  padding: 3px 0 3px 0px;
+  padding-bottom: 3px; }
+
+.chart2header {
+  border-bottom: 2px solid #efefef; }
+
+.chart2legend {
+  display: inline-block;
+  height: 12px;
+  font-size: 0;
+  margin-left: -6px; }
+
+.chart2legendEntry {
+  display: inline-block;
+  width: 25px;
+  padding: 0 0 0 3px;
+  font-family: "Roboto Mono", monospace;
+  font-size: 8px;
+  margin: 0; }
+
+@media (max-width: 768px) {
+  .chart2legendEntry {
+    width: auto;
+    padding: 0 3px 0 3px; } }
+
+.c2option {
+  font-family: "Roboto Mono", monospace;
+  font-weight: 500;
+  font-size: .8em;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-right: 10px;
+  opacity: .75;
+  cursor: pointer; }
+
+.c2option:hover {
+  border-bottom: 1px solid white; }
+
+.c2optionActive {
+  opacity: 1;
+  border-bottom: 1px solid white; }
+
+.c2subOption {
+  font-family: "Roboto Mono", monospace;
+  font-weight: 300;
+  font-size: .6em;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-right: 10px;
+  opacity: .75;
+  cursor: pointer; }
+
+.c2subOption:hover {
+  border-bottom: 1px solid white; }
+
+.c2subOptionActive {
+  opacity: 1;
+  border-bottom: 1px solid white; }
+
+.chart2lastrow {
+  margin-top: 20px;
+  border-top: 1px solid #b5b5b5; }
+
+.chart2rank {
+  display: inline-block;
+  width: 20px;
+  font-family: "Roboto Mono", monospace;
+  font-size: .8em; }
+
+.chart2label {
+  font-family: "Roboto Mono", monospace;
+  font-size: .5em; }
+
+.c2ticks, .c2text {
+  pointer-events: none;
+  text-transform: uppercase; }
+
+.chart2svg {
+  overflow: visible; }
+
 .cityline {
   stroke: #666;
   stroke-width: 1.5px;
@@ -551,3 +678,35 @@ footer > .right {
 
 .map0AnnotationCurrent .annotation-connector .connector {
   stroke: #E00000 !important; }
+
+.c2searchWrapper {
+  margin-top: 20px; }
+
+.search-container {
+  width: 100%;
+  display: block;
+  margin: 0 auto; }
+
+#search-bar {
+  position: relative;
+  display: inline-block;
+  width: calc(100% - 15px);
+  height: 40px;
+  padding: 0 0 0 15px;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 1rem;
+  color: #fff;
+  border: none;
+  background-color: #444;
+  outline: none; }
+  #search-bar:focus {
+    border: none;
+    color: #fff; }
+
+#searchsubmit {
+  float: right;
+  position: relative;
+  z-index: 1;
+  margin-top: -30px;
+  margin-right: 10px;
+  cursor: pointer; }
