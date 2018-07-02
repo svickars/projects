@@ -1624,10 +1624,9 @@ function drawChart2(titleData, placeData) {
     }
   };
 
-  // if (small_screen) $("#search-barS").easyAutocomplete(options);
-  // if (!small_screen) $("#search-bar").easyAutocomplete(options);
-
-  $(".search-bar").easyAutocomplete(options);
+  if (small_screen) $(".search-bar").easyAutocomplete(options);
+  if (medium_screen) $(".search-bar").easyAutocomplete(options);
+  if (large_screen) $(".search-bar2").easyAutocomplete(options);
 
   var key = "count",
     metrics = {
