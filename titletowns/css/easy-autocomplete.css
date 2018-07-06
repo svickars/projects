@@ -13,6 +13,7 @@
 .easy-autocomplete input {
   float: none;
   padding: 6px 12px;
+  color: white;
 }
 .easy-autocomplete a {
   display: block;
@@ -21,15 +22,33 @@
 .easy-autocomplete-container {
   left: 0;
   position: absolute;
-  width: 100%;
+  width: calc(100% + 30px);
+  margin-left: -23px;
   z-index: 2;
 }
+
+.overchart .easy-autocomplete-container {
+  left: 0;
+  position: absolute;
+  width: calc(100% + 10px);
+  margin-left: 0;
+  z-index: 2;
+}
+
+.c2searchWrapper .easy-autocomplete-container {
+  left: 0;
+  position: absolute;
+  width: 95%;
+  margin-left: 0;
+  z-index: 2;
+}
+
 .easy-autocomplete-container ul {
   background: none repeat scroll 0 0 #444;
   display: none;
   margin-top: 5px;
   padding-bottom: 0;
-  padding-left: 0;
+  padding-left: 13px;
   position: relative;
   top: -1px;
 }
