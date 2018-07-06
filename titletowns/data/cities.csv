@@ -1,198 +1,199 @@
-city,stateAbb,state,cityState,Latitude,Longitude,lngLat,rank_all,rank_pro,rank_NCAA,count,finals,final4,pro,NCAA,mlb,nba,nfl,nhl,mls,cfl,ncaa,ncaa-football-m,ncaa-basketball-m,ncaa-baseball-m,ncaa-basketball-w,ncaa-soccer-w,ncaa-volleyball-w
-Los Angeles,CA,California,"Los Angeles, California",34.0522342,-118.2436849,"[-118.2436849, 34.0522342]",1,6,1,66,40,55,27,39,6,11,2,3,5,0,39,10,11,13,0,1,4
-New York,NY,New York,"New York, New York",40.7127753,-74.0059728,"[-74.0059728, 40.7127753]",2,1,68,55,63,85,54,1,35,2,9,8,0,0,1,0,1,0,0,0,0
-Toronto,ON,Ontario,"Toronto, Ontario",43.653226,-79.3831843,"[-79.3831843, 43.653226]",3,2,109,40,23,40,40,0,2,0,0,13,1,24,0,0,0,0,0,0,0
-Boston,MA,Massachusetts,"Boston, Massachusetts",42.3600825,-71.0588801,"[-71.0588801, 42.3600825]",4,3,109,37,33,58,37,0,9,17,5,6,0,0,0,0,0,0,0,0,0
-Montreal,QC,Quebec,"Montreal, Quebec",45.5016889,-73.567256,"[-73.567256, 45.5016889]",5,4,109,36,21,36,36,0,0,0,0,27,0,9,0,0,0,0,0,0,0
-Chicago,IL,Illinois,"Chicago, Illinois",41.8781136,-87.6297982,"[-87.6297982, 41.8781136]",6,5,36,32,30,57,29,3,6,6,10,6,1,0,3,1,2,0,0,0,0
-Chapel Hill,NC,North Carolina,"Chapel Hill, North Carolina",35.9131996,-79.0558445,"[-79.0558445, 35.9131996]",7,52,2,28,10,17,0,28,0,0,0,0,0,0,28,0,6,0,1,21,0
-Philadelphia,PA,Pennsylvania,"Philadelphia, Pennsylvania",39.9525839,-75.1652215,"[-75.1652215, 39.9525839]",8,9,26,23,24,41,18,5,7,4,5,2,0,0,5,4,1,0,0,0,0
-Detroit,MI,Michigan,"Detroit, Michigan",42.331427,-83.0457538,"[-83.0457538, 42.331427]",9,7,109,22,23,39,22,0,4,3,4,11,0,0,0,0,0,0,0,0,0
-Pittsburgh,PA,Pennsylvania,"Pittsburgh, Pennsylvania",40.4406248,-79.9958864,"[-79.9958864, 40.4406247999999]",10,10,26,21,5,31,16,5,5,0,6,5,0,0,5,5,0,0,0,0,0
-Edmonton,AB,Alberta,"Edmonton, Alberta",53.544389,-113.4909267,"[-113.4909267, 53.544389]",11,8,109,19,13,20,19,0,0,0,0,5,0,14,0,0,0,0,0,0,0
-New Haven,CT,Connecticut,"New Haven, Connecticut",41.308274,-72.9278835,"[-72.9278835, 41.308274]",12,52,3,18,2,0,0,18,0,0,0,0,0,0,18,18,0,0,0,0,0
-Notre Dame,IN,Indiana,"Notre Dame, Indiana",41.7001908,-86.2379328,"[-86.2379328, 41.7001908]",12,52,3,18,9,8,0,18,0,0,0,0,0,0,18,13,0,0,2,3,0
-Miami,FL,Florida,"Miami, Florida",25.7616798,-80.1917902,"[-80.1917902, 25.7616798]",14,22,17,16,8,11,7,9,2,3,2,0,0,0,9,5,0,4,0,0,0
-Minneapolis,MN,Minnesota,"Minneapolis, Minnesota",44.977753,-93.2650108,"[-93.2650108, 44.977753]",14,22,17,16,9,28,7,9,2,5,0,0,0,0,9,6,0,3,0,0,0
-Tuscaloosa,AL,Alabama,"Tuscaloosa, Alabama",33.2098407,-87.5691735,"[-87.5691734999999, 33.2098407]",16,52,5,15,3,2,0,15,0,0,0,0,0,0,15,15,0,0,0,0,0
-Mansfield,CT,Connecticut,"Mansfield, Connecticut",41.788489,-72.2292913,"[-72.2292913, 41.788489]",16,52,5,15,4,12,0,15,0,0,0,0,0,0,15,0,4,0,11,0,0
-Princeton,NJ,New Jersey,"Princeton, New Jersey",40.3572976,-74.6672226,"[-74.6672226, 40.3572976]",16,52,5,15,0,2,0,15,0,0,0,0,0,0,15,15,0,0,0,0,0
-Stanford,CA,California,"Stanford, California",37.424106,-122.1660756,"[-122.1660756, 37.4241059999999]",16,52,5,15,15,26,0,15,0,0,0,0,0,0,15,1,1,2,2,2,7
-Hamilton,ON,Ontario,"Hamilton, Ontario",43.2557206,-79.8711024,"[-79.8711024, 43.2557206]",16,11,109,15,17,11,15,0,0,0,0,0,0,15,0,0,0,0,0,0,0
-Green Bay,WI,Wisconsin,"Green Bay, Wisconsin",44.5133188,-88.0132958,"[-88.0132958, 44.5133188]",21,12,109,14,5,4,14,0,0,0,14,0,0,0,0,0,0,0,0,0,0
-Austin,TX,Texas,"Austin, Texas",30.267153,-97.7430608,"[-97.7430608, 30.267153]",22,52,9,13,10,26,0,13,0,0,0,0,0,0,13,4,0,6,1,0,2
-Washington,DC,DC,"Washington, DC",38.9071923,-77.0368707,"[-77.0368707, 38.9071923]",22,15,68,13,16,11,12,1,1,1,5,1,4,0,1,0,1,0,0,0,0
-St Louis,MO,Missouri,"St Louis, Missouri",38.6270025,-90.1994042,"[-90.1994041999999, 38.6270025]",22,13,109,13,16,30,13,0,11,1,1,0,0,0,0,0,0,0,0,0,0
-Ottawa,ON,Ontario,"Ottawa, Ontario",45.4215296,-75.6971931,"[-75.6971930999999, 45.4215296]",22,13,109,13,12,15,13,0,0,0,0,3,0,10,0,0,0,0,0,0,0
-Ann Arbor,MI,Michigan,"Ann Arbor, Michigan",42.2808256,-83.7430378,"[-83.7430378, 42.2808256]",26,52,10,12,3,4,0,12,0,0,0,0,0,0,12,9,1,2,0,0,0
-Centre Country,PA,Pennsylvania,"Centre Country, Pennsylvania",40.8765649,-77.8367282,"[-77.8367282, 40.8765649]",26,52,10,12,5,10,0,12,0,0,0,0,0,0,12,4,0,0,0,1,7
-Columbus,OH,Ohio,"Columbus, Ohio",39.9611755,-82.9987942,"[-82.9987941999999, 39.9611755]",28,41,12,11,7,13,1,10,0,0,0,0,1,0,10,8,1,1,0,0,0
-Baton Rouge,LA,Louisiana,"Baton Rouge, Louisiana",30.4514677,-91.1871466,"[-91.1871465999999, 30.4514677]",29,52,12,10,1,15,0,10,0,0,0,0,0,0,10,4,0,6,0,0,0
-Lincoln,NE,Nebraska,"Lincoln, Nebraska",40.813616,-96.7025955,"[-96.7025955, 40.813616]",29,52,12,10,3,6,0,10,0,0,0,0,0,0,10,5,0,0,0,0,5
-Columbia,SC,South Carolina,"Columbia, South Carolina",34.0007104,-81.0348144,"[-81.0348144, 34.0007104]",29,52,12,10,6,13,0,10,0,0,0,0,0,0,10,0,0,2,3,2,3
-Knoxville,TN,Tennessee,"Knoxville, Tennessee",35.9606384,-83.9207392,"[-83.9207392, 35.9606384]",29,52,12,10,6,8,0,10,0,0,0,0,0,0,10,2,0,0,8,0,0
-San Francisco,CA,California,"San Francisco, California",37.7749295,-122.4194155,"[-122.4194155, 37.7749295]",29,20,50,10,6,17,8,2,3,0,5,0,0,0,2,0,2,0,0,0,0
-Baltimore,MD,Maryland,"Baltimore, Maryland",39.2903848,-76.6121893,"[-76.6121893, 39.2903848]",29,16,109,10,7,11,10,0,3,1,5,0,0,1,0,0,0,0,0,0,0
-Winnipeg,MB,Manitoba,"Winnipeg, Manitoba",49.895136,-97.1383744,"[-97.1383743999999, 49.895136]",29,16,109,10,17,14,10,0,0,0,0,0,0,10,0,0,0,0,0,0,0
-Oakland,CA,California,"Oakland, California",37.8043637,-122.2711137,"[-122.2711137, 37.8043637]",29,16,109,10,5,13,10,0,4,4,2,0,0,0,0,0,0,0,0,0,0
-Norman,OK,Oklahoma,"Norman, Oklahoma",35.2225668,-97.4394777,"[-97.4394777, 35.2225668]",37,52,17,9,3,6,0,9,0,0,0,0,0,0,9,7,0,2,0,0,0
-Cleveland,OH,Ohio,"Cleveland, Ohio",41.49932,-81.6943605,"[-81.6943605, 41.49932]",37,19,109,9,13,22,9,0,2,1,6,0,0,0,0,0,0,0,0,0,0
-Cambridge,MA,Massachusetts,"Cambridge, Massachusetts",42.3736158,-71.1097335,"[-71.1097334999999, 42.3736158]",39,52,20,8,0,0,0,8,0,0,0,0,0,0,8,8,0,0,0,0,0
-Lexington,KY,Kentucky,"Lexington, Kentucky",38.0405837,-84.5037164,"[-84.5037164, 38.0405837]",39,52,20,8,4,6,0,8,0,0,0,0,0,0,8,0,8,0,0,0,0
-Calgary,AB,Alberta,"Calgary, Alberta",51.0486151,-114.0708459,"[-114.0708459, 51.0486151]",39,20,109,8,11,17,8,0,0,0,0,1,0,7,0,0,0,0,0,0,0
-Gainesville,FL,Florida,"Gainesville, Florida",29.6516344,-82.3248262,"[-82.3248261999999, 29.6516344]",42,52,22,7,5,12,0,7,0,0,0,0,0,0,7,3,2,1,0,1,0
-Cincinnati,OH,Ohio,"Cincinnati, Ohio",39.1031182,-84.5120196,"[-84.5120196, 39.1031182]",42,26,50,7,7,14,5,2,5,0,0,0,0,0,2,0,2,0,0,0,0
-Dallas,TX,Texas,"Dallas, Texas",32.7766642,-96.7969879,"[-96.7969878999999, 32.7766642]",42,22,109,7,7,18,7,0,0,1,5,1,0,0,0,0,0,0,0,0,0
-Berkeley,CA,California,"Berkeley, California",37.8715926,-122.272747,"[-122.272747, 37.8715926]",45,52,23,6,2,6,0,6,0,0,0,0,0,0,6,3,1,2,0,0,0
-Statesboro,GA,Georgia,"Statesboro, Georgia",32.4487876,-81.7831674,"[-81.7831674, 32.4487876]",45,52,23,6,2,0,0,6,0,0,0,0,0,0,6,6,0,0,0,0,0
-Fargo,ND,North Dakota,"Fargo, North Dakota",46.8771863,-96.7898034,"[-96.7898034, 46.8771863]",45,52,23,6,0,0,0,6,0,0,0,0,0,0,6,6,0,0,0,0,0
-Denver,CO,Colorado,"Denver, Colorado",39.7392358,-104.990251,"[-104.990251, 39.7392358]",45,26,68,6,6,11,5,1,0,0,3,2,0,0,1,1,0,0,0,0,0
-Houston,TX,Texas,"Houston, Texas",29.7604267,-95.3698028,"[-95.3698028, 29.7604267]",45,26,68,6,8,17,5,1,1,2,0,0,2,0,1,0,0,1,0,0,0
-Vancouver,BC,British Columbia,"Vancouver, British Columbia",49.2827291,-123.1207375,"[-123.1207375, 49.2827291]",45,25,109,6,7,12,6,0,0,0,0,0,0,6,0,0,0,0,0,0,0
-Tucson,AZ,Arizona,"Tucson, Arizona",32.2226066,-110.9747108,"[-110.9747108, 32.2226066]",51,52,26,5,5,6,0,5,0,0,0,0,0,0,5,0,1,4,0,0,0
-Durham,NC,North Carolina,"Durham, North Carolina",35.9940329,-78.898619,"[-78.898619, 35.9940329]",51,52,26,5,11,8,0,5,0,0,0,0,0,0,5,0,5,0,0,0,0
-Tallahassee,FL,Florida,"Tallahassee, Florida",30.4382559,-84.2807329,"[-84.2807328999999, 30.4382559]",51,52,26,5,6,11,0,5,0,0,0,0,0,0,5,4,0,0,0,1,0
-Bloomington,IN,Indiana,"Bloomington, Indiana",39.165325,-86.5263857,"[-86.5263856999999, 39.165325]",51,52,26,5,1,2,0,5,0,0,0,0,0,0,5,0,5,0,0,0,0
-East Lansing,MI,Michigan,"East Lansing, Michigan",42.7369792,-84.4838654,"[-84.4838654, 42.7369792]",51,52,26,5,2,8,0,5,0,0,0,0,0,0,5,3,2,0,0,0,0
-Tempe,AZ,Arizona,"Tempe, Arizona",33.4255104,-111.9400054,"[-111.9400054, 33.4255104]",51,52,26,5,5,6,0,5,0,0,0,0,0,0,5,0,0,5,0,0,0
-Seattle,WA,Washington,"Seattle, Washington",47.6062095,-122.3320708,"[-122.3320708, 47.6062095]",51,32,50,5,6,14,3,2,0,1,1,0,1,0,2,1,0,0,0,0,1
-San Antonio,TX,Texas,"San Antonio, Texas",29.4241219,-98.4936282,"[-98.4936281999999, 29.4241219]",51,26,109,5,1,9,5,0,0,5,0,0,0,0,0,0,0,0,0,0,0
-Kansas City,MO,Missouri,"Kansas City, Missouri",39.0997265,-94.5785667,"[-94.5785667, 39.0997265]",51,26,109,5,4,10,5,0,2,0,1,0,2,0,0,0,0,0,0,0,0
-Youngstown,OH,Ohio,"Youngstown, Ohio",41.0997803,-80.6495194,"[-80.6495194, 41.0997803]",60,52,34,4,3,0,0,4,0,0,0,0,0,0,4,4,0,0,0,0,0
-Fullerton,CA,California,"Fullerton, California",33.8703645,-117.9242123,"[-117.9242123, 33.8703645]",60,52,34,4,1,5,0,4,0,0,0,0,0,0,4,0,0,4,0,0,0
-Atlanta,GA,Georgia,"Atlanta, Georgia",33.7489954,-84.3879824,"[-84.3879824, 33.7489954]",60,41,36,4,8,12,1,3,1,0,0,0,0,0,3,3,0,0,0,0,0
-Portland,OR,Oregon,"Portland, Oregon",45.5230622,-122.6764815,"[-122.6764815, 45.5230622]",60,35,50,4,3,9,2,2,0,1,0,0,1,0,2,0,0,0,0,2,0
-Regina,SK,Saskatchewan,"Regina, Saskatchewan",50.4452112,-104.6188943,"[-104.6188943, 50.4452112]",60,31,109,4,15,11,4,0,0,0,0,0,0,4,0,0,0,0,0,0,0
-Boone,NC,North Carolina,"Boone, North Carolina",36.216795,-81.6745517,"[-81.6745517, 36.216795]",65,52,36,3,0,0,0,3,0,0,0,0,0,0,3,3,0,0,0,0,0
-West Point,NY,New York,"West Point, New York",41.3914827,-73.9559721,"[-73.9559721, 41.3914827]",65,52,36,3,0,0,0,3,0,0,0,0,0,0,3,3,0,0,0,0,0
-Ithaca,NY,New York,"Ithaca, New York",42.4439614,-76.5018807,"[-76.5018807, 42.4439614]",65,52,36,3,0,0,0,3,0,0,0,0,0,0,3,3,0,0,0,0,0
-Champaign County,IL,Illinois,"Champaign County, Illinois",40.2138865,-88.2461183,"[-88.2461182999999, 40.2138865]",65,52,36,3,2,6,0,3,0,0,0,0,0,0,3,3,0,0,0,0,0
-Lawrence,KS,Kansas,"Lawrence, Kansas",38.9716689,-95.2352501,"[-95.2352501, 38.9716689]",65,52,36,3,6,6,0,3,0,0,0,0,0,0,3,0,3,0,0,0,0
-College Park,MD,Maryland,"College Park, Maryland",38.9896967,-76.93776,"[-76.93776, 38.9896967]",65,52,36,3,0,5,0,3,0,0,0,0,0,0,3,1,1,0,1,0,0
-Stillwater,OK,Oklahoma,"Stillwater, Oklahoma",36.1156071,-97.0583681,"[-97.0583681, 36.1156071]",65,52,36,3,6,10,0,3,0,0,0,0,0,0,3,0,2,1,0,0,0
-College Station,TX,Texas,"College Station, Texas",30.627977,-96.3344068,"[-96.3344068, 30.627977]",65,52,36,3,0,1,0,3,0,0,0,0,0,0,3,2,0,0,1,0,0
-Villanova,PA,Pennsylvania,"Villanova, Pennsylvania",40.0375832,-75.3491813,"[-75.3491813, 40.0375832]",65,52,36,3,0,2,0,3,0,0,0,0,0,0,3,1,2,0,0,0,0
-Honolulu,HI,Hawaii,"Honolulu, Hawaii",21.3069444,-157.8583333,"[-157.8583333, 21.3069444]",65,52,36,3,3,4,0,3,0,0,0,0,0,0,3,0,0,0,0,0,3
-Long Beach,CA,California,"Long Beach, California",33.7700504,-118.1937395,"[-118.1937395, 33.7700504]",65,52,36,3,2,7,0,3,0,0,0,0,0,0,3,0,0,0,0,0,3
-Louisville,KY,Kentucky,"Louisville, Kentucky",38.2526647,-85.7584557,"[-85.7584557, 38.2526647]",65,52,36,3,2,7,0,3,0,0,0,0,0,0,3,0,3,0,0,0,0
-Raleigh,NC,North Carolina,"Raleigh, North Carolina",35.7795897,-78.6381787,"[-78.6381787, 35.7795897]",65,41,50,3,2,5,1,2,0,0,0,1,0,0,2,0,2,0,0,0,0
-Syracuse,NY,New York,"Syracuse, New York",43.0481221,-76.1474244,"[-76.1474243999999, 43.0481221]",65,41,50,3,5,10,1,2,0,1,0,0,0,0,2,1,1,0,0,0,0
-Milwaukee,WI,Wisconsin,"Milwaukee, Wisconsin",43.0389025,-87.9064736,"[-87.9064736, 43.0389025]",65,35,68,3,4,13,2,1,1,1,0,0,0,0,1,0,1,0,0,0,0
-Kingston,ON,Ontario,"Kingston, Ontario",44.2311717,-76.4859544,"[-76.4859544, 44.2311717]",65,32,109,3,0,0,3,0,0,0,0,0,0,3,0,0,0,0,0,0,0
-Newark,NJ,New jersey,"Newark, New jersey",40.735657,-74.1723667,"[-74.1723667, 40.735657]",65,32,109,3,4,2,3,0,0,0,0,3,0,0,0,0,0,0,0,0,0
-Fayetteville,AR,Arkansas,"Fayetteville, Arkansas",36.082156,-94.1718542,"[-94.1718542, 36.082156]",82,52,50,2,2,8,0,2,0,0,0,0,0,0,2,1,1,0,0,0,0
-Auburn,AL,Alabama,"Auburn, Alabama",32.6098566,-85.4807825,"[-85.4807824999999, 32.6098566]",82,52,50,2,3,1,0,2,0,0,0,0,0,0,2,2,0,0,0,0,0
-Waco,TX,Texas,"Waco, Texas",31.549333,-97.1466695,"[-97.1466695, 31.549333]",82,52,50,2,1,4,0,2,0,0,0,0,0,0,2,0,0,0,2,0,0
-Clemson,SC,South Carolina,"Clemson, South Carolina",34.6834382,-82.8373654,"[-82.8373654, 34.6834382]",82,52,50,2,1,3,0,2,0,0,0,0,0,0,2,2,0,0,0,0,0
-Richmond,KY,Kentucky,"Richmond, Kentucky",37.7478572,-84.2946539,"[-84.2946539, 37.7478572]",82,52,50,2,2,0,0,2,0,0,0,0,0,0,2,2,0,0,0,0,0
-Athens,GA,Georgia,"Athens, Georgia",33.9519347,-83.357567,"[-83.357567, 33.9519347]",82,52,50,2,4,5,0,2,0,0,0,0,0,0,2,1,0,1,0,0,0
-Worcester,MA,Massachusetts,"Worcester, Massachusetts",42.2625932,-71.8022934,"[-71.8022934, 42.2625932]",82,52,50,2,0,2,0,2,0,0,0,0,0,0,2,0,1,1,0,0,0
-Harrisonburg,VA,Virginia,"Harrisonburg, Virginia",38.4495688,-78.8689155,"[-78.8689155, 38.4495688]",140,52,109,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
-Rouston,PA,Pennsylvania,"Rouston, Pennsylvania",32.5098297,-92.6680377,"[-92.6680377, 32.5098297]",82,52,50,2,5,4,0,2,0,0,0,0,0,0,2,0,0,0,2,0,0
-Huntington,WV,West Virginia,"Huntington, West Virginia",38.4192496,-82.445154,"[-82.445154, 38.4192496]",82,52,50,2,4,0,0,2,0,0,0,0,0,0,2,2,0,0,0,0,0
-Dillon,MT,Montana,"Dillon, Montana",45.2166324,-112.6389244,"[-112.6389244, 45.2166323999999]",82,52,50,2,5,0,0,2,0,0,0,0,0,0,2,2,0,0,0,0,0
-Corvallis,OR,Oregon,"Corvallis, Oregon",44.5645659,-123.2620435,"[-123.2620435, 44.5645659]",82,52,50,2,0,5,0,2,0,0,0,0,0,0,2,0,0,2,0,0,0
-Stockton,CA,California,"Stockton, California",37.9577016,-121.2907796,"[-121.2907796, 37.9577016]",82,52,50,2,1,4,0,2,0,0,0,0,0,0,2,0,0,0,0,0,2
-Salt Lake City,UT,Utah,"Salt Lake City, Utah",40.7607793,-111.8910474,"[-111.8910474, 40.7607793]",82,41,68,2,4,9,1,1,0,0,0,0,1,0,1,0,1,0,0,0,0
-San Jose,CA,California,"San Jose, California",37.3382082,-121.8863286,"[-121.8863286, 37.3382082]",82,35,109,2,1,5,2,0,0,0,0,0,2,0,0,0,0,0,0,0,0
-Sarnia,ON,Ontario,"Sarnia, Ontario",42.974536,-82.4065901,"[-82.4065901, 42.974536]",82,35,109,2,1,0,2,0,0,0,0,0,0,2,0,0,0,0,0,0,0
-Tampa,FL,Florida,"Tampa, Florida",27.950575,-82.4571776,"[-82.4571776, 27.950575]",82,35,109,2,2,6,2,0,0,0,1,1,0,0,0,0,0,0,0,0,0
-Canton,OH,Ohio,"Canton, Ohio",40.7989473,-81.378447,"[-81.378447, 40.7989472999999]",82,35,109,2,0,0,2,0,0,0,2,0,0,0,0,0,0,0,0,0,0
-Boise,ID,Idaho,"Boise, Idaho",43.6187102,-116.2146068,"[-116.2146068, 43.6187102]",99,52,68,1,1,0,0,1,0,0,0,0,0,0,1,1,0,0,0,0,0
-Provo,UT,Utah,"Provo, Utah",40.2338438,-111.6585337,"[-111.6585337, 40.2338438]",99,52,68,1,1,1,0,1,0,0,0,0,0,0,1,1,0,0,0,0,0
-Newark,DE,Delaware,"Newark, Delaware",39.6837226,-75.7496572,"[-75.7496572, 39.6837226]",99,52,68,1,3,0,0,1,0,0,0,0,0,0,1,1,0,0,0,0,0
-Cheney,WA,Washington,"Cheney, Washington",47.4873895,-117.5757622,"[-117.5757622, 47.4873895]",99,52,68,1,0,0,0,1,0,0,0,0,0,0,1,1,0,0,0,0,0
-Greenville,SC,South Carolina,"Greenville, South Carolina",34.8526176,-82.3940104,"[-82.3940104, 34.8526175999999]",99,52,68,1,2,0,0,1,0,0,0,0,0,0,1,1,0,0,0,0,0
-Fairfax,VA,Virginia,"Fairfax, Virginia",38.8462236,-77.3063733,"[-77.3063732999999, 38.8462235999999]",99,52,68,1,2,2,0,1,0,0,0,0,0,0,1,0,0,0,0,1,0
-Pocatello,ID,Idaho,"Pocatello, Idaho",42.8713032,-112.4455344,"[-112.4455344, 42.8713032]",99,52,68,1,0,0,0,1,0,0,0,0,0,0,1,1,0,0,0,0,0
-Iowa City,IA,Iowa,"Iowa City, Iowa",41.6611277,-91.5301683,"[-91.5301683, 41.6611277]",99,52,68,1,1,3,0,1,0,0,0,0,0,0,1,1,0,0,0,0,0
-Easton,PA,Pennsylvania,"Easton, Pennsylvania",40.688432,-75.2207323,"[-75.2207323, 40.688432]",99,52,68,1,0,1,0,1,0,0,0,0,0,0,1,1,0,0,0,0,0
-Monroe,LA,Louisiana,"Monroe, Louisiana",32.5093109,-92.1193012,"[-92.1193012, 32.5093109]",99,52,68,1,0,1,0,1,0,0,0,0,0,0,1,1,0,0,0,0,0
-Amherst,MA,Massachusetts,"Amherst, Massachusetts",42.3732216,-72.5198537,"[-72.5198537, 42.3732216]",99,52,68,1,3,5,0,1,0,0,0,0,0,0,1,1,0,0,0,0,0
-Oxford,MS,Mississippi,"Oxford, Mississippi",34.3664951,-89.5192484,"[-89.5192484, 34.3664951]",99,52,68,1,0,2,0,1,0,0,0,0,0,0,1,1,0,0,0,0,0
-Bozeman,MT,Montana,"Bozeman, Montana",45.6769979,-111.0429339,"[-111.0429339, 45.6769979]",99,52,68,1,0,0,0,1,0,0,0,0,0,0,1,1,0,0,0,0,0
-Eugene,OR,Oregon,"Eugene, Oregon",44.0520691,-123.0867536,"[-123.0867536, 44.0520691]",99,52,68,1,2,1,0,1,0,0,0,0,0,0,1,0,1,0,0,0,0
-West Lafayette,IN,Indiana,"West Lafayette, Indiana",40.4258686,-86.9080655,"[-86.9080654999999, 40.4258686]",99,52,68,1,2,2,0,1,0,0,0,0,0,0,1,0,0,0,1,0,0
-Richmond,VA,Virginia,"Richmond, Virginia",37.5407246,-77.4360481,"[-77.4360481, 37.5407246]",99,52,68,1,0,1,0,1,0,0,0,0,0,0,1,1,0,0,0,0,0
-New Brunswick,NJ,New Jersey,"New Brunswick, New Jersey",40.4862157,-74.4518188,"[-74.4518188, 40.4862157]",99,52,68,1,1,4,0,1,0,0,0,0,0,0,1,1,0,0,0,0,0
-Santa Clara,CA,California,"Santa Clara, California",37.3541079,-121.9552356,"[-121.9552356, 37.3541079]",99,52,68,1,2,10,0,1,0,0,0,0,0,0,1,0,0,0,0,1,0
-Carbondale,IL,Illinois,"Carbondale, Illinois",37.7272727,-89.2167501,"[-89.2167501, 37.7272727]",99,52,68,1,2,2,0,1,0,0,0,0,0,0,1,1,0,0,0,0,0
-Fort Worth,TX,Texas,"Fort Worth, Texas",32.7554883,-97.3307658,"[-97.3307658, 32.7554883]",99,52,68,1,0,4,0,1,0,0,0,0,0,0,1,1,0,0,0,0,0
-El Paso,TX,Texas,"El Paso, Texas",31.7618778,-106.4850217,"[-106.4850217, 31.7618778]",99,52,68,1,0,0,0,1,0,0,0,0,0,0,1,0,1,0,0,0,0
-Las Vegas,NV,Nevada,"Las Vegas, Nevada",36.1699412,-115.1398296,"[-115.1398296, 36.1699412]",99,52,68,1,1,3,0,1,0,0,0,0,0,0,1,0,1,0,0,0,0
-Charlottesville,VA,Virginia,"Charlottesville, Virginia",38.0293059,-78.4766781,"[-78.4766781, 38.0293059]",99,52,68,1,3,7,0,1,0,0,0,0,0,0,1,0,0,1,0,0,0
-Winston-Salem,NC,North Carolina,"Winston-Salem, North Carolina",36.0998596,-80.244216,"[-80.244216, 36.0998595999999]",99,52,68,1,1,3,0,1,0,0,0,0,0,0,1,0,0,1,0,0,0
-Bowling Green,KY,Kentucky,"Bowling Green, Kentucky",36.9685219,-86.4808043,"[-86.4808043, 36.9685219]",99,52,68,1,1,2,0,1,0,0,0,0,0,0,1,1,0,0,0,0,0
-Wichita,KS,Kansas,"Wichita, Kansas",37.6871761,-97.330053,"[-97.3300529999999, 37.6871760999999]",99,52,68,1,3,3,0,1,0,0,0,0,0,0,1,0,0,1,0,0,0
-Madison,WI,Wisconsin,"Madison, Wisconsin",43.0730517,-89.4012302,"[-89.4012302, 43.0730517]",99,52,68,1,4,4,0,1,0,0,0,0,0,0,1,0,1,0,0,0,0
-Laramie,WI,Wisconsin,"Laramie, Wisconsin",41.3113669,-105.5911007,"[-105.5911007, 41.3113669]",99,52,68,1,0,0,0,1,0,0,0,0,0,0,1,0,1,0,0,0,0
-Conway,SC,South Carolina,"Conway, South Carolina",33.8360034,-79.0478143,"[-79.0478143, 33.8360034]",99,52,68,1,0,0,0,1,0,0,0,0,0,0,1,0,0,1,0,0,0
-Fresno,CA,California,"Fresno, California",36.7377981,-119.7871247,"[-119.7871247, 36.7377981]",99,52,68,1,0,1,0,1,0,0,0,0,0,0,1,0,0,1,0,0,0
-Columbia,MO,Missouri,"Columbia, Missouri",38.9517053,-92.3340724,"[-92.3340724, 38.9517053]",99,52,68,1,3,1,0,1,0,0,0,0,0,0,1,0,0,1,0,0,0
-Norfolk,VA,Virginia,"Norfolk, Virginia",36.8507689,-76.2858726,"[-76.2858725999999, 36.8507689]",99,52,68,1,1,1,0,1,0,0,0,0,0,0,1,0,0,0,1,0,0
-Malibu,CA,California,"Malibu, California",34.0259216,-118.7797571,"[-118.7797571, 34.0259216]",99,52,68,1,0,1,0,1,0,0,0,0,0,0,1,0,0,1,0,0,0
-Lubbock,TX,Texas,"Lubbock, Texas",33.5778631,-101.8551665,"[-101.8551665, 33.5778631]",99,52,68,1,0,0,0,1,0,0,0,0,0,0,1,0,0,0,1,0,0
-Nashville,TN,Tennessee,"Nashville, Tennessee",36.1626638,-86.7816016,"[-86.7816016, 36.1626638]",99,52,68,1,3,3,0,1,0,0,0,0,0,0,1,0,0,1,0,0,0
-Indianapolis,IN,Indiana,"Indianapolis, Indiana",39.768403,-86.158068,"[-86.158068, 39.768403]",99,41,109,1,4,10,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0
-Providence,RI,Rhode Island,"Providence, Rhode Island",41.8239891,-71.4128343,"[-71.4128343, 41.8239891]",99,41,109,1,0,2,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0
-Denver,ON,Ontario,"Denver, Ontario",39.593928,-104.730829,"[-104.730829, 39.593928]",99,41,109,1,1,4,1,0,0,0,0,0,1,0,0,0,0,0,0,0,0
-Rochester,NY,New York,"Rochester, New York",43.1565779,-77.6088465,"[-77.6088465, 43.1565778999999]",99,41,109,1,0,3,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0
-Phoenix,AZ,Arizona,"Phoenix, Arizona",33.4483771,-112.0740373,"[-112.0740373, 33.4483771]",99,41,109,1,3,10,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0
-New Orleans,LA,Louisiana,"New Orleans, Louisiana",29.9510658,-90.0715323,"[-90.0715323, 29.9510657999999]",99,41,109,1,0,1,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0
-Jonesboro,AR,Arkansas,"Jonesboro, Arkansas",35.8422967,-90.704279,"[-90.704279, 35.8422967]",140,52,109,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
-Peoria,IL,Illinois,"Peoria, Illinois",40.6936488,-89.5889864,"[-89.5889864, 40.6936488]",140,52,109,0,2,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
-Madison County,NY,New York,"Madison County, New York",42.9805975,-75.8069082,"[-75.8069082, 42.9805974999999]",140,52,109,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
-Hanover,NH,New Hampshire,"Hanover, New Hampshire",43.7022451,-72.2895526,"[-72.2895526, 43.7022451]",140,52,109,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
-Dayton,OH,Ohio,"Dayton, Ohio",39.7589478,-84.1916069,"[-84.1916069, 39.7589478]",140,52,109,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
-Des Moines,IA,Iowa,"Des Moines, Iowa",41.6005448,-93.6091064,"[-93.6091064, 41.6005448]",140,52,109,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
-Spokane,WA,Washington,"Spokane, Washington",47.6587802,-117.4260465,"[-117.4260465, 47.6587802]",140,52,109,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
-Normal,IL,Illinois,"Normal, Illinois",40.5142026,-88.9906312,"[-88.9906312, 40.5142026]",140,52,109,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
-Terre Haute,IN,Indiana,"Terre Haute, Indiana",39.4667034,-87.4139092,"[-87.4139091999999, 39.4667034]",140,52,109,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
-Ames,IA,Iowa,"Ames, Iowa",42.0307812,-93.6319131,"[-93.6319130999999, 42.0307812]",140,52,109,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
-Jacksonville,FL,Florida,"Jacksonville, Florida",30.3321838,-81.655651,"[-81.6556509999999, 30.3321838]",140,52,109,0,2,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
-New York,KS,Kansas,"New York, Kansas",39.104235,-94.5838046,"[-94.5838046, 39.104235]",140,52,109,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
-Bethlehem,NJ,New Jersey,"Bethlehem, New Jersey",40.6672137,-75.0026972,"[-75.0026972, 40.6672137]",140,52,109,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
-Lake Charles,LA,Louisiana,"Lake Charles, Louisiana",30.2265949,-93.2173758,"[-93.2173758, 30.2265949]",140,52,109,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
-Memphis,TN,Tennessee,"Memphis, Tennessee",35.1495343,-90.0489801,"[-90.0489801, 35.1495343]",140,52,109,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
-Starkville,MS,Mississippi,"Starkville, Mississippi",33.4503998,-88.8183872,"[-88.8183871999999, 33.4503998]",140,52,109,0,3,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
-Reno,NV,Nevada,"Reno, Nevada",39.5296329,-119.8138027,"[-119.8138027, 39.5296329]",140,52,109,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
-Las Cruces,NM,New Mexico,"Las Cruces, New Mexico",32.3199396,-106.7636538,"[-106.7636538, 32.3199396]",140,52,109,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
-Huntsville,TX,Texas,"Huntsville, Texas",30.7235263,-95.5507771,"[-95.5507770999999, 30.7235263]",140,52,109,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
-South Orange,NJ,New Jersey,"South Orange, New Jersey",40.7489277,-74.2609903,"[-74.2609903, 40.7489277]",140,52,109,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
-Allegany,NY,New York,"Allegany, New York",42.0900647,-78.4941887,"[-78.4941887, 42.0900647]",140,52,109,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
-Queens,NY,New York,"Queens, New York",40.7282239,-73.7948516,"[-73.7948516, 40.7282239]",140,52,109,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
-Nacogdoches,TX,Texas,"Nacogdoches, Texas",31.6035129,-94.6554874,"[-94.6554874, 31.6035129]",140,52,109,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
-Towson,MD,Maryland,"Towson, Maryland",39.4014955,-76.6019125,"[-76.6019125, 39.4014955]",140,52,109,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
-Charlotte,NC,North Carolina,"Charlotte, North Carolina",35.2270869,-80.8431267,"[-80.8431267, 35.2270869]",140,52,109,0,2,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
-Cedar Falls,IA,Iowa,"Cedar Falls, Iowa",42.5348993,-92.4453161,"[-92.4453161, 42.5348993]",140,52,109,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
-Pullman,WA,Washington,"Pullman, Washington",46.7297771,-117.1817377,"[-117.1817377, 46.7297771]",140,52,109,0,2,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
-Morgantown,WV,West Virginia,"Morgantown, West Virginia",39.629526,-79.9558968,"[-79.9558967999999, 39.629526]",140,52,109,0,2,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
-Cullowhee,NC,North Carolina,"Cullowhee, North Carolina",35.3137111,-83.1765333,"[-83.1765333, 35.3137111]",140,52,109,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
-Newton,MA,Massachusetts,"Newton, Massachusetts",42.3370413,-71.2092214,"[-71.2092213999999, 42.3370413]",140,52,109,0,0,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
-Orlando,FL,Florida,"Orlando, Florida",28.5383355,-81.3792365,"[-81.3792365, 28.5383355]",140,52,109,0,3,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
-Delaware Country,PA,Pennsylvania,"Delaware Country, Pennsylvania",39.907793,-75.3878525,"[-75.3878525, 39.907793]",140,52,109,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
-Colorado Springs,CO,Colorado,"Colorado Springs, Colorado",38.8338816,-104.8213634,"[-104.8213634, 38.8338816]",140,52,109,0,2,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
-Omaha,NE,Nebraska,"Omaha, Nebraska",41.2565369,-95.9345034,"[-95.9345034, 41.2565369]",140,52,109,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
-Hartford,CT,Connecticut,"Hartford, Connecticut",41.7658043,-72.6733723,"[-72.6733723, 41.7658043]",140,52,109,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
-Lafayette,LA,Louisiana,"Lafayette, Louisiana",30.2240897,-92.0198427,"[-92.0198427, 30.2240897]",140,52,109,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
-Orono,ME,Maine,"Orono, Maine",44.8831125,-68.6719411,"[-68.6719411, 44.8831125]",140,52,109,0,0,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
-Athens,OH,Ohio,"Athens, Ohio",39.3292396,-82.1012554,"[-82.1012554, 39.3292396]",140,52,109,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
-Winter Park,FL,Florida,"Winter Park, Florida",28.5999998,-81.3392352,"[-81.3392351999999, 28.5999998]",140,52,109,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
-San Diego,CA,California,"San Diego, California",32.715738,-117.1610838,"[-117.1610838, 32.715738]",140,52,109,0,3,5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
-Springfield,MO,Missouri,"Springfield, Missouri",37.2089572,-93.2922989,"[-93.2922988999999, 37.2089572]",140,52,109,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
-Edinburg,TX,Texas,"Edinburg, Texas",26.3017374,-98.1633432,"[-98.1633432, 26.3017374]",140,52,109,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
-Tulsa,OK,Oklahoma,"Tulsa, Oklahoma",36.1539816,-95.992775,"[-95.992775, 36.1539816]",140,52,109,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
-Irvine,CA,California,"Irvine, California",33.6845673,-117.8265049,"[-117.8265049, 33.6845673]",140,52,109,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
-Arlington,TX,Texas,"Arlington, Texas",32.735687,-97.1080656,"[-97.1080655999999, 32.735687]",140,52,109,0,2,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
-Blacksburg,VA,Virginia,"Blacksburg, Virginia",37.2295733,-80.4139393,"[-80.4139393, 37.2295733]",140,52,109,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
-Kalamazoo,MI,Michigan,"Kalamazoo, Michigan",42.2917069,-85.5872286,"[-85.5872286, 42.2917069]",140,52,109,0,1,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
-Ypsilanti,MI,Michigan,"Ypsilanti, Michigan",42.2411499,-83.6129939,"[-83.6129938999999, 42.2411499]",140,52,109,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
-Monreal,QC,Quebec,"Monreal, Quebec",45.5016889,-73.567256,"[-73.567256, 45.5016889]",140,52,109,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
-Oklahoma City,OK,Oklahoma,"Oklahoma City, Oklahoma",35.4675602,-97.5164276,"[-97.5164276, 35.4675602]",140,52,109,0,1,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
-Fort Wayne,IN,Indiana,"Fort Wayne, Indiana",41.079273,-85.1393513,"[-85.1393513, 41.079273]",140,52,109,0,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
-Sacramento,CA,California,"Sacramento, California",38.5815719,-121.4943996,"[-121.4943996, 38.5815719]",140,52,109,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
-Buffalo,NY,New York,"Buffalo, New York",42.8864468,-78.8783689,"[-78.8783689, 42.8864467999999]",140,52,109,0,6,5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
-Pottsville,PA,Pennsylvania,"Pottsville, Pennsylvania",40.6856456,-76.195499,"[-76.195499, 40.6856456]",140,52,109,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
-Portsmouth,OH,Ohio,"Portsmouth, Ohio",38.7317431,-82.9976742,"[-82.9976742, 38.7317431]",140,52,109,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
-Quebec City,QC,Quebec,"Quebec City, Quebec",46.8138783,-71.2079809,"[-71.2079809, 46.8138783]",140,52,109,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
-Manhattan,KS,Kansas,"Manhattan, Kansas",39.168205,-96.6899444,"[-96.6899444, 39.168205]",140,52,109,0,2,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+city,stateAbb,state,cityState,teams,Latitude,Longitude,lngLat,rank_all,rank_pro,rank_NCAA,count,finals,final4,pro,NCAA,mlb,nba,nfl,nhl,mls,cfl,ncaa,ncaa-football-m,ncaa-basketball-m,ncaa-baseball-m,ncaa-basketball-w,ncaa-soccer-w,ncaa-volleyball-w
+Los Angeles,CA,California,"Los Angeles, California","[""University of Southern California (NCAA - 21)"", "" University of California-Los Angeles (NCAA - 18)"", "" Los Angeles Lakers (NBA - 11)"", "" Los Angeles Dodgers (MLB - 5)"", "" Los Angeles Galaxy (MLS - 5)"", "" Los Angeles Kings (NHL - 2)"", "" Los Angeles Raiders (NFL - 1)"", "" Los Angeles Rams (NFL - 1)""]",34.0522342,-118.2436849,"[-118.2436849, 34.0522342]",1,6,1,64,39,50,25,39,5,11,2,2,5,0,39,10,11,13,0,1,4
+New York,NY,New York,"New York, New York","[""New York Yankees (MLB - 27)"", "" New York Giants (MLB - 8)"", "" New York Giants (MLB - 5)"", "" New York Islanders (NHL - 4)"", "" New York Rangers (NHL - 4)"", "" New York Knicks (NBA - 2)"", "" New York Mets (MLB - 2)"", "" Brooklyn Dodgers (MLB - 1)"", "" City College of New York (NCAA - 1)"", "" New York Jets (NFL - 1)""]",40.7127753,-74.0059728,"[-74.0059728, 40.7127753]",2,1,69,55,63,85,54,1,35,2,9,8,0,0,1,0,1,0,0,0,0
+Toronto,ON,Ontario,"Toronto, Ontario","[""Toronto Argonauts (CFL - 17)"", "" Toronto Maple Leafs (NHL - 11)"", "" University of Toronto Varsity Blues (CFL - 4)"", "" Toronto Balmy Beach (CFL - 2)"", "" Toronto Blue Jays (MLB - 2)"", "" Toronto Arenas (NHL - 1)"", "" Toronto FC (MLS - 1)"", "" Toronto RCAF Hurricanes (CFL - 1)"", "" Toronto St. Patricks (NHL - 1)""]",43.653226,-79.3831843,"[-79.3831843, 43.653226]",3,2,110,40,23,40,40,0,2,0,0,13,1,24,0,0,0,0,0,0,0
+Boston,MA,Massachusetts,"Boston, Massachusetts","[""Boston Celtics (NBA - 17)"", "" Boston Red Sox (MLB - 7)"", "" Boston Bruins (NHL - 6)"", "" New England Patriots (NFL - 5)"", "" Boston Americans (MLB - 1)"", "" Boston Braves (MLB - 1)""]",42.3600825,-71.0588801,"[-71.0588801, 42.3600825]",4,3,110,37,33,58,37,0,9,17,5,6,0,0,0,0,0,0,0,0,0
+Montreal,QC,Quebec,"Montreal, Quebec","[""Montreal Canadiens (NHL - 25)"", "" Montreal Alouettes (CFL - 7)"", "" Montreal Maroons (NHL - 2)"", "" Montreal AAA Winged Wheelers (CFL - 1)"", "" St. Hyacinthe-Donnacona Navy (CFL - 1)""]",45.5016889,-73.567256,"[-73.567256, 45.5016889]",5,4,110,36,21,36,36,0,0,0,0,27,0,9,0,0,0,0,0,0,0
+Chicago,IL,Illinois,"Chicago, Illinois","[""Chicago Bears (NFL - 8)"", "" Chicago Bulls (NBA - 6)"", "" Chicago Black Hawks (NHL - 3)"", "" Chicago Blackhawks (NHL - 3)"", "" Chicago Cubs (MLB - 3)"", "" Chicago White Sox (MLB - 3)"", "" Chicago Cardinals (NFL - 2)"", "" Loyola-Chicago (NCAA - 2)"", "" Chicago Fire (MLS - 1)"", "" University of Chicago (NCAA - 1)""]",41.8781136,-87.6297982,"[-87.6297982, 41.8781136]",6,5,36,32,30,57,29,3,6,6,10,6,1,0,3,1,2,0,0,0,0
+Chapel Hill,NC,North Carolina,"Chapel Hill, North Carolina","[""University of North Carolina (NCAA - 28)""]",35.9131996,-79.0558445,"[-79.0558445, 35.9131996]",7,53,2,28,10,17,0,28,0,0,0,0,0,0,28,0,6,0,1,21,0
+Philadelphia,PA,Pennsylvania,"Philadelphia, Pennsylvania","[""Philadelphia Athletics (MLB - 5)"", "" Philadelphia Eagles (NFL - 4)"", "" University of Pennsylvania (NCAA - 4)"", "" Philadelphia 76ers (NBA - 2)"", "" Philadelphia Flyers (NHL - 2)"", "" Philadelphia Warriors (NBA - 2)"", "" Frankford Yellow Jackets (NFL - 1)"", "" La Salle University (NCAA - 1)"", "" Philadelphia Philles (MLB - 1)""]",39.9525839,-75.1652215,"[-75.1652215, 39.9525839]",8,9,26,23,24,41,18,5,7,4,5,2,0,0,5,4,1,0,0,0,0
+Detroit,MI,Michigan,"Detroit, Michigan","[""Detroit Red Wings (NHL - 11)"", "" Detroit Lions (NFL - 4)"", "" Detroit Tigers (MLB - 4)"", "" Detroit Pistons (NBA - 3)""]",42.331427,-83.0457538,"[-83.0457538, 42.331427]",9,7,110,22,23,39,22,0,4,3,4,11,0,0,0,0,0,0,0,0,0
+Pittsburgh,PA,Pennsylvania,"Pittsburgh, Pennsylvania","[""Pittsburgh Steelers (NFL - 6)"", "" Pittsburgh Penguins (NHL - 5)"", "" Pittsburgh Pirates (MLB - 5)"", "" University of Pittsburgh (NCAA - 5)""]",40.4406248,-79.9958864,"[-79.9958864, 40.4406247999999]",10,10,26,21,5,31,16,5,5,0,6,5,0,0,5,5,0,0,0,0,0
+Edmonton,AB,Alberta,"Edmonton, Alberta","[""Edmonton Eskimos (CFL - 14)"", "" Edmonton Oilers (NHL - 5)""]",53.544389,-113.4909267,"[-113.4909267, 53.544389]",11,8,110,19,13,20,19,0,0,0,0,5,0,14,0,0,0,0,0,0,0
+New Haven,CT,Connecticut,"New Haven, Connecticut","[""Yale University (NCAA - 18)""]",41.308274,-72.9278835,"[-72.9278835, 41.308274]",12,53,3,18,2,0,0,18,0,0,0,0,0,0,18,18,0,0,0,0,0
+Notre Dame,IN,Indiana,"Notre Dame, Indiana","[""University of Notre Dame (NCAA - 18)""]",41.7001908,-86.2379328,"[-86.2379328, 41.7001908]",12,53,3,18,9,8,0,18,0,0,0,0,0,0,18,13,0,0,2,3,0
+Miami,FL,Florida,"Miami, Florida","[""University of Miami (NCAA - 9)"", "" Miami Heat (NBA - 3)"", "" Florida Marlins (MLB - 2)"", "" Miami Dolphins (NFL - 2)""]",25.7616798,-80.1917902,"[-80.1917902, 25.7616798]",14,22,17,16,8,11,7,9,2,3,2,0,0,0,9,5,0,4,0,0,0
+Minneapolis,MN,Minnesota,"Minneapolis, Minnesota","[""University of Minnesota (NCAA - 9)"", "" Minneapolis Lakers (NBA - 5)"", "" Minnesota Twins (MLB - 2)""]",44.977753,-93.2650108,"[-93.2650108, 44.977753]",14,22,17,16,9,28,7,9,2,5,0,0,0,0,9,6,0,3,0,0,0
+Tuscaloosa,AL,Alabama,"Tuscaloosa, Alabama","[""University of Alabama (NCAA - 15)""]",33.2098407,-87.5691735,"[-87.5691734999999, 33.2098407]",16,53,5,15,3,2,0,15,0,0,0,0,0,0,15,15,0,0,0,0,0
+Mansfield,CT,Connecticut,"Mansfield, Connecticut","[""University of Connecticut (NCAA - 15)""]",41.788489,-72.2292913,"[-72.2292913, 41.788489]",16,53,5,15,4,12,0,15,0,0,0,0,0,0,15,0,4,0,11,0,0
+Princeton,NJ,New Jersey,"Princeton, New Jersey","[""Princeton University (NCAA - 15)""]",40.3572976,-74.6672226,"[-74.6672226, 40.3572976]",16,53,5,15,0,2,0,15,0,0,0,0,0,0,15,15,0,0,0,0,0
+Stanford,CA,California,"Stanford, California","[""Stanford University (NCAA - 15)""]",37.424106,-122.1660756,"[-122.1660756, 37.4241059999999]",16,53,5,15,15,26,0,15,0,0,0,0,0,0,15,1,1,2,2,2,7
+Hamilton,ON,Ontario,"Hamilton, Ontario","[""Hamilton Tiger-Cats (CFL - 8)"", "" Hamilton Tigers (CFL - 5)"", "" Hamilton Alerts (CFL - 1)"", "" Hamilton Flying Wildcats (CFL - 1)""]",43.2557206,-79.8711024,"[-79.8711024, 43.2557206]",16,11,110,15,17,11,15,0,0,0,0,0,0,15,0,0,0,0,0,0,0
+Green Bay,WI,Wisconsin,"Green Bay, Wisconsin","[""Green Bay Packers (NFL - 14)""]",44.5133188,-88.0132958,"[-88.0132958, 44.5133188]",21,12,110,14,5,4,14,0,0,0,14,0,0,0,0,0,0,0,0,0,0
+St Louis,MO,Missouri,"St Louis, Missouri","[""St Louis Cardinals (MLB - 11)"", "" St Louis Hawks (NBA - 1)"", "" St Louis Rams (NFL - 1)""]",38.6270025,-90.1994042,"[-90.1994041999999, 38.6270025]",22,13,110,13,16,30,13,0,11,1,1,0,0,0,0,0,0,0,0,0,0
+Washington,DC,DC,"Washington, DC","[""Washington Redskins (NFL - 5)"", "" Washington Redskins (NFL - 5)"", "" D.C. United (MLS - 4)"", "" Georgetown University (NCAA - 1)"", "" Washington Bullets (NBA - 1)"", "" Washington Capitals (NHL - 1)"", "" Washington Senators (MLB - 1)""]",38.9071923,-77.0368707,"[-77.0368707, 38.9071923]",22,15,69,13,16,11,12,1,1,1,5,1,4,0,1,0,1,0,0,0,0
+Austin,TX,Texas,"Austin, Texas","[""University of Texas (NCAA - 13)""]",30.267153,-97.7430608,"[-97.7430608, 30.267153]",22,53,9,13,10,26,0,13,0,0,0,0,0,0,13,4,0,6,1,0,2
+Ottawa,ON,Ontario,"Ottawa, Ontario","[""Ottawa Rough Riders (CFL - 7)"", "" Ottawa Senators (NHL - 5)"", "" Ottawa Redblacks (CFL - 1)""]",45.4215296,-75.6971931,"[-75.6971930999999, 45.4215296]",22,13,110,13,12,15,13,0,0,0,0,3,0,10,0,0,0,0,0,0,0
+Ann Arbor,MI,Michigan,"Ann Arbor, Michigan","[""University of Michigan (NCAA - 12)""]",42.2808256,-83.7430378,"[-83.7430378, 42.2808256]",26,53,10,12,3,4,0,12,0,0,0,0,0,0,12,9,1,2,0,0,0
+Centre Country,PA,Pennsylvania,"Centre Country, Pennsylvania","[""Penn State University (NCAA - 12)""]",40.8765649,-77.8367282,"[-77.8367282, 40.8765649]",26,53,10,12,5,10,0,12,0,0,0,0,0,0,12,4,0,0,0,1,7
+Columbus,OH,Ohio,"Columbus, Ohio","[""Ohio State University (NCAA - 10)"", "" Columbus Crew (MLS - 1)""]",39.9611755,-82.9987942,"[-82.9987941999999, 39.9611755]",28,42,12,11,7,13,1,10,0,0,0,0,1,0,10,8,1,1,0,0,0
+Oakland,CA,California,"Oakland, California","[""Golden State Warriors (NBA - 4)"", "" Oakland Athletics (MLB - 4)"", "" Oakland Raiders (NFL - 2)""]",37.8043637,-122.2711137,"[-122.2711137, 37.8043637]",29,16,110,10,5,13,10,0,4,4,2,0,0,0,0,0,0,0,0,0,0
+San Francisco,CA,California,"San Francisco, California","[""San Francisco 49ers (NFL - 5)"", "" San Francisco Giants (MLB - 3)"", "" University of San Francisco (NCAA - 2)""]",37.7749295,-122.4194155,"[-122.4194155, 37.7749295]",29,20,50,10,6,17,8,2,3,0,5,0,0,0,2,0,2,0,0,0,0
+Baltimore,MD,Maryland,"Baltimore, Maryland","[""Baltimore Colts (NFL - 3)"", "" Baltimore Orioles (MLB - 3)"", "" Baltimore Ravens (NFL - 2)"", "" Baltimore Bullets (NBA - 1)"", "" Baltimore Stallions (CFL - 1)""]",39.2903848,-76.6121893,"[-76.6121893, 39.2903848]",29,16,110,10,7,11,10,0,3,1,5,0,0,1,0,0,0,0,0,0,0
+Baton Rouge,LA,Louisiana,"Baton Rouge, Louisiana","[""Louisiana State University (NCAA - 10)""]",30.4514677,-91.1871466,"[-91.1871465999999, 30.4514677]",29,53,12,10,1,15,0,10,0,0,0,0,0,0,10,4,0,6,0,0,0
+Lincoln,NE,Nebraska,"Lincoln, Nebraska","[""University of Nebraska (NCAA - 10)""]",40.813616,-96.7025955,"[-96.7025955, 40.813616]",29,53,12,10,3,6,0,10,0,0,0,0,0,0,10,5,0,0,0,0,5
+Columbia,SC,South Carolina,"Columbia, South Carolina","[""University of South Carolina (NCAA - 10)""]",34.0007104,-81.0348144,"[-81.0348144, 34.0007104]",29,53,12,10,6,13,0,10,0,0,0,0,0,0,10,0,0,2,3,2,3
+Knoxville,TN,Tennessee,"Knoxville, Tennessee","[""University of Tennessee (NCAA - 10)""]",35.9606384,-83.9207392,"[-83.9207392, 35.9606384]",29,53,12,10,6,8,0,10,0,0,0,0,0,0,10,2,0,0,8,0,0
+Winnipeg,MB,Manitoba,"Winnipeg, Manitoba","[""Winnipeg Blue Bombers (CFL - 9)"", "" Winnipeg ‘Pegs (CFL - 1)""]",49.895136,-97.1383744,"[-97.1383743999999, 49.895136]",29,16,110,10,17,14,10,0,0,0,0,0,0,10,0,0,0,0,0,0,0
+Cleveland,OH,Ohio,"Cleveland, Ohio","[""Cleveland Browns (NFL - 4)"", "" Cleveland Indians (MLB - 2)"", "" Cleveland Bulldogs (NFL - 1)"", "" Cleveland Cavaliers (NBA - 1)"", "" Cleveland Rams (NFL - 1)""]",41.49932,-81.6943605,"[-81.6943605, 41.49932]",37,19,110,9,13,22,9,0,2,1,6,0,0,0,0,0,0,0,0,0,0
+Norman,OK,Oklahoma,"Norman, Oklahoma","[""University of Oklahama (NCAA - 9)""]",35.2225668,-97.4394777,"[-97.4394777, 35.2225668]",37,53,17,9,3,6,0,9,0,0,0,0,0,0,9,7,0,2,0,0,0
+Cambridge,MA,Massachusetts,"Cambridge, Massachusetts","[""Harvard University (NCAA - 8)""]",42.3736158,-71.1097335,"[-71.1097334999999, 42.3736158]",39,53,20,8,0,0,0,8,0,0,0,0,0,0,8,8,0,0,0,0,0
+Lexington,KY,Kentucky,"Lexington, Kentucky","[""University of Kentucky (NCAA - 8)""]",38.0405837,-84.5037164,"[-84.5037164, 38.0405837]",39,53,20,8,4,6,0,8,0,0,0,0,0,0,8,0,8,0,0,0,0
+Calgary,AB,Alberta,"Calgary, Alberta","[""Calgary Stampeders (CFL - 7)"", "" Calgary Flames (NHL - 1)""]",51.0486151,-114.0708459,"[-114.0708459, 51.0486151]",39,20,110,8,11,17,8,0,0,0,0,1,0,7,0,0,0,0,0,0,0
+Cincinnati,OH,Ohio,"Cincinnati, Ohio","[""Cincinnati Reds (MLB - 5)"", "" University of Cincinnati (NCAA - 2)""]",39.1031182,-84.5120196,"[-84.5120196, 39.1031182]",42,26,50,7,7,14,5,2,5,0,0,0,0,0,2,0,2,0,0,0,0
+Gainesville,FL,Florida,"Gainesville, Florida","[""University of Florida (NCAA - 7)""]",29.6516344,-82.3248262,"[-82.3248261999999, 29.6516344]",42,53,22,7,5,12,0,7,0,0,0,0,0,0,7,3,2,1,0,1,0
+Dallas,TX,Texas,"Dallas, Texas","[""Dallas Cowboys (NFL - 5)"", "" Dallas Mavericks (NBA - 1)"", "" Dallas Stars (NHL - 1)""]",32.7766642,-96.7969879,"[-96.7969878999999, 32.7766642]",42,22,110,7,7,18,7,0,0,1,5,1,0,0,0,0,0,0,0,0,0
+Houston,TX,Texas,"Houston, Texas","[""Houston Dynamo (MLS - 2)"", "" Houston Rockets (NBA - 2)"", "" Houston Astros (MLB - 1)"", "" Rice University (NCAA - 1)""]",29.7604267,-95.3698028,"[-95.3698028, 29.7604267]",45,26,69,6,8,17,5,1,1,2,0,0,2,0,1,0,0,1,0,0,0
+Berkeley,CA,California,"Berkeley, California","[""University of California (NCAA - 6)""]",37.8715926,-122.272747,"[-122.272747, 37.8715926]",45,53,23,6,2,6,0,6,0,0,0,0,0,0,6,3,1,2,0,0,0
+Statesboro,GA,Georgia,"Statesboro, Georgia","[""Georgia Southern University (NCAA - 6)""]",32.4487876,-81.7831674,"[-81.7831674, 32.4487876]",45,53,23,6,2,0,0,6,0,0,0,0,0,0,6,6,0,0,0,0,0
+Fargo,ND,North Dakota,"Fargo, North Dakota","[""North Dakota State University (NCAA - 6)""]",46.8771863,-96.7898034,"[-96.7898034, 46.8771863]",45,53,23,6,0,0,0,6,0,0,0,0,0,0,6,6,0,0,0,0,0
+Denver,CO,Colorado,"Denver, Colorado","[""Denver Broncos (NFL - 3)"", "" Colorado Avalanche (NHL - 2)"", "" University of Colorado (NCAA - 1)""]",39.7392358,-104.990251,"[-104.990251, 39.7392358]",45,26,69,6,6,11,5,1,0,0,3,2,0,0,1,1,0,0,0,0,0
+Vancouver,BC,British Columbia,"Vancouver, British Columbia","[""BC Lions (CFL - 6)""]",49.2827291,-123.1207375,"[-123.1207375, 49.2827291]",45,25,110,6,7,12,6,0,0,0,0,0,0,6,0,0,0,0,0,0,0
+Kansas City,MO,Missouri,"Kansas City, Missouri","[""Kansas City Royals (MLB - 2)"", "" Kansas City Chiefs (NFL - 1)"", "" Kansas City Wizards (MLS - 1)"", "" Sporting Kansas City (MLS - 1)""]",39.0997265,-94.5785667,"[-94.5785667, 39.0997265]",51,26,110,5,4,10,5,0,2,0,1,0,2,0,0,0,0,0,0,0,0
+Tucson,AZ,Arizona,"Tucson, Arizona","[""University of Arizona (NCAA - 5)""]",32.2226066,-110.9747108,"[-110.9747108, 32.2226066]",51,53,26,5,5,6,0,5,0,0,0,0,0,0,5,0,1,4,0,0,0
+Durham,NC,North Carolina,"Durham, North Carolina","[""Duke University (NCAA - 5)""]",35.9940329,-78.898619,"[-78.898619, 35.9940329]",51,53,26,5,11,8,0,5,0,0,0,0,0,0,5,0,5,0,0,0,0
+Tallahassee,FL,Florida,"Tallahassee, Florida","[""Florida State University (NCAA - 4)"", "" Florida A&M (NCAA - 1)""]",30.4382559,-84.2807329,"[-84.2807328999999, 30.4382559]",51,53,26,5,6,11,0,5,0,0,0,0,0,0,5,4,0,0,0,1,0
+Bloomington,IN,Indiana,"Bloomington, Indiana","[""University of Indiana (NCAA - 5)""]",39.165325,-86.5263857,"[-86.5263856999999, 39.165325]",51,53,26,5,1,2,0,5,0,0,0,0,0,0,5,0,5,0,0,0,0
+East Lansing,MI,Michigan,"East Lansing, Michigan","[""Michigan State University (NCAA - 5)""]",42.7369792,-84.4838654,"[-84.4838654, 42.7369792]",51,53,26,5,2,8,0,5,0,0,0,0,0,0,5,3,2,0,0,0,0
+Tempe,AZ,Arizona,"Tempe, Arizona","[""Arizona State University (NCAA - 5)""]",33.4255104,-111.9400054,"[-111.9400054, 33.4255104]",51,53,26,5,5,6,0,5,0,0,0,0,0,0,5,0,0,5,0,0,0
+Seattle,WA,Washington,"Seattle, Washington","[""University of Washington (NCAA - 2)"", "" Seattle Seahawks (NFL - 1)"", "" Seattle Sounders FC (MLS - 1)"", "" Seattle SuperSonics (NBA - 1)""]",47.6062095,-122.3320708,"[-122.3320708, 47.6062095]",51,32,50,5,6,14,3,2,0,1,1,0,1,0,2,1,0,0,0,0,1
+San Antonio,TX,Texas,"San Antonio, Texas","[""San Antonio Spurs (NBA - 5)""]",29.4241219,-98.4936282,"[-98.4936281999999, 29.4241219]",51,26,110,5,1,9,5,0,0,5,0,0,0,0,0,0,0,0,0,0,0
+Atlanta,GA,Georgia,"Atlanta, Georgia","[""Georgia Tech (NCAA - 3)"", "" Atlanta Braves (MLB - 1)""]",33.7489954,-84.3879824,"[-84.3879824, 33.7489954]",60,42,36,4,8,12,1,3,1,0,0,0,0,0,3,3,0,0,0,0,0
+Youngstown,OH,Ohio,"Youngstown, Ohio","[""Youngstown State University (NCAA - 4)""]",41.0997803,-80.6495194,"[-80.6495194, 41.0997803]",60,53,34,4,3,0,0,4,0,0,0,0,0,0,4,4,0,0,0,0,0
+Fullerton,CA,California,"Fullerton, California","[""California State University"", "" Fullerton (NCAA - 4)""]",33.8703645,-117.9242123,"[-117.9242123, 33.8703645]",60,53,34,4,1,5,0,4,0,0,0,0,0,0,4,0,0,4,0,0,0
+Portland,OR,Oregon,"Portland, Oregon","[""University of Portland (NCAA - 2)"", "" Portland Timbers (MLS - 1)"", "" Portland Trail Blazers (NBA - 1)""]",45.5230622,-122.6764815,"[-122.6764815, 45.5230622]",60,35,50,4,3,9,2,2,0,1,0,0,1,0,2,0,0,0,0,2,0
+Regina,SK,Saskatchewan,"Regina, Saskatchewan","[""Saskatchewan Roughriders (CFL - 4)""]",50.4452112,-104.6188943,"[-104.6188943, 50.4452112]",60,31,110,4,15,11,4,0,0,0,0,0,0,4,0,0,0,0,0,0,0
+Milwaukee,WI,Wisconsin,"Milwaukee, Wisconsin","[""Marquette University (NCAA - 1)"", "" Milwaukee Brewers (MLB - 1)"", "" Milwaukee Bucks (NBA - 1)""]",43.0389025,-87.9064736,"[-87.9064736, 43.0389025]",65,35,69,3,4,13,2,1,1,1,0,0,0,0,1,0,1,0,0,0,0
+Boone,NC,North Carolina,"Boone, North Carolina","[""Appalachian State University (NCAA - 3)""]",36.216795,-81.6745517,"[-81.6745517, 36.216795]",65,53,36,3,0,0,0,3,0,0,0,0,0,0,3,3,0,0,0,0,0
+West Point,NY,New York,"West Point, New York","[""United States Military Academy (NCAA - 3)""]",41.3914827,-73.9559721,"[-73.9559721, 41.3914827]",65,53,36,3,0,0,0,3,0,0,0,0,0,0,3,3,0,0,0,0,0
+Ithaca,NY,New York,"Ithaca, New York","[""Cornell University (NCAA - 3)""]",42.4439614,-76.5018807,"[-76.5018807, 42.4439614]",65,53,36,3,0,0,0,3,0,0,0,0,0,0,3,3,0,0,0,0,0
+Champaign County,IL,Illinois,"Champaign County, Illinois","[""University of Illinois (NCAA - 3)""]",40.2138865,-88.2461183,"[-88.2461182999999, 40.2138865]",65,53,36,3,2,6,0,3,0,0,0,0,0,0,3,3,0,0,0,0,0
+Lawrence,KS,Kansas,"Lawrence, Kansas","[""University of Kansas (NCAA - 3)""]",38.9716689,-95.2352501,"[-95.2352501, 38.9716689]",65,53,36,3,6,6,0,3,0,0,0,0,0,0,3,0,3,0,0,0,0
+College Park,MD,Maryland,"College Park, Maryland","[""University of Maryland (NCAA - 3)""]",38.9896967,-76.93776,"[-76.93776, 38.9896967]",65,53,36,3,0,5,0,3,0,0,0,0,0,0,3,1,1,0,1,0,0
+Stillwater,OK,Oklahoma,"Stillwater, Oklahoma","[""Oklahoma A&M (NCAA - 2)"", "" Oklahoma State University (NCAA - 1)""]",36.1156071,-97.0583681,"[-97.0583681, 36.1156071]",65,53,36,3,6,10,0,3,0,0,0,0,0,0,3,0,2,1,0,0,0
+College Station,TX,Texas,"College Station, Texas","[""Texas A&M (NCAA - 3)""]",30.627977,-96.3344068,"[-96.3344068, 30.627977]",65,53,36,3,0,1,0,3,0,0,0,0,0,0,3,2,0,0,1,0,0
+Villanova,PA,Pennsylvania,"Villanova, Pennsylvania","[""Villanova University (NCAA - 3)""]",40.0375832,-75.3491813,"[-75.3491813, 40.0375832]",65,53,36,3,0,2,0,3,0,0,0,0,0,0,3,1,2,0,0,0,0
+Honolulu,HI,Hawaii,"Honolulu, Hawaii","[""University of Hawaii (NCAA - 3)""]",21.3069444,-157.8583333,"[-157.8583333, 21.3069444]",65,53,36,3,3,4,0,3,0,0,0,0,0,0,3,0,0,0,0,0,3
+Long Beach,CA,California,"Long Beach, California","[""Long Beach State (NCAA - 3)""]",33.7700504,-118.1937395,"[-118.1937395, 33.7700504]",65,53,36,3,2,7,0,3,0,0,0,0,0,0,3,0,0,0,0,0,3
+Louisville,KY,Kentucky,"Louisville, Kentucky","[""University of Louisville (NCAA - 3)""]",38.2526647,-85.7584557,"[-85.7584557, 38.2526647]",65,53,36,3,2,7,0,3,0,0,0,0,0,0,3,0,3,0,0,0,0
+Raleigh,NC,North Carolina,"Raleigh, North Carolina","[""North Carolina State (NCAA - 2)"", "" Carolina Hurricanes (NHL - 1)""]",35.7795897,-78.6381787,"[-78.6381787, 35.7795897]",65,42,50,3,2,5,1,2,0,0,0,1,0,0,2,0,2,0,0,0,0
+Syracuse,NY,New York,"Syracuse, New York","[""Syracuse University (NCAA - 2)"", "" Syracuse Nationals (NBA - 1)""]",43.0481221,-76.1474244,"[-76.1474243999999, 43.0481221]",65,42,50,3,5,10,1,2,0,1,0,0,0,0,2,1,1,0,0,0,0
+Kingston,ON,Ontario,"Kingston, Ontario","[""Queen’s University (CFL - 3)""]",44.2311717,-76.4859544,"[-76.4859544, 44.2311717]",65,32,110,3,0,0,3,0,0,0,0,0,0,3,0,0,0,0,0,0,0
+Newark,NJ,New jersey,"Newark, New jersey","[""New Jersey Devils (NHL - 3)""]",40.735657,-74.1723667,"[-74.1723667, 40.735657]",65,32,110,3,4,2,3,0,0,0,0,3,0,0,0,0,0,0,0,0,0
+Anaheim,CA,California,"Anaheim, California","[""Anaheim Angels (MLB - 1)"", "" Anaheim Ducks (NHL - 1)""]",33.8339114,-117.985577,"[-117.985577, 33.8339114]",82,35,110,2,1,5,2,0,1,0,0,1,0,0,0,0,0,0,0,0,0
+Fayetteville,AR,Arkansas,"Fayetteville, Arkansas","[""University of Arkansas (NCAA - 2)""]",36.082156,-94.1718542,"[-94.1718542, 36.082156]",82,53,50,2,2,8,0,2,0,0,0,0,0,0,2,1,1,0,0,0,0
+Auburn,AL,Alabama,"Auburn, Alabama","[""Auburn University (NCAA - 2)""]",32.6098566,-85.4807825,"[-85.4807824999999, 32.6098566]",82,53,50,2,3,1,0,2,0,0,0,0,0,0,2,2,0,0,0,0,0
+Waco,TX,Texas,"Waco, Texas","[""Baylor University (NCAA - 2)""]",31.549333,-97.1466695,"[-97.1466695, 31.549333]",82,53,50,2,1,4,0,2,0,0,0,0,0,0,2,0,0,0,2,0,0
+Clemson,SC,South Carolina,"Clemson, South Carolina","[""Clemson University (NCAA - 2)""]",34.6834382,-82.8373654,"[-82.8373654, 34.6834382]",82,53,50,2,1,3,0,2,0,0,0,0,0,0,2,2,0,0,0,0,0
+Richmond,KY,Kentucky,"Richmond, Kentucky","[""Eastern Kentucky University (NCAA - 2)""]",37.7478572,-84.2946539,"[-84.2946539, 37.7478572]",82,53,50,2,2,0,0,2,0,0,0,0,0,0,2,2,0,0,0,0,0
+Athens,GA,Georgia,"Athens, Georgia","[""University of Georgia (NCAA - 2)""]",33.9519347,-83.357567,"[-83.357567, 33.9519347]",82,53,50,2,4,5,0,2,0,0,0,0,0,0,2,1,0,1,0,0,0
+Worcester,MA,Massachusetts,"Worcester, Massachusetts","[""Holy Cross University (NCAA - 2)""]",42.2625932,-71.8022934,"[-71.8022934, 42.2625932]",82,53,50,2,0,2,0,2,0,0,0,0,0,0,2,0,1,1,0,0,0
+Harrisonburg,VA,Virginia,"Harrisonburg, Virginia","[""James Madison University (NCAA - 2)""]",38.4495688,-78.8689155,"[-78.8689155, 38.4495688]",82,53,50,2,1,0,0,2,0,0,0,0,0,0,2,2,0,0,0,0,0
+Rouston,PA,Pennsylvania,"Rouston, Pennsylvania","[""Louisiana Tech (NCAA - 2)""]",32.5098297,-92.6680377,"[-92.6680377, 32.5098297]",82,53,50,2,5,4,0,2,0,0,0,0,0,0,2,0,0,0,2,0,0
+Huntington,WV,West Virginia,"Huntington, West Virginia","[""Marshall University (NCAA - 2)""]",38.4192496,-82.445154,"[-82.445154, 38.4192496]",82,53,50,2,4,0,0,2,0,0,0,0,0,0,2,2,0,0,0,0,0
+Dillon,MT,Montana,"Dillon, Montana","[""University of Montana (NCAA - 2)""]",45.2166324,-112.6389244,"[-112.6389244, 45.2166323999999]",82,53,50,2,5,0,0,2,0,0,0,0,0,0,2,2,0,0,0,0,0
+Corvallis,OR,Oregon,"Corvallis, Oregon","[""Oregon State University (NCAA - 2)""]",44.5645659,-123.2620435,"[-123.2620435, 44.5645659]",82,53,50,2,0,5,0,2,0,0,0,0,0,0,2,0,0,2,0,0,0
+Stockton,CA,California,"Stockton, California","[""University of the Pacific (NCAA - 2)""]",37.9577016,-121.2907796,"[-121.2907796, 37.9577016]",82,53,50,2,1,4,0,2,0,0,0,0,0,0,2,0,0,0,0,0,2
+Salt Lake City,UT,Utah,"Salt Lake City, Utah","[""Real Salt Lake (MLS - 1)"", "" University of Utah (NCAA - 1)""]",40.7607793,-111.8910474,"[-111.8910474, 40.7607793]",82,42,69,2,4,9,1,1,0,0,0,0,1,0,1,0,1,0,0,0,0
+San Jose,CA,California,"San Jose, California","[""San Jose Earthquakes (MLS - 2)""]",37.3382082,-121.8863286,"[-121.8863286, 37.3382082]",82,35,110,2,1,5,2,0,0,0,0,0,2,0,0,0,0,0,0,0,0
+Sarnia,ON,Ontario,"Sarnia, Ontario","[""Sarnia Imperials (CFL - 2)""]",42.974536,-82.4065901,"[-82.4065901, 42.974536]",82,35,110,2,1,0,2,0,0,0,0,0,0,2,0,0,0,0,0,0,0
+Tampa,FL,Florida,"Tampa, Florida","[""Tampa Bay Buccaneers (NFL - 1)"", "" Tampa Bay Lightning (NHL - 1)""]",27.950575,-82.4571776,"[-82.4571776, 27.950575]",82,35,110,2,2,6,2,0,0,0,1,1,0,0,0,0,0,0,0,0,0
+Canton,OH,Ohio,"Canton, Ohio","[""Canton Bulldogs (NFL - 2)""]",40.7989473,-81.378447,"[-81.378447, 40.7989472999999]",82,35,110,2,0,0,2,0,0,0,2,0,0,0,0,0,0,0,0,0,0
+Phoenix,AZ,Arizona,"Phoenix, Arizona","[""Arizona Diamondbacks (MLB - 1)""]",33.4483771,-112.0740373,"[-112.0740373, 33.4483771]",101,42,110,1,3,10,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0
+Boise,ID,Idaho,"Boise, Idaho","[""Boise State University (NCAA - 1)""]",43.6187102,-116.2146068,"[-116.2146068, 43.6187102]",101,53,69,1,1,0,0,1,0,0,0,0,0,0,1,1,0,0,0,0,0
+Provo,UT,Utah,"Provo, Utah","[""Brigham Young University (NCAA - 1)""]",40.2338438,-111.6585337,"[-111.6585337, 40.2338438]",101,53,69,1,1,1,0,1,0,0,0,0,0,0,1,1,0,0,0,0,0
+Newark,DE,Delaware,"Newark, Delaware","[""University of Delaware (NCAA - 1)""]",39.6837226,-75.7496572,"[-75.7496572, 39.6837226]",101,53,69,1,3,0,0,1,0,0,0,0,0,0,1,1,0,0,0,0,0
+Cheney,WA,Washington,"Cheney, Washington","[""Eastern Washington University (NCAA - 1)""]",47.4873895,-117.5757622,"[-117.5757622, 47.4873895]",101,53,69,1,0,0,0,1,0,0,0,0,0,0,1,1,0,0,0,0,0
+Greenville,SC,South Carolina,"Greenville, South Carolina","[""Furman University (NCAA - 1)""]",34.8526176,-82.3940104,"[-82.3940104, 34.8526175999999]",101,53,69,1,2,0,0,1,0,0,0,0,0,0,1,1,0,0,0,0,0
+Fairfax,VA,Virginia,"Fairfax, Virginia","[""George Mason University (NCAA - 1)""]",38.8462236,-77.3063733,"[-77.3063732999999, 38.8462235999999]",101,53,69,1,2,2,0,1,0,0,0,0,0,0,1,0,0,0,0,1,0
+Pocatello,ID,Idaho,"Pocatello, Idaho","[""Idaho State University (NCAA - 1)""]",42.8713032,-112.4455344,"[-112.4455344, 42.8713032]",101,53,69,1,0,0,0,1,0,0,0,0,0,0,1,1,0,0,0,0,0
+Iowa City,IA,Iowa,"Iowa City, Iowa","[""University of Iowa (NCAA - 1)""]",41.6611277,-91.5301683,"[-91.5301683, 41.6611277]",101,53,69,1,1,3,0,1,0,0,0,0,0,0,1,1,0,0,0,0,0
+Easton,PA,Pennsylvania,"Easton, Pennsylvania","[""Lafayette College (NCAA - 1)""]",40.688432,-75.2207323,"[-75.2207323, 40.688432]",101,53,69,1,0,1,0,1,0,0,0,0,0,0,1,1,0,0,0,0,0
+Monroe,LA,Louisiana,"Monroe, Louisiana","[""University of Louisiana-Monroe (NCAA - 1)""]",32.5093109,-92.1193012,"[-92.1193012, 32.5093109]",101,53,69,1,0,1,0,1,0,0,0,0,0,0,1,1,0,0,0,0,0
+Amherst,MA,Massachusetts,"Amherst, Massachusetts","[""University of Massachusetts (NCAA - 1)""]",42.3732216,-72.5198537,"[-72.5198537, 42.3732216]",101,53,69,1,3,5,0,1,0,0,0,0,0,0,1,1,0,0,0,0,0
+Oxford,MS,Mississippi,"Oxford, Mississippi","[""University of Mississippi (NCAA - 1)""]",34.3664951,-89.5192484,"[-89.5192484, 34.3664951]",101,53,69,1,0,2,0,1,0,0,0,0,0,0,1,1,0,0,0,0,0
+Bozeman,MT,Montana,"Bozeman, Montana","[""Montana State University (NCAA - 1)""]",45.6769979,-111.0429339,"[-111.0429339, 45.6769979]",101,53,69,1,0,0,0,1,0,0,0,0,0,0,1,1,0,0,0,0,0
+Eugene,OR,Oregon,"Eugene, Oregon","[""University of Oregon (NCAA - 1)""]",44.0520691,-123.0867536,"[-123.0867536, 44.0520691]",101,53,69,1,2,1,0,1,0,0,0,0,0,0,1,0,1,0,0,0,0
+West Lafayette,IN,Indiana,"West Lafayette, Indiana","[""Purdue University (NCAA - 1)""]",40.4258686,-86.9080655,"[-86.9080654999999, 40.4258686]",101,53,69,1,2,2,0,1,0,0,0,0,0,0,1,0,0,0,1,0,0
+Richmond,VA,Virginia,"Richmond, Virginia","[""University of Richmond (NCAA - 1)""]",37.5407246,-77.4360481,"[-77.4360481, 37.5407246]",101,53,69,1,0,1,0,1,0,0,0,0,0,0,1,1,0,0,0,0,0
+New Brunswick,NJ,New Jersey,"New Brunswick, New Jersey","[""Rutgers University (NCAA - 1)""]",40.4862157,-74.4518188,"[-74.4518188, 40.4862157]",101,53,69,1,1,4,0,1,0,0,0,0,0,0,1,1,0,0,0,0,0
+Santa Clara,CA,California,"Santa Clara, California","[""Santa Clara University (NCAA - 1)""]",37.3541079,-121.9552356,"[-121.9552356, 37.3541079]",101,53,69,1,2,10,0,1,0,0,0,0,0,0,1,0,0,0,0,1,0
+Carbondale,IL,Illinois,"Carbondale, Illinois","[""University of Southern Illinois (NCAA - 1)""]",37.7272727,-89.2167501,"[-89.2167501, 37.7272727]",101,53,69,1,2,2,0,1,0,0,0,0,0,0,1,1,0,0,0,0,0
+Fort Worth,TX,Texas,"Fort Worth, Texas","[""Texas Christian University (NCAA - 1)""]",32.7554883,-97.3307658,"[-97.3307658, 32.7554883]",101,53,69,1,0,4,0,1,0,0,0,0,0,0,1,1,0,0,0,0,0
+El Paso,TX,Texas,"El Paso, Texas","[""Texas Western University (NCAA - 1)""]",31.7618778,-106.4850217,"[-106.4850217, 31.7618778]",101,53,69,1,0,0,0,1,0,0,0,0,0,0,1,0,1,0,0,0,0
+Las Vegas,NV,Nevada,"Las Vegas, Nevada","[""University of Nevada-Las Vegas (NCAA - 1)""]",36.1699412,-115.1398296,"[-115.1398296, 36.1699412]",101,53,69,1,1,3,0,1,0,0,0,0,0,0,1,0,1,0,0,0,0
+Charlottesville,VA,Virginia,"Charlottesville, Virginia","[""University of Virginia (NCAA - 1)""]",38.0293059,-78.4766781,"[-78.4766781, 38.0293059]",101,53,69,1,3,7,0,1,0,0,0,0,0,0,1,0,0,1,0,0,0
+Winston-Salem,NC,North Carolina,"Winston-Salem, North Carolina","[""Wake Forest University (NCAA - 1)""]",36.0998596,-80.244216,"[-80.244216, 36.0998595999999]",101,53,69,1,1,3,0,1,0,0,0,0,0,0,1,0,0,1,0,0,0
+Bowling Green,KY,Kentucky,"Bowling Green, Kentucky","[""Western Kentucky University (NCAA - 1)""]",36.9685219,-86.4808043,"[-86.4808043, 36.9685219]",101,53,69,1,1,2,0,1,0,0,0,0,0,0,1,1,0,0,0,0,0
+Wichita,KS,Kansas,"Wichita, Kansas","[""Wichita State University (NCAA - 1)""]",37.6871761,-97.330053,"[-97.3300529999999, 37.6871760999999]",101,53,69,1,3,3,0,1,0,0,0,0,0,0,1,0,0,1,0,0,0
+Madison,WI,Wisconsin,"Madison, Wisconsin","[""University of Wisconsin (NCAA - 1)""]",43.0730517,-89.4012302,"[-89.4012302, 43.0730517]",101,53,69,1,4,4,0,1,0,0,0,0,0,0,1,0,1,0,0,0,0
+Laramie,WI,Wisconsin,"Laramie, Wisconsin","[""University of Wyoming (NCAA - 1)""]",41.3113669,-105.5911007,"[-105.5911007, 41.3113669]",101,53,69,1,0,0,0,1,0,0,0,0,0,0,1,0,1,0,0,0,0
+Conway,SC,South Carolina,"Conway, South Carolina","[""Coastal Carolina University (NCAA - 1)""]",33.8360034,-79.0478143,"[-79.0478143, 33.8360034]",101,53,69,1,0,0,0,1,0,0,0,0,0,0,1,0,0,1,0,0,0
+Fresno,CA,California,"Fresno, California","[""Fresno State (NCAA - 1)""]",36.7377981,-119.7871247,"[-119.7871247, 36.7377981]",101,53,69,1,0,1,0,1,0,0,0,0,0,0,1,0,0,1,0,0,0
+Columbia,MO,Missouri,"Columbia, Missouri","[""University of Missouri (NCAA - 1)""]",38.9517053,-92.3340724,"[-92.3340724, 38.9517053]",101,53,69,1,3,1,0,1,0,0,0,0,0,0,1,0,0,1,0,0,0
+Norfolk,VA,Virginia,"Norfolk, Virginia","[""Old Dominion University (NCAA - 1)""]",36.8507689,-76.2858726,"[-76.2858725999999, 36.8507689]",101,53,69,1,1,1,0,1,0,0,0,0,0,0,1,0,0,0,1,0,0
+Malibu,CA,California,"Malibu, California","[""Pepperdine University (NCAA - 1)""]",34.0259216,-118.7797571,"[-118.7797571, 34.0259216]",101,53,69,1,0,1,0,1,0,0,0,0,0,0,1,0,0,1,0,0,0
+Lubbock,TX,Texas,"Lubbock, Texas","[""Texas Tech (NCAA - 1)""]",33.5778631,-101.8551665,"[-101.8551665, 33.5778631]",101,53,69,1,0,0,0,1,0,0,0,0,0,0,1,0,0,0,1,0,0
+Nashville,TN,Tennessee,"Nashville, Tennessee","[""Vanderbilt University (NCAA - 1)""]",36.1626638,-86.7816016,"[-86.7816016, 36.1626638]",101,53,69,1,3,3,0,1,0,0,0,0,0,0,1,0,0,1,0,0,0
+Indianapolis,IN,Indiana,"Indianapolis, Indiana","[""Indianapolis Colts (NFL - 1)""]",39.768403,-86.158068,"[-86.158068, 39.768403]",101,42,110,1,4,10,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0
+Providence,RI,Rhode Island,"Providence, Rhode Island","[""Providence Steam Roller (NFL - 1)""]",41.8239891,-71.4128343,"[-71.4128343, 41.8239891]",101,42,110,1,0,2,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0
+Denver,ON,Ontario,"Denver, Ontario","[""Colorado Rapids (MLS - 1)""]",39.593928,-104.730829,"[-104.730829, 39.593928]",101,42,110,1,1,4,1,0,0,0,0,0,1,0,0,0,0,0,0,0,0
+Rochester,NY,New York,"Rochester, New York","[""Rochester Royals (NBA - 1)""]",43.1565779,-77.6088465,"[-77.6088465, 43.1565778999999]",101,42,110,1,0,3,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0
+New Orleans,LA,Louisiana,"New Orleans, Louisiana","[""New Orleans Saints (NFL - 1)""]",29.9510658,-90.0715323,"[-90.0715323, 29.9510657999999]",101,42,110,1,0,1,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0
+Jonesboro,AR,Arkansas,"Jonesboro, Arkansas",,35.8422967,-90.704279,"[-90.704279, 35.8422967]",142,53,110,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+Peoria,IL,Illinois,"Peoria, Illinois",,40.6936488,-89.5889864,"[-89.5889864, 40.6936488]",142,53,110,0,2,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+Madison County,NY,New York,"Madison County, New York",,42.9805975,-75.8069082,"[-75.8069082, 42.9805974999999]",142,53,110,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+Hanover,NH,New Hampshire,"Hanover, New Hampshire",,43.7022451,-72.2895526,"[-72.2895526, 43.7022451]",142,53,110,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+Dayton,OH,Ohio,"Dayton, Ohio",,39.7589478,-84.1916069,"[-84.1916069, 39.7589478]",142,53,110,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+Des Moines,IA,Iowa,"Des Moines, Iowa",,41.6005448,-93.6091064,"[-93.6091064, 41.6005448]",142,53,110,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+Spokane,WA,Washington,"Spokane, Washington",,47.6587802,-117.4260465,"[-117.4260465, 47.6587802]",142,53,110,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+Normal,IL,Illinois,"Normal, Illinois",,40.5142026,-88.9906312,"[-88.9906312, 40.5142026]",142,53,110,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+Terre Haute,IN,Indiana,"Terre Haute, Indiana",,39.4667034,-87.4139092,"[-87.4139091999999, 39.4667034]",142,53,110,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+Ames,IA,Iowa,"Ames, Iowa",,42.0307812,-93.6319131,"[-93.6319130999999, 42.0307812]",142,53,110,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+Jacksonville,FL,Florida,"Jacksonville, Florida",,30.3321838,-81.655651,"[-81.6556509999999, 30.3321838]",142,53,110,0,2,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+New York,KS,Kansas,"New York, Kansas",,39.104235,-94.5838046,"[-94.5838046, 39.104235]",142,53,110,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+Bethlehem,NJ,New Jersey,"Bethlehem, New Jersey",,40.6672137,-75.0026972,"[-75.0026972, 40.6672137]",142,53,110,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+Lake Charles,LA,Louisiana,"Lake Charles, Louisiana",,30.2265949,-93.2173758,"[-93.2173758, 30.2265949]",142,53,110,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+Memphis,TN,Tennessee,"Memphis, Tennessee",,35.1495343,-90.0489801,"[-90.0489801, 35.1495343]",142,53,110,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+Starkville,MS,Mississippi,"Starkville, Mississippi",,33.4503998,-88.8183872,"[-88.8183871999999, 33.4503998]",142,53,110,0,3,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+Reno,NV,Nevada,"Reno, Nevada",,39.5296329,-119.8138027,"[-119.8138027, 39.5296329]",142,53,110,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+Las Cruces,NM,New Mexico,"Las Cruces, New Mexico",,32.3199396,-106.7636538,"[-106.7636538, 32.3199396]",142,53,110,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+Huntsville,TX,Texas,"Huntsville, Texas",,30.7235263,-95.5507771,"[-95.5507770999999, 30.7235263]",142,53,110,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+South Orange,NJ,New Jersey,"South Orange, New Jersey",,40.7489277,-74.2609903,"[-74.2609903, 40.7489277]",142,53,110,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+Allegany,NY,New York,"Allegany, New York",,42.0900647,-78.4941887,"[-78.4941887, 42.0900647]",142,53,110,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+Queens,NY,New York,"Queens, New York",,40.7282239,-73.7948516,"[-73.7948516, 40.7282239]",142,53,110,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+Nacogdoches,TX,Texas,"Nacogdoches, Texas",,31.6035129,-94.6554874,"[-94.6554874, 31.6035129]",142,53,110,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+Towson,MD,Maryland,"Towson, Maryland",,39.4014955,-76.6019125,"[-76.6019125, 39.4014955]",142,53,110,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+Charlotte,NC,North Carolina,"Charlotte, North Carolina",,35.2270869,-80.8431267,"[-80.8431267, 35.2270869]",142,53,110,0,2,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+Cedar Falls,IA,Iowa,"Cedar Falls, Iowa",,42.5348993,-92.4453161,"[-92.4453161, 42.5348993]",142,53,110,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+Pullman,WA,Washington,"Pullman, Washington",,46.7297771,-117.1817377,"[-117.1817377, 46.7297771]",142,53,110,0,2,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+Morgantown,WV,West Virginia,"Morgantown, West Virginia",,39.629526,-79.9558968,"[-79.9558967999999, 39.629526]",142,53,110,0,2,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+Cullowhee,NC,North Carolina,"Cullowhee, North Carolina",,35.3137111,-83.1765333,"[-83.1765333, 35.3137111]",142,53,110,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+Newton,MA,Massachusetts,"Newton, Massachusetts",,42.3370413,-71.2092214,"[-71.2092213999999, 42.3370413]",142,53,110,0,0,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+Orlando,FL,Florida,"Orlando, Florida",,28.5383355,-81.3792365,"[-81.3792365, 28.5383355]",142,53,110,0,3,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+Delaware Country,PA,Pennsylvania,"Delaware Country, Pennsylvania",,39.907793,-75.3878525,"[-75.3878525, 39.907793]",142,53,110,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+Colorado Springs,CO,Colorado,"Colorado Springs, Colorado",,38.8338816,-104.8213634,"[-104.8213634, 38.8338816]",142,53,110,0,2,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+Omaha,NE,Nebraska,"Omaha, Nebraska",,41.2565369,-95.9345034,"[-95.9345034, 41.2565369]",142,53,110,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+Hartford,CT,Connecticut,"Hartford, Connecticut",,41.7658043,-72.6733723,"[-72.6733723, 41.7658043]",142,53,110,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+Lafayette,LA,Louisiana,"Lafayette, Louisiana",,30.2240897,-92.0198427,"[-92.0198427, 30.2240897]",142,53,110,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+Orono,ME,Maine,"Orono, Maine",,44.8831125,-68.6719411,"[-68.6719411, 44.8831125]",142,53,110,0,0,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+Athens,OH,Ohio,"Athens, Ohio",,39.3292396,-82.1012554,"[-82.1012554, 39.3292396]",142,53,110,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+Winter Park,FL,Florida,"Winter Park, Florida",,28.5999998,-81.3392352,"[-81.3392351999999, 28.5999998]",142,53,110,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+San Diego,CA,California,"San Diego, California",,32.715738,-117.1610838,"[-117.1610838, 32.715738]",142,53,110,0,3,5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+Springfield,MO,Missouri,"Springfield, Missouri",,37.2089572,-93.2922989,"[-93.2922988999999, 37.2089572]",142,53,110,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+Edinburg,TX,Texas,"Edinburg, Texas",,26.3017374,-98.1633432,"[-98.1633432, 26.3017374]",142,53,110,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+Tulsa,OK,Oklahoma,"Tulsa, Oklahoma",,36.1539816,-95.992775,"[-95.992775, 36.1539816]",142,53,110,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+Irvine,CA,California,"Irvine, California",,33.6845673,-117.8265049,"[-117.8265049, 33.6845673]",142,53,110,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+Arlington,TX,Texas,"Arlington, Texas",,32.735687,-97.1080656,"[-97.1080655999999, 32.735687]",142,53,110,0,2,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+Blacksburg,VA,Virginia,"Blacksburg, Virginia",,37.2295733,-80.4139393,"[-80.4139393, 37.2295733]",142,53,110,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+Kalamazoo,MI,Michigan,"Kalamazoo, Michigan",,42.2917069,-85.5872286,"[-85.5872286, 42.2917069]",142,53,110,0,1,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+Ypsilanti,MI,Michigan,"Ypsilanti, Michigan",,42.2411499,-83.6129939,"[-83.6129938999999, 42.2411499]",142,53,110,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+Monreal,QC,Quebec,"Monreal, Quebec",,45.5016889,-73.567256,"[-73.567256, 45.5016889]",142,53,110,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+Oklahoma City,OK,Oklahoma,"Oklahoma City, Oklahoma",,35.4675602,-97.5164276,"[-97.5164276, 35.4675602]",142,53,110,0,1,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+Fort Wayne,IN,Indiana,"Fort Wayne, Indiana",,41.079273,-85.1393513,"[-85.1393513, 41.079273]",142,53,110,0,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+Sacramento,CA,California,"Sacramento, California",,38.5815719,-121.4943996,"[-121.4943996, 38.5815719]",142,53,110,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+Buffalo,NY,New York,"Buffalo, New York",,42.8864468,-78.8783689,"[-78.8783689, 42.8864467999999]",142,53,110,0,6,5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+Pottsville,PA,Pennsylvania,"Pottsville, Pennsylvania",,40.6856456,-76.195499,"[-76.195499, 40.6856456]",142,53,110,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+Portsmouth,OH,Ohio,"Portsmouth, Ohio",,38.7317431,-82.9976742,"[-82.9976742, 38.7317431]",142,53,110,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+Quebec City,QC,Quebec,"Quebec City, Quebec",,46.8138783,-71.2079809,"[-71.2079809, 46.8138783]",142,53,110,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+Manhattan,KS,Kansas,"Manhattan, Kansas",,39.168205,-96.6899444,"[-96.6899444, 39.168205]",142,53,110,0,2,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
