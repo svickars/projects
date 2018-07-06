@@ -878,8 +878,8 @@ footer > .right {
   display: none; }
 
 .hr-text {
-  margin-top: 100px;
-  margin-bottom: 100px;
+  margin-top: 50px;
+  margin-bottom: 50px;
   width: 60%;
   min-width: 345px;
   line-height: 1em;
@@ -913,8 +913,8 @@ footer > .right {
   margin-bottom: 50px; }
 
 .hr-text-dark {
-  margin-top: 100px;
-  margin-bottom: 100px;
+  margin-top: 50px;
+  margin-bottom: 50px;
   width: 60%;
   min-width: 345px;
   line-height: 1em;
