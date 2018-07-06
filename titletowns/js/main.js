@@ -37,8 +37,8 @@ var margin = {
   },
   c1m = {
     top: 12,
-    right: 150,
-    bottom: 25,
+    right: 25,
+    bottom: 30,
     left: 25
   },
   c1D = {
@@ -72,7 +72,7 @@ var windowW, windowH, projection, path, smallprojectio, smallpath, mediumproject
 var trophyList = ["NBA", "NHL", "NFL", "MLB", "CFL", "MLS", "volleyball-w", "baseball-m", "basketball-w", "basketball-m", "football-m", "soccer-w"],
   leagueList = ["MLB", "NBA", "NFL", "NHL"],
   levelList = ["pro", "NCAA"],
-  opacityScale = d3.scaleLinear().domain([1, 66]).range([.25, .05]);
+  opacityScale = d3.scaleLinear().domain([1, 64]).range([.25, .05]);
 
 
 var formatDateIntoYear = d3.timeFormat("%Y"),
@@ -110,13 +110,15 @@ function handleResize() {
     margin.right = 0
     mapD.w = windowW - 16
     mapD.h = windowW * .66
-    c1m.right = 15;
+    c1m.right = 15
     c1D.w = windowW - 16 - c1m.left - c1m.right
     c1D.h = windowW * .66 - c1m.top - c1m.bottom
-    smallmapD.w = (windowW - 20)
-    smallmapD.h = windowW * .66
+    smallmapD.w = (windowW / 2) - 8
+    smallmapD.h = (windowW / 2) * .66
     mediummapD.w = (windowW - 20)
     mediummapD.h = windowW * .66
+    d3.selectAll(".nomobile").style("display", "none")
+    d3.selectAll(".onlymobile").style("display", "block")
   } else if (medium_screen) {
     margin.left = (windowW * .125) - 8
     margin.right = (windowW * .125) - 8
@@ -128,6 +130,7 @@ function handleResize() {
     smallmapD.h = ((windowW * .75) / 2) * .66
     mediummapD.w = (windowW * .75) / 2
     mediummapD.h = ((windowW * .75) / 2) * .66
+    d3.selectAll(".onlymobile").style("display", "block")
   } else {
     margin.left = (windowW * .125) - 8
     margin.right = (windowW * .125) - 8
@@ -169,7 +172,7 @@ function handleResize() {
   yscale = d3.scaleLinear().range([c1D.h, 0]);
 
   line = d3.line()
-    .curve(d3.curveStep)
+    .curve(d3.curveStepAfter)
     .x(function(d) {
       return xscale(d.date);
     })
@@ -189,24 +192,30 @@ function handleResize() {
   for (var i = 0; i < mapCount; i++) {
     d3.select("#map" + i).attr("height", mapD.h)
       .attr("width", mapD.w)
-      .attr("transform", "translate(" + margin.left + ")")
+      .style("transform", "translate(" + (mapD.m + margin.left) + "px)")
   }
 
   for (var i = 0; i < smallmapCount; i++) {
     d3.select("#smallmap" + i).attr("height", smallmapD.h)
       .attr("width", smallmapD.w)
-      .attr("transform", "translate(" + margin.left + ")")
+      .style("transform", "translate(" + (smallmapD.m + margin.left) + "px)")
   }
 
   for (var i = 0; i < mediummapCount; i++) {
     d3.select("#mediummap" + i).attr("height", mediummapD.h)
       .attr("width", mediummapD.w)
-      .attr("transform", "translate(" + margin.left + ")")
+      .style("transform", "translate(" + (mediummapD.m + margin.left) + "px)")
   }
 
   d3.select("#chart1").attr("height", c1D.h + c1m.top + c1m.bottom)
     .attr("width", c1D.w + c1m.left + c1m.right)
-    .attr("transform", "translate(" + margin.left + ")")
+    .style("transform", "translate(" + margin.left + "px)")
+
+  d3.select(".c1close")
+    .style("width", c1D.w + c1m.left + c1m.right + "px")
+    .style("transform", "translate(" + margin.left + "px)")
+
+  d3.selectAll(".overchart").style("transform", "translate(" + (margin.left + c1m.left) + "px)")
 
   d3.selectAll(".mapcaptionsmall").style("left", margin.left + ((smallmapD.w * .25) / 2) + "px").style("width", smallmapD.w * .75 + "px")
   d3.selectAll(".mapcaptionmedium").style("left", margin.left + ((mediummapD.w * .25) / 2) + "px").style("width", mediummapD.w * .75 + "px")
@@ -215,14 +224,7 @@ function handleResize() {
     d3.select("#chart-overtext1").style("left", margin.left + 100 + "px")
   }
 
-  if (small_screen) {
-    // d3.select("#chart-overtext1").style("display", "none")
-    // d3.select("#c1story").style("display", "block")
-    // d3.select(".chart-container").style("margin-top", "25px")
-  }
-
   // SLIDER
-  // d3.select("#play-button").style("left", margin.left + 25 + "px").style("top", 25 + "px");
   targetValue = sliderD.w - 15;
   x.range([30, targetValue])
   d3.select(".track").attr("x1", x.range()[0]).attr("x2", x.range()[1])
@@ -253,20 +255,22 @@ function processData(error, world, us, canada, titles, places, matrix) {
   if (!small_screen) drawMap0(titles, places);
   drawProMaps(titles);
   drawProVsCollegeMaps(titles, places);
-  drawChart1(matrix);
-  drawChart2(titles, places);
+  drawChart1(matrix, titles);
+  drawChart2(places);
   detectView();
 } // end processData
 
 function drawMaps(world, us, canada) {
   for (var i = 0; i < mapCount; i++) {
     var svg = d3.select("#map" + i);
-    var g = svg.append("g").attr("transform", "translate(" + mapD.m + "," + mapD.m + ")")
+    var g = svg.append("g")
+      .style("transform", "translate(" + mapD.m + "," + mapD.m + ")")
 
     var defs = svg.append("defs");
 
     var filter = defs.append("filter")
-      .attr("id", "glow");
+      .attr("id", "glow")
+      .attr("filterUnits", "userSpaceOnUse");
     filter.append("feGaussianBlur")
       .attr("in", "SourceAlpha")
       .attr("stdDeviation", "25")
@@ -291,6 +295,7 @@ function drawMaps(world, us, canada) {
       .datum(topojson.feature(world, world.objects.continent))
       .attr("d", path)
       .style("fill", "#fff")
+      // .style("stroke", "#000")
       .style("filter", "url(#glow)")
   }
 
@@ -375,6 +380,11 @@ function drawMap0(titles, placeData) {
     .attr("class", "map0annotation-group");
   var gTT = svg.append("g").attr("transform", "translate(" + mapD.m + "," + mapD.m + ")");
 
+  svg.on("click", function() {
+    d3.select(".overplayrect").remove()
+    d3.select(".overplay").remove()
+    $("#play-button").click();
+  })
 
   for (var i = 0; i < trophyList.length; i++) {
     gTrophy.append("svg:image")
@@ -452,27 +462,6 @@ function drawMap0(titles, placeData) {
     .attr("dy", 7)
     .text("2018")
 
-  // slider.insert("g", ".track-overlay")
-  //   .attr("class", "ticks")
-  //   .attr("transform", function() {
-  //     // if (medium_screen) {
-  //     //   return "translate(30," + -18 + ")"
-  //     // } else if (large_screen) {
-  //     //   return "translate(60," + -18 + ")"
-  //     // }
-  //     return "translate(0," + -18 + ")"
-  //   })
-  //   .selectAll("text")
-  //   .data(x.ticks())
-  //   .enter()
-  //   .append("text")
-  //   .attr("x", x)
-  //   .attr("y", 10)
-  //   .attr("text-anchor", "middle")
-  //   .text(function(d) {
-  //     return parseInt(formatDateIntoYear(d));
-  //   });
-
   var handle = slider.insert("circle", ".track-overlay")
     .attr("class", "slider-handle")
     .attr("r", 5)
@@ -525,10 +514,14 @@ function drawMap0(titles, placeData) {
         map0 = false;
         $("#play-button").click();
       }
+      d3.select(".overplayrect").remove()
+      d3.select(".overplay").remove()
     } else if (e.which == "39") {
       step();
     } else if (e.which == "37") {
       stepBack()
+    } else if (e.which == "27") {
+      clearSearched()
     }
   }
 
@@ -609,7 +602,6 @@ function drawMap0(titles, placeData) {
 
     d3.selectAll(".placeCircles")
       .on("mouseover", function(d) {
-        // d3.select(this).style("opacity", 1)
         svg.append("text")
           .attr("class", "cityAnnoBG cityAnno-" + camelize(d.cityState))
           .attr("x", projection(parseCoord(d.lngLat))[0] + 8)
@@ -858,7 +850,7 @@ function drawMap0(titles, placeData) {
     {
       note: {
         title: "1. Los Angeles",
-        label: "27 PRO/39 NCAA",
+        label: "25 PRO/39 NCAA",
         orientation: "leftRight",
         lineType: "none",
         align: "middle"
@@ -960,6 +952,21 @@ function drawMap0(titles, placeData) {
   }
   // end annotations
 
+  svg.append("rect")
+    .attr("class", "overplayrect")
+    .attr("x", 0)
+    .attr("y", 0)
+    .attr("width", mapD.w)
+    .attr("height", mapD.h)
+
+  d3.select(".overplay")
+    .style("transform", "translate(" + ((mapD.w / 2) + margin.left - 37.5) + "px, " + (-mapD.h / 2 - 37.5) + "px)")
+    .on("click", function() {
+      $("#play-button").click();
+      d3.select(".overplayrect").remove()
+      d3.select(".overplay").remove()
+    })
+
 
 
 } // end drawMap0
@@ -975,6 +982,8 @@ function drawMap0small(titles) {
   d3.select("#play-button").style("display", "none")
   d3.select("#sliderYear").style("display", "none")
   d3.selectAll(".hide").style("display", "none")
+  d3.selectAll(".overplay").style("display", "none")
+  d3.selectAll(".map-footer").style("width", "275px").style("min-width", "275px")
 
   var cities = g.selectAll(".cityNFL")
     .data(data);
@@ -1003,6 +1012,42 @@ function drawMap0small(titles) {
       var nth = countThis(cityList, t1loc)
       return nth / 3
     })
+
+  var map0t5 = {
+    cities: ["1. Los Angeles, CA", "2. New York, NY", "3. Toronto, ON", "4. Boston, MA", "5. Montreal, QC"],
+    counts: [64, 55, 40, 37, 36],
+    coords: [
+      [-118.2436849, 34.0522342],
+      [-74.0059728, 40.7127753],
+      [-79.3831843, 43.653226],
+      [-71.0588801, 42.3600825],
+      [-73.567256, 45.5016889]
+    ]
+  }
+
+  for (var i = 0; i < map0t5.cities.length; i++) {
+    svg.append("text")
+      .attr("class", "cityAnnoBG")
+      .attr("x", projection(map0t5.coords[i])[0] + 8)
+      .attr("y", projection(map0t5.coords[i])[1] + 8)
+      .attr("text-anchor", "middle")
+      .attr("dy", function() {
+        return (map0t5.counts[i] / 3) * 2
+      })
+      .text(map0t5.cities[i] + " (" + map0t5.counts[i] + ")")
+
+    svg.append("text")
+      .attr("class", "mainAnno")
+      .attr("x", projection(map0t5.coords[i])[0] + 8)
+      .attr("y", projection(map0t5.coords[i])[1] + 8)
+      .attr("text-anchor", "middle")
+      .attr("dy", function() {
+        return (map0t5.counts[i] / 3) * 2
+      })
+      .text(map0t5.cities[i] + " (" + map0t5.counts[i] + ")")
+  }
+
+
 
 
 
@@ -1251,7 +1296,7 @@ function drawProVsCollegeMaps(titles, placeData) {
 
   var cityMainAnnos0 = {
       cities: ["1. New York", "3. Boston", "6. Los Angeles", "5. Chicago"],
-      ranks: [54, 37, 27, 29],
+      ranks: [54, 37, 25, 29],
       coords: [
         [-74.0059728, 40.7127753],
         [-71.0588801, 42.3600825],
@@ -1459,13 +1504,21 @@ function drawProVsCollegeMaps(titles, placeData) {
   });
 } // end drawProVsCollegeMaps
 
-function drawChart1(matrix) {
+function drawChart1(matrix, titleData) {
 
   var startDate = new Date(1870, 0, 1),
     endDate = new Date(2018, 11, 31);
 
   var svg = d3.select("#chart1");
   var g = svg.append("g").attr("transform", "translate(" + c1m.left + "," + c1m.top + ")");
+
+  svg.on("mouseover", function() {
+    d3.selectAll(".c1labels").transition().duration(200).style("opacity", 0)
+  }).on("mouseout", function() {
+    d3.selectAll(".c1labels").transition().duration(200).style("opacity", 1)
+  }).on("click", function() {
+    clearSearched();
+  })
 
   var cities = matrix.columns.slice(1).map(function(id) {
     return {
@@ -1476,10 +1529,56 @@ function drawChart1(matrix) {
         return {
           date: parseYear(d.date),
           wins: +(d[id]),
+          city: id
         };
       })
     };
   });
+
+  var options = {
+    data: searchArray,
+    list: {
+      maxNumberOfElements: 5,
+      sort: {
+        enabled: true
+      },
+      match: {
+        enabled: true
+      },
+      onClickEvent: function() {
+        term = $("#c1search").val()
+        c1searched(term)
+      },
+      onKeyEnterEvent: function() {
+        term = $("#c1search").val()
+        c1searched(term)
+      }
+    }
+  };
+
+  var options2 = {
+    data: searchArray,
+    list: {
+      maxNumberOfElements: 5,
+      sort: {
+        enabled: true
+      },
+      match: {
+        enabled: true
+      },
+      onClickEvent: function() {
+        term = $("#c1search2").val()
+        c1searched(term)
+      },
+      onKeyEnterEvent: function() {
+        term = $("#c1search2").val()
+        c1searched(term)
+      }
+    }
+  };
+
+  $("#c1search").easyAutocomplete(options);
+  $("#c1search2").easyAutocomplete(options2);
 
   xscale.domain(d3.extent(matrix, function(d) {
     return parseYear(d.date);
@@ -1498,12 +1597,31 @@ function drawChart1(matrix) {
     })
   ]);
 
+  var voronoi = d3.voronoi()
+    .x(function(d) {
+      return xscale(d.date);
+    })
+    .y(function(d) {
+      return yscale(d.wins);
+    })
+    .extent([
+      [-c1m.left, -c1m.top],
+      [c1D.w + c1m.right, c1D.h + c1m.bottom]
+    ]);
+
   var xAxis = d3.axisBottom(xscale)
     .tickSize(0)
+    .tickFormat(function(d) {
+      return formatDateIntoYear(d)
+    })
     .tickValues([parseYear(1870), parseYear(1900), parseYear(1930), parseYear(1960), parseYear(1990), parseYear(2018)])
 
   var yAxis = d3.axisLeft(yscale)
     .tickSize(-c1D.w)
+    .tickFormat(function(d) {
+      if (d === 60) return d + " titles"
+      return d
+    })
     .tickValues([10, 20, 30, 40, 50, 60])
 
   g.append("g")
@@ -1534,66 +1652,191 @@ function drawChart1(matrix) {
     .attr("d", function(d) {
       return line(d.values);
     })
-    .on("mouseover", function(d) {
-      if (!small_screen) {
-        d3.selectAll(".cityline").style("opacity", .5).style("stroke", "#666").style("stroke-width", "1.5px")
-        d3.select(this).style("opacity", .75).style("stroke", "#fff").style("stroke-width", "2px")
 
-        var values = d.values.filter(function(e) {
-          return e.wins > 0;
-        })
+  var focus = g.append("g")
+    .attr("transform", "translate(-100,-100)")
+    .attr("class", "focus");
 
-        var bg = g.append("rect").attr("class", "c1tt c1ttbg")
+  focus.append("circle")
+    .attr("r", 3.5)
+    .style("fill", "#fff");
 
-        var c1ttmain = g.append("text")
-          .attr("class", "c1tt c1ttmain")
-          .attr("x", xscale(d3.max(values, function(e) {
-            return e.date;
-          })))
-          .attr("y", yscale(d3.max(d.values, function(e) {
-            return e.wins;
-          })))
-          .attr("dy", -3)
-          .attr("dx", 8)
-          .text(d.id)
+  focus.append("text")
+    .attr("class", "focustextBG")
+    .attr("y", 25);
 
-        g.append("text")
-          .attr("class", "c1tt c1ttsub")
-          .attr("x", xscale(d3.max(values, function(e) {
-            return e.date;
-          })))
-          .attr("y", yscale(d3.max(d.values, function(e) {
-            return e.wins;
-          })))
-          .attr("dy", 12)
-          .attr("dx", 8)
-          .text(d3.max(d.values, function(e) {
-            return e.wins;
-          }) + " titles")
+  focus.append("text")
+    .attr("class", "focustext")
+    .attr("y", 25);
 
-        var bb = c1ttmain.node().getBBox()
-        bg.attr("x", bb.x - 8)
-          .attr("y", bb.y - 8)
-          .attr("width", bb.width + 16)
-          .attr("height", bb.height + 16 + 12)
-      }
 
+  var c1labelArray = {
+    cities: ["Los Angeles, CA", "New York, NY", "Toronto, ON", "Boston, MA", "Montreal, QC"],
+    coords: [
+      [2014, 64],
+      [2012, 55],
+      [2017, 40],
+      [2017, 37],
+      [2006, 34]
+    ]
+  }
+
+  for (var l = 0; l < 5; l++) {
+    g.append("circle")
+      .attr("class", "c1labels")
+      .attr("r", 2)
+      .attr("cx", xscale(parseYear(c1labelArray.coords[l][0])))
+      .attr("cy", yscale(c1labelArray.coords[l][1]))
+      .style("fill", "#fff")
+      .style("opacity", .75)
+
+    g.append("text")
+      .attr("class", "c1labels")
+      .attr("x", xscale(parseYear(c1labelArray.coords[l][0])))
+      .attr("y", yscale(c1labelArray.coords[l][1]))
+      .attr("dx", -10)
+      .attr("dy", 5)
+      .text(c1labelArray.cities[l])
+  }
+
+
+  // voroni! https://bl.ocks.org/mbostock/8033015
+  var voronoiGroup = g.append("g")
+    .attr("class", "voronoi");
+
+  voronoiGroup.selectAll("path")
+    .data(voronoi.polygons(d3.merge(cities.map(function(d) {
+      return d.values;
+    }))))
+    .enter().append("path")
+    .attr("class", function(d) {
+      if (d != undefined) return "vor-" + camelize(d.data.city);
     })
-    .on("mouseout", function() {
-      if (!small_screen) {
-        d3.select(this).style("opacity", .5).style("stroke", "#666").style("stroke-width", "1.5px")
-        d3.select("#chart1-losAngelesCalifornia").style("opacity", .75).style("stroke", "#fff").style("stroke-width", "2px")
-        d3.select("#chart1-newYorkNewYork").style("opacity", .75).style("stroke", "#fff").style("stroke-width", "2px")
-        d3.select("#chart1-torontoOntario").style("opacity", .75).style("stroke", "#fff").style("stroke-width", "2px")
-        d3.select("#chart1-bostonMassachusetts").style("opacity", .75).style("stroke", "#fff").style("stroke-width", "2px")
-        d3.selectAll(".c1tt").remove();
-      }
-    });
+    .attr("d", function(d) {
+      return d ? "M" + d.join("L") + "Z" : null;
+    })
+    .on("mouseover", mouseover)
+    .on("click", mouseover)
+    .on("mouseout", mouseout);
 
+  function c1searched(term) {
+    d3.select(".c1close").style("opacity", 1)
+    d3.selectAll(".c1labels").transition().duration(200).style("opacity", 0)
+    var thisline = d3.select("#chart1-" + camelize(term));
+    if (large_screen) {
+      d3.selectAll(".cityline").transition().duration(200).style("stroke-width", 1).style("opacity", .2).style("stroke", "#555")
+      thisline.transition().duration(200).style("stroke", "#fff").style("stroke-width", 2).style("opacity", .75);
+      thisline.moveToFront();
+    } else {
+      d3.selectAll(".cityline").style("stroke-width", 1).style("opacity", .2).style("stroke", "#555")
+      thisline.style("stroke", "#fff").style("stroke-width", 2).style("opacity", .75);
+      thisline.moveToBack();
+    }
+    svg.on("mouseover", function() {})
+      .on("mouseout", function() {})
+    voronoiGroup.selectAll("path")
+      .on("mouseover", function() {})
+      .on("mouseout", function() {});
+    d3.selectAll(".vor-" + camelize(term))
+      .on("mouseover", mouseover);
 
+    d3.selectAll(".c1searchsubmitIcon").html('<i id="c1searchsubmit" class="fas fa-times"></i>').on("click", clearSearched)
+  }
+
+  function clearSearched() {
+    d3.select(".c1close").style("opacity", 0)
+    $("#c1search").val("")
+    if (large_screen) {
+      d3.selectAll(".cityline").transition().duration(200).style("stroke-width", 1).style("opacity", .5).style("stroke", "#555")
+      d3.selectAll("#chart1-losAngelesCA, #chart1-newYorkNY, #chart1-torontoON, #chart1-bostonMA, #chart1-montrealQC").transition().duration(200).style("stroke", "#fff").style("stroke-width", 2).style("opacity", .75);
+      focus.attr("transform", "translate(-100,-100)");
+    } else {
+      d3.selectAll(".cityline").style("stroke-width", 1).style("opacity", .5).style("stroke", "#555")
+      d3.selectAll("#chart1-losAngelesCA, #chart1-newYorkNY, #chart1-torontoON, #chart1-bostonMA, #chart1-montrealQC").style("stroke", "#fff").style("stroke-width", 2).style("opacity", .75);
+      focus.attr("transform", "translate(-100,-100)");
+    }
+    svg.on("mouseover", function() {
+      d3.selectAll(".c1labels").transition().duration(200).style("opacity", 0)
+    }).on("mouseout", function() {
+      d3.selectAll(".c1labels").transition().duration(200).style("opacity", 1)
+    })
+    voronoiGroup.selectAll("path")
+      .on("mouseover", mouseover)
+      .on("mouseout", mouseout);
+
+    d3.select(".c1searchsubmitIcon").html('<i id="c1searchsubmit" class="fas fa-search"></i>').on("click", function() {})
+  }
+
+  function mouseover(d) {
+    if (large_screen) {
+      d3.selectAll(".cityline").transition().duration(200).style("stroke-width", 1).style("opacity", .5).style("stroke", "#555")
+      var thisline = d3.select("#chart1-" + camelize(d.data.city));
+      thisline.transition().duration(200).style("stroke", "#fff").style("stroke-width", 2).style("opacity", .75);
+    } else {
+      d3.selectAll(".cityline").style("stroke-width", 1).style("opacity", .5).style("stroke", "#555")
+      var thisline = d3.select("#chart1-" + camelize(d.data.city));
+      thisline.style("stroke", "#fff").style("stroke-width", 2).style("opacity", .75);
+    }
+
+    var moData = titleData.filter(function(titleData) {
+      return camelize(titleData.t1cityState) === camelize(d.data.city) && titleData.year === formatDateIntoYear(d.data.date);
+    })
+
+    var winners = [],
+      winnerleagues = [];
+
+    moData.forEach(function(moData) {
+      winners.push(moData.t1)
+      winnerleagues.push(moData.leagueLevel)
+    })
+
+    var textanchor = "start";
+    if (d3.mouse(this)[0] <= c1D.w / 10) textanchor = "start";
+    if (d3.mouse(this)[0] > c1D.w / 10 && d3.mouse(this)[0] < c1D.w * .9) textanchor = "middle";
+    if (d3.mouse(this)[0] >= c1D.w * .9) textanchor = "end";
+
+    focus.attr("transform", "translate(" + xscale(d.data.date) + "," + yscale(d.data.wins) + ")");
+    if (winnerleagues.length > 0) {
+      focus.select("circle").style("fill", cLeagues[winnerleagues[0].toLowerCase()])
+    } else {
+      focus.select("circle").style("fill", "#fff")
+    }
+    focus.select(".focustext").text(d.data.city + " - " + formatDateIntoYear(d.data.date) + " (" + d.data.wins + ")").style("text-anchor", textanchor);
+    focus.select(".focustextBG").text(d.data.city + " - " + formatDateIntoYear(d.data.date) + " (" + d.data.wins + ")").style("text-anchor", textanchor).style("fill", "none").style("stroke", "#333").style("stroke-width", 6);
+
+    d3.selectAll(".subFocus").remove();
+
+    for (var i = 0; i < winners.length; i++) {
+      focus.append("text")
+        .attr("class", "subFocus")
+        .attr("dy", i * 15 + 40)
+        .text(winners[i])
+        .style("text-anchor", textanchor)
+        .style("stroke", "#333")
+        .style("stroke-width", 6)
+      focus.append("text")
+        .attr("class", "subFocus")
+        .attr("dy", i * 15 + 40)
+        .text(winners[i])
+        .style("fill", cLeagues[winnerleagues[i].toLowerCase()])
+        .style("text-anchor", textanchor)
+    }
+  }
+
+  function mouseout(d) {
+    if (large_screen) {
+      d3.selectAll(".cityline").transition().duration(200).style("stroke-width", 1).style("opacity", .5).style("stroke", "#555")
+      d3.selectAll("#chart1-losAngelesCA, #chart1-newYorkNY, #chart1-torontoON, #chart1-bostonMA, #chart1-montrealQC").transition().duration(200).style("stroke", "#fff").style("stroke-width", 2).style("opacity", .75);
+      focus.attr("transform", "translate(-100,-100)");
+    } else {
+      d3.selectAll(".cityline").style("stroke-width", 1).style("opacity", .5).style("stroke", "#555")
+      d3.selectAll("#chart1-losAngelesCA, #chart1-newYorkNY, #chart1-torontoON, #chart1-bostonMA, #chart1-montrealQC").style("stroke", "#fff").style("stroke-width", 2).style("opacity", .75);
+      focus.attr("transform", "translate(-100,-100)");
+    }
+  }
 } // end drawChart1
 
-function drawChart2(titleData, placeData) {
+function drawChart2(placeData) {
 
   var w, h, c2x, term;
 
@@ -1612,21 +1855,15 @@ function drawChart2(titleData, placeData) {
         enabled: true
       },
       onClickEvent: function() {
-        term = $(".search-bar").val()
-        $(".search-bar").val("")
-        addLast(term, key, metrics[key], titleData, placeData);
+        term = $("#search-bar").val()
+        addLast(term, key, metrics[key], placeData, false);
       },
       onKeyEnterEvent: function() {
-        term = $(".search-bar").val()
-        $(".search-bar").val("")
-        addLast(term, key, metrics[key], titleData, placeData);
+        term = $("#search-bar").val()
+        addLast(term, key, metrics[key], placeData, false);
       }
     }
   };
-
-  if (small_screen) $(".search-bar").easyAutocomplete(options);
-  if (medium_screen) $(".search-bar").easyAutocomplete(options);
-  if (large_screen) $(".search-bar2").easyAutocomplete(options);
 
   var key = "count",
     metrics = {
@@ -1645,8 +1882,8 @@ function drawChart2(titleData, placeData) {
     term = "Minneapolis, MN";
   }
 
-  chart2(key, metrics[key], titleData, placeData);
-  addLast(term, key, metrics[key], titleData, placeData);
+  chart2(key, metrics[key], placeData);
+  addLast(term, key, metrics[key], placeData, true);
 
   $(".c2option").click(function() {
     $(".c2option").removeClass("c2optionActive")
@@ -1657,12 +1894,12 @@ function drawChart2(titleData, placeData) {
     if (key === "ncaa") $("#chart2headertext").text("College Sports")
     d3.selectAll(".c2remove").remove();
     d3.selectAll(".c2subfilter").remove();
-    drawSubfilter(key, metrics[key], titleData, placeData)
-    chart2(key, metrics[key], titleData, placeData);
-    addLast(term, key, metrics[key], titleData, placeData);
+    drawSubfilter(key, metrics[key], placeData)
+    chart2(key, metrics[key], placeData);
+    addLast(term, key, metrics[key], placeData, true);
   })
 
-  function drawSubfilter(key, metrics, titleData, placeData) {
+  function drawSubfilter(key, metrics, placeData) {
     if (key === "pro") {
       var subfilter = d3.selectAll(".c2filter").append("div").attr("class", "c2subfilter");
       subfilter.append("span").attr("class", "c2subOption c2subOptionActive").attr("key", "pro").text("All")
@@ -1685,8 +1922,8 @@ function drawChart2(titleData, placeData) {
         d3.selectAll(".c2remove").remove();
         if (key != "pro") var newMetric = [key]
         if (key === "pro") var newMetric = metrics;
-        chart2(key, newMetric, titleData, placeData);
-        addLast(term, key, newMetric, titleData, placeData);
+        chart2(key, newMetric, placeData);
+        addLast(term, key, newMetric, placeData, false);
       })
     }
 
@@ -1703,38 +1940,64 @@ function drawChart2(titleData, placeData) {
         $(this).addClass("c2subOptionActive")
         key = $(this).attr("key")
         if (key === "ncaa") $("#chart2headertext").text("College Sports")
-        if (key === "ncaa-baseball-m") $("#chart2headertext").text("Men's College Baseball")
-        if (key === "ncaa-basketball-m") $("#chart2headertext").text("Men's College Basketball")
-        if (key === "ncaa-basketball-w") $("#chart2headertext").text("Women's College Basketball")
-        if (key === "ncaa-football-m") $("#chart2headertext").text("Men's College Football")
-        if (key === "ncaa-soccer-w") $("#chart2headertext").text("Women's College Soccer")
-        if (key === "ncaa-volleyball-w") $("#chart2headertext").text("Women's College Volleyball")
+        if (key === "ncaa-baseball-m") $("#chart2headertext").html("Men&rsquo;s College Baseball")
+        if (key === "ncaa-basketball-m") $("#chart2headertext").html("Men&rsquo;s College Basketball")
+        if (key === "ncaa-basketball-w") $("#chart2headertext").html("Women&rsquo;s College Basketball")
+        if (key === "ncaa-football-m") $("#chart2headertext").html("Men&rsquo;s College Football")
+        if (key === "ncaa-soccer-w") $("#chart2headertext").html("Women&rsquo;s College Soccer")
+        if (key === "ncaa-volleyball-w") $("#chart2headertext").html("Women&rsquo;s College Volleyball")
         d3.selectAll(".c2remove").remove();
         if (key != "ncaa") var newMetric = [key]
         if (key === "ncaa") var newMetric = metrics;
-        chart2(key, newMetric, titleData, placeData);
-        addLast(term, key, newMetric, titleData, placeData);
+        chart2(key, newMetric, placeData);
+        addLast(term, key, newMetric, placeData, false);
       })
     }
 
   }
 
-  function chart2(key, metrics, titleData, placeData) {
+  function chart2(key, metrics, placeData) {
     var data;
 
     data = placeData.sort(function(a, b) {
       return d3.descending(+a[key], +b[key]);
     }).slice(0, 10);
 
+    updateRight(0)
+
+    function updateRight(n) {
+      $("#c2city").text(data[n].city + ", " + data[n].stateAbb)
+      $("#c2numTitles").text(data[n].count)
+      $("#c2numTeams").text(parseCoord(data[n].teams).length)
+      d3.selectAll(".c2winListRow").remove();
+
+      for (var i = 0; i < parseCoord(data[n].teams).length; i++) {
+        var c2winListRow = d3.select("#c2winList").append("div").attr("class", "c2winListRow").text(parseCoord(data[n].teams)[i])
+        if (c2winListRow.text().includes("MLB")) c2winListRow.style("color", cLeagues.mlb)
+        if (c2winListRow.text().includes("NBA")) c2winListRow.style("color", cLeagues.nba)
+        if (c2winListRow.text().includes("NFL")) c2winListRow.style("color", cLeagues.nfl)
+        if (c2winListRow.text().includes("NHL")) c2winListRow.style("color", cLeagues.nhl)
+        if (c2winListRow.text().includes("MLS")) c2winListRow.style("color", cLeagues.mls)
+        if (c2winListRow.text().includes("CFL")) c2winListRow.style("color", cLeagues.cfl)
+        if (c2winListRow.text().includes("NCAA")) c2winListRow.style("color", cLeagues.ncaa)
+      }
+    }
+
     var max = d3.max(data, function(d) {
       return +d[key]; //<-- convert to number
     })
 
-    c2x = d3.scaleLinear().domain([0, 66])
+    c2x = d3.scaleLinear().domain([0, 64])
 
     for (var i = 0; i < data.length; i++) {
 
-      var row = d3.select(".chart2left").append("div").attr("class", "c2remove chart2row");
+      var row = d3.select(".chart2left").append("div").attr("class", "c2remove chart2row chart2rowMain").attr("id", "row" + i);
+
+      row.on("mouseover", function() {
+        d3.selectAll(".chart2rowMain").style("background-color", "#333")
+        d3.select(this).style("background-color", "#444")
+        updateRight(d3.select(this).attr("id").replace("row", ""))
+      })
 
       h = 15
       w = $(".chart2row").width() - 160;
@@ -1819,6 +2082,7 @@ function drawChart2(titleData, placeData) {
               .style("fill", "none")
               .style("stroke", "#333")
               .style("stroke-width", 4)
+              .style("stroke-linejoin", "round")
               .style("opacity", 0)
 
             svg.append("text")
@@ -1846,7 +2110,7 @@ function drawChart2(titleData, placeData) {
     }
   } //end chart2
 
-  function addLast(term, key, metrics, titleData, placeData) {
+  function addLast(term, key, metrics, placeData, first) {
 
     d3.selectAll(".lastRemove").remove()
 
@@ -1854,10 +2118,33 @@ function drawChart2(titleData, placeData) {
       return camelize(placeData.city + ", " + placeData.stateAbb) === camelize(term);
     })
 
+    if (!first) {
+
+      $("#c2city").text(lastData[0].city + ", " + lastData[0].stateAbb)
+      $("#c2numTitles").text(lastData[0].count)
+      d3.selectAll(".c2winListRow").remove();
+
+      if (parseCoord(lastData[0].teams) != undefined) {
+        $("#c2numTeams").text(parseCoord(lastData[0].teams).length)
+        for (var i = 0; i < parseCoord(lastData[0].teams).length; i++) {
+          var c2winListRow = d3.select("#c2winList").append("div").attr("class", "c2winListRow").text(parseCoord(lastData[0].teams)[i])
+          if (c2winListRow.text().includes("MLB")) c2winListRow.style("color", cLeagues.mlb)
+          if (c2winListRow.text().includes("NBA")) c2winListRow.style("color", cLeagues.nba)
+          if (c2winListRow.text().includes("NFL")) c2winListRow.style("color", cLeagues.nfl)
+          if (c2winListRow.text().includes("NHL")) c2winListRow.style("color", cLeagues.nhl)
+          if (c2winListRow.text().includes("MLS")) c2winListRow.style("color", cLeagues.mls)
+          if (c2winListRow.text().includes("CFL")) c2winListRow.style("color", cLeagues.cfl)
+          if (c2winListRow.text().includes("NCAA")) c2winListRow.style("color", cLeagues.ncaa)
+        }
+      }
+    }
+
     var row = d3.select(".chart2left").append("div").attr("class", "lastRemove chart2row c2remove chart2lastrow");
-    row.append("div").attr("class", "lastRemove c2remove chart2rank").text("")
-    row.append("div").attr("class", "lastRemove c2remove chart2city").text(lastData[0].city + ", " + lastData[0].stateAbb)
+    row.append("div").attr("class", "lastRemove c2remove chart2rank").html('<i id="searchsubmit" class="fas fa-search"></i>')
+    row.append("div").attr("class", "lastRemove c2remove chart2city").html('<input type="text" id="search-bar" class="search-bar" placeholder="' + lastData[0].city + ", " + lastData[0].stateAbb + '" />')
     var lastsvg = row.append("svg").attr("class", "lastRemove c2remove chart2svg").attr("height", h).attr("width", w);
+
+    $("#search-bar").easyAutocomplete(options);
 
     for (var j = 0; j < metrics.length; j++) {
 
@@ -1913,7 +2200,7 @@ function drawChart2(titleData, placeData) {
             .attr("dx", 0)
             .text(lastData[0][metrics[j]] + " (" + metrics[j] + ")")
             .style("fill", "none")
-            .style("stroke", "#333")
+            .style("stroke", "#444")
             .style("stroke-width", 4)
             .style("opacity", 0)
 
@@ -2006,3 +2293,18 @@ function findClosest(places) {
 function getRandomInt(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
+
+// https://github.com/wbkd/d3-extended
+d3.selection.prototype.moveToFront = function() {
+  return this.each(function() {
+    this.parentNode.appendChild(this);
+  });
+};
+d3.selection.prototype.moveToBack = function() {
+  return this.each(function() {
+    var firstChild = this.parentNode.firstChild;
+    if (firstChild) {
+      this.parentNode.insertBefore(this, firstChild);
+    }
+  });
+};
