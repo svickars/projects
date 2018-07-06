@@ -1,3 +1,5 @@
+d3.select(".title-wrapper").style("background-image", "url('./img/backgrounds/" + getRandomInt(1, 7) + ".jpg')")
+
 var cLeagues = {
   mlb: "#beaed4",
   cfl: "#7fc97f",
@@ -87,8 +89,6 @@ var x = d3.scaleTime(),
   yscale = d3.scaleLinear().range([c1D.h, 0]);
 
 function handleResize() {
-
-  d3.select(".title-wrapper").style("background-image", "url('./img/backgrounds/" + getRandomInt(1, 7) + ".jpg')")
 
   windowW = window.innerWidth;
   windowH = window.innerHeight;
