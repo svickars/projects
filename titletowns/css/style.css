@@ -159,6 +159,13 @@ footer > .right {
 .grey-wrapper .story p {
   color: white; }
 
+.grey-wrapper .story a {
+  border-bottom: 1px solid white;
+  cursor: pointer; }
+
+.grey-wrapper .story a:hover {
+  border-bottom: 1px solid #666; }
+
 .title {
   width: 100%;
   margin: auto;
@@ -185,6 +192,7 @@ footer > .right {
 .movie-container {
   width: 50%;
   min-width: 350px;
+  max-width: 800px;
   margin: -25px auto 0 auto; }
 
 .movie-wrapper {
