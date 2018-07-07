@@ -520,8 +520,8 @@ function drawMap0(titles, placeData) {
       step();
     } else if (e.which == "37") {
       stepBack()
-    } else if (e.which == "27") {
-      clearSearched()
+      // } else if (e.which == "27") {
+      //   clearSearched()
     }
   }
 
@@ -658,6 +658,9 @@ function drawMap0(titles, placeData) {
     if (parseInt(d3.select("#sliderYear").html()) > 1874) {
       d3.select(".map0Annotation1875").style("opacity", "1")
     }
+    if (parseInt(d3.select("#sliderYear").html()) > 1889) {
+      $("#play-button").click();
+    }
     if (parseInt(d3.select("#sliderYear").html()) < 1903) {
       d3.select(".map0Annotation1903").style("opacity", "0")
     }
@@ -745,7 +748,7 @@ function drawMap0(titles, placeData) {
 
   const map0Annotations = [{
       note: {
-        label: "Titletowns of the late 1800s centred around the NE United States, home to a good chunk of early NCAA Div 1 football championships.",
+        label: "Titletowns of the late 1800s centred around the NE United States, home to a good chunk of early NCAA Div I football championships.",
         orientation: "leftRight",
         lineType: "none",
         align: "middle"
@@ -758,7 +761,7 @@ function drawMap0(titles, placeData) {
     },
     {
       note: {
-        label: "Professional sports championships began with baseball's World Series landing in Boston, the first of their nine Major League titles, and quickly shifting to New York and then Chicago.",
+        label: "Professional sports championships began with baseball's World Series landing in Boston, the first of its nine Major League titles, and quickly shifting to New York and then Chicago.",
         orientation: "leftRight",
         lineType: "none",
         align: "middle"
@@ -771,7 +774,7 @@ function drawMap0(titles, placeData) {
     },
     {
       note: {
-        label: "The first professional Stanley Cup was won in 1918 by Toronto, the first of their 13. Hockey championships account for more than 30% of Toronto's titles.",
+        label: "The first professional Stanley Cup was won in 1918 by Toronto, the first of its 13. Hockey championships account for more than 30% of Toronto's titles.",
         orientation: "leftRight",
         lineType: "none",
         align: "middle"
@@ -810,7 +813,7 @@ function drawMap0(titles, placeData) {
     },
     {
       note: {
-        label: "The first Superbowl (previously the NFL Championships) was won by Titletown USA, or Green Bay, Wisconsin, in 1967. Green Bay has won 13 NFL championships, the most of any city.",
+        label: "The first Superbowl (previously the NFL Championships) was won by Titletown, or Green Bay, Wisconsin, in 1967. Green Bay has won 13 NFL championships, the most of any city.",
         orientation: "leftRight",
         lineType: "none",
         align: "middle"
@@ -836,7 +839,7 @@ function drawMap0(titles, placeData) {
     },
     {
       note: {
-        label: "In 2002, LA surpassed NYC in total championships, having won nine in the previous decade. They continue to be America's winningest city. West Coast, Best Coast.",
+        label: "In 2002, LA surpassed NYC in total championships, having won nine in the previous decade. It continues to be America's winningest city. West Coast, Best Coast.",
         orientation: "leftRight",
         lineType: "none",
         align: "middle"
@@ -1507,7 +1510,8 @@ function drawProVsCollegeMaps(titles, placeData) {
 function drawChart1(matrix, titleData) {
 
   var startDate = new Date(1870, 0, 1),
-    endDate = new Date(2018, 11, 31);
+    endDate = new Date(2018, 11, 31),
+    clicked = false;
 
   var svg = d3.select("#chart1");
   var g = svg.append("g").attr("transform", "translate(" + c1m.left + "," + c1m.top + ")");
@@ -1579,6 +1583,71 @@ function drawChart1(matrix, titleData) {
 
   $("#c1search").easyAutocomplete(options);
   $("#c1search2").easyAutocomplete(options2);
+  d3.select("#c1LA").on("mouseover", function() {
+      c1mover("losAngelesCA")
+    }).on("mouseout", function() {
+      if (!clicked) {
+        c1mout()
+      }
+    })
+    .on("click", function() {
+      c1searched("losAngelesCA")
+      clicked = true;
+      $("#c1search2").val("Los Angeles, CA")
+      $("#c1search").val("Los Angeles, CA")
+    })
+  d3.select("#c1Philly").on("mouseover", function() {
+      c1mover("philadelphiaPA")
+    }).on("mouseout", function() {
+      if (!clicked) {
+        c1mout()
+      }
+    })
+    .on("click", function() {
+      c1searched("philadelphiaPA")
+      clicked = true;
+      $("#c1search2").val("Philadelphia, PA")
+      $("#c1search").val("Philadelphia, PA")
+    })
+  d3.select("#c1BatonRouge").on("mouseover", function() {
+      c1mover("batonRougeLA")
+    }).on("mouseout", function() {
+      if (!clicked) {
+        c1mout()
+      }
+    })
+    .on("click", function() {
+      c1searched("batonRougeLA")
+      clicked = true;
+      $("#c1search2").val("Baton-Rouge, LA")
+      $("#c1search").val("Baton-Rouge, LA")
+    })
+  d3.select("#c1NewHaven").on("mouseover", function() {
+      c1mover("newHavenCT")
+    }).on("mouseout", function() {
+      if (!clicked) {
+        c1mout()
+      }
+    })
+    .on("click", function() {
+      c1searched("newHavenCT")
+      clicked = true;
+      $("#c1search2").val("New Haven, CT")
+      $("#c1search").val("New Haven, CT")
+    })
+  d3.select("#c1CollegeStation").on("mouseover", function() {
+      c1mover("collegeStationTX")
+    }).on("mouseout", function() {
+      if (!clicked) {
+        c1mout()
+      }
+    })
+    .on("click", function() {
+      c1searched("collegeStationTX")
+      clicked = true;
+      $("#c1search2").val("College Station, CT")
+      $("#c1search").val("College Station, CT")
+    })
 
   xscale.domain(d3.extent(matrix, function(d) {
     return parseYear(d.date);
@@ -1719,6 +1788,31 @@ function drawChart1(matrix, titleData) {
     .on("click", mouseover)
     .on("mouseout", mouseout);
 
+  function c1mover(term) {
+    d3.selectAll(".c1labels").transition().duration(200).style("opacity", 0)
+    var thisline = d3.select("#chart1-" + camelize(term));
+    if (large_screen) {
+      d3.selectAll(".cityline").transition().duration(200).style("stroke-width", 1).style("opacity", .2).style("stroke", "#555")
+      thisline.transition().duration(200).style("stroke", "#fff").style("stroke-width", 2).style("opacity", .75);
+      thisline.moveToFront();
+    } else {
+      d3.selectAll(".cityline").style("stroke-width", 1).style("opacity", .2).style("stroke", "#555")
+      thisline.style("stroke", "#fff").style("stroke-width", 2).style("opacity", .75);
+      thisline.moveToBack();
+    }
+  }
+
+  function c1mout() {
+    d3.selectAll(".c1labels").transition().duration(200).style("opacity", 1)
+    if (large_screen) {
+      d3.selectAll(".cityline").transition().duration(200).style("stroke-width", 1).style("opacity", .5).style("stroke", "#555")
+      d3.selectAll("#chart1-losAngelesCA, #chart1-newYorkNY, #chart1-torontoON, #chart1-bostonMA, #chart1-montrealQC").transition().duration(200).style("stroke", "#fff").style("stroke-width", 2).style("opacity", .75);
+    } else {
+      d3.selectAll(".cityline").style("stroke-width", 1).style("opacity", .5).style("stroke", "#555")
+      d3.selectAll("#chart1-losAngelesCA, #chart1-newYorkNY, #chart1-torontoON, #chart1-bostonMA, #chart1-montrealQC").style("stroke", "#fff").style("stroke-width", 2).style("opacity", .75);
+    }
+  }
+
   function c1searched(term) {
     d3.select(".c1close").style("opacity", 1)
     d3.selectAll(".c1labels").transition().duration(200).style("opacity", 0)
@@ -1744,6 +1838,7 @@ function drawChart1(matrix, titleData) {
   }
 
   function clearSearched() {
+    clicked = false;
     d3.select(".c1close").style("opacity", 0)
     $("#c1search").val("")
     if (large_screen) {
