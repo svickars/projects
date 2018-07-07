@@ -209,19 +209,6 @@ footer > .right {
   width: 100%;
   height: 100%; }
 
-.overplayrect {
-  fill: #000;
-  opacity: .1; }
-
-.overplay {
-  font-size: 4em;
-  height: 75px;
-  width: 75px;
-  text-align: center;
-  color: white;
-  cursor: pointer;
-  position: absolute; }
-
 .map-header {
   width: 50%;
   min-width: 350px;
@@ -610,6 +597,43 @@ footer > .right {
   opacity: 1;
   border-bottom: 1px solid white; }
 
+.m0filter {
+  display: block; }
+
+.m0option {
+  font-family: "Roboto Mono", monospace;
+  font-weight: 500;
+  font-size: .8em;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-right: 10px;
+  opacity: .75;
+  cursor: pointer; }
+
+.m0option:hover {
+  border-bottom: 1px solid #666; }
+
+.m0optionActive {
+  opacity: 1;
+  border-bottom: 1px solid #666; }
+
+.m0subOption {
+  font-family: "Roboto Mono", monospace;
+  font-weight: 300;
+  font-size: .6em;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-right: 10px;
+  opacity: .75;
+  cursor: pointer; }
+
+.m0subOption:hover {
+  border-bottom: 1px solid #666; }
+
+.m0subOptionActive {
+  opacity: 1;
+  border-bottom: 1px solid #666; }
+
 .chart2rowMain {
   cursor: pointer; }
 
@@ -969,3 +993,65 @@ ol li p {
 
 ol li::marker {
   color: #666; }
+
+#scroll {
+  position: relative; }
+
+.scroll__graphic {
+  position: -webkit-sticky;
+  position: sticky;
+  float: right;
+  top: 0;
+  right: 0;
+  -webkit-transform: translate3d(0, 0, 0);
+  -moz-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0); }
+
+.chart {
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  -moz-transform: translateY(-50%);
+  -webkit-transform: translateY(-50%);
+  transform: translateY(-50%); }
+
+.chart p {
+  text-align: center;
+  padding: 1rem;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -moz-transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  font-size: 8rem;
+  font-weight: 900;
+  color: #666; }
+
+.scroll__text {
+  position: relative;
+  padding: 0 1rem;
+  max-width: 30rem;
+  width: 25%; }
+
+.step {
+  margin: 2rem auto;
+  display: -webkit-flex;
+  /* Safari */
+  -webkit-align-items: center;
+  /* Safari 7.0+ */
+  display: flex;
+  align-items: center; }
+
+.step-last {
+  display: block; }
+
+.step p {
+  display: block; }
+
+.instructions {
+  font-family: "Roboto Mono", monospace;
+  font-size: .75em;
+  font-weight: 400;
+  margin-top: 25px;
+  color: #b5b5b5; }

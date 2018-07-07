@@ -111,16 +111,86 @@
 
     <hr class="hr-text" data-content="&#x26F5">
 
-    <div class="map-container" id="firstMap">
+    <div class="nomobile map-container" id="firstMap">
       <div class="map-header">
-        <!-- <div class="divider"></div> -->
         <h3>The Capitals of Championship</h3>
         <h5>The hotspots of success in the continental United States and Canada, 1870-2018. A circle is drawn for every city that has won a title, growing in size for each championship it wins between 1870 and 2018. Circles are coloured by league, while the trophy representing each sport moves around the map.</h5>
         <p class="hide">Use the timeline controls below or the <span class="key">ENTER</span> <span class="key" style="padding: 2px 5px 0 5px"><i class="fas fa-chevron-right"></i></span> <span class="key" style="padding: 2px 6px 0 5px"><i class="fas fa-chevron-left"></i></span>          keys to play/pause, or move forward or back. Click anywhere on the map to pause. Once you reach 2018, hover over the hotspots to see city names.</p>
       </div>
-      <svg class="map" id="map0">
-        <div class="overplay"><i class="fas fa-play"></i></div>
-      </svg>
+    </div>
+
+    <section class="nomobile" id='scroll'>
+      <div class='scroll__graphic sticky'>
+        <div class='chart'>
+          <svg class="map" id="map0">
+          </svg>
+          <div class="map-footer">
+            <div class="map-footer-p">
+              <div class="colourdot" id="lMLB"></div>MLB&nbsp;&nbsp;&nbsp;
+              <div class="colourdot" id="lNBA"></div>NBA&nbsp;&nbsp;&nbsp;
+              <div class="colourdot" id="lNFL"></div>NFL&nbsp;&nbsp;&nbsp;
+              <div class="colourdot" id="lNHL"></div>NHL&nbsp;&nbsp;&nbsp;
+              <div class="colourdot" id="lCFL"></div>CFL&nbsp;&nbsp;&nbsp;
+              <div class="colourdot" id="lMLS"></div>MLS&nbsp;&nbsp;&nbsp;
+              <div class="colourdot" id="lNCAA"></div>NCAA&nbsp;&nbsp;&nbsp;
+            </div>
+            <div class="map-footer-p">
+              <button class="paused" id="play-button">Play</button><span id="sliderYear">1870</span>
+              <svg class="slider" id="slider"></svg>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class='scroll__text'>
+        <div class='step' data-step='0'>
+          <p>Since 1870, 458 distinct professional sports franchises have existed in North America<sup><a href="#fn3-13990" id="fnr3-13990" title="see footnote" class="footnote">3</a></sup>. Last year, 1917 NCAA Div I teams represented 352 colleges and universities
+            in women’s basketball, soccer, and volleyball, and men’s football, basketball, and baseball<sup><a href="#fn4-13990" id="fnr4-13990" title="see footnote" class="footnote">4</a></sup>. In all, these teams have played for 199 cities and towns
+            across Canada and the United States, competing for 995 titles since 1870.</p>
+        </div>
+        <div class='step' data-step='1'>
+          <p>Titletowns of the late 1800s centred around the NE United States, home to a good chunk of early NCAA Div I football championships.</p>
+        </div>
+        <div class='step' data-step='2'>
+          <p>Professional sports championships began with baseball's World Series landing in Boston, the first of its nine Major League titles, and quickly shifting to New York and then Chicago.</p>
+        </div>
+        <div class='step' data-step='3'>
+          <p>The first professional Stanley Cup was won in 1918 by Toronto, the first of its 13. Hockey championships account for more than 30% of Toronto's titles.</p>
+        </div>
+        <div class='step' data-step='4'>
+          <p>The first city on the West Coast to join the party was Berkeley, when the University of California Berkeley won its first of six NCAA titles.</p>
+        </div>
+        <div class='step' data-step='5'>
+          <p>The inaugural March Madness, also known as the NCAA Division I Men's Basketball Tournament, was played in 1939 and won by the University of Oregon, bringing just the seventh title (all NCAA) to the West Coast.
+          </p>
+        </div>
+        <div class='step' data-step='6'>
+          <p>The first Superbowl (previously the NFL Championships) was won by Titletown, or Green Bay, Wisconsin, in 1967. Green Bay has won 13 NFL championships, the most of any city.</p>
+        </div>
+        <div class='step' data-step='7'>
+          <p>By the mid-1980s, New York City was far and away the winningest city around, having claimed 43 professional titles (and just one college ship), mostly in baseball.</p>
+        </div>
+        <div class='step' data-step='8'>
+          <p>In 2002, LA surpassed NYC in total championships, having won nine in the previous decade. It continues to be America's winningest city. West Coast, Best Coast.</p>
+        </div>
+        <div class='step step-last' data-step='9'>
+          <p class="instructions">Use the timeline controls below the map or the <span class="key">ENTER</span> <span class="key" style="padding: 2px 5px 0 5px"><i class="fas fa-chevron-right"></i></span> <span class="key" style="padding: 2px 6px 0 5px"><i class="fas fa-chevron-left"></i></span>            keys to play/pause, or move forward or back. </p>
+          <p class="instructions"> Hover over hotspots to see city names and select a level and sport below to filter the map.</p>
+          <p>
+            <div class="m0filter">
+              <span class="m0option m0optionActive" key="everything">All</span> <span class="m0option" key="pro">Pro</span> <span class="m0option" key="ncaa">College</span>
+            </div>
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <div class="mobileMap0 map-container" id="firstMap">
+      <div class="map-header">
+        <h3>The Capitals of Championship</h3>
+        <h5>The hotspots of success in the continental United States and Canada, 1870-2018. A circle is drawn for every city that has won a title, growing in size for each championship it wins between 1870 and 2018. Circles are coloured by league, while the trophy representing each sport moves around the map.</h5>
+        <p class="hide">Use the timeline controls below or the <span class="key">ENTER</span> <span class="key" style="padding: 2px 5px 0 5px"><i class="fas fa-chevron-right"></i></span> <span class="key" style="padding: 2px 6px 0 5px"><i class="fas fa-chevron-left"></i></span>          keys to play/pause, or move forward or back. Click anywhere on the map to pause. Once you reach 2018, hover over the hotspots to see city names.</p>
+      </div>
+      <svg class="map" id="map0"></svg>
       <div class="map-footer">
         <div class="map-footer-p">
           <div class="colourdot" id="lMLB"></div>MLB&nbsp;&nbsp;&nbsp;
@@ -138,7 +208,7 @@
       </div>
     </div>
 
-    <div class="story">
+    <div class="mobileMap0 story">
       <p>Since 1870, 458 distinct professional sports franchises have existed in North America<sup><a href="#fn3-13990" id="fnr3-13990" title="see footnote" class="footnote">3</a></sup>. Last year, 1917 NCAA Div I teams represented 352 colleges and universities
         in women’s basketball, soccer, and volleyball, and men’s football, basketball, and baseball<sup><a href="#fn4-13990" id="fnr4-13990" title="see footnote" class="footnote">4</a></sup>. In all, these teams have played for 199 cities and towns across
         Canada and the United States, competing for 995 titles since 1870.</p>
@@ -243,10 +313,10 @@
       </div>
 
       <div class="story">
-        <p>The line chart above is cumulative, meaning that every time a city wins a title, its line goes up a notch (where the x-axis is equivalent to time, 1870-2018). The steeper the line (read, <a><span id="c1LA">Los Angeles</span></a>, 1963 to 2014,
-          or 58 boats in 51 years) the quicker the city is earning those ships. The longer the line, horizontally (see <a><span id="c1Philly">Philly</span></a> from 1896, when UPenn won the men’s football title, until 2018, when the Eagles won their first
-          Super Bowl), the more consistent or enduring the city is. The slope and position of a city’s line can show us other trends, like late-bloomers (<a><span id="c1BatonRouge">Baton-Rouge, Louisiana</span></a>), early-risers (<a><span id="c1NewHaven">New Haven, Connecticut</span></a>),
-          and slow-burners (<a><span id="c1CollegeStation">College Station, Texas</span></a>).</p>
+        <p>The line chart above is cumulative, meaning that every time a city wins a title, its line goes up a notch (where the x-axis is equivalent to time, 1870-2018). The steeper the line (read, <span id="c1LA"><a>Los Angeles</a></span>, 1963 to 2014,
+          or 58 boats in 51 years) the quicker the city is earning those ships. The longer the line, horizontally (see <span id="c1Philly"><a>Philly</a></span> from 1896, when UPenn won the men’s football title, until 2018, when the Eagles won their first
+          Super Bowl), the more consistent or enduring the city is. The slope and position of a city’s line can show us other trends, like late-bloomers (<span id="c1BatonRouge"><a>Baton-Rouge, Louisiana</a></span>), early-risers (
+          <span id="c1NewHaven"><a>New Haven, Connecticut</a></span>), and slow-burners (<span id="c1CollegeStation"><a>College Station, Texas</a></span>).</p>
 
         <p>Of the 199 cities represented, 57 have never won a title at all, while 146 have never won a pro title. Twenty teams account for more than half of all championships ever won.</p>
       </div>
@@ -394,9 +464,10 @@
 
     <script src=" //ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js "></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-annotation/1.17.0/d3-annotation.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.5/ScrollMagic.min.js "></script>
+    <script src='https://unpkg.com/intersection-observer'></script>
+    <script src='https://unpkg.com/scrollama'></script>
     <script src="js/jquery.easy-autocomplete.js"></script>
-    <script src="js/main.js"></script>
+    <script src="js/main-min.js"></script>
   </body>
 
 </html>

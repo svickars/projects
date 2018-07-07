@@ -31,9 +31,7 @@ body {
   font-family: $sansserif;
   color: $darkgray;
   background-color: white;
-  -webkit-transition: background-color 250ms linear;
-    -ms-transition: background-color 250ms linear;
-    transition: background-color 250ms linear;
+  overflow-x: hidden;
 }
 
 input:focus,
@@ -86,14 +84,25 @@ h5 {
 }
 
 p {
-  // font-size: 1em;
+  font-size: 1.1em;
   line-height: 1.5em;
   font-family: $serif;
+  color: $darkgray;
 }
 
 a {
   color: inherit;
   text-decoration: inherit;
+  border-bottom: 1px solid $darkgray;
+  -webkit-transition: border-bottom .15s;
+  -moz-transition: border-bottom .5s;
+  -ms-transition: border-bottom .5s;
+  -o-transition: border-bottom .5s;
+  transition: border-bottom .5s;
+}
+
+a:hover {
+  border-bottom: 1px solid $lightergray;
 }
 
 sup {
@@ -104,6 +113,14 @@ sup {
 
 sup a {
   color: $red;
+  text-decoration: none;
+  border-bottom: none;
+}
+
+sup a:hover {
+  color: $mediumgray !important;
+  text-decoration: none !important;
+  border-bottom: none;
 }
 
 
@@ -118,8 +135,14 @@ header {
   color: #fff !important;
 }
 
+header a {
+  color: white !important;
+  border-bottom: none;
+}
+
 header a:hover {
   color: $red !important;
+  border-bottom: none;
 }
 
 header > .left {
@@ -194,11 +217,24 @@ footer > .right {
   // height: -moz-calc(100% - 16px);
   // height: -webkit-calc(100% - 16px);
   // height: calc(100% - 16px);
-  padding-top: 5px;
-  padding-bottom: 150px;
+  padding-top: 75px;
+  padding-bottom: 20px;
 
   background-color: #333;
   color: white;
+}
+
+.grey-wrapper .story p {
+  color: white;
+}
+
+.grey-wrapper .story a {
+  border-bottom: 1px solid white;
+  cursor: pointer;
+}
+
+.grey-wrapper .story a:hover {
+  border-bottom: 1px solid $mediumgray;
 }
 
 .title {
@@ -208,7 +244,7 @@ footer > .right {
 }
 
 .title p {
-  color: $mediumgray;
+  color: $lightergray;
   margin-top: 30px;
   font-size: .8em;
 }
@@ -222,13 +258,35 @@ footer > .right {
 .story {
   width: 40%;
   min-width: 345px;
-  margin: 50px auto 75px auto;
+  margin: 50px auto 50px auto;
 }
 
 .divider {
   width: 100px;
   border-bottom: 3px solid $darkgray;
   margin-bottom: -25px;
+}
+
+.movie-container {
+  width: 50%;
+  min-width: 350px;
+  max-width: 800px;
+  margin: -25px auto 0 auto;
+}
+
+.movie-wrapper {
+  position: relative;
+	padding-bottom: 56.25%; /* 16:9 */
+	padding-top: 0;
+	height: 0;
+}
+
+.movie-wrapper iframe {
+  position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
 }
 
 .map-header {
@@ -246,7 +304,7 @@ footer > .right {
   font-family: $mono;
   font-size: .75em;
   font-weight: 400;
-  margin: 0;
+  margin-top: 25px;
   color: $lightgray;
 }
 
@@ -337,6 +395,7 @@ footer > .right {
   // border-radius: 3px;
   border: none;
   color: rgba(51,51,51,0);
+  background-color: #fff;
   margin: 0;
   // padding: 0 12px;
   width: 45px;
@@ -511,12 +570,22 @@ footer > .right {
 }
 
 .chart {
-  // background-color: $darkgray;
+  // overflow: visible;
 }
 
 .chart-wrapper {
   display: inline-block;
   position: relative;
+}
+
+.c1close {
+  margin: auto;
+  width: 50%;
+  text-align: center;
+  font-size: .8em;
+  font-family: $sansserif;
+  color: $lightgray;
+  opacity: 0;
 }
 
 .chart-overtext {
@@ -533,7 +602,7 @@ footer > .right {
 #chart2 {
   width: 75%;
   min-width: 345px;
-  margin: 50px auto 200px auto;
+  margin: 0 auto 200px auto;
 }
 
 .chart2left {
@@ -557,7 +626,13 @@ footer > .right {
 }
 
 .c2top {
-  display:none;
+  // display:none;
+}
+
+.c2tl {
+  display: inline-block;
+  // width: 50%;
+  height: 60px;
 }
 
 @media (max-width: 768px) {
@@ -574,6 +649,57 @@ footer > .right {
     width: 100%;
     margin: 0;
   }
+}
+
+#c2city {
+  border-bottom: 2px solid $lightergray;
+  width: 100%;
+}
+
+.c2rTitles {
+  font-family: $mono;
+  font-size: 1em;
+}
+
+.c2rTitles .c2rTitlesSpan {
+  font-size: 3em !important;
+}
+
+.c2rTitlesSpan {
+  display: inline-block;
+  width: 40%;
+  margin: 0;
+  float: none;
+}
+
+.c2rTitlesCaption {
+  font-family: $mono;
+  font-size: 1em;
+  text-transform: uppercase;
+}
+
+.c2rTitles .c2rTitlesCaption {
+  font-size: .8em !important;
+}
+
+.c2rWinningTeams h6 {
+  font-family: $sansserif;
+  font-size: .75em;
+  font-weight: 500 !important;
+  color: $lightergray;
+  padding-bottom: 3px;
+  margin-bottom: 8px;
+  border-bottom: 2px solid $lightergray;
+}
+
+.c2rWinningList {
+  font-family: $sansserif;
+  font-weight: 300;
+  font-size: .9em;
+}
+
+.c2winListRow {
+  padding-bottom: 2px;
 }
 
 .chart2city {
@@ -658,18 +784,64 @@ footer > .right {
   border-bottom: 1px solid white;
 }
 
-.chart2row {
-  // border-bottom: .25px solid $mediumgray;
+.m0filter {
+  display: block;
+}
+
+.m0option {
+  font-family: $mono;
+  font-weight: 500;
+  font-size: .8em;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-right: 10px;
+  opacity: .75;
+  cursor: pointer;
+}
+
+.m0option:hover {
+  border-bottom: 1px solid $mediumgray;
+}
+
+.m0optionActive {
+  opacity: 1;
+  border-bottom: 1px solid $mediumgray;
+}
+
+.m0subOption {
+  font-family: $mono;
+  font-weight: 300;
+  font-size: .6em;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-right: 10px;
+  opacity: .75;
+  cursor: pointer;
+}
+
+.m0subOption:hover {
+  border-bottom: 1px solid $mediumgray;
+}
+
+.m0subOptionActive {
+  opacity: 1;
+  border-bottom: 1px solid $mediumgray;
+}
+
+.chart2rowMain {
+  cursor: pointer;
 }
 
 .chart2lastrow {
   margin-top: 20px;
-  border-top: 1px solid $lightgray;
+  background-color: #444;
+  // border-top: 1px solid $lightgray;
 }
 
 .chart2rank {
   display: inline-block;
   width: 20px;
+  padding-left: 2px;
   font-family: $mono;
   font-size: .8em;
 }
@@ -689,10 +861,34 @@ footer > .right {
 }
 
 .cityline {
-  stroke: $mediumgray;
-  stroke-width: 1.5px;
+  stroke: #555;
+  stroke-width: 1px;
   opacity: .5;
   fill: none;
+}
+
+#chart1-losAngelesCA, #chart1-newYorkNY, #chart1-torontoON, #chart1-bostonMA, #chart1-montrealQC {
+  opacity: .75;
+  stroke: $lightgray;
+  stroke-width: 2px;
+}
+
+.focus text {
+  font-family: $mono;
+  fill: #fff;
+  // text-shadow: 0 6px 0 #333, 6px 0 0 #333, 0 -6px 0 #333, -6px 0 0 #333;
+}
+
+.focus .subFocus {
+  font-family: $mono;
+  font-size: .75em;
+}
+
+.voronoi path {
+  fill: none;
+  pointer-events: all;
+  // stroke: red;
+  // stroke-opacity: .2
 }
 
 .yAxis path {
@@ -707,7 +903,14 @@ footer > .right {
 
 .yAxis text {
   fill: #fff;
-  font-family: $sansserif;
+  font-family: $mono;
+  text-transform: uppercase;
+  text-shadow: 0 6px 0 #333, 6px 0 0 #333, 0 -6px 0 #333, -6px 0 0 #333;
+  -webkit-transform: translate(0, .7em);
+  -moz-transform: translate(0, .7em);
+  -ms-transform: translate(0, .7em);
+  -o-transform: translate(0, .7em);
+  transform: translate(0, .7em);
 }
 
 .xAxis path {
@@ -718,30 +921,16 @@ footer > .right {
 
 .xAxis text {
   fill: #fff;
-  font-family: $sansserif;
+  font-family: $mono;
 }
 
-#chart1-losAngelesCalifornia, #chart1-newYorkNewYork, #chart1-torontoOntario, #chart1-bostonMassachusetts {
-  opacity: .75;
-  stroke: #fff;
-  stroke-width: 2px;
-}
-
-.c1ttbg {
-  fill: $darkgray;
-}
-
-.c1ttmain {
-  fill: white;
-  font-family: $sansserif;
-  font-size: 12px;
-}
-
-.c1ttsub {
-  fill: white;
-  font-family: $sansserif;
-  font-size: 12px;
-  font-style: italic;
+.c1labels {
+  font-family: $mono;
+  font-size: .75em;
+  fill: $lightgray;
+  text-anchor: end;
+  // opacity: .75;
+  text-shadow: 0 6px 0 #333, 6px 0 0 #333, 0 -6px 0 #333, -6px 0 0 #333;
 }
 
 .colourdot {
@@ -843,6 +1032,8 @@ footer > .right {
   fill: white;
   stroke: white;
   stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
   pointer-events: none;
 }
 
@@ -852,6 +1043,7 @@ footer > .right {
   fill: white;
   stroke: white;
   stroke-width: 2;
+  stroke-linejoin: round;
   pointer-events: none;
 }
 
@@ -890,7 +1082,7 @@ footer > .right {
 }
 
 .c2searchWrapper {
-  margin-top: 20px;
+  // margin-top: 20px;
 }
 
 .search-container{
@@ -899,13 +1091,13 @@ footer > .right {
   margin: 0 auto;
 }
 
-#search-bar{
+#search-bar, #search-bar2 {
   position: relative;
   display: inline-block;
   // margin: 0 auto;
-  width: calc(100% - 15px);
+  width: 100%;
   height: 40px;
-  padding: 0 0 0 15px;
+  padding: 0 0 0 0;
   font-family: $sansserif;
   font-size: 1rem;
   color: #fff;
@@ -918,11 +1110,248 @@ footer > .right {
    }
  }
 
+ #c1search, #c1search2 {
+   position: relative;
+   display: inline-block;
+   // margin: 0 auto;
+   width: 100%;
+   height: 40px;
+   padding: 0 0 0 10px;
+   font-family: $sansserif;
+   font-size: 1rem;
+   color: #fff;
+   border: none;
+   background-color: #444;
+   outline: none;
+   &:focus{
+     border: none;
+     color: #fff;
+    }
+  }
+
+  #c1search2{
+    width: 90%;
+  }
+
+ #c1searchsubmit {
+   float: right;
+   position: relative;
+   z-index: 1;
+   margin-top: -30px;
+   margin-right: -5px;
+   cursor: pointer;
+ }
+
 #searchsubmit {
-  float: right;
-  position: relative;
-  z-index: 1;
-  margin-top: -30px;
-  margin-right: 10px;
+  // float: right;
+  // position: relative;
+  // z-index: 1;
+  // margin-top: -30px;
+  // margin-right: 10px;
+  margin-left: 5px;
   cursor: pointer;
+}
+
+.overchart {
+  width: 200px;
+  position: absolute;
+  top: 100px;
+  left: 20px;
+}
+
+.c2searchWrapper {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .overchart {
+    display: none;
+  }
+  .c2searchWrapper {
+    display: block;
+  }
+}
+
+.onlymobile {
+  display:none;
+}
+
+.hr-text {
+  margin-top: 50px;
+  margin-bottom: 50px;
+  width: 60%;
+  min-width: 345px;
+  line-height: 1em;
+  position: relative;
+  outline: 0;
+  border: 0;
+  color: black;
+  text-align: center;
+  height: 1.5em;
+  opacity: .5;
+  &:before {
+    content: '';
+    // use the linear-gradient for the fading effect
+    // use a solid background color for a solid bar
+    background: linear-gradient(to right, transparent, #818078, transparent);
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: 100%;
+    height: 1px;
+  }
+  &:after {
+    content: attr(data-content);
+    position: relative;
+    display: inline-block;
+    color: black;
+
+    padding: 0 .5em;
+    line-height: 1.5em;
+    // this is really the only tricky part, you need to specify the background color of the container element...
+    color: #818078;
+    background-color: #fcfcfa;
+  }
+}
+
+.hr-last {
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+
+.hr-text-dark {
+  margin-top: 50px;
+  margin-bottom: 50px;
+  width: 60%;
+  min-width: 345px;
+  line-height: 1em;
+  position: relative;
+  outline: 0;
+  border: 0;
+  color: black;
+  text-align: center;
+  height: 1.5em;
+  opacity: .5;
+  &:before {
+    content: '';
+    // use the linear-gradient for the fading effect
+    // use a solid background color for a solid bar
+    background: linear-gradient(to right, transparent, #818078, transparent);
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: 100%;
+    height: 1px;
+  }
+  &:after {
+    content: attr(data-content);
+    position: relative;
+    display: inline-block;
+    color: black;
+
+    padding: 0 .5em;
+    line-height: 1.5em;
+    // this is really the only tricky part, you need to specify the background color of the container element...
+    color: #818078;
+    background-color: #333;
+  }
+}
+
+.methodology p {
+  font-size: .8em;
+  color: $mediumgray;
+}
+
+ol {
+    margin: 0;
+    padding: 0 0 0 10px;
+}
+
+li {
+  font-family: $mono;
+  font-size: .8em;
+  // color: $red;
+}
+
+ol li p {
+  font-size: 1em !important;
+  margin: 0;
+}
+
+ol li::marker {
+  // font-size: .8em;
+  color: $mediumgray;
+}
+
+
+// SCROLLYTELLING
+
+#scroll {
+	position: relative;
+}
+.scroll__graphic {
+	position: -webkit-sticky;
+	position: sticky;
+	float: right;
+	top: 0;
+	right: 0;
+	-webkit-transform: translate3d(0, 0, 0);
+	-moz-transform: translate3d(0, 0, 0);
+	transform: translate3d(0, 0, 0);
+}
+.chart {
+	position: absolute;
+	right: 1rem;
+	top: 50%;
+	-moz-transform: translateY(-50%);
+	-webkit-transform: translateY(-50%);
+	transform: translateY(-50%);
+	// background-color: #ddd;
+	// border: 1px solid #000;
+}
+.chart p {
+	text-align: center;
+	padding: 1rem;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	-moz-transform: translate(-50%, -50%);
+	-webkit-transform: translate(-50%, -50%);
+	transform: translate(-50%, -50%);
+	font-size: 8rem;
+	font-weight: 900;
+	color: #666;
+}
+.scroll__text {
+	position: relative;
+	padding: 0 1rem;
+	max-width: 30rem;
+	width: 25%;
+}
+.step {
+	margin: 2rem auto;
+
+  display: -webkit-flex; /* Safari */
+    -webkit-align-items: center; /* Safari 7.0+ */
+  display: flex;
+  align-items: center;
+}
+
+.step-last {
+  display: block;
+}
+
+.step.is-active {
+	// background-color: lightgoldenrodyellow;
+}
+.step p {
+	display: block;
+}
+
+.instructions {
+  font-family: $mono;
+  font-size: .75em;
+  font-weight: 400;
+  margin-top: 25px;
+  color: $lightgray;
 }

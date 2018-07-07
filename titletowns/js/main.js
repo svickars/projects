@@ -1,3 +1,20 @@
+var container = d3.select('#scroll');
+var graphic = container.select('.scroll__graphic');
+var chart = graphic.select('.chart');
+var text = container.select('.scroll__text');
+var step = text.selectAll('.step');
+
+var stepheight,
+  bodyWidth,
+  textWidth,
+  graphicWidth,
+  chartMargin,
+  chartWidth,
+  chartHeight;
+
+var scroller = scrollama();
+
+
 d3.select(".title-wrapper").style("background-image", "url('./img/backgrounds/" + getRandomInt(1, 7) + ".jpg')")
 
 var cLeagues = {
@@ -68,7 +85,6 @@ var large_screen = false,
 var startDate = new Date(1870, 0, 1),
   endDate = new Date(2018, 11, 31);
 
-var controller = new ScrollMagic.Controller();
 var windowW, windowH, projection, path, smallprojectio, smallpath, mediumprojection, mediumpath, line, targetValue, x;
 
 var trophyList = ["NBA", "NHL", "NFL", "MLB", "CFL", "MLS", "volleyball-w", "baseball-m", "basketball-w", "basketball-m", "football-m", "soccer-w"],
@@ -117,7 +133,7 @@ function handleResize() {
     smallmapD.h = (windowW / 2) * .66
     mediummapD.w = (windowW - 20)
     mediummapD.h = windowW * .66
-    d3.selectAll(".nomobile").style("display", "none")
+    d3.selectAll(".nomobile").style("display", "none").remove();
     d3.selectAll(".onlymobile").style("display", "block")
   } else if (medium_screen) {
     margin.left = (windowW * .125) - 8
@@ -130,6 +146,7 @@ function handleResize() {
     smallmapD.h = ((windowW * .75) / 2) * .66
     mediummapD.w = (windowW * .75) / 2
     mediummapD.h = ((windowW * .75) / 2) * .66
+    d3.selectAll(".mobileMap0").style("display", "none")
     d3.selectAll(".onlymobile").style("display", "block")
   } else {
     margin.left = (windowW * .125) - 8
@@ -142,7 +159,30 @@ function handleResize() {
     smallmapD.h = ((windowW * .75) / 4) * .66
     mediummapD.w = (windowW * .75) / 2
     mediummapD.h = ((windowW * .75) / 2) * .66
+    d3.selectAll(".mobileMap0").style("display", "none")
   }
+
+  // SCROLLAMA
+  stepHeight = Math.floor(window.innerHeight * 0.75);
+  step.style('height', stepHeight + 'px');
+
+  bodyWidth = d3.select('body').node().offsetWidth;
+  textWidth = text.node().offsetWidth;
+  graphicWidth = mapD.w;
+
+  graphic
+    .style('width', graphicWidth + 'px')
+    .style('height', window.innerHeight + 'px');
+
+  chartMargin = mapD.m;
+  chartWidth = graphic.node().offsetWidth - chartMargin;
+  chartHeight = mapD.h;
+
+  chart
+    .style('width', chartWidth + 'px')
+    .style('height', chartHeight + 'px');
+
+  scroller.resize();
 
   projection = d3.geoAlbers()
     .scale(mapD.w + 100)
@@ -192,7 +232,7 @@ function handleResize() {
   for (var i = 0; i < mapCount; i++) {
     d3.select("#map" + i).attr("height", mapD.h)
       .attr("width", mapD.w)
-      .style("transform", "translate(" + (mapD.m + margin.left) + "px)")
+    // .style("transform", "translate(" + (mapD.m + margin.left) + "px)")
   }
 
   for (var i = 0; i < smallmapCount; i++) {
@@ -228,7 +268,6 @@ function handleResize() {
   targetValue = sliderD.w - 15;
   x.range([30, targetValue])
   d3.select(".track").attr("x1", x.range()[0]).attr("x2", x.range()[1])
-
 } // end handleResize
 
 loadData();
@@ -257,7 +296,6 @@ function processData(error, world, us, canada, titles, places, matrix) {
   drawProVsCollegeMaps(titles, places);
   drawChart1(matrix, titles);
   drawChart2(places);
-  detectView();
 } // end processData
 
 function drawMaps(world, us, canada) {
@@ -338,39 +376,6 @@ function drawMaps(world, us, canada) {
   }
 } // end drawMaps
 
-function detectView() {
-  var map0scene = new ScrollMagic.Scene({
-      triggerElement: "#map0"
-    })
-    .addTo(controller);
-
-  map0scene.on("enter", function() {
-    if (!map0) {
-      map0 = true;
-      // $("#play-button").click();
-    }
-  }).on("exit", function() {
-    if (map0) {
-      map0 = false;
-    }
-  })
-
-  // var chart1scene = new ScrollMagic.Scene({
-  //     triggerElement: "#chart1"
-  //   })
-  //   .addTo(controller);
-  //
-  // chart1scene.on("progress", function(event) {
-  //   if (event.scrollDirection === "FORWARD") {
-  //     d3.select("body").style("background-color", "#333")
-  //     d3.select("#chart-overtext1").transition().delay(250).style("opacity", "1")
-  //   } else {
-  //     d3.select("#chart-overtext1").transition().duration(50).style("opacity", "0")
-  //     d3.select("body").style("background-color", "#fff")
-  //   }
-  // })
-} // end detectView
-
 function drawMap0(titles, placeData) {
 
   var svg = d3.select("#map0");
@@ -381,10 +386,66 @@ function drawMap0(titles, placeData) {
   var gTT = svg.append("g").attr("transform", "translate(" + mapD.m + "," + mapD.m + ")");
 
   var firstpause = false;
+  var includeThis = ["american_football-men", "baseball", "canadian_football", "ice_hockey", "american_football", "basketball-men", "basketball", "baseball-men", "volleyball-women", "basketball-women", "soccer-women", "soccer"]
+
+  $(".m0option").click(function() {
+    $(".m0option").removeClass("m0optionActive")
+    $(this).addClass("m0optionActive")
+    key = $(this).attr("key")
+    if (key === "everything") includeThis = ["american_football-men", "baseball", "canadian_football", "ice_hockey", "american_football", "basketball-men", "basketball", "baseball-men", "volleyball-women", "basketball-women", "soccer-women", "soccer"]
+    if (key === "pro") includeThis = ["baseball", "canadian_football", "ice_hockey", "american_football", "basketball", "soccer"]
+    if (key === "ncaa") includeThis = ["american_football-men", "basketball-men", "baseball-men", "volleyball-women", "basketball-women", "soccer-women"]
+    d3.selectAll(".m0subfilter").remove();
+    if (key === "everything") {
+      d3.selectAll(".map0Annotation2018").transition().duration(200).style("opacity", 1)
+    } else if (key === "pro") {
+      drawM0Subfilter(key)
+      d3.selectAll(".map0Annotation2018").transition().duration(200).style("opacity", 0)
+    } else if (key === "ncaa") {
+      drawM0Subfilter(key)
+      d3.selectAll(".map0Annotation2018").transition().duration(200).style("opacity", 0)
+    }
+    update(parseYear(2018), includeThis, true)
+  })
+
+  function drawM0Subfilter(key) {
+    if (key === "everything") var subs = []
+    if (key === "pro") var subs = ["MLB", "NBA", "NFL", "NHL", "CFL", "MLS"]
+    if (key == "ncaa") var subs = ["Baseball (M)", "Basketball (M)", "Basketball (W)", "Football (M)", "Soccer (W)", "Volleyball (W)"]
+
+    var m0subfilters = {
+        pro: ["MLB", "NBA", "NFL", "NHL", "CFL", "MLS"],
+        ncaa: ["Baseball (M)", "Basketball (M)", "Basketball (W)", "Football (M)", "Soccer (W)", "Volleyball (W)"]
+      },
+      m0keys = {
+        pro: ["baseball", "basketball", "american_football", "ice_hockey", "canadian_football", "soccer"],
+        ncaa: ["baseball-men", "basketball-men", "basketball-women", "american_football-men", "soccer-women", "volleyball-women"]
+      }
+
+    var subfilter = d3.selectAll(".m0filter").append("div").attr("class", "m0subfilter");
+    subfilter.append("span").attr("class", "m0subOption m0subOptionActive").attr("key", key).text("All")
+
+    for (var n = 0; n < m0subfilters[key].length; n++) {
+      subfilter.append("span").attr("class", "m0subOption").attr("key", m0keys[key][n]).text(m0subfilters[key][n])
+    }
+
+    $(".m0subOption").click(function() {
+      $(".m0subOption").removeClass("m0subOptionActive")
+      $(this).addClass("m0subOptionActive")
+      var filterBy = $(this).attr("key")
+      if (filterBy === "pro") {
+        includeThis = ["baseball", "canadian_football", "ice_hockey", "american_football", "basketball", "soccer"]
+      } else if (filterBy === "ncaa") {
+        includeThis = ["american_football-men", "basketball-men", "baseball-men", "volleyball-women", "basketball-women", "soccer-women"]
+      } else {
+        includeThis = [filterBy]
+      }
+      update(x.invert(currentValue), includeThis, true)
+    })
+
+  }
 
   svg.on("click", function() {
-    d3.select(".overplayrect").remove()
-    d3.select(".overplay").remove()
     $("#play-button").click();
   })
 
@@ -444,7 +505,7 @@ function drawMap0(titles, placeData) {
       })
       .on("start drag", function() {
         currentValue = d3.event.x;
-        update(x.invert(currentValue));
+        update(x.invert(currentValue), includeThis, false);
       })
     );
 
@@ -516,8 +577,6 @@ function drawMap0(titles, placeData) {
         map0 = false;
         $("#play-button").click();
       }
-      d3.select(".overplayrect").remove()
-      d3.select(".overplay").remove()
     } else if (e.which == "39") {
       step();
     } else if (e.which == "37") {
@@ -528,7 +587,7 @@ function drawMap0(titles, placeData) {
   }
 
   function step() {
-    update(x.invert(currentValue));
+    update(x.invert(currentValue), includeThis, false);
     currentValue = currentValue + (targetValue / 151);
     if (currentValue > targetValue) {
       moving = false;
@@ -541,7 +600,7 @@ function drawMap0(titles, placeData) {
 
   function stepBack() {
     currentValue = currentValue - (targetValue / 151);
-    update(x.invert(currentValue));
+    update(x.invert(currentValue), includeThis, false);
     if (currentValue > targetValue) {
       moving = false;
       currentValue = 0;
@@ -551,7 +610,16 @@ function drawMap0(titles, placeData) {
     }
   } // end step
 
-  function drawPlot(data, placeData) {
+  function drawPlot(data, placeData, filtered) {
+    if (filtered) d3.selectAll(".city").remove();
+
+    var winnerNth = []
+
+    data.forEach(function(d) {
+      winnerNth.push(d.t1loc)
+      d.newNth = countThis(winnerNth, d.t1loc)
+    })
+
     var cities = gCircle.selectAll(".city")
       .data(data);
 
@@ -573,12 +641,12 @@ function drawMap0(titles, placeData) {
         return d.colour
       })
       .style("opacity", function(d) {
-        return opacityScale(d.nth)
+        return opacityScale(d.newNth)
       })
       .attr("r", 0)
       .transition().duration(400)
       .attr("r", function(d) {
-        return d.nth
+        return d.newNth
       })
 
     var placeCircles = gTT.selectAll(".placeCircles")
@@ -631,6 +699,44 @@ function drawMap0(titles, placeData) {
     cities.exit()
       .remove();
 
+    var scrollLabels = {
+      cities: ["Princeton, NJ", "Boston, MA", "Toronto, ON", "Berkeley, CA", "Eugene, OR", "Green Bay, WI", "New York, NY", "Los Angeles, CA"],
+      coords: [
+        [-74.6672226, 40.3572976],
+        [-71.0588801, 42.3600825],
+        [-79.3831843, 43.653226],
+        [-122.272747, 37.8715926],
+        [-123.0867536, 44.0520691],
+        [-88.0132958, 44.5133188],
+        [-74.0059728, 40.7127753],
+        [-118.2436849, 34.0522342]
+      ]
+    }
+
+    for (var i = 0; i < scrollLabels.cities.length; i++) {
+      svg.append("text")
+        .attr("class", "cityAnnoBG scrollLabel scrollLabel" + i)
+        .attr("x", projection(scrollLabels.coords[i])[0] + 8)
+        .attr("y", projection(scrollLabels.coords[i])[1] + 8)
+        .attr("text-anchor", "middle")
+        .attr("dy", function() {
+          return 20
+        })
+        .style("opacity", 0)
+        .text(scrollLabels.cities[i])
+
+      svg.append("text")
+        .attr("class", "mainAnno scrollLabel scrollLabel" + i)
+        .attr("x", projection(scrollLabels.coords[i])[0] + 8)
+        .attr("y", projection(scrollLabels.coords[i])[1] + 8)
+        .attr("text-anchor", "middle")
+        .attr("dy", function() {
+          return 20
+        })
+        .style("opacity", 0)
+        .text(scrollLabels.cities[i])
+    }
+
     window.addEventListener("resize", function() {
       d3.selectAll(".trophy").transition().duration(100).style("opacity", 0)
       d3.selectAll(".city")
@@ -645,7 +751,7 @@ function drawMap0(titles, placeData) {
     gTrophy.selectAll(".trophy").style("opacity", 0)
   } // end drawPlot
 
-  function update(h) {
+  function update(h, included, filtered) {
     handle.attr("cx", x(h));
     handleStroke.attr("cx", x(h))
     d3.select("#sliderYear").html(formatDateIntoYear(h))
@@ -654,71 +760,6 @@ function drawMap0(titles, placeData) {
       $("#play-button").removeClass("paused").removeClass("played").addClass("ended")
     }
 
-    if (parseInt(d3.select("#sliderYear").html()) < 1875) {
-      d3.selectAll(".map0Annotation").style("opacity", "0")
-    }
-    if (parseInt(d3.select("#sliderYear").html()) > 1874) {
-      d3.select(".map0Annotation1875").style("opacity", "1")
-    }
-    if (parseInt(d3.select("#sliderYear").html()) > 1889) {
-      if (!firstpause) {
-        firstpause = true;
-        $("#play-button").click();
-      }
-    }
-    if (parseInt(d3.select("#sliderYear").html()) < 1903) {
-      d3.select(".map0Annotation1903").style("opacity", "0")
-    }
-    if (parseInt(d3.select("#sliderYear").html()) > 1902) {
-      d3.select(".map0Annotation1875").style("opacity", "0")
-      d3.select(".map0Annotation1903").style("opacity", "1")
-    }
-    if (parseInt(d3.select("#sliderYear").html()) < 1918) {
-      d3.select(".map0Annotation1918").style("opacity", "0")
-    }
-    if (parseInt(d3.select("#sliderYear").html()) > 1917) {
-      d3.select(".map0Annotation1903").style("opacity", "0")
-      d3.select(".map0Annotation1918").style("opacity", "1")
-    }
-    if (parseInt(d3.select("#sliderYear").html()) < 1921) {
-      d3.select(".map0Annotation1921").style("opacity", "0")
-    }
-    if (parseInt(d3.select("#sliderYear").html()) > 1920) {
-      d3.select(".map0Annotation1921").style("opacity", "1")
-    }
-    if (parseInt(d3.select("#sliderYear").html()) < 1939) {
-      d3.select(".map0Annotation1939").style("opacity", "0")
-    }
-    if (parseInt(d3.select("#sliderYear").html()) > 1938) {
-      d3.select(".map0Annotation1918").style("opacity", "0")
-      d3.select(".map0Annotation1921").style("opacity", "0")
-      d3.select(".map0Annotation1939").style("opacity", "1")
-    }
-    if (parseInt(d3.select("#sliderYear").html()) > 1950) {
-      d3.select(".map0Annotation1939").style("opacity", "0")
-    }
-    if (parseInt(d3.select("#sliderYear").html()) < 1967) {
-      d3.select(".map0Annotation1967").style("opacity", "0")
-    }
-    if (parseInt(d3.select("#sliderYear").html()) > 1966) {
-      d3.select(".map0Annotation1967").style("opacity", "1")
-    }
-    if (parseInt(d3.select("#sliderYear").html()) > 1977) {
-      d3.select(".map0Annotation1967").style("opacity", "0")
-    }
-    if (parseInt(d3.select("#sliderYear").html()) < 1985) {
-      d3.select(".map0Annotation1985").style("opacity", "0")
-    }
-    if (parseInt(d3.select("#sliderYear").html()) > 1984) {
-      d3.select(".map0Annotation1985").style("opacity", "1")
-    }
-    if (parseInt(d3.select("#sliderYear").html()) < 2002) {
-      d3.select(".map0Annotation2002").style("opacity", "0")
-    }
-    if (parseInt(d3.select("#sliderYear").html()) > 2001) {
-      d3.select(".map0Annotation1985").style("opacity", "0")
-      d3.select(".map0Annotation2002").style("opacity", "1")
-    }
     if (parseInt(d3.select("#sliderYear").html()) < 2018) {
       d3.selectAll(".map0Annotation2018").style("opacity", "0")
     }
@@ -735,12 +776,65 @@ function drawMap0(titles, placeData) {
       })
     }
 
-
     var newData = titles.filter(function(d) {
-      return d.year <= formatDateIntoYear(h);
+      return d.year <= formatDateIntoYear(h) && included.indexOf(d.sport) > -1
     })
-    drawPlot(newData, placeData);
+
+    // var filterednewData = newData.filter(function(d) {
+    //   return included.indexOf(d.sport) > -1
+    // })
+    if (!filtered) {
+      drawPlot(newData, placeData, false);
+    } else {
+      drawPlot(newData, placeData, true);
+    }
   } //end update
+
+  var scrollIndex = [1870, 1875, 1903, 1918, 1921, 1939, 1967, 1985, 2002, 2018];
+
+  // SCROLLAMA
+  // setupStickyfill();
+  // 2. setup the scroller passing options
+  // this will also initialize trigger observations
+  // 3. bind scrollama event handlers (this can be chained like below)
+  scroller.setup({
+      container: '#scroll',
+      graphic: '.scroll__graphic',
+      text: '.scroll__text',
+      step: '.scroll__text .step',
+      debug: false,
+    })
+    .onStepEnter(handleStepEnter)
+    .onContainerEnter(handleContainerEnter)
+    .onContainerExit(handleContainerExit);
+
+
+
+  // scrollama event handlers
+  function handleStepEnter(response) {
+    // $("#play-button").click();
+    var year = scrollIndex[response.index]
+    // if (response.direction === "down") var year = scrollIndex[response.index]
+    // if (response.direction === "up") var year = scrollIndex[response.index - 1]
+
+    update(parseYear(year), includeThis, false)
+    d3.selectAll(".scrollLabel").style("opacity", 0)
+    d3.selectAll(".scrollLabel" + (response.index - 1).toString()).style("opacity", 1)
+  }
+
+  function handleContainerEnter(response) {
+    // response = { direction }
+  }
+
+  function handleContainerExit(response) {
+    // response = { direction }
+  }
+
+  function setupStickyfill() {
+    d3.selectAll('.sticky').each(function() {
+      Stickyfill.add(this);
+    });
+  }
 
   // Annotations -- thank you Susie Lu
   const type = d3.annotationCustomType(
@@ -752,110 +846,6 @@ function drawMap0(titles, placeData) {
     })
 
   const map0Annotations = [{
-      note: {
-        label: "Titletowns of the late 1800s centred around the NE United States, home to a good chunk of early NCAA Div I football championships.",
-        orientation: "leftRight",
-        lineType: "none",
-        align: "middle"
-      },
-      className: "map0hide map0Annotation annotation-end map0Annotation1875",
-      x: projection([-72.9642011, 41.2983476])[0] + 8,
-      y: projection([-72.9642011, 41.2983476])[1] + 8,
-      dy: -75,
-      dx: -100
-    },
-    {
-      note: {
-        label: "Professional sports championships began with baseball's World Series landing in Boston, the first of its nine Major League titles, and quickly shifting to New York and then Chicago.",
-        orientation: "leftRight",
-        lineType: "none",
-        align: "middle"
-      },
-      className: "map0hide map0Annotation annotation-end map0Annotation1903",
-      x: projection([-71.0588801, 42.3600825])[0] + 8,
-      y: projection([-71.0588801, 42.3600825])[1] + 8,
-      dy: -75,
-      dx: -100
-    },
-    {
-      note: {
-        label: "The first professional Stanley Cup was won in 1918 by Toronto, the first of its 13. Hockey championships account for more than 30% of Toronto's titles.",
-        orientation: "leftRight",
-        lineType: "none",
-        align: "middle"
-      },
-      className: "map0hide map0Annotation annotation-end map0Annotation1918",
-      x: projection([-79.3831843, 43.653226])[0] + 8,
-      y: projection([-79.3831843, 43.653226])[1] + 8,
-      dy: -85,
-      dx: -105
-    },
-    {
-      note: {
-        label: "The first city on the West Coast to join the party was Berkeley, when the University of California Berkeley won its first of six NCAA titles.",
-        orientation: "leftRight",
-        lineType: "none",
-        align: "middle"
-      },
-      className: "map0hide map0Annotation annotation-start map0Annotation1921",
-      x: projection([-122.272747, 37.8715926])[0] + 8,
-      y: projection([-122.272747, 37.8715926])[1] + 8,
-      dy: 75,
-      dx: 90
-    },
-    {
-      note: {
-        label: "The inaugural March Madness, also known as the NCAA Division I Men's Basketball Tournament, was played in 1939 and won by the University of Oregon, bringing just the seventh title (all NCAA) to the West Coast.",
-        orientation: "leftRight",
-        lineType: "none",
-        align: "middle"
-      },
-      className: "map0hide map0Annotation annotation-start map0Annotation1939",
-      x: projection([-123.0867536, 44.0520691])[0] + 8,
-      y: projection([-123.0867536, 44.0520691])[1] + 8,
-      dy: -75,
-      dx: 90
-    },
-    {
-      note: {
-        label: "The first Superbowl (previously the NFL Championships) was won by Titletown, or Green Bay, Wisconsin, in 1967. Green Bay has won 13 NFL championships, the most of any city.",
-        orientation: "leftRight",
-        lineType: "none",
-        align: "middle"
-      },
-      className: "map0hide map0Annotation annotation-end map0Annotation1967",
-      x: projection([-88.0132958, 44.5133188])[0] + 8,
-      y: projection([-88.0132958, 44.5133188])[1] + 8,
-      dy: 65,
-      dx: -120
-    },
-    {
-      note: {
-        label: "By the mid-1980s, New York City was far and away the winningest city around, having claimed 43 professional titles (and just one college ship), mostly in baseball.",
-        orientation: "leftRight",
-        lineType: "none",
-        align: "middle"
-      },
-      className: "map0hide map0Annotation annotation-end map0Annotation1985",
-      x: projection([-74.0059728, 40.7127753])[0] + 8,
-      y: projection([-74.0059728, 40.7127753])[1] + 8,
-      dy: -90,
-      dx: -115
-    },
-    {
-      note: {
-        label: "In 2002, LA surpassed NYC in total championships, having won nine in the previous decade. It continues to be America's winningest city. West Coast, Best Coast.",
-        orientation: "leftRight",
-        lineType: "none",
-        align: "middle"
-      },
-      className: "map0hide map0Annotation annotation-start map0Annotation2002",
-      x: projection([-118.2436849, 34.0522342])[0] + 8,
-      y: projection([-118.2436849, 34.0522342])[1] + 8,
-      dy: -60,
-      dx: 85
-    },
-    {
       note: {
         title: "1. Los Angeles",
         label: "25 PRO/39 NCAA",
@@ -959,24 +949,6 @@ function drawMap0(titles, placeData) {
       .attr("class", "map0currentannotation-group").call(map0MakeCurrentAnnotations)
   }
   // end annotations
-
-  svg.append("rect")
-    .attr("class", "overplayrect")
-    .attr("x", 0)
-    .attr("y", 0)
-    .attr("width", mapD.w)
-    .attr("height", mapD.h)
-
-  d3.select(".overplay")
-    .style("transform", "translate(" + ((mapD.w / 2) + margin.left - 37.5) + "px, " + (-mapD.h / 2 - 37.5) + "px)")
-    .on("click", function() {
-      $("#play-button").click();
-      d3.select(".overplayrect").remove()
-      d3.select(".overplay").remove()
-    })
-
-
-
 } // end drawMap0
 
 function drawMap0small(titles) {
@@ -990,7 +962,6 @@ function drawMap0small(titles) {
   d3.select("#play-button").style("display", "none")
   d3.select("#sliderYear").style("display", "none")
   d3.selectAll(".hide").style("display", "none")
-  d3.selectAll(".overplay").style("display", "none")
   d3.selectAll(".map-footer").style("width", "275px").style("min-width", "275px")
 
   var cities = g.selectAll(".cityNFL")
