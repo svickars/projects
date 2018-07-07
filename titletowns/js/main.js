@@ -380,6 +380,8 @@ function drawMap0(titles, placeData) {
     .attr("class", "map0annotation-group");
   var gTT = svg.append("g").attr("transform", "translate(" + mapD.m + "," + mapD.m + ")");
 
+  var firstpause = false;
+
   svg.on("click", function() {
     d3.select(".overplayrect").remove()
     d3.select(".overplay").remove()
@@ -659,7 +661,10 @@ function drawMap0(titles, placeData) {
       d3.select(".map0Annotation1875").style("opacity", "1")
     }
     if (parseInt(d3.select("#sliderYear").html()) > 1889) {
-      $("#play-button").click();
+      if (!firstpause) {
+        firstpause = true;
+        $("#play-button").click();
+      }
     }
     if (parseInt(d3.select("#sliderYear").html()) < 1903) {
       d3.select(".map0Annotation1903").style("opacity", "0")
