@@ -1,6 +1,6 @@
 var container = d3.select('#scroll');
 var graphic = container.select('.scroll__graphic');
-var chart = graphic.select('.chart');
+var chart = graphic.select('.chartmap0');
 var text = container.select('.scroll__text');
 var step = text.selectAll('.step');
 
