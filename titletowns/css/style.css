@@ -227,7 +227,7 @@ footer > .right {
 
 .map-footer {
   text-align: center;
-  width: 50%;
+  width: 75%;
   min-width: 350px;
   margin: 25px auto 25px auto;
   border-top: 1px solid #b5b5b5; }
@@ -1007,15 +1007,15 @@ ol li::marker {
   -moz-transform: translate3d(0, 0, 0);
   transform: translate3d(0, 0, 0); }
 
-.chart {
+.chartmap0 {
   position: absolute;
-  right: 1rem;
-  top: 50%;
+  right: 0;
+  top: 45%;
   -moz-transform: translateY(-50%);
   -webkit-transform: translateY(-50%);
   transform: translateY(-50%); }
 
-.chart p {
+.chartmap0 p {
   text-align: center;
   padding: 1rem;
   position: absolute;
@@ -1031,11 +1031,9 @@ ol li::marker {
 .scroll__text {
   position: relative;
   padding: 0 1rem;
-  max-width: 30rem;
   width: 25%; }
 
 .step {
-  margin: 2rem auto;
   display: -webkit-flex;
   /* Safari */
   -webkit-align-items: center;

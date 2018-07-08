@@ -138,8 +138,8 @@ function handleResize() {
   } else if (medium_screen) {
     margin.left = (windowW * .125) - 8
     margin.right = (windowW * .125) - 8
-    mapD.w = windowW * .75
-    mapD.h = (windowW * .75) * .66
+    mapD.w = windowW * .7
+    mapD.h = (windowH * .8)
     c1D.w = windowW * .75 - c1m.left - c1m.right
     c1D.h = (windowW * .75) * .66 - c1m.top - c1m.bottom
     smallmapD.w = (windowW * .75) / 2
@@ -151,8 +151,8 @@ function handleResize() {
   } else {
     margin.left = (windowW * .125) - 8
     margin.right = (windowW * .125) - 8
-    mapD.w = windowW * .75
-    mapD.h = (windowW * .75) * .66
+    mapD.w = windowW * .7
+    mapD.h = (windowH * .8)
     c1D.w = windowW * .75 - c1m.left - c1m.right
     c1D.h = (windowW * .75) * .66 - c1m.top - c1m.bottom
     smallmapD.w = (windowW * .75) / 4
