@@ -1,0 +1,77 @@
+body {
+  background: #FFFFE0;
+  font-family: sans-serif; }
+
+.container {
+  width: 100%;
+  height: -moz-calc(100vh - 16px);
+  height: -webkit-calc(100vh - 16px);
+  height: calc(100vh - 16px);
+  display: -webkit-flex;
+  /* Safari */
+  -webkit-align-items: center;
+  /* Safari 7.0+ */
+  display: flex;
+  align-items: center; }
+
+.map {
+  margin: auto;
+  width: 800px;
+  height: 450px; }
+
+svg {
+  background: #fff; }
+
+.stroke {
+  fill: none;
+  stroke: #000;
+  stroke-width: 3px; }
+
+.fill {
+  fill: #fff; }
+
+.graticule {
+  fill: none;
+  stroke: #777;
+  stroke-width: .5px;
+  stroke-opacity: 0.5; }
+
+.land {
+  fill: #71c671;
+  opacity: .75; }
+
+.boundary {
+  fill: none;
+  stroke: none;
+  stroke-width: 0.5px; }
+
+.connection {
+  fill: none;
+  stroke-width: 2px; }
+
+.connection.separate {
+  stroke-width: 1px;
+  opacity: .5; }
+
+.texts {
+  font-family: "Roboto", Arial, sans-serif;
+  font-size: 10px; }
+
+.callouts {
+  fill: none;
+  stroke: #ADD8E6; }
+
+.toofar {
+  fill: none;
+  stroke: #ADD8E6;
+  stroke-dasharray: 8,4;
+  stroke-width: 4;
+  opacity: .75; }
+
+.label {
+  font-family: "Roboto", Arial, sans-serif;
+  font-size: 14px; }
+
+.sub {
+  font-size: 10px;
+  font-style: italic; }
