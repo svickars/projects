@@ -8,10 +8,14 @@ var width = $(".map").width(),
 var sameplace = false;
 
 var projection = d3.geo.wagner6()
-  .scale(230)
-  .center([-25,20])
+  .scale(290)
+  .center([-39,30])
   .translate([width / 2, height / 2])
   .precision(.1);
+
+var zoom = d3.behavior.zoom()
+    .scaleExtent([1, 8])
+    .on("zoom", zoomed);
 
 var path = d3.geo.path()
   .projection(projection);
@@ -20,8 +24,9 @@ var svg = d3.select(".map").append("svg")
   .attr("width", width)
   .attr("height", height);
 
+
 var defs = svg.append("defs"),
-mapG = svg.append("g")
+g = svg.append("g")
   	.attr("class", "mapG"),
 textsG = svg.append("g")
 	.attr("class", "textsG")
@@ -30,9 +35,46 @@ arcs = svg.append("g")
 points = svg.append("g")
 	.attr("class", "points");
 
+
+svg.call(zoom)
+    .call(zoom.event)
+
 var data;
 
 var publicSpreadsheetUrl = 'https://docs.google.com/spreadsheets/d/10H4X5yRnubACgBCK1qR_zKJgWA5Mla5wGfqEpbCOugs/edit?usp=sharing';
+
+defs.append("pattern")
+    .attr("id", "rosie_img")//set the id here
+    .attr("height", "100%")
+    .attr("width", "100%")
+    .attr("patternContentUnits", "objectBoundingBox")
+    .append("image")
+    .attr("height", 1)
+    .attr("width", 1)
+    .attr("preserveAspectRatio", "none")
+    .attr("xlink:href", "http://projects.samvickars.com/samandrosie/img/img3.png");
+
+defs.append("pattern")
+    .attr("id", "sam_img")//set the id here
+    .attr("height", "100%")
+    .attr("width", "100%")
+    .attr("patternContentUnits", "objectBoundingBox")
+    .append("image")
+    .attr("height", 1)
+    .attr("width", 1)
+    .attr("preserveAspectRatio", "none")
+    .attr("xlink:href", "http://projects.samvickars.com/samandrosie/img/img2.png");
+
+defs.append("pattern")
+    .attr("id", "both_img")//set the id here
+    .attr("height", "100%")
+    .attr("width", "100%")
+    .attr("patternContentUnits", "objectBoundingBox")
+    .append("image")
+    .attr("height", 1)
+    .attr("width", 1)
+    .attr("preserveAspectRatio", "none")
+    .attr("xlink:href", "http://projects.samvickars.com/samandrosie/img/img1.png");
 
 function init() {
 	Tabletop.init( { key: publicSpreadsheetUrl,
@@ -43,6 +85,13 @@ function init() {
 function showInfo(raw, tabletop) {
 	data = raw;
 	drawPoints(data);
+}
+
+function zoomed() {
+  g.attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
+  textsG.attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
+  arcs.attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
+  points.attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
 }
 
 loadData();
@@ -60,9 +109,7 @@ function drawMap(error, world) {
  	var features = topojson.feature(world, world.objects.countries).features;
 
 	  // draw a base map
-	  mapG.append('g')
-	    .classed('basemap', true)
-	    .selectAll('path')
+	  g.selectAll('path')
 	    .data(features)
 	    .enter().append('path')
 	    .attr('d', path)
@@ -117,7 +164,12 @@ function drawPoints(data) {
 	    .attr("y", function(d){
 	    	return projection(parseCoord(d.lngLat))[1] + parseCoord(d.distance)[1]
 		})
-		.attr("dy", 4)
+		.attr("dy", function(d) {
+			return d.dy
+		})
+		.attr("dx", function(d) {
+			return d.dx
+		})
 		.style("text-anchor", function(d){
 			return d.anchor
 		})
@@ -141,6 +193,59 @@ function drawPoints(data) {
 	    	return projection(parseCoord(d.lngLat))[1] + parseCoord(d.distance)[1]
 		})
 
+	if (sameplace) {
+		points.append("circle")
+			.attr("class", "point together")
+			.attr("cx", projection(parseCoord(together[together.length-1].lngLat))[0])
+			.attr("cy", projection(parseCoord(together[together.length-1].lngLat))[1])
+			.attr("r", 15)
+			.style("stroke", colour("Sam & Rosie"))
+			.style("stroke-width", 3)
+			.style("fill", "url(#both_img")
+
+		points.append("text")
+			.attr("class", "label")
+			.attr("x", projection(parseCoord(together[together.length-1].lngLat))[0])
+			.attr("y", projection(parseCoord(together[together.length-1].lngLat))[1])
+			.attr("text-anchor", "middle")
+			.attr("dy", 35)
+			.style("fill", colour("Sam & Rosie"))
+			.style("stroke", "white")
+			.style("stroke-width", 2)
+			.text("Sam & Rosie")
+
+
+		points.append("text")
+			.attr("class", "label sub")
+			.attr("x", projection(parseCoord(together[together.length-1].lngLat))[0])
+			.attr("y", projection(parseCoord(together[together.length-1].lngLat))[1])
+			.attr("text-anchor", "middle")
+			.attr("dy", 50)
+			.style("fill", colour("Sam & Rosie"))
+			.style("stroke", "white")
+			.style("stroke-width", 2)
+			.text(together[together.length-1].place)
+
+		points.append("text")
+			.attr("class", "label")
+			.attr("x", projection(parseCoord(together[together.length-1].lngLat))[0])
+			.attr("y", projection(parseCoord(together[together.length-1].lngLat))[1])
+			.attr("text-anchor", "middle")
+			.attr("dy", 35)
+			.style("fill", colour("Sam & Rosie"))
+			.text("Sam & Rosie")
+
+
+		points.append("text")
+			.attr("class", "label sub")
+			.attr("x", projection(parseCoord(together[together.length-1].lngLat))[0])
+			.attr("y", projection(parseCoord(together[together.length-1].lngLat))[1])
+			.attr("text-anchor", "middle")
+			.attr("dy", 50)
+			.style("fill", colour("Sam & Rosie"))
+			.text(together[together.length-1].place)
+	}
+
 
 	if (!sameplace) {
 		points.append("circle")
@@ -150,6 +255,7 @@ function drawPoints(data) {
 			.attr("r", 15)
 			.style("stroke", colour("Sam"))
 			.style("stroke-width", 3)
+			.style("fill", "url(#sam_img")
 
 		points.append("circle")
 			.attr("class", "point separate rosie")
@@ -158,6 +264,7 @@ function drawPoints(data) {
 			.attr("r", 15)
 			.style("stroke", colour("Rosie"))
 			.style("stroke-width", 3)
+			.style("fill", "url(#rosie_img")
 
 		points.append("text")
 			.attr("class", "label")
@@ -249,12 +356,41 @@ function drawPoints(data) {
 		    .attr('d', lngLatToArc(rosie[rosie.length-1]), 0)
 		    .style("stroke", colour("Rosie"))
 
-		arcs.append("line")
+		var toofar = arcs.append("g");
+
+		toofar.append("line")
 			.attr("class", "toofar")
 			.attr("x1", projection(parseCoord(rosie[rosie.length-1].lngLat))[0])
 			.attr("y1", projection(parseCoord(rosie[rosie.length-1].lngLat))[1])
 			.attr("x2", projection(parseCoord(sam[sam.length-1].lngLat))[0])
 			.attr("y2", projection(parseCoord(sam[sam.length-1].lngLat))[1])
+
+		arcs.append("text")
+			.attr("class", "toofartext")
+			.style("transform", function(){
+				var x = (projection(parseCoord(rosie[rosie.length-1].lngLat))[0] + projection(parseCoord(sam[sam.length-1].lngLat))[0])/2,
+					y = (projection(parseCoord(rosie[rosie.length-1].lngLat))[1] + projection(parseCoord(sam[sam.length-1].lngLat))[1])/2,
+					x1 = projection(parseCoord(rosie[rosie.length-1].lngLat))[0],
+					y1 = projection(parseCoord(rosie[rosie.length-1].lngLat))[1],
+					x2 = projection(parseCoord(sam[sam.length-1].lngLat))[0],
+					y2 = projection(parseCoord(sam[sam.length-1].lngLat))[1];
+				var dx = x1 - x2,
+					dy = y1 - y2;
+				var theta = Math.atan2(dy,dx);
+				return "translate(" + x + "px, " + y + "px) rotate("+theta+"rad) rotate(180deg)"
+			})
+			.attr("dy", 14)
+			.attr("text-anchor", "middle")
+			// .style("transform-origin", "center")
+			// .style("transform", "rotate(45deg)")			
+			.text(function() {
+				var lat1 = parseCoord(rosie[rosie.length-1].lngLat)[1],
+					lon1 = parseCoord(rosie[rosie.length-1].lngLat)[0],
+					lat2 = parseCoord(sam[sam.length-1].lngLat)[1],
+					lon2 = parseCoord(sam[sam.length-1].lngLat)[0];
+				var distance = getDistanceFromLatLonInKm(lat1, lon1, lat2, lon2)
+				return "Way too far (" + distance.toFixed(0) + "km)"
+			})
 	}
     
 }
@@ -291,4 +427,22 @@ function lngLatToArc(d, bend) {
 
 function parseCoord(value) {
   return JSON.parse("[" + value + "]")[0]
+}
+
+function getDistanceFromLatLonInKm(lat1,lon1,lat2,lon2) {
+  var R = 6371; // Radius of the earth in km
+  var dLat = deg2rad(lat2-lat1);  // deg2rad below
+  var dLon = deg2rad(lon2-lon1); 
+  var a = 
+    Math.sin(dLat/2) * Math.sin(dLat/2) +
+    Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) * 
+    Math.sin(dLon/2) * Math.sin(dLon/2)
+    ; 
+  var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
+  var d = R * c; // Distance in km
+  return d;
+}
+
+function deg2rad(deg) {
+  return deg * (Math.PI/180)
 }
