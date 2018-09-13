@@ -77,9 +77,9 @@ function handleResize() {
   }
   scatterM = {
     top: 12,
-    right: 25,
+    right: 40,
     bottom: 30,
-    left: 25
+    left: 0
   }
   scatterD = {
     w: 0,
@@ -101,22 +101,22 @@ function handleResize() {
     c1m.right = 15
     c1D.w = windowW - 16 - c1m.left - c1m.right
     c1D.h = windowW * .66 - c1m.top - c1m.bottom
-    scatterM.right = 15
-    scatterD.w = windowW - 16 - scatterM.left - scatterM.right
+    // scatterM.right = 15
+    scatterD.w = $(".side-figure").width() - scatterM.left - scatterM.right
     scatterD.h = 400
   } else if (medium_screen) {
     margin.left = (windowW * .125) - 8
     margin.right = (windowW * .125) - 8
     c1D.w = windowW * .75 - c1m.left - c1m.right
     c1D.h = (windowW * .75) * .66 - c1m.top - c1m.bottom
-    scatterD.w = windowW * .75 - scatterM.left - scatterM.right
+    scatterD.w = $(".side-figure").width() - scatterM.left - scatterM.right
     scatterD.h = 400
   } else {
     margin.left = (windowW * .125) - 8
     margin.right = (windowW * .125) - 8
     c1D.w = windowW * .75 - c1m.left - c1m.right
     c1D.h = (windowW * .75) * .66 - c1m.top - c1m.bottom
-    scatterD.w = windowW * .75 - scatterM.left - scatterM.right
+    scatterD.w = $(".side-figure").width() - scatterM.left - scatterM.right
     scatterD.h = 400
   }
 
@@ -602,9 +602,10 @@ function drawTLQ(tlq) {
 
     enterView({
       selector: stepSel.nodes(),
-      offset: 0.2,
+      offset: 0.4,
       enter: function(el) {
         var index = +d3.select(el).attr("data-index");
+        stepSel.classed('active', (d, i) => i === index);
         updateChart(index);
       },
       once: false

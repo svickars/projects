@@ -1101,6 +1101,58 @@ ol li p {
 ol li::marker {
   color: #666; }
 
+section.side {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 5rem;
+  width: 75%;
+  min-width: 345px;
+  margin: 0 auto 500px auto; }
+  @media screen and (min-width: 768px) {
+    section.side {
+      flex-direction: row; } }
+  section.side > * {
+    flex: 1; }
+
+.side article {
+  padding: 0 1rem;
+  pointer-events: none;
+  z-index: 99; }
+  .side article .step {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 1.1rem;
+    line-height: 1.8;
+    min-height: 95vh;
+    color: #b5b5b5; }
+    @media screen and (min-width: 768px) {
+      .side article .step {
+        margin: 0;
+        flex: 1;
+        min-height: 67vh; } }
+    .side article .step:first-of-type {
+      margin-top: 50vh; }
+    .side article .step.active {
+      color: #333; }
+
+.side figure {
+  align-items: center;
+  align-self: flex-start;
+  display: flex;
+  height: 500px;
+  margin: 0;
+  width: 100%;
+  justify-content: center;
+  top: 50%;
+  -webkit-transform: translate(0, -50%);
+  -moz-transform: translate(0, -50%);
+  -ms-transform: translate(0, -50%);
+  -o-transform: translate(0, -50%);
+  transform: translate(0, -50%);
+  position: sticky; }
+  @media screen and (min-width: 768px) {
+    .side figure {
+      flex: 2; } }
+
 #scrolly-overlay .scrolly {
   width: 75%;
   min-width: 345px;
@@ -1116,47 +1168,11 @@ ol li::marker {
   left: 0;
   z-index: 1; }
 
-.s1 .sticky {
-  top: 50%;
-  -webkit-transform: translate(0, -50%);
-  -moz-transform: translate(0, -50%);
-  -ms-transform: translate(0, -50%);
-  -o-transform: translate(0, -50%);
-  transform: translate(0, -50%); }
-
 article {
   padding: 0;
   width: 100%;
   margin: 0 auto;
   position: relative; }
-
-.s1 article {
-  max-width: 30rem;
-  width: 30rem;
-  display: block;
-  pointer-events: none;
-  z-index: 1; }
-
-.step {
-  min-height: 95vh;
-  margin: auto;
-  margin-bottom: 1rem; }
-
-#step3 {
-  min-height: 150vh; }
-
-.step-inner {
-  margin: 0;
-  padding: 1rem;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size: 1.5em;
-  font-weight: 300;
-  background-color: white;
-  -webkit-box-shadow: 0px 0px 41px -1px rgba(153, 153, 153, 0.8);
-  -moz-box-shadow: 0px 0px 41px -1px rgba(153, 153, 153, 0.8);
-  box-shadow: 0px 0px 41px -1px rgba(153, 153, 153, 0.8);
-  border-radius: 2px;
-  pointer-events: all; }
 
 .step-inner .note {
   margin-top: 25px;
@@ -1245,16 +1261,20 @@ article {
 
 .s1filter {
   margin-top: 15px;
-  width: 100%; }
+  width: 100%;
+  pointer-events: auto; }
 
 .fleft, .fright {
   height: 100%;
-  width: 50%;
   display: inline-block;
   margin: 0; }
 
 .fleft {
-  float: left; }
+  float: left;
+  width: 40%; }
+
+.fright {
+  width: 60%; }
 
 .s1switch {
   font-family: "Roboto Mono", monospace;

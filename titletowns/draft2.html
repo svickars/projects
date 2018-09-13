@@ -148,102 +148,108 @@
       </div>
     </div>
 
-    <section id="scrolly-overlay">
-      <div class="s1 scrolly">
-        <figure class="sticky">
-          <div class="scatter">
+
+    <section class="side" id="scrolly-overlay">
+
+      <figure class="side-figure">
+        <div class="scatter">
+        </div>
+      </figure>
+
+      <article>
+        <div class="step" data-index="0">
+          <div class="step-inner"><strong>step 0.</strong><br> Green Bay has a population of 320,050, making it the 157th largest metro area in the United States, and home to less than a percent of the NFL's market.</div>
           </div>
-        </figure>
-        <article>
-          <div class="step" data-index="0">
-            <div class="step-inner"><strong>step 0.</strong><br> Green Bay has a population of 320,050, making it the 157th largest metro area in the United States, and home to less than a percent of the NFL's market.</div>
+          <div class="step" data-index="1">
+            <div class="step-inner"><strong>step 1.</strong><br> The Packers, however, have won 14 NFL championships (1968) since they started playing in 1919, almost 15% of all pro football titles (97) won in that time.
+              <div class="note">combine with step 0? work better as a side scroll?</div>
             </div>
-            <div class="step" data-index="1">
-              <div class="step-inner"><strong>step 1.</strong><br> The Packers, however, have won 14 NFL championships (1968) since they started playing in 1919, almost 15% of all pro football titles (97) won in that time.
-                <div class="note">combine with step 0? work better as a side scroll?</div>
-              </div>
+          </div>
+          <div class="step" data-index="2">
+            <div class="step-inner"><strong>step 2.</strong><br>Look at these numbers in context... compared to larger cities, New York, Boston. Small population, high championship count... edmonton?</div>
             </div>
-            <div class="step" data-index="2">
-              <div class="step-inner"><strong>step 2.</strong><br>Look at these numbers in context... compared to larger cities, New York, Boston. Small population, high championship count... edmonton?</div>
-              </div>
-              <div class="step" data-index="3" id="step3">
-                <div class="step-inner"><strong>step 3.</strong><br>Every other metro area to have won... comparing population to number of championships...
-                  <div class="instructions">This includes only professional titles, won between 1903 and 2018. Use the controls below to adjust these eligibility requirements. Hover to see city names.</div>
-                  <div class="note">Add title, etc., fix scroll backwards</div>
-                  <div class="s1filter">
-                    <div class="fleft">
-                      <form class="form">
-                        <div class="s1switch">
-                          <p>When do we start counting?</p>
-                        </div>
-                      </form>
-                      [Year range slider]
-                    </div>
-                    <div class="fright">
-                      <form class="form">
-                        <div class="s1switch leagueToggleVS" id="switch1">
-                          <p>What leagues do we count?</p>
-                          <input type="radio" id="sw_all" name="switch1" value="titleYears" />
-                          <label for="sw_all">All</label>
-                          <input type="radio" id="sw_pro" name="switch1" value="proYears" / checked>
-                          <label for="sw_pro">Pro</label>
-                          <input type="radio" id="sw_big4" name="switch1" value="big4years" />
-                          <label for="sw_big4">Big 4</label>
-                          <input type="radio" id="sw_college" name="switch1" value="collegeYears" />
-                          <label for="sw_college">College</label>
-                        </div>
-                      </form>
-                    </div>
+            <div class="step" data-index="3" id="step3">
+              <div class="step-inner"><strong>step 3.</strong><br>Every other metro area to have won... comparing population to number of championships...
+                <div class="instructions">This includes only professional titles, won between 1903 and 2018. Use the controls below to adjust these eligibility requirements. Hover to see city names.</div>
+                <div class="note">Add title, etc., fix scroll backwards</div>
+                <div class="s1filter">
+                  <div class="fleft">
+                    <form class="form">
+                      <div class="s1switch">
+                        <p>When do we start counting?</p>
+                      </div>
+                    </form>
+                    [Year range slider]
+                  </div>
+                  <div class="fright">
+                    <form class="form">
+                      <div class="s1switch leagueToggleVS" id="switch1">
+                        <p>What leagues do we count?</p>
+                        <input type="radio" id="sw_all" name="switch1" value="titleYears" />
+                        <label for="sw_all">All</label>
+                        <input type="radio" id="sw_pro" name="switch1" value="proYears" / checked>
+                        <label for="sw_pro">Pro</label>
+                        <input type="radio" id="sw_big4" name="switch1" value="big4years" />
+                        <label for="sw_big4">Big 4</label>
+                        <input type="radio" id="sw_college" name="switch1" value="collegeYears" />
+                        <label for="sw_college">College</label>
+                      </div>
+                    </form>
                   </div>
                 </div>
               </div>
-              <div class="step" data-index="4">
-                <div class="step-inner"><strong>step 4.</strong><br> Use location quotient to compare a city's success to it's expected success. LQ of 1 (
-                  <font style="color: #e00000">Chicago</font>) means a city is doing pretty much how we'd expect based on its size.
-                  <div class="note">Convert chart to beeswarm to compare location quotients. Bug: scroll up and then down again to get this to work properly.</div>
-                </div>
+            </div>
+            <div class="step" data-index="4">
+              <div class="step-inner"><strong>step 4.</strong><br> Use location quotient to compare a city's success to it's expected success. LQ of 1 (
+                <font style="color: #e00000">Chicago</font>) means a city is doing pretty much how we'd expect based on its size.
+                <div class="note">Convert chart to beeswarm to compare location quotients. Bug: scroll up and then down again to get this to work properly.</div>
               </div>
-              <div class="step" data-index="5">
-                <div class="step-inner"><strong>step 5.</strong><br>This means that just because a city wins a lot does not make it all that impressive...<br> Like
-                  <font style="color: #e00000">New York</font>, which has won 57 pro titles, but is actually doing <em>slightly worse</em> than we'd expect.</div>
-              </div>
-              <div class="step" data-index="6">
-                <div class="step-inner"><strong>step 6.</strong><br>
-                  <font style="color: #e00000">Green Bay</font> is doing great... </div>
-              </div>
-              <div class="step" data-index="7">
-                <div class="step-inner"><strong>step 7.</strong><br> And everywhere else...
-                  <div class="instructions">This includes only professional titles, won between 1903 and 2018. Use the controls below to adjust these eligibility requirements.</div>
-                  <div class="s1filter">
-                    <div class="fleft">
-                      <form class="form">
-                        <div class="s1switch">
-                          <p>When do we start counting?</p>
-                        </div>
-                      </form>
-                      [Year range slider]
-                    </div>
-                    <div class="fright">
-                      <form class="form">
-                        <div class="s1switch switch2 leagueToggleTLQ" id="switch2">
-                          <p>What leagues do we count?</p>
-                          <input type="radio" id="sw_all2" name="switch2" value="titleYears" />
-                          <label for="sw_all2">All</label>
-                          <input type="radio" id="sw_pro2" name="switch2" value="proYears" / checked>
-                          <label for="sw_pro2">Pro</label>
-                          <input type="radio" id="sw_big42" name="switch2" value="big4years" />
-                          <label for="sw_big42">Big 4</label>
-                          <input type="radio" id="sw_college2" name="switch2" value="collegeYears" />
-                          <label for="sw_college2">College</label>
-                        </div>
-                      </form>
-                    </div>
+            </div>
+            <div class="step" data-index="5">
+              <div class="step-inner"><strong>step 5.</strong><br>This means that just because a city wins a lot does not make it all that impressive...<br> Like
+                <font style="color: #e00000">New York</font>, which has won 57 pro titles, but is actually doing <em>slightly worse</em> than we'd expect.</div>
+            </div>
+            <div class="step" data-index="6">
+              <div class="step-inner"><strong>step 6.</strong><br>
+                <font style="color: #e00000">Green Bay</font> is doing great... </div>
+            </div>
+            <div class="step" data-index="7">
+              <div class="step-inner"><strong>step 7.</strong><br> And everywhere else...
+                <div class="instructions">This includes only professional titles, won between 1903 and 2018. Use the controls below to adjust these eligibility requirements.</div>
+                <div class="s1filter">
+                  <div class="fleft">
+                    <form class="form">
+                      <div class="s1switch">
+                        <p>When do we start counting?</p>
+                      </div>
+                    </form>
+                    [Year range slider]
+                  </div>
+                  <div class="fright">
+                    <form class="form">
+                      <div class="s1switch switch2 leagueToggleTLQ" id="switch2">
+                        <p>What leagues do we count?</p>
+                        <input type="radio" id="sw_all2" name="switch2" value="titleYears" />
+                        <label for="sw_all2">All</label>
+                        <input type="radio" id="sw_pro2" name="switch2" value="proYears" / checked>
+                        <label for="sw_pro2">Pro</label>
+                        <input type="radio" id="sw_big42" name="switch2" value="big4years" />
+                        <label for="sw_big42">Big 4</label>
+                        <input type="radio" id="sw_college2" name="switch2" value="collegeYears" />
+                        <label for="sw_college2">College</label>
+                      </div>
+                    </form>
                   </div>
                 </div>
               </div>
-        </article>
-      </div>
+            </div>
+      </article>
+
     </section>
+
+
+
+
 
     <div class="grey-wrapper">
       <section id="scrolly-overlay">
