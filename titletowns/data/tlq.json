@@ -1,0 +1,2227 @@
+[{
+  "metro": "Princeton, NJ",
+  "titleYears": [1870, 1873, 1874, 1879, 1880, 1881, 1886, 1890, 1894, 1897, 1904, 1907, 1912, 1923],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [1870, 1873, 1874, 1879, 1880, 1881, 1886, 1890, 1894, 1897, 1904, 1907, 1912, 1923],
+  "population": 30168
+}, {
+  "metro": "New York Metro Area",
+  "titleYears": [1905, 1921, 1922, 1923, 1927, 1927, 1928, 1928, 1932, 1933, 1933, 1934, 1936, 1937, 1938, 1938, 1939, 1940, 1941, 1943, 1947, 1949, 1950, 1950, 1951, 1952, 1953, 1954, 1955, 1956, 1956, 1958, 1961, 1962, 1969, 1969, 1970, 1973, 1977, 1978, 1980, 1981, 1982, 1983, 1986, 1987, 1991, 1994, 1995, 1996, 1998, 1999, 2000, 2000, 2003, 2008, 2009, 2012],
+  "proYears": [1905, 1921, 1922, 1923, 1927, 1927, 1928, 1928, 1932, 1933, 1933, 1934, 1936, 1937, 1938, 1938, 1939, 1940, 1941, 1943, 1947, 1949, 1950, 1951, 1952, 1953, 1954, 1955, 1956, 1956, 1958, 1961, 1962, 1969, 1969, 1970, 1973, 1977, 1978, 1980, 1981, 1982, 1983, 1986, 1987, 1991, 1994, 1995, 1996, 1998, 1999, 2000, 2000, 2003, 2008, 2009, 2012],
+  "big4years": [1905, 1921, 1922, 1923, 1927, 1927, 1928, 1928, 1932, 1933, 1933, 1934, 1936, 1937, 1938, 1938, 1939, 1940, 1941, 1943, 1947, 1949, 1950, 1951, 1952, 1953, 1954, 1955, 1956, 1956, 1958, 1961, 1962, 1969, 1969, 1970, 1973, 1977, 1978, 1980, 1981, 1982, 1983, 1986, 1987, 1991, 1994, 1995, 1996, 1998, 1999, 2000, 2000, 2003, 2008, 2009, 2012],
+  "collegeYears": [1950],
+  "population": 20320876
+}, {
+  "metro": "New Brunswick, NJ",
+  "titleYears": [1870],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [1870],
+  "population": 56910
+}, {
+  "metro": "New Haven, CT",
+  "titleYears": [1875, 1877, 1878, 1881, 1882, 1883, 1884, 1885, 1887, 1888, 1889, 1892, 1893, 1895, 1901, 1908, 1910, 1928],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [1875, 1877, 1878, 1881, 1882, 1883, 1884, 1885, 1887, 1888, 1889, 1892, 1893, 1895, 1901, 1908, 1910, 1928],
+  "population": 860435
+}, {
+  "metro": "Greater Boston, MA",
+  "titleYears": [1876, 1891, 1899, 1900, 1903, 1911, 1912, 1913, 1914, 1914, 1915, 1916, 1918, 1920, 1929, 1939, 1941, 1957, 1959, 1960, 1961, 1962, 1963, 1964, 1965, 1966, 1968, 1969, 1970, 1972, 1974, 1976, 1981, 1984, 1986, 2002, 2004, 2004, 2005, 2007, 2008, 2011, 2013, 2015, 2017],
+  "proYears": [1903, 1912, 1914, 1915, 1916, 1918, 1929, 1939, 1941, 1957, 1959, 1960, 1961, 1962, 1963, 1964, 1965, 1966, 1968, 1969, 1970, 1972, 1974, 1976, 1981, 1984, 1986, 2002, 2004, 2004, 2005, 2007, 2008, 2011, 2013, 2015, 2017],
+  "big4years": [1903, 1912, 1914, 1915, 1916, 1918, 1929, 1939, 1941, 1957, 1959, 1960, 1961, 1962, 1963, 1964, 1965, 1966, 1968, 1969, 1970, 1972, 1974, 1976, 1981, 1984, 1986, 2002, 2004, 2004, 2005, 2007, 2008, 2011, 2013, 2015, 2017],
+  "collegeYears": [1876, 1891, 1899, 1900, 1911, 1913, 1914, 1920],
+  "population": 4836531
+}, {
+  "metro": "Greater Philadelphia, PA",
+  "titleYears": [1896, 1898, 1905, 1909, 1910, 1911, 1913, 1926, 1929, 1930, 1947, 1948, 1949, 1954, 1956, 1960, 1967, 1974, 1975, 1980, 1983, 1985, 2008, 2010, 2016, 2018],
+  "proYears": [1910, 1911, 1913, 1926, 1929, 1930, 1947, 1948, 1949, 1956, 1960, 1967, 1974, 1975, 1980, 1983, 2008, 2018],
+  "big4years": [1910, 1911, 1913, 1926, 1929, 1930, 1947, 1948, 1949, 1956, 1960, 1967, 1974, 1975, 1980, 1983, 2008, 2018],
+  "collegeYears": [1896, 1898, 1905, 1909, 1954, 1985, 2010, 2016],
+  "population": 6096120
+}, {
+  "metro": "Springfield, MA",
+  "titleYears": [1999],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [1999],
+  "population": 631652
+}, {
+  "metro": "Providence, RI",
+  "titleYears": [1928],
+  "proYears": [1928],
+  "big4years": [1928],
+  "collegeYears": [],
+  "population": 1621122
+}, {
+  "metro": "Hanover, PA",
+  "titleYears": [],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [],
+  "population": 15561
+}, {
+  "metro": "Ann Arbor, MI",
+  "titleYears": [1902, 1903, 1904, 1905, 1919, 1924, 1934, 1949, 1953, 1962, 1989, 1998],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [1902, 1903, 1904, 1905, 1919, 1924, 1934, 1949, 1953, 1962, 1989, 1998],
+  "population": 367627
+}, {
+  "metro": "Hartford, CT",
+  "titleYears": [1995, 1999, 2000, 2002, 2003, 2004, 2004, 2009, 2010, 2011, 2013, 2014, 2014, 2015, 2016],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [1995, 1999, 2000, 2002, 2003, 2004, 2004, 2009, 2010, 2011, 2013, 2014, 2014, 2015, 2016],
+  "population": 1210259
+}, {
+  "metro": "Lehigh Valley, NJ-PA",
+  "titleYears": [1897],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [1897],
+  "population": 840550
+}, {
+  "metro": "Williamstown, MA",
+  "titleYears": [],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [],
+  "population": 7758
+}, {
+  "metro": "Ithaca, NY",
+  "titleYears": [1916, 1922, 1923],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [1916, 1922, 1923],
+  "population": 104802
+}, {
+  "metro": "Worcester, MA",
+  "titleYears": [1947, 1952],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [1947, 1952],
+  "population": 942475
+}, {
+  "metro": "Swarthmore, PA",
+  "titleYears": [],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [],
+  "population": 6239
+}, {
+  "metro": "Lewisburg, PA",
+  "titleYears": [],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [],
+  "population": 5699
+}, {
+  "metro": "State College, PA",
+  "titleYears": [1912, 1913, 1983, 1987, 1999, 2007, 2008, 2009, 2010, 2013, 2014, 2015],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [1912, 1913, 1983, 1987, 1999, 2007, 2008, 2009, 2010, 2013, 2014, 2015],
+  "population": 162660
+}, {
+  "metro": "Harrisburg-Carlisle, PA",
+  "titleYears": [],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [],
+  "population": 647390
+}, {
+  "metro": "Newark, DE",
+  "titleYears": [2004],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [2004],
+  "population": 33398
+}, {
+  "metro": "Lancaster, PA",
+  "titleYears": [],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [],
+  "population": 59218
+}, {
+  "metro": "Charlottesville, VA",
+  "titleYears": [2015],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [2015],
+  "population": 233793
+}, {
+  "metro": "Richmond, KY",
+  "titleYears": [1980, 1983],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [1980, 1983],
+  "population": 99972
+}, {
+  "metro": "Annapolis, MD",
+  "titleYears": [],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [],
+  "population": 39418
+}, {
+  "metro": "West Point, NY",
+  "titleYears": [1915, 1945, 1946],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [1915, 1945, 1946],
+  "population": 6763
+}, {
+  "metro": "West Lafayette, IN",
+  "titleYears": [1999],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [1999],
+  "population": 219239
+}, {
+  "metro": "Madison, WI",
+  "titleYears": [1941],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [1941],
+  "population": 654230
+}, {
+  "metro": "Champaign-Urbana, IL",
+  "titleYears": [1920, 1924, 1928],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [1920, 1924, 1928],
+  "population": 239124
+}, {
+  "metro": "Twin Cities, MN",
+  "titleYears": [1935, 1936, 1937, 1941, 1942, 1949, 1950, 1952, 1953, 1954, 1956, 1960, 1961, 1964, 1987, 1991],
+  "proYears": [1949, 1950, 1952, 1953, 1954, 1987, 1991],
+  "big4years": [1949, 1950, 1952, 1953, 1954, 1987, 1991],
+  "collegeYears": [1935, 1936, 1937, 1941, 1942, 1956, 1960, 1961, 1964],
+  "population": 3600618
+}, {
+  "metro": "Chicago, IL",
+  "titleYears": [1906, 1906, 1907, 1908, 1917, 1925, 1932, 1933, 1934, 1938, 1940, 1941, 1943, 1946, 1947, 1961, 1963, 1963, 1986, 1991, 1992, 1993, 1996, 1997, 1998, 1998, 2005, 2010, 2013, 2015, 2016, 2018],
+  "proYears": [1906, 1907, 1908, 1917, 1925, 1932, 1933, 1934, 1938, 1940, 1941, 1943, 1946, 1947, 1961, 1963, 1986, 1991, 1992, 1993, 1996, 1997, 1998, 1998, 2005, 2010, 2013, 2015, 2016],
+  "big4years": [1906, 1907, 1908, 1917, 1925, 1932, 1933, 1934, 1938, 1940, 1941, 1943, 1946, 1947, 1961, 1963, 1986, 1991, 1992, 1993, 1996, 1997, 1998, 2005, 2010, 2013, 2015, 2016],
+  "collegeYears": [1906, 1963, 2018],
+  "population": 9533040
+}, {
+  "metro": "Fargo, ND",
+  "titleYears": [2012, 2013, 2014, 2015, 2016],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [2012, 2013, 2014, 2015, 2016],
+  "population": 241356
+}, {
+  "metro": "Janesville-Beloit, WI",
+  "titleYears": [],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [],
+  "population": 100541
+}, {
+  "metro": "Capital District, NY",
+  "titleYears": [],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [],
+  "population": 98111
+}, {
+  "metro": "Cedar Falls, IA",
+  "titleYears": [],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [],
+  "population": 41390
+}, {
+  "metro": "Ames, IA",
+  "titleYears": [],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [],
+  "population": 66191
+}, {
+  "metro": "Portland-South Portland, ME",
+  "titleYears": [],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [],
+  "population": 66937
+}, {
+  "metro": "Grinnell, IA",
+  "titleYears": [],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [],
+  "population": 9151
+}, {
+  "metro": "Iowa City, IA",
+  "titleYears": [1959],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [1959],
+  "population": 171491
+}, {
+  "metro": "Syracuse, NY",
+  "titleYears": [1955, 1960, 2003],
+  "proYears": [1955],
+  "big4years": [1955],
+  "collegeYears": [1960, 2003],
+  "population": 654841
+}, {
+  "metro": "Galesburg, IL",
+  "titleYears": [],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [],
+  "population": 30960
+}, {
+  "metro": "Notre Dame, IN",
+  "titleYears": [1920, 1925, 1930, 1931, 1944, 1947, 1948, 1950, 1965, 1967, 1974, 1978, 1989, 1995, 2001, 2004, 2010, 2018],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [1920, 1925, 1930, 1931, 1944, 1947, 1948, 1950, 1965, 1967, 1974, 1978, 1989, 1995, 2001, 2004, 2010, 2018],
+  "population": 321815
+}, {
+  "metro": "Bloomington, IN",
+  "titleYears": [1940, 1953, 1976, 1981, 1987],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [1940, 1953, 1976, 1981, 1987],
+  "population": 167825
+}, {
+  "metro": "Des Moines, IA",
+  "titleYears": [],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [],
+  "population": 215472
+}, {
+  "metro": "Lincoln, NE",
+  "titleYears": [1971, 1972, 1995, 1995, 1996, 1998, 2000, 2006, 2015, 2017],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [1971, 1972, 1995, 1995, 1996, 1998, 2000, 2006, 2015, 2017],
+  "population": 331519
+}, {
+  "metro": "Columbia, MO",
+  "titleYears": [1954],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [1954],
+  "population": 178271
+}, {
+  "metro": "Burlington, VT",
+  "titleYears": [],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [],
+  "population": 42260
+}, {
+  "metro": "Lawrence, KS",
+  "titleYears": [1952, 1988, 2008],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [1952, 1988, 2008],
+  "population": 120793
+}, {
+  "metro": "Spokane, WA",
+  "titleYears": [2011],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [2011],
+  "population": 564236
+}, {
+  "metro": "Indianola, IA",
+  "titleYears": [],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [],
+  "population": 15785
+}, {
+  "metro": "Sewanee, TN",
+  "titleYears": [],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [],
+  "population": 2311
+}, {
+  "metro": "Blacksburg, VA",
+  "titleYears": [],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [],
+  "population": 45038
+}, {
+  "metro": "New Orleans, LA",
+  "titleYears": [2010],
+  "proYears": [2010],
+  "big4years": [2010],
+  "collegeYears": [],
+  "population": 1275762
+}, {
+  "metro": "Greenville, SC",
+  "titleYears": [1982, 1989, 2017],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [1982, 1989, 2017],
+  "population": 895923
+}, {
+  "metro": "Nashville, TN",
+  "titleYears": [2014],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [2014],
+  "population": 1903045
+}, {
+  "metro": "Boulder, CO",
+  "titleYears": [1991],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [1991],
+  "population": 322514
+}, {
+  "metro": "Washington, DC Metro Area",
+  "titleYears": [1924, 1937, 1942, 1954, 1978, 1983, 1984, 1985, 1988, 1992, 1996, 1997, 1999, 2002, 2004, 2006, 2018],
+  "proYears": [1924, 1937, 1942, 1978, 1983, 1988, 1992, 1996, 1997, 1999, 2004, 2018],
+  "big4years": [1924, 1937, 1942, 1978, 1983, 1988, 1992, 2018],
+  "collegeYears": [1954, 1984, 1985, 2002, 2006],
+  "population": 6216589
+}, {
+  "metro": "Austin, TX",
+  "titleYears": [1949, 1950, 1964, 1970, 1971, 1975, 1983, 1986, 1988, 2002, 2005, 2006, 2012],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [1949, 1950, 1964, 1970, 1971, 1975, 1983, 1986, 1988, 2002, 2005, 2006, 2012],
+  "population": 2115827
+}, {
+  "metro": "Oxford, MS",
+  "titleYears": [1961],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [1961],
+  "population": 43975
+}, {
+  "metro": "Knoxville, TN",
+  "titleYears": [1952, 1987, 1989, 1991, 1996, 1997, 1998, 1999, 2007, 2008],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [1952, 1987, 1989, 1991, 1996, 1997, 1998, 1999, 2007, 2008],
+  "population": 877104
+}, {
+  "metro": "St. Louis, MO",
+  "titleYears": [1926, 1931, 1934, 1942, 1944, 1946, 1958, 1964, 1967, 1982, 2000, 2006, 2011],
+  "proYears": [1926, 1931, 1934, 1942, 1944, 1946, 1958, 1964, 1967, 1982, 2000, 2006, 2011],
+  "big4years": [1926, 1931, 1934, 1942, 1944, 1946, 1958, 1964, 1967, 1982, 2000, 2006, 2011],
+  "collegeYears": [],
+  "population": 2807338
+}, {
+  "metro": "Auburn, AL",
+  "titleYears": [1958, 2011],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [1958, 2011],
+  "population": 161604
+}, {
+  "metro": "Colorado Springs, CO",
+  "titleYears": [],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [],
+  "population": 465101
+}, {
+  "metro": "Greater Raleigh, NC",
+  "titleYears": [1957, 1974, 1982, 1982, 1983, 1983, 1984, 1986, 1987, 1988, 1989, 1990, 1991, 1991, 1992, 1992, 1993, 1993, 1994, 1994, 1996, 1997, 1999, 2000, 2001, 2003, 2005, 2006, 2006, 2008, 2009, 2009, 2010, 2012, 2015, 2017],
+  "proYears": [2006],
+  "big4years": [2006],
+  "collegeYears": [1957, 1974, 1982, 1982, 1983, 1983, 1984, 1986, 1987, 1988, 1989, 1990, 1991, 1991, 1992, 1992, 1993, 1993, 1994, 1994, 1996, 1997, 1999, 2000, 2001, 2003, 2005, 2006, 2008, 2009, 2009, 2010, 2012, 2015, 2017],
+  "population": 567428
+}, {
+  "metro": "Fort Collins, CO",
+  "titleYears": [],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [],
+  "population": 164207
+}, {
+  "metro": "Denver, CO",
+  "titleYears": [1996, 1998, 1999, 2001, 2010, 2016],
+  "proYears": [1996, 1998, 1999, 2001, 2010, 2016],
+  "big4years": [1996, 1998, 1999, 2001, 2016],
+  "collegeYears": [],
+  "population": 2888227
+}, {
+  "metro": "Athens, GA",
+  "titleYears": [1981, 1990],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [1981, 1990],
+  "population": 209271
+}, {
+  "metro": "Winston-Salem, NC",
+  "titleYears": [1955],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [1955],
+  "population": 667733
+}, {
+  "metro": "Baton Rouge, LA",
+  "titleYears": [1909, 1959, 1991, 1993, 1996, 1997, 2000, 2004, 2008, 2009],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [1909, 1959, 1991, 1993, 1996, 1997, 2000, 2004, 2008, 2009],
+  "population": 834159
+}, {
+  "metro": "Starkville, MS",
+  "titleYears": [],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [],
+  "population": 25570
+}, {
+  "metro": "Tuscaloosa, AL",
+  "titleYears": [1926, 1927, 1931, 1962, 1965, 1966, 1974, 1979, 1980, 1993, 2010, 2012, 2013, 2016, 2018],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [1926, 1927, 1931, 1962, 1965, 1966, 1974, 1979, 1980, 1993, 2010, 2012, 2013, 2016, 2018],
+  "population": 242799
+}, {
+  "metro": "Atlanta, GA",
+  "titleYears": [1918, 1929, 1991, 1995],
+  "proYears": [1995],
+  "big4years": [1995],
+  "collegeYears": [1918, 1929, 1991],
+  "population": 5884736
+}, {
+  "metro": "Pittsburgh, PA",
+  "titleYears": [1909, 1911, 1917, 1919, 1925, 1938, 1960, 1971, 1975, 1976, 1977, 1979, 1979, 1980, 1991, 1992, 2006, 2009, 2009, 2016, 2017],
+  "proYears": [1909, 1925, 1960, 1971, 1975, 1976, 1979, 1979, 1980, 1991, 1992, 2006, 2009, 2009, 2016, 2017],
+  "big4years": [1909, 1925, 1960, 1971, 1975, 1976, 1979, 1979, 1980, 1991, 1992, 2006, 2009, 2009, 2016, 2017],
+  "collegeYears": [1911, 1917, 1919, 1938, 1977],
+  "population": 2333367
+}, {
+  "metro": "Lebanon, TN",
+  "titleYears": [],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [],
+  "population": 31317
+}, {
+  "metro": "Cincinnati, OH",
+  "titleYears": [1919, 1940, 1961, 1962, 1975, 1976, 1990],
+  "proYears": [1919, 1940, 1975, 1976, 1990],
+  "big4years": [1919, 1940, 1975, 1976, 1990],
+  "collegeYears": [1961, 1962],
+  "population": 2179082
+}, {
+  "metro": "Metro Detroit, MI",
+  "titleYears": [1935, 1935, 1936, 1937, 1943, 1945, 1950, 1952, 1952, 1953, 1954, 1955, 1957, 1968, 1984, 1989, 1990, 1997, 1998, 2002, 2004, 2008],
+  "proYears": [1935, 1935, 1936, 1937, 1943, 1945, 1950, 1952, 1952, 1953, 1954, 1955, 1957, 1968, 1984, 1989, 1990, 1997, 1998, 2002, 2004, 2008],
+  "big4years": [1935, 1935, 1936, 1937, 1943, 1945, 1950, 1952, 1952, 1953, 1954, 1955, 1957, 1968, 1984, 1989, 1990, 1997, 1998, 2002, 2004, 2008],
+  "collegeYears": [],
+  "population": 4313002
+}, {
+  "metro": "Cedar Rapids, IA",
+  "titleYears": [],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [],
+  "population": 131127
+}, {
+  "metro": "Dallas-Fort Worth, TX",
+  "titleYears": [1939, 1972, 1978, 1993, 1994, 1996, 1999, 2011],
+  "proYears": [1972, 1978, 1993, 1994, 1996, 1999, 2011],
+  "big4years": [1972, 1978, 1993, 1994, 1996, 1999, 2011],
+  "collegeYears": [1939],
+  "population": 7399662
+}, {
+  "metro": "Cleveland, OH",
+  "titleYears": [1920, 1924, 1945, 1948, 1950, 1954, 1955, 1964, 2016],
+  "proYears": [1920, 1924, 1945, 1948, 1950, 1954, 1955, 1964, 2016],
+  "big4years": [1920, 1924, 1945, 1948, 1950, 1954, 1955, 1964, 2016],
+  "collegeYears": [],
+  "population": 2058844
+}, {
+  "metro": "Waco, TX",
+  "titleYears": [2005, 2012],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [2005, 2012],
+  "population": 268696
+}, {
+  "metro": "College Station, TX",
+  "titleYears": [1920, 1940, 2011],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [1920, 1940, 2011],
+  "population": 258044
+}, {
+  "metro": "Columbia, SC",
+  "titleYears": [1981, 1983, 1984, 2002, 2003, 2007, 2010, 2011, 2016, 2017],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [1981, 1983, 1984, 2002, 2003, 2007, 2010, 2011, 2016, 2017],
+  "population": 825033
+}, {
+  "metro": "Oklahoma City, OK",
+  "titleYears": [1951, 1951, 1956, 1957, 1975, 1976, 1986, 1994, 2001],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [1951, 1951, 1956, 1957, 1975, 1976, 1986, 1994, 2001],
+  "population": 1383737
+}, {
+  "metro": "Orono, ME",
+  "titleYears": [],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [],
+  "population": 9548
+}, {
+  "metro": "Lexington, VA",
+  "titleYears": [],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [],
+  "population": 7045
+}, {
+  "metro": "Columbus, OH",
+  "titleYears": [1943, 1955, 1958, 1960, 1962, 1966, 1969, 1971, 2003, 2008, 2015],
+  "proYears": [2008],
+  "big4years": [],
+  "collegeYears": [1943, 1955, 1958, 1960, 1962, 1966, 1969, 1971, 2003, 2015],
+  "population": 2078725
+}, {
+  "metro": "Durham, NH",
+  "titleYears": [],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [],
+  "population": 16431
+}, {
+  "metro": "Gainesville, FL",
+  "titleYears": [1997, 1998, 2006, 2007, 2007, 2009, 2017],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [1997, 1998, 2006, 2007, 2007, 2009, 2017],
+  "population": 284687
+}, {
+  "metro": "Crawfordsville, IN",
+  "titleYears": [],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [],
+  "population": 16001
+}, {
+  "metro": "Waterville, ME",
+  "titleYears": [],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [],
+  "population": 16406
+}, {
+  "metro": "Calhoun County, AL",
+  "titleYears": [],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [],
+  "population": 115620
+}, {
+  "metro": "Salt Lake City, UT",
+  "titleYears": [1944, 2009],
+  "proYears": [2009],
+  "big4years": [],
+  "collegeYears": [1944],
+  "population": 1203105
+}, {
+  "metro": "Hamilton, NY",
+  "titleYears": [],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [],
+  "population": 4122
+}, {
+  "metro": "Appleton, WI",
+  "titleYears": [],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [],
+  "population": 74370
+}, {
+  "metro": "Topeka, KS",
+  "titleYears": [],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [],
+  "population": 126808
+}, {
+  "metro": "Cheyenne, WY",
+  "titleYears": [],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [],
+  "population": 98327
+}, {
+  "metro": "Maryville, TN",
+  "titleYears": [],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [],
+  "population": 28703
+}, {
+  "metro": "Northwest Arkansas, AR",
+  "titleYears": [1965, 1994],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [1965, 1994],
+  "population": 537463
+}, {
+  "metro": "Springfield, MO",
+  "titleYears": [],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [],
+  "population": 167319
+}, {
+  "metro": "Birmingham Metro Area, AL",
+  "titleYears": [],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [],
+  "population": 212157
+}, {
+  "metro": "Macon-Bibb County, GA",
+  "titleYears": [],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [],
+  "population": 93072
+}, {
+  "metro": "Morgantown, WV",
+  "titleYears": [],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [],
+  "population": 30855
+}, {
+  "metro": "Chattanooga, TN",
+  "titleYears": [],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [],
+  "population": 177571
+}, {
+  "metro": "Toronto, ON",
+  "titleYears": [1914, 1918, 1921, 1927, 1930, 1932, 1933, 1937, 1938, 1942, 1942, 1945, 1945, 1946, 1947, 1947, 1948, 1949, 1950, 1951, 1952, 1962, 1963, 1964, 1967, 1983, 1991, 1992, 1993, 1996, 1997, 2004, 2012, 2017, 2017],
+  "proYears": [1914, 1918, 1921, 1927, 1930, 1932, 1933, 1937, 1938, 1942, 1942, 1945, 1945, 1946, 1947, 1947, 1948, 1949, 1950, 1951, 1952, 1962, 1963, 1964, 1967, 1983, 1991, 1992, 1993, 1996, 1997, 2004, 2012, 2017, 2017],
+  "big4years": [1918, 1932, 1942, 1945, 1947, 1948, 1949, 1951, 1962, 1963, 1964, 1967, 1992, 1993],
+  "collegeYears": [],
+  "population": 5928040
+}, {
+  "metro": "Ottawa, ON",
+  "titleYears": [1925, 1926, 1940, 1951, 1960, 1968, 1969, 1973, 1976, 2016],
+  "proYears": [1925, 1926, 1940, 1951, 1960, 1968, 1969, 1973, 1976, 2016],
+  "big4years": [],
+  "collegeYears": [],
+  "population": 1323783
+}, {
+  "metro": "Charleston Metro Area, SC",
+  "titleYears": [],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [],
+  "population": 664607
+}, {
+  "metro": "Richmond, VA",
+  "titleYears": [2009],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [2009],
+  "population": 1294204
+}, {
+  "metro": "Hamilton, ON",
+  "titleYears": [1912, 1913, 1915, 1928, 1929, 1932, 1943, 1953, 1957, 1963, 1965, 1967, 1972, 1986, 1999],
+  "proYears": [1912, 1913, 1915, 1928, 1929, 1932, 1943, 1953, 1957, 1963, 1965, 1967, 1972, 1986, 1999],
+  "big4years": [],
+  "collegeYears": [],
+  "population": 747545
+}, {
+  "metro": "Edmonton, AB",
+  "titleYears": [1954, 1955, 1956, 1975, 1978, 1979, 1980, 1981, 1982, 1984, 1985, 1987, 1987, 1988, 1990, 1993, 2003, 2005, 2015],
+  "proYears": [1954, 1955, 1956, 1975, 1978, 1979, 1980, 1981, 1982, 1984, 1985, 1987, 1987, 1988, 1990, 1993, 2003, 2005, 2015],
+  "big4years": [1984, 1985, 1987, 1988, 1990],
+  "collegeYears": [],
+  "population": 1321426
+}, {
+  "metro": "Regina, SK",
+  "titleYears": [1966, 1989, 2007, 2013],
+  "proYears": [1966, 1989, 2007, 2013],
+  "big4years": [],
+  "collegeYears": [],
+  "population": 236481
+}, {
+  "metro": "Georgetown,TX",
+  "titleYears": [],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [],
+  "population": 67140
+}, {
+  "metro": "Jackson, MS",
+  "titleYears": [],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [],
+  "population": 169148
+}, {
+  "metro": "Manhattan, KS",
+  "titleYears": [],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [],
+  "population": 53678
+}, {
+  "metro": "Huntsville, TX",
+  "titleYears": [],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [],
+  "population": 41208
+}, {
+  "metro": "Logan, UT",
+  "titleYears": [],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [],
+  "population": 50676
+}, {
+  "metro": "Buckhannon, WV",
+  "titleYears": [],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [],
+  "population": 5612
+}, {
+  "metro": "Winnipeg, MB",
+  "titleYears": [1935, 1939, 1941, 1958, 1959, 1961, 1962, 1984, 1988, 1990],
+  "proYears": [1935, 1939, 1941, 1958, 1959, 1961, 1962, 1984, 1988, 1990],
+  "big4years": [],
+  "collegeYears": [],
+  "population": 778489
+}, {
+  "metro": "Stillwater, OK",
+  "titleYears": [1945, 1946, 1959],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [1945, 1946, 1959],
+  "population": 80850
+}, {
+  "metro": "Spartanburg, SC",
+  "titleYears": [],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [],
+  "population": 37876
+}, {
+  "metro": "Houston, TX",
+  "titleYears": [1994, 1995, 2003, 2006, 2007, 2017],
+  "proYears": [1994, 1995, 2006, 2007, 2017],
+  "big4years": [1994, 1995, 2017],
+  "collegeYears": [2003],
+  "population": 6892427
+}, {
+  "metro": "Lexington-Fayette, KY",
+  "titleYears": [1948, 1949, 1951, 1958, 1978, 1996, 1998, 2012],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [1948, 1949, 1951, 1958, 1978, 1996, 1998, 2012],
+  "population": 512650
+}, {
+  "metro": "San Francisco Bay Area, CA",
+  "titleYears": [1921, 1922, 1923, 1927, 1942, 1947, 1955, 1956, 1957, 1959, 1972, 1973, 1974, 1975, 1977, 1981, 1982, 1985, 1987, 1988, 1989, 1989, 1990, 1990, 1992, 1992, 1994, 1995, 1996, 1997, 2001, 2004, 2010, 2011, 2012, 2014, 2015, 2016, 2017, 2017, 2018],
+  "proYears": [1972, 1973, 1974, 1975, 1977, 1981, 1982, 1985, 1989, 1989, 1990, 1995, 2010, 2012, 2014, 2015, 2017, 2018],
+  "big4years": [1972, 1973, 1974, 1975, 1977, 1981, 1982, 1985, 1989, 1989, 1990, 1995, 2010, 2012, 2014, 2015, 2017, 2018],
+  "collegeYears": [1921, 1922, 1923, 1927, 1942, 1947, 1955, 1956, 1957, 1959, 1987, 1988, 1990, 1992, 1992, 1994, 1996, 1997, 2001, 2004, 2011, 2016, 2017],
+  "population": 4727357
+}, {
+  "metro": "Corvallis, OR",
+  "titleYears": [2006, 2007, 2018],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [2006, 2007, 2018],
+  "population": 90951
+}, {
+  "metro": "Seattle,WA",
+  "titleYears": [1979, 1992, 2005, 2014, 2016],
+  "proYears": [1979, 2014, 2016],
+  "big4years": [1979, 2014],
+  "collegeYears": [1992, 2005],
+  "population": 3867046
+}, {
+  "metro": "Eugene, OR",
+  "titleYears": [1939],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [1939],
+  "population": 374748
+}, {
+  "metro": "Montreal, QC",
+  "titleYears": [1919, 1924, 1925, 1926, 1930, 1931, 1931, 1935, 1944, 1944, 1946, 1949, 1953, 1956, 1957, 1958, 1959, 1960, 1965, 1966, 1968, 1969, 1970, 1971, 1973, 1974, 1976, 1977, 1977, 1978, 1979, 1986, 1993, 2002, 2009, 2010],
+  "proYears": [1919, 1924, 1925, 1926, 1930, 1931, 1931, 1935, 1944, 1944, 1946, 1949, 1953, 1956, 1957, 1958, 1959, 1960, 1965, 1966, 1968, 1969, 1970, 1971, 1973, 1974, 1976, 1977, 1977, 1978, 1979, 1986, 1993, 2002, 2009, 2010],
+  "big4years": [1919, 1924, 1925, 1926, 1930, 1931, 1935, 1944, 1946, 1953, 1956, 1957, 1958, 1959, 1960, 1965, 1966, 1968, 1969, 1971, 1973, 1976, 1977, 1978, 1979, 1986, 1993],
+  "collegeYears": [],
+  "population": 4098927
+}, {
+  "metro": "Pullman, WA",
+  "titleYears": [],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [],
+  "population": 33282
+}, {
+  "metro": "Tulsa, OK",
+  "titleYears": [],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [],
+  "population": 403090
+}, {
+  "metro": "Vallejo-Fairfield, CA",
+  "titleYears": [],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [],
+  "population": 440207
+}, {
+  "metro": "Moscow, ID",
+  "titleYears": [],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [],
+  "population": 25322
+}, {
+  "metro": "Missoula, MT",
+  "titleYears": [1996, 2002],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [1996, 2002],
+  "population": 117441
+}, {
+  "metro": "East Lansing, MI",
+  "titleYears": [1953, 1966, 1967, 1979, 2000],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [1953, 1966, 1967, 1979, 2000],
+  "population": 477656
+}, {
+  "metro": "Mobile, AL",
+  "titleYears": [],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [],
+  "population": 192904
+}, {
+  "metro": "Quebec City, QC",
+  "titleYears": [],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [],
+  "population": 538238
+}, {
+  "metro": "Due West, SC",
+  "titleYears": [],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [],
+  "population": 1292
+}, {
+  "metro": "Danville, KY",
+  "titleYears": [],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [],
+  "population": 16802
+}, {
+  "metro": "Enid, OK",
+  "titleYears": [],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [],
+  "population": 51004
+}, {
+  "metro": "Quad Cities, IL",
+  "titleYears": [],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [],
+  "population": 474937
+}, {
+  "metro": "Dayton, OH",
+  "titleYears": [],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [],
+  "population": 140489
+}, {
+  "metro": "Hampden-Sydney, VA",
+  "titleYears": [],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [],
+  "population": 1450
+}, {
+  "metro": "Marion, OH",
+  "titleYears": [],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [],
+  "population": 36310
+}, {
+  "metro": "Evansville, IN",
+  "titleYears": [],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [],
+  "population": 119477
+}, {
+  "metro": "Rochester, NY",
+  "titleYears": [1951],
+  "proYears": [1951],
+  "big4years": [1951],
+  "collegeYears": [],
+  "population": 1077948
+}, {
+  "metro": "Green Bay, WI",
+  "titleYears": [1929, 1930, 1931, 1936, 1939, 1944, 1961, 1962, 1965, 1966, 1967, 1968, 1997, 2011],
+  "proYears": [1929, 1930, 1931, 1936, 1939, 1944, 1961, 1962, 1965, 1966, 1967, 1968, 1997, 2011],
+  "big4years": [1929, 1930, 1931, 1936, 1939, 1944, 1961, 1962, 1965, 1966, 1967, 1968, 1997, 2011],
+  "collegeYears": [],
+  "population": 320050
+}, {
+  "metro": "Louisville, KY",
+  "titleYears": [1980, 1986],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [1980, 1986],
+  "population": 1283430
+}, {
+  "metro": "Canton, OH",
+  "titleYears": [1922, 1923],
+  "proYears": [1922, 1923],
+  "big4years": [1922, 1923],
+  "collegeYears": [],
+  "population": 399927
+}, {
+  "metro": "Akron, OH",
+  "titleYears": [],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [],
+  "population": 197633
+}, {
+  "metro": "Racine, WI",
+  "titleYears": [],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [],
+  "population": 77571
+}, {
+  "metro": "Buffalo, NY",
+  "titleYears": [],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [],
+  "population": 256902
+}, {
+  "metro": "Toledo, OH",
+  "titleYears": [],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [],
+  "population": 278508
+}, {
+  "metro": "Provo, UT",
+  "titleYears": [1985],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [1985],
+  "population": 617675
+}, {
+  "metro": "Greater Los Angeles, CA",
+  "titleYears": [1932, 1933, 1948, 1951, 1955, 1958, 1959, 1961, 1963, 1963, 1963, 1964, 1965, 1965, 1967, 1968, 1968, 1968, 1969, 1970, 1970, 1971, 1971, 1972, 1972, 1972, 1973, 1973, 1973, 1974, 1975, 1975, 1978, 1979, 1979, 1980, 1981, 1982, 1984, 1984, 1984, 1985, 1987, 1988, 1988, 1989, 1990, 1991, 1992, 1993, 1995, 1995, 1998, 1998, 2000, 2001, 2002, 2002, 2002, 2004, 2004, 2005, 2005, 2007, 2009, 2010, 2011, 2011, 2012, 2012, 2013, 2013, 2014, 2014],
+  "proYears": [1951, 1959, 1963, 1965, 1972, 1980, 1981, 1982, 1984, 1985, 1987, 1988, 1988, 2000, 2001, 2002, 2002, 2002, 2005, 2007, 2009, 2010, 2011, 2012, 2012, 2014, 2014],
+  "big4years": [1951, 1959, 1963, 1965, 1972, 1980, 1981, 1982, 1984, 1985, 1987, 1988, 1988, 2000, 2001, 2002, 2002, 2007, 2009, 2010, 2012, 2014],
+  "collegeYears": [1932, 1933, 1948, 1955, 1958, 1961, 1963, 1963, 1964, 1965, 1967, 1968, 1968, 1968, 1969, 1970, 1970, 1971, 1971, 1972, 1972, 1973, 1973, 1973, 1974, 1975, 1975, 1978, 1979, 1979, 1984, 1984, 1989, 1990, 1991, 1992, 1993, 1995, 1995, 1998, 1998, 2004, 2004, 2005, 2011, 2013, 2013],
+  "population": 13353907
+}, {
+  "metro": "Columbus, GA",
+  "titleYears": [],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [],
+  "population": 197485
+}, {
+  "metro": "Williamsburg, VA",
+  "titleYears": [],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [],
+  "population": 15214
+}, {
+  "metro": "Milwaukee, WI",
+  "titleYears": [1957, 1971, 1977],
+  "proYears": [1957, 1971],
+  "big4years": [1957, 1971],
+  "collegeYears": [1977],
+  "population": 1576236
+}, {
+  "metro": "Twin Ports, MN",
+  "titleYears": [],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [],
+  "population": 279771
+}, {
+  "metro": "Greeley, CO",
+  "titleYears": [],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [],
+  "population": 103990
+}, {
+  "metro": "Nacogdoches, TX",
+  "titleYears": [],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [],
+  "population": 33932
+}, {
+  "metro": "Walla Walla, WA",
+  "titleYears": [],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [],
+  "population": 32132
+}, {
+  "metro": "Bozeman, MT",
+  "titleYears": [1985],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [1985],
+  "population": 94720
+}, {
+  "metro": "Gulfport-Biloxi Metro Area, MS",
+  "titleYears": [],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [],
+  "population": 246190
+}, {
+  "metro": "Kansas City, MO",
+  "titleYears": [1970, 1985, 2000, 2013, 2015],
+  "proYears": [1970, 1985, 2000, 2013, 2015],
+  "big4years": [1970, 1985, 2015],
+  "collegeYears": [],
+  "population": 2128912
+}, {
+  "metro": "Gunnison, CO",
+  "titleYears": [],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [],
+  "population": 6261
+}, {
+  "metro": "Pottsville, PA",
+  "titleYears": [],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [],
+  "population": 13738
+}, {
+  "metro": "Omaha, NE",
+  "titleYears": [],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [],
+  "population": 446970
+}, {
+  "metro": "Sarnia, ON",
+  "titleYears": [1934, 1936],
+  "proYears": [1934, 1936],
+  "big4years": [],
+  "collegeYears": [],
+  "population": 96151
+}, {
+  "metro": "South Orange, NJ",
+  "titleYears": [],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [],
+  "population": 16319
+}, {
+  "metro": "Portsmouth, OH",
+  "titleYears": [],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [],
+  "population": 20422
+}, {
+  "metro": "Shreveport-Bossier City, LA",
+  "titleYears": [],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [],
+  "population": 68485
+}, {
+  "metro": "Tucson, AZ",
+  "titleYears": [1976, 1980, 1986, 1997, 2012],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [1976, 1980, 1986, 1997, 2012],
+  "population": 1022769
+}, {
+  "metro": "Las Cruces, NM",
+  "titleYears": [],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [],
+  "population": 101759
+}, {
+  "metro": "Metro Phoenix, AZ",
+  "titleYears": [1965, 1967, 1969, 1977, 1981, 2001],
+  "proYears": [2001],
+  "big4years": [2001],
+  "collegeYears": [1965, 1967, 1969, 1977, 1981],
+  "population": 4737270
+}, {
+  "metro": "Flagstaff, AZ",
+  "titleYears": [],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [],
+  "population": 71459
+}, {
+  "metro": "Albuquerque, NM",
+  "titleYears": [],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [],
+  "population": 559277
+}, {
+  "metro": "Lubbock, TX",
+  "titleYears": [1993],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [1993],
+  "population": 316983
+}, {
+  "metro": "Indianapolis Metro Area, IN",
+  "titleYears": [2007],
+  "proYears": [2007],
+  "big4years": [2007],
+  "collegeYears": [],
+  "population": 2028614
+}, {
+  "metro": "San Jose-Santa Clara, CA",
+  "titleYears": [2001, 2001, 2003],
+  "proYears": [2001, 2003],
+  "big4years": [],
+  "collegeYears": [2001],
+  "population": 1998463
+}, {
+  "metro": "El Paso, TX",
+  "titleYears": [1966],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [1966],
+  "population": 844818
+}, {
+  "metro": "Greater Miami Area, FL",
+  "titleYears": [1973, 1974, 1982, 1984, 1985, 1988, 1990, 1992, 1997, 1999, 2001, 2002, 2003, 2006, 2012, 2013],
+  "proYears": [1973, 1974, 1997, 2003, 2006, 2012, 2013],
+  "big4years": [1973, 1974, 1997, 2003, 2006, 2012, 2013],
+  "collegeYears": [1982, 1984, 1985, 1988, 1990, 1992, 1999, 2001, 2002],
+  "population": 6158824
+}, {
+  "metro": "Youngstown, OH",
+  "titleYears": [1992, 1994, 1995, 1998],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [1992, 1994, 1995, 1998],
+  "population": 541926
+}, {
+  "metro": "Huntington, WV",
+  "titleYears": [1993, 1997],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [1993, 1997],
+  "population": 356474
+}, {
+  "metro": "Allegany, NY",
+  "titleYears": [],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [],
+  "population": 7662
+}, {
+  "metro": "Baltimore, MD",
+  "titleYears": [1948, 1958, 1959, 1966, 1970, 1971, 1983, 1995, 2001, 2013],
+  "proYears": [1948, 1958, 1959, 1966, 1970, 1971, 1983, 1995, 2001, 2013],
+  "big4years": [1948, 1958, 1959, 1966, 1970, 1971, 1983, 2001, 2013],
+  "collegeYears": [],
+  "population": 2808175
+}, {
+  "metro": "Wichita, KS",
+  "titleYears": [1989],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [1989],
+  "population": 645628
+}, {
+  "metro": "Peoria, IL",
+  "titleYears": [],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [],
+  "population": 114265
+}, {
+  "metro": "Oxford, OH",
+  "titleYears": [],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [],
+  "population": 22341
+}, {
+  "metro": "Kalamazoo, MI",
+  "titleYears": [],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [],
+  "population": 75984
+}, {
+  "metro": "Abilene, TX",
+  "titleYears": [],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [],
+  "population": 122225
+}, {
+  "metro": "Terre Haute, IN",
+  "titleYears": [],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [],
+  "population": 60852
+}, {
+  "metro": "Bowling Green, KY",
+  "titleYears": [2003],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [2003],
+  "population": 174835
+}, {
+  "metro": "Memphis, TN",
+  "titleYears": [],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [],
+  "population": 652717
+}, {
+  "metro": "Athens, OH",
+  "titleYears": [],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [],
+  "population": 25341
+}, {
+  "metro": "Valparaiso, IN",
+  "titleYears": [],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [],
+  "population": 33104
+}, {
+  "metro": "Amarillo, TX",
+  "titleYears": [],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [],
+  "population": 199582
+}, {
+  "metro": "Jacksonville, FL",
+  "titleYears": [],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [],
+  "population": 880619
+}, {
+  "metro": "Reno, NV",
+  "titleYears": [],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [],
+  "population": 245255
+}, {
+  "metro": "Trenton, NJ",
+  "titleYears": [],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [],
+  "population": 84056
+}, {
+  "metro": "Stockton, CA",
+  "titleYears": [1985, 1986],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [1985, 1986],
+  "population": 745424
+}, {
+  "metro": "Rockford, IL",
+  "titleYears": [],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [],
+  "population": 147651
+}, {
+  "metro": "Cookeville, TN",
+  "titleYears": [],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [],
+  "population": 32622
+}, {
+  "metro": "Inland Empire, CA",
+  "titleYears": [],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [],
+  "population": 4200000
+}, {
+  "metro": "Granville, OH",
+  "titleYears": [],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [],
+  "population": 5646
+}, {
+  "metro": "San Antonio, TX",
+  "titleYears": [1999, 2003, 2005, 2007, 2014],
+  "proYears": [1999, 2003, 2005, 2007, 2014],
+  "big4years": [1999, 2003, 2005, 2007, 2014],
+  "collegeYears": [],
+  "population": 2473974
+}, {
+  "metro": "Pocatello, ID",
+  "titleYears": [1982],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [1982],
+  "population": 85269
+}, {
+  "metro": "Laramie, WY",
+  "titleYears": [],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [],
+  "population": 32382
+}, {
+  "metro": "Norwich-New London, CT",
+  "titleYears": [],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [],
+  "population": 39556
+}, {
+  "metro": "Gettysburg, PA",
+  "titleYears": [],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [],
+  "population": 7700
+}, {
+  "metro": "Calgary, AB",
+  "titleYears": [1948, 1971, 1989, 1992, 1998, 2001, 2008, 2014],
+  "proYears": [1948, 1971, 1989, 1992, 1998, 2001, 2008, 2014],
+  "big4years": [1989],
+  "collegeYears": [],
+  "population": 1392609
+}, {
+  "metro": "Portland Metro Area, OR",
+  "titleYears": [1977, 2002, 2005, 2015],
+  "proYears": [1977, 2015],
+  "big4years": [1977],
+  "collegeYears": [2002, 2005],
+  "population": 2453168
+}, {
+  "metro": "Wyoming Valley, PA",
+  "titleYears": [],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [],
+  "population": 563631
+}, {
+  "metro": "Fort Wayne, IN",
+  "titleYears": [],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [],
+  "population": 264488
+}, {
+  "metro": "Murray, KY",
+  "titleYears": [],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [],
+  "population": 19006
+}, {
+  "metro": "Tallahassee, FL",
+  "titleYears": [1979, 1994, 2000, 2014, 2014],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [1979, 1994, 2000, 2014, 2014],
+  "population": 382627
+}, {
+  "metro": "Vancouver, BC",
+  "titleYears": [1964, 1985, 1994, 2000, 2006, 2011],
+  "proYears": [1964, 1985, 1994, 2000, 2006, 2011],
+  "big4years": [],
+  "collegeYears": [],
+  "population": 2463431
+}, {
+  "metro": "Morehead, KY",
+  "titleYears": [],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [],
+  "population": 7758
+}, {
+  "metro": "Johnstown, PA",
+  "titleYears": [],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [],
+  "population": 19712
+}, {
+  "metro": "Fresno, CA",
+  "titleYears": [2008],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [2008],
+  "population": 989255
+}, {
+  "metro": "Owensboro, KY",
+  "titleYears": [],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [],
+  "population": 59273
+}, {
+  "metro": "Murfreesboro, TN",
+  "titleYears": [],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [],
+  "population": 131947
+}, {
+  "metro": "Johnson City, TN",
+  "titleYears": [],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [],
+  "population": 66677
+}, {
+  "metro": "San Diego, CA",
+  "titleYears": [],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [],
+  "population": 1407000
+}, {
+  "metro": "Santa Maria-Santa Barbara, CA",
+  "titleYears": [],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [],
+  "population": 106290
+}, {
+  "metro": "Clarksville, TN-KY",
+  "titleYears": [],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [],
+  "population": 153205
+}, {
+  "metro": "Ogden-Clearfield, UT",
+  "titleYears": [],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [],
+  "population": 547184
+}, {
+  "metro": "Hattiesburg, MS",
+  "titleYears": [],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [],
+  "population": 46926
+}, {
+  "metro": "Tampa Bay Area, FL",
+  "titleYears": [2003, 2004],
+  "proYears": [2003, 2004],
+  "big4years": [2003, 2004],
+  "collegeYears": [],
+  "population": 3091399
+}, {
+  "metro": "Greater Bridgeport, CT",
+  "titleYears": [],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [],
+  "population": 305000
+}, {
+  "metro": "Lakeland-Winter Haven, FL",
+  "titleYears": [],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [],
+  "population": 666149
+}, {
+  "metro": "Greenville, NC",
+  "titleYears": [],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [],
+  "population": 91495
+}, {
+  "metro": "Davis, CA",
+  "titleYears": [],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [],
+  "population": 68111
+}, {
+  "metro": "Jonesboro, AR",
+  "titleYears": [],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [],
+  "population": 74889
+}, {
+  "metro": "Sacramento, CA",
+  "titleYears": [],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [],
+  "population": 495234
+}, {
+  "metro": "Greater Orlando, FL",
+  "titleYears": [],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [],
+  "population": 2134411
+}, {
+  "metro": "Deltona-Daytona Beach-Ormond Beach, FL",
+  "titleYears": [],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [],
+  "population": 623279
+}, {
+  "metro": "Quantico, VA",
+  "titleYears": [],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [],
+  "population": 540
+}, {
+  "metro": "Battle Creek, MI",
+  "titleYears": [],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [],
+  "population": 51534
+}, {
+  "metro": "Kirksville, MO",
+  "titleYears": [],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [],
+  "population": 17519
+}, {
+  "metro": "Williamsport, PA",
+  "titleYears": [],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [],
+  "population": 28834
+}, {
+  "metro": "Springfield, OH",
+  "titleYears": [],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [],
+  "population": 59087
+}, {
+  "metro": "Lafayette, LA",
+  "titleYears": [],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [],
+  "population": 127626
+}, {
+  "metro": "Chestertown, MD",
+  "titleYears": [],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [],
+  "population": 5080
+}, {
+  "metro": "Pueblo, CO",
+  "titleYears": [],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [],
+  "population": 110291
+}, {
+  "metro": "Salisbury, MD",
+  "titleYears": [],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [],
+  "population": 110291
+}, {
+  "metro": "Charleston, WV",
+  "titleYears": [],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [],
+  "population": 49138
+}, {
+  "metro": "Brockport, NY",
+  "titleYears": [],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [],
+  "population": 8319
+}, {
+  "metro": "Wilmington, NC",
+  "titleYears": [],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [],
+  "population": 117525
+}, {
+  "metro": "West Chester, PA",
+  "titleYears": [],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [],
+  "population": 19928
+}, {
+  "metro": "Findlay, OH",
+  "titleYears": [],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [],
+  "population": 41422
+}, {
+  "metro": "Erie, PA",
+  "titleYears": [],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [],
+  "population": 98593
+}, {
+  "metro": "Carbondale, IL",
+  "titleYears": [1984],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [1984],
+  "population": 125612
+}, {
+  "metro": "Chico, CA",
+  "titleYears": [],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [],
+  "population": 91567
+}, {
+  "metro": "Edinburg, TX",
+  "titleYears": [],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [],
+  "population": 87650
+}, {
+  "metro": "Valley City, ND",
+  "titleYears": [],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [],
+  "population": 87650
+}, {
+  "metro": "Beaumont-Port Arthur, TX",
+  "titleYears": [],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [],
+  "population": 388745
+}, {
+  "metro": "Las Vegas, NV",
+  "titleYears": [1990],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [1990],
+  "population": 2204079
+}, {
+  "metro": "Honolulu, HI",
+  "titleYears": [1982, 1983, 1987],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [1982, 1983, 1987],
+  "population": 988650
+}, {
+  "metro": "Muncie, IN",
+  "titleYears": [],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [],
+  "population": 69010
+}, {
+  "metro": "Boise City, ID",
+  "titleYears": [1981],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [1981],
+  "population": 709845
+}, {
+  "metro": "Orangeburg, SC",
+  "titleYears": [],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [],
+  "population": 13196
+}, {
+  "metro": "Statesboro, GA",
+  "titleYears": [1986, 1987, 1990, 1991, 2000, 2001],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [1986, 1987, 1990, 1991, 2000, 2001],
+  "population": 71214
+}, {
+  "metro": "Normal, IL",
+  "titleYears": [],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [],
+  "population": 54264
+}, {
+  "metro": "Boone, NC",
+  "titleYears": [2006, 2007, 2008],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [2006, 2007, 2008],
+  "population": 55423
+}, {
+  "metro": "Old Westbury, NY",
+  "titleYears": [],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [],
+  "population": 4743
+}, {
+  "metro": "Harrison, NY",
+  "titleYears": [],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [],
+  "population": 28340
+}, {
+  "metro": "Harrisonburg, VA",
+  "titleYears": [2005, 2017],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [2005, 2017],
+  "population": 134442
+}, {
+  "metro": "Norfolk, VA",
+  "titleYears": [1985],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [1985],
+  "population": 1725246
+}, {
+  "metro": "Charlotte Metro Area, NC",
+  "titleYears": [],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [],
+  "population": 2474314
+}, {
+  "metro": "Mount Pleasant, MI",
+  "titleYears": [],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [],
+  "population": 26313
+}, {
+  "metro": "Lake Charles, LA",
+  "titleYears": [],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [],
+  "population": 76848
+}, {
+  "metro": "Monroe, LA",
+  "titleYears": [1982, 1988, 1988],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [1982, 1988, 1988],
+  "population": 178445
+}, {
+  "metro": "Dover, DE",
+  "titleYears": [],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [],
+  "population": 37786
+}, {
+  "metro": "Buies Creek, NC",
+  "titleYears": [],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [],
+  "population": 2942
+}, {
+  "metro": "Natchitoches, LA",
+  "titleYears": [],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [],
+  "population": 18319
+}, {
+  "metro": "Cullowhee, NC",
+  "titleYears": [],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [],
+  "population": 9428
+}, {
+  "metro": "Itta Bena, MS",
+  "titleYears": [],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [],
+  "population": 1931
+}, {
+  "metro": "Lorman, MS",
+  "titleYears": [],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [],
+  "population": 1812
+}, {
+  "metro": "Little Rock Metro, AR",
+  "titleYears": [],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [],
+  "population": 738344
+}, {
+  "metro": "Houma-Thibodaux, LA",
+  "titleYears": [],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [],
+  "population": 208178
+}, {
+  "metro": "Hammond, LA",
+  "titleYears": [],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [],
+  "population": 20609
+}, {
+  "metro": "Cleveland, MS",
+  "titleYears": [],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [],
+  "population": 12101
+}, {
+  "metro": "Utica-Rome, NY",
+  "titleYears": [],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [],
+  "population": 299397
+}, {
+  "metro": "Poughkeepsie, NY",
+  "titleYears": [],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [],
+  "population": 30267
+}, {
+  "metro": "San Marcos, TX",
+  "titleYears": [],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [],
+  "population": 61980
+}, {
+  "metro": "Charleston–Mattoon, IL",
+  "titleYears": [],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [],
+  "population": 61980
+}, {
+  "metro": "Macomb, IL",
+  "titleYears": [],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [],
+  "population": 18352
+}, {
+  "metro": "Cheyney, PA",
+  "titleYears": [],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [],
+  "population": 988
+}, {
+  "metro": "Montgomery, AL",
+  "titleYears": [],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [],
+  "population": 200022
+}, {
+  "metro": "Long Branch, NJ",
+  "titleYears": [],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [],
+  "population": 30763
+}, {
+  "metro": "Martin, TN",
+  "titleYears": [],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [],
+  "population": 10768
+}, {
+  "metro": "Bolivar, MO",
+  "titleYears": [],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [],
+  "population": 10795
+}, {
+  "metro": "Lynchburg, VA",
+  "titleYears": [],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [],
+  "population": 80212
+}, {
+  "metro": "Orange City, IA",
+  "titleYears": [],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [],
+  "population": 6179
+}, {
+  "metro": "Augusta Metro Area, GA-SC",
+  "titleYears": [],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [],
+  "population": 583632
+}, {
+  "metro": "Savannah, GA",
+  "titleYears": [],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [],
+  "population": 146763
+}, {
+  "metro": "Myrtle Beach Metro Area, SC",
+  "titleYears": [2016],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [2016],
+  "population": 464165
+}, {
+  "metro": "Asheville, NC",
+  "titleYears": [],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [],
+  "population": 89121
+}, {
+  "metro": "Emmitsburg, MD",
+  "titleYears": [],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [],
+  "population": 3038
+}, {
+  "metro": "Albany, GA",
+  "titleYears": [],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [],
+  "population": 3038
+}, {
+  "metro": "Cedar City, UT",
+  "titleYears": [],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [],
+  "population": 31223
+}, {
+  "metro": "Cape Girardeau, MO-IL",
+  "titleYears": [],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [],
+  "population": 97422
+}, {
+  "metro": "Troy, AL",
+  "titleYears": [],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [],
+  "population": 19191
+}, {
+  "metro": "Hilo, HI",
+  "titleYears": [],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [],
+  "population": 43263
+}, {
+  "metro": "Newburgh, NY",
+  "titleYears": [],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [],
+  "population": 28200
+}, {
+  "metro": "Stony Brook, NY",
+  "titleYears": [],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [],
+  "population": 13740
+}, {
+  "metro": "Pine Bluff, AR",
+  "titleYears": [],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [],
+  "population": 43841
+}, {
+  "metro": "Burlington, NC",
+  "titleYears": [],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [],
+  "population": 52709
+}, {
+  "metro": "Huntsville, AL",
+  "titleYears": [],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [],
+  "population": 193079
+}, {
+  "metro": "Piedmont Triad, NC",
+  "titleYears": [],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [],
+  "population": 1640717
+}, {
+  "metro": "Binghamton, NY",
+  "titleYears": [],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [],
+  "population": 45672
+}, {
+  "metro": "Corpus Christi, TX",
+  "titleYears": [],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [],
+  "population": 325733
+}, {
+  "metro": "Brookings, SD",
+  "titleYears": [],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [],
+  "population": 23895
+}, {
+  "metro": "Farmville, VA",
+  "titleYears": [],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [],
+  "population": 8140
+}, {
+  "metro": "Oskaloosa, IA",
+  "titleYears": [],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [],
+  "population": 11523
+}, {
+  "metro": "Florence, SC",
+  "titleYears": [],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [],
+  "population": 38317
+}, {
+  "metro": "Bakersfield, CA",
+  "titleYears": [],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [],
+  "population": 376380
+}, {
+  "metro": "Dubuque, IA",
+  "titleYears": [],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [],
+  "population": 58531
+}, {
+  "metro": "Cape Coral-Fort Myers, FL",
+  "titleYears": [],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [],
+  "population": 77146
+}, {
+  "metro": "Grand Forks, ND",
+  "titleYears": [],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [],
+  "population": 57339
+}, {
+  "metro": "Vermillion, SD",
+  "titleYears": [],
+  "proYears": [],
+  "big4years": [],
+  "collegeYears": [],
+  "population": 10844
+}]
