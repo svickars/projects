@@ -1881,9 +1881,8 @@ function casethree_filter() {
     var extent = d3.extent(data, function(d) {
       return d.tlq;
     });
-    c3x = d3.scaleLog().domain([0, 1, extent[1]]).rangeRound([0, sideD.w / 2, sideD.w]);
+    c3x = d3.scaleLog().domain([0, 1, extent[1]]).rangeRound([0, sideD.w / 4, sideD.w]);
     c3y = d3.scaleBand().domain(d3.range(case3num)).range([0, case3num * h]);
-    console.log(c3x(100))
   }
 
   var svg = d3.select(".case3 svg").style("overlow", "visible").transition()
