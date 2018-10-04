@@ -69,6 +69,7 @@ section.side {
   section.side > * {
     flex: 1; }
   section.side figure {
+    position: -webkit-sticky;
     position: sticky;
     display: flex;
     align-items: center;
@@ -79,7 +80,7 @@ section.side {
     height: 330px;
     margin: 0;
     width: 100%;
-    top: 50%;
+    top: 175px;
     -webkit-transform: translate(0, -50%);
     -moz-transform: translate(0, -50%);
     -ms-transform: translate(0, -50%);
@@ -88,7 +89,8 @@ section.side {
     section.side figure .header {
       width: 100%; }
       section.side figure .header svg {
-        margin-bottom: 1rem; }
+        margin-bottom: 1rem;
+        overflow: visible; }
         section.side figure .header svg text {
           font-family: "Inconsolata", monospace;
           font-size: .8em;
@@ -97,6 +99,9 @@ section.side {
           @media screen and (max-width: 375px) {
             section.side figure .header svg text {
               font-size: .7em; } }
+          section.side figure .header svg text.fontawesome {
+            text-transform: none;
+            font-family: FontAwesome; }
     @media screen and (min-width: 768px) {
       section.side figure {
         flex: 2;
@@ -527,6 +532,8 @@ input[type=range] {
 
 .case1 svg, .case3 svg {
   overflow: visible; }
+  .case1 svg g, .case3 svg g {
+    overflow: visible; }
   .case1 svg text, .case3 svg text {
     font-family: "aktiv-grotesk", sans-serif;
     font-size: .8em;
@@ -539,7 +546,7 @@ input[type=range] {
       font-size: 8px;
       text-transform: uppercase;
       letter-spacing: 1px; }
-    .case1 svg text.count, .case3 svg text.count {
+    .case1 svg text.count, .case1 svg text.label-count, .case3 svg text.count, .case3 svg text.label-count {
       font-family: "Inconsolata", monospace;
       fill: #666; }
     .case1 svg text.expected, .case3 svg text.expected {
@@ -627,6 +634,9 @@ input[type=range] {
   margin: 2px 0 8px 0;
   color: white; }
 
+.group3, .group3-behind {
+  pointer-events: none; }
+
 .y.axis path, .x.axis path {
   display: none; }
 
@@ -652,6 +662,7 @@ input[type=range] {
   height: 250px;
   background-color: white;
   color: #b5b5b5;
+  z-index: 100;
   -webkit-transform: translate(0, 211px);
   -moz-transform: translate(0, 211px);
   -ms-transform: translate(0, 211px);
