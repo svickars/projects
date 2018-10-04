@@ -2122,8 +2122,7 @@ function casethree_filter() {
     connect.exit().transition().duration(250).style("opacity", 0).remove();
   }
 
-  if (casethreestatus === "ordering" || casethreestatus === "ordered") {
-
+  if (casethreestatus === "ordering") {
     legendg.selectAll(".c3_legend_phase2_circle")
       .data(c3r.domain())
       .enter().append("circle").attr("class", "c3_legend_phase2_circle")
@@ -2217,6 +2216,9 @@ function casethree_filter() {
         d3.selectAll(".label-count").style("opacity", 0)
         d3.selectAll(".label").style("font-weight", "normal")
       });
+  }
+
+  if (casethreestatus === "ordering" || casethreestatus === "ordered") {
 
     var text_count = g.selectAll(".label-count")
       .data(data, function(d) {
