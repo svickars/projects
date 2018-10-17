@@ -6,7 +6,7 @@ var local_coords = [],
   sortmode2 = "descend_seasons",
   sortmode3 = "descend_basic",
   local, userlocal, searched, level, league, start, end;
-var sideD, c1x, c1y, c2x, c2y, c3x, c3y, c3r, c3c, num = 10,
+var sideD, c1x, c1y, c1tip, c2x, c2y, c3x, c3y, c3r, c3c, num = 10,
   case2num = 11,
   case3num = 11,
   radius = d3.scaleLinear().domain([0, 148]).range([3, 2]),
@@ -379,6 +379,11 @@ function setup() {
   };
   $("#citysearch-left").easyAutocomplete(options);
 
+  // Tooltips
+  c1tip = d3.tip().attr("class", "d3-tip").html(function(d) {
+    return "<div class='tipH'><h1>" + d.year + "</h1></div><div class='tipH' style='background-color: " + cLeagues[d.sport] + "'><h3>" + replaceSports(d.sport) + "</h3></div><h2>" + d.team + "</h2>";
+  }).direction("e").offset([25, 0]);
+
   // Case One Switches
   $("#switch_actual").on("click", function() {
     $("#switch_actual").addClass("isactive")
@@ -553,9 +558,6 @@ function caseone() {
     .attr("transform", "translate(" + sideD.left + "," + (num * h) + ")")
     .call(xAxis);
 
-  var c1tip = d3.tip().attr("class", "d3-tip").html(function(d) {
-    return "<div class='tipH'><h1>" + d.year + "</h1></div><div class='tipH' style='background-color: " + cLeagues[d.sport] + "'><h3>" + replaceSports(d.sport) + "</h3></div><h2>" + d.team + "</h2>";
-  }).direction("e").offset([25, 0]);
   g.call(c1tip)
 
   legendg.selectAll(".legend_case1_phase1.rect")
@@ -950,9 +952,6 @@ function caseone_filter() {
   var g = d3.select(".group")
   c1y.domain(d3.range(num)).range([0, num * h]);
 
-  var c1tip = d3.tip().attr("class", "d3-tip").html(function(d) {
-    return "<h1>" + d.year + "</h1><h2 style='color: " + cLeagues[d.sport] + "'>" + d.team + " (" + replaceSports(d.sport) + ")";
-  }).direction("e").offset([25, 0]);
   g.call(c1tip)
 
   var xAxis = d3.axisTop(c1x)

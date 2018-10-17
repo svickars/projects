@@ -64,15 +64,20 @@
         rootElement.scrollTop,
         scrollLeft = document.documentElement.scrollLeft ||
         rootElement.scrollLeft
-
       nodel.html(content)
         .style('opacity', 1).style('pointer-events', 'all')
 
       while (i--) nodel.classed(directions[i], false)
       coords = directionCallbacks.get(dir).apply(this)
+
+      var newcoords = {
+        top: d3.event.clientY,
+        left: d3.event.clientX
+      };
+
       nodel.classed(dir, true)
-        .style('top', (coords.top + poffset[0]) + scrollTop + 'px')
-        .style('left', (coords.left + poffset[1]) + scrollLeft + 'px')
+        .style('top', (newcoords.top + poffset[0]) + scrollTop + 'px')
+        .style('left', (newcoords.left + poffset[1]) + scrollLeft + 'px')
 
       return tip
     }
