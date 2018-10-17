@@ -8,7 +8,7 @@
 
     <link href="css/easy-autocomplete.css" rel="stylesheet" />
     <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-9ralMzdK1QYsk4yBY680hmsb4/hJ98xK3w0TIaJ3ll4POWpWUYaA2bRjGGujGT8w" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-POYwD7xcktv3gUeZO5s/9nUbRJG/WOmV6jfEGikMJu77LGYO8Rfs2X7URG822aum" crossorigin="anonymous">
 
     <link href="https://fonts.googleapis.com/css?family=Cormorant+Garamond:300|Inconsolata" rel="stylesheet">
     <link rel="stylesheet" href="https://use.typekit.net/dpo4ptz.css">
@@ -134,55 +134,50 @@
           <div class="step light" data-index="0">
             <div class="inner">
               <h4>Actual Titles</h4>
-              If we simply look at the numbers &mdash; total championships won by metro area &mdash; it's pretty clear who the leaders are. In this case, looking at <span class="step_blank" id="step0_filter">all sports</span> between <span class="step_blank" id="step0_start">1870</span>
-              and <span class="step_blank" id="step0_end">2018</span>, the winningest city in North America is <span id="step0_leader">Greater Los Angeles, CA</span>.
+              Our first way to determine titletowns is to simply look at the numbers &mdash; total championships won by a metro area. And in this case, looking at <span class="step_blank" id="step0_filter">all sports</span> between <span class="step_blank"
+                id="step0_start">1870</span> and <span class="step_blank" id="step0_end">2018</span>, the winningest city in North America is
+              <span id="step0_leader">Greater Los Angeles, CA</span>.
             </div>
           </div>
           <div class="step light" data-index="1">
             <div class="inner">
-              This makes sense, considering <span id="step1_leader">Greater Los Angeles</span> teams have played a combined <span id="step1_totalseasons">x</span> seasons <span id="step1_local">(Vancouver, BC teams have played</span> <span id="step1_totalseasons_local">116)</span>
-              . But is <span id="step1_totaltitles">74</span> titles what we should expect?
+              This makes sense, considering <span class="step1_leader">Greater Los Angeles</span> teams have played a combined <span id="step1_totalseasons">x</span> seasons <span id="step1_local"></span> <span id="step1_totalseasons_local"></span>
+              . But is <span id="step1_totaltitles">74</span> titles what we should expect based on the number of opportunites they&rsquo;ve had to win?
             </div>
           </div>
           <div class="step light" data-index="2">
             <div class="inner">
-              Well actually, no. We&rsquo;d expect them to have won <span id="step2_lessormore">a lot fewer</span>. By giving each team in a given season an equal chance of winning the championship, and adding those odds up over time, we can get an
-              expected number of championships. The expected title count for <span id="step2_leader">Greater Los Angeles</span> is <span id="step2_howmany">24</span> <span id="step2_local">(Vancouver, BC has a </span><span id="step2_howmany_local">+4.6 differential)</span>.
+              Well actually, no. We&rsquo;d expect them to have won <span id="step2_lessormore">a lot fewer</span>. By giving each team in a given season an equal chance of winning its respective championship, and adding those odds up over time, we
+              can get an
+              expected number of championships. Combining these for each metro area to ever field a team, we can compare the expected to actual wins differential for every city in our dataset. <span id="step2_leader">Greater Los Angeles</span>
+              should have won <span id="step2_howmany">24</span><span id="step2_local"></span><span id="step2_howmany_local"></span>.
             </div>
           </div>
           <div class="step light" data-index="3">
             <div class="inner">
-              <h4>Expectations vs Reality</h4>
-              So which cities are doing better than expected? And which are doing worse? In terms of actual title count vs expected title count, ...
+              <h4>Expected Titles</h4>
+              So <span class="step1_leader"></span> is doing better than expected. What other metro areas are overperforming? How about underperforming?
               </br></br>
 
               <div class="button-wrapper">
-                Sort by differential:<br>
+                Show me:<br>
                 <div class="button isactive" id="switch_high_diff">
-                  Highest
+                  Overperformers
                 </div>
                 <div class="button" id="switch_low_diff">
-                  Lowest
+                  Underperformers
                 </div>
-              </div>
-            </div>
-          </div>
-          <div class="step light laststep" data-index="4">
-            <div class="inner">
-              <h4>Explore</h4>
-              Play with the filters and search for a team in the bottom left to explore the data for yourself.
-              </br></br>
-              <div class="button-wrapper">
-                Change the view:</br>
                 <div class="button" id="switch_actual">
-                  Actual
-                </div>
-                <div class="button isactive" id="switch_expected">
-                  Expected
+                  Actual title counts
                 </div>
               </div>
             </div>
           </div>
+          <!-- <div class="step light laststep" data-index="4">
+            <div class="inner">
+
+            </div>
+          </div> -->
         </article>
       </section>
     </div>
@@ -305,7 +300,7 @@
       </section>
     </div>
 
-    <div class="filter-container">
+    <div class="filter-container ishidden">
       <div class="f-header">
         <div class="left" id="selected_filters">
           All-Levels / All-Leagues / 1870-2018
