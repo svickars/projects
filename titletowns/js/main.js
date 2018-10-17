@@ -554,7 +554,7 @@ function caseone() {
     .call(xAxis);
 
   var c1tip = d3.tip().attr("class", "d3-tip").html(function(d) {
-    return "<h1>" + d.year + "</h1><h2 style='color: " + cLeagues[d.sport] + "'>" + d.team + " (" + replaceSports(d.sport) + ")";
+    return "<div class='tipH'><h1>" + d.year + "</h1></div><div class='tipH' style='background-color: " + cLeagues[d.sport] + "'><h3>" + replaceSports(d.sport) + "</h3></div><h2>" + d.team + "</h2>";
   }).direction("e").offset([25, 0]);
   g.call(c1tip)
 
@@ -1374,9 +1374,6 @@ function caseone_update(index, prev) {
     if (prev === 1) {
       c1rectO = 0;
       c1expO = .1;
-
-
-
     } else {
       c1rectO = 0;
       c1expO = 1;

@@ -212,6 +212,9 @@ h4 {
 .dark h2 {
   color: #f9f9fa; }
 
+.icon {
+  font-family: "FontAwesome" !important; }
+
 p {
   font-family: "aktiv-grotesk", sans-serif;
   font-weight: normal;
@@ -536,7 +539,7 @@ input[type=range] {
     overflow: visible; }
   .case1 svg text, .case3 svg text {
     font-family: "aktiv-grotesk", sans-serif;
-    font-size: .8em;
+    font-size: 13px;
     fill: #666; }
     @media screen and (max-width: 375px) {
       .case1 svg text, .case3 svg text {
@@ -554,6 +557,10 @@ input[type=range] {
       fill: #333;
       font-size: .6em;
       text-anchor: middle; }
+
+#c1locationLine {
+  stroke: #666;
+  stroke-dasharray: 1,1; }
 
 .showMore_wrapper {
   font-size: .5em;
@@ -610,24 +617,38 @@ input[type=range] {
   line-height: 1;
   font-weight: bold;
   padding: 12px;
-  background: rgba(0, 0, 0, 0.8);
-  color: #fff;
+  background: #ffffff;
+  color: #333;
   border-radius: 2px;
   pointer-events: none;
-  width: 200px; }
+  width: 200px;
+  -webkit-box-shadow: 0px 0px 5px 2px rgba(153, 153, 153, 0.5);
+  -moz-box-shadow: 0px 0px 5px 2px rgba(153, 153, 153, 0.5);
+  box-shadow: 0px 0px 5px 2px rgba(153, 153, 153, 0.5); }
+
+.d3-tip .tipH {
+  display: inline-block;
+  margin-right: 5px; }
 
 .d3-tip h1 {
-  font-family: "Inconsolata", monospace;
+  font-family: "aktiv-grotesk", sans-serif;
   font-size: 1em;
+  font-weight: bold;
   margin: 0 0 10px 0; }
 
 .d3-tip h2 {
   font-family: "aktiv-grotesk", sans-serif;
-  font-size: .6em;
+  font-size: .8em;
   margin: 5px 0 0 0;
-  font-weight: normal;
-  text-transform: uppercase;
-  letter-spacing: 1px; }
+  font-weight: normal; }
+
+.d3-tip h3 {
+  font-family: "aktiv-grotesk", sans-serif;
+  font-size: .8em;
+  text-transform: none;
+  letter-spacing: 1px;
+  color: #ffffff;
+  padding: 2px; }
 
 .d3-tip p {
   font-size: .6em;
@@ -676,6 +697,12 @@ input[type=range] {
   -webkit-box-shadow: 0px 0px 5px 2px rgba(153, 153, 153, 0.5);
   -moz-box-shadow: 0px 0px 5px 2px rgba(153, 153, 153, 0.5);
   box-shadow: 0px 0px 5px 2px rgba(153, 153, 153, 0.5); }
+  .filter-container.ishidden {
+    -webkit-transform: translate(0, 275px);
+    -moz-transform: translate(0, 275px);
+    -ms-transform: translate(0, 275px);
+    -o-transform: translate(0, 275px);
+    transform: translate(0, 275px); }
   .filter-container.isvisible {
     -webkit-transform: translate(0, 0);
     -moz-transform: translate(0, 0);
