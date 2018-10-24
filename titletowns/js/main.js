@@ -1552,10 +1552,6 @@ function casetwo() {
   })
 
   var DDdata = dynasties_and_droughts(case2data)
-  DDdata.sort(function(a, b) {
-    return d3.descending(+a.max_dynasty, +b.max_dynasty) || d3.ascending(a.metro, b.metro)
-  })
-  DDdata = DDdata.slice(0, case2num - 1);
 
   c2x = d3.scaleLinear().domain([start, end]).range([150, sideD.w]);
   c2y = d3.scaleBand().domain(d3.range(case2num)).range([0, case2num * h]);
@@ -1757,7 +1753,7 @@ function casetwo() {
     .attr("dy", 14)
     .style("opacity", 0)
     .text("\uf002")
-  if (adjRank > num - 2) {
+  if (adjRank > case2num - 2) {
     g.select("#c2locationLine")
       .transition()
       .style("opacity", 1)
@@ -1806,6 +1802,17 @@ function casetwo_filter() {
     d.conversion = titles / d.newseasons.length
     if (isNaN(d.conversion)) d.conversion = 0;
   })
+  if (sortmode2 === "ascend_max_dryspell" || sortmode2 === "descend_max_dryspell") {
+    data = data.filter(function(d) {
+      return (d.titles > 0 && d.newseasons.length > 24) || d.metro === local;
+    })
+    // data = data.filter(function(d) {
+    //   return d.newseasons.length > 24 || d.metro === local;
+    // })
+  } else {
+    data = data;
+  }
+  // data = filtereddata;
   data = dynasties_and_droughts(data);
   data.sort(function(a, b) {
     if (sortmode2 === "descend_seasons") return d3.descending(+a.newseasons.length, +b.newseasons.length) || d3.ascending(a.metro, b.metro);
@@ -1821,14 +1828,6 @@ function casetwo_filter() {
     if (sortmode2 === "descend_total_dryspells") return d3.descending(+a.dryspells.length, +b.dryspells.length) || d3.descending(+a.titles, +b.titles) || d3.ascending(a.metro, b.metro);
     if (sortmode2 === "descend_total_prettygooddynasties") return d3.descending(+a.prettygooddynasties.length, +b.prettygooddynasties.length) || d3.descending(+a.titles, +b.titles) || d3.ascending(a.metro, b.metro);
   })
-  if (sortmode2 === "ascend_max_dryspell" || sortmode2 === "descend_max_dryspell") {
-    data = data.filter(function(d) {
-      return d.titles > 0
-    })
-    data = data.filter(function(d) {
-      return d.newseasons.length > 24
-    })
-  }
   data.forEach(function(d, i) {
     if (d.metro === local) rank = i;
     if (d.metro === searched) searchedRank = i;
@@ -1836,19 +1835,19 @@ function casetwo_filter() {
 
   adjRank = rank;
   searchedAdjRank = 0;
-  if (rank > num - 2) adjRank = num - 1;
-  if (searchedRank < num) searchedAdjRank = searchedRank;
-  if (searched === local && rank > num - 2) searchedAdjRank = adjRank;
-  if (searchedRank > num - 1 && searchedAdjRank === 0) leader = 1;
-  if (adjRank > num - 2) {
-    var mainData = data.slice(0, num - 1)
+  if (rank > case2num - 2) adjRank = case2num - 1;
+  if (searchedRank < case2num) searchedAdjRank = searchedRank;
+  if (searched === local && rank > case2num - 2) searchedAdjRank = adjRank;
+  if (searchedRank > case2num - 1 && searchedAdjRank === 0) leader = 1;
+  if (adjRank > case2num - 2) {
+    var mainData = data.slice(0, case2num - 1)
   } else {
-    var mainData = data.slice(0, num)
+    var mainData = data.slice(0, case2num)
   }
-  if (searchedRank > num - 2 && searched != local) {
+  if (searchedRank > case2num - 2 && searched != local) {
     mainData = mainData.slice(0, mainData.length - 1)
   }
-  if (searched != undefined && searchedRank > num - 2 && searched != local) {
+  if (searched != undefined && searchedRank > case2num - 2 && searched != local) {
     var searchData = data.filter(function(d) {
       return d.metro === searched;
     })
@@ -1858,7 +1857,7 @@ function casetwo_filter() {
     Array.prototype.push.apply(searchData, mainData)
     mainData = searchData;
   }
-  if (local != undefined && rank > num - 2) {
+  if (local != undefined && rank > case2num - 2) {
     var localData = data.filter(function(d) {
       return d.metro === local;
     })
@@ -1966,10 +1965,10 @@ function casetwo_filter() {
   back.exit().remove();
 
   var group = g.selectAll(".c2rect").data(data);
-  group.enter().append("g").attr("class", "c1rect").merge(group);
+  group.enter().append("g").attr("class", "c2rect").merge(group);
   group.exit().remove();
 
-  var rect = group.selectAll(".season")
+  var rect = g.selectAll(".c2rect").selectAll(".season")
     .data(function(d, i) {
       return d.newseasons
     })
@@ -2125,7 +2124,7 @@ function casetwo_filter() {
       })
       .style("stroke-linecap", "round")
       .style("stroke", "white")
-      .style("stroke-width", 1)
+      .style("stroke-width", 1.5)
       .style("opacity", 0)
       .merge(dyn_rect).transition().duration(500).delay(function(d, i) {
         return i + 500
@@ -2197,7 +2196,7 @@ function casetwo_filter() {
       })
       .attr("y", c1y(adjRank))
     g.select(".c2label-" + camelize(local)).style("font-weight", "bold")
-    if (adjRank > num - 2) {
+    if (adjRank > case2num - 2) {
       g.select("#c2locationLine")
         .transition()
         .attr("x1", function() {
