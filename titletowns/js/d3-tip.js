@@ -76,6 +76,8 @@
       };
 
       nodel.classed(dir, true)
+        // .style("top", newcoords.top + "px")
+        // .style("left", newcoords.left + "px")
         .style('top', (newcoords.top + poffset[0]) + scrollTop + 'px')
         .style('left', (newcoords.left + poffset[1]) + scrollLeft + 'px')
 
