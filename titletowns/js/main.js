@@ -7,7 +7,7 @@ var local_coords = [],
   sortmode3 = "descend_basic",
   local, userlocal, searched, level, league, start, end;
 var sideD, c1x, c1y, c1tip, c2x, c2y, c3x, c3y, c3r, c3c, num = 10,
-  case2num = 11,
+  case2num = 10,
   case3num = 11,
   radius = d3.scaleLinear().domain([0, 148]).range([3, 2]),
   casetwodrawn = false,
@@ -50,37 +50,20 @@ var filters = {
   }
 }
 
-var cLeagues = {
-    mlb: "#beaed4",
-    cfl: "#7fc97f",
-    mls: "#fdc086",
-    nba: "#ccba15",
-    nfl: "#f0027f",
-    nhl: "#bf5b17",
-    ncaa: "#386cb0",
-    baseball_m: "#386cb0",
-    basketball_m: "#386cb0",
-    basketball_w: "#386cb0",
-    football_m: "#386cb0",
-    soccer_w: "#386cb0",
-    volleyball_w: "#386cb0"
-  },
-  cEvents = {
-    title: "#f9ed35",
-    finals: "#a17bff",
-    finalFour: "#fc545d"
-  }
+var league_colours = d3.scaleOrdinal()
+  .range(["#beaed4", "#7fc97f", "#fdc086", "#ccba15", "#f0027f", "#bf5b17", "#386cb0", "#386cb0", "#386cb0", "#386cb0", "#386cb0", "#386cb0", "#386cb0"]).domain(["mlb", "cfl", "mls", "nba", "nfl", "nhl", "ncaa", "baseball_m", "basketball_m", "basketball_w", "football_m", "soccer_w", "volleyball_w"]),
+  event_colours = d3.scaleOrdinal().range(["#f9ed35", "#a17bff", "#fc545d"]).domain(["title", "finals", "finalFour"])
 
 var leagues = ["MLB", "NBA", "NFL", "NHL", "CFL", "MLS", "NCAA"],
   events = [{
     "event": "title",
-    "colour": cEvents.title
+    "colour": event_colours("title")
   }, {
     "event": "finals appearance",
-    "colour": cEvents.finals
+    "colour": event_colours("finals")
   }, {
     "event": "final four appearance",
-    "colour": cEvents.finalFour
+    "colour": event_colours("finalFour")
   }]
 
 // DATA
@@ -107,13 +90,13 @@ function resize() {
 
   if (!small_screen) {
     num = 20;
-    case2num = 21;
+    case2num = 20;
     case3num = 21;
   }
 
   if (windowH < 900 && windowH >= 700) {
     num = 15;
-    case2num = 16;
+    case2num = 15;
     case3num = 16;
   }
 
@@ -179,13 +162,13 @@ function setup() {
 
   if (!small_screen) {
     num = 20;
-    case2num = 21;
+    case2num = 20;
     case3num = 21;
   }
 
   if (windowH < 900 && windowH >= 700) {
     num = 15;
-    case2num = 16;
+    case2num = 15;
     case3num = 16;
   }
 
@@ -381,8 +364,30 @@ function setup() {
 
   // Tooltips
   c1tip = d3.tip().attr("class", "d3-tip").html(function(d) {
-    return "<div class='tipH'><h1>" + d.year + "</h1></div><div class='tipH' style='background-color: " + cLeagues[d.sport] + "'><h3>" + replaceSports(d.sport) + "</h3></div><h2>" + d.team + "</h2>";
+    return "<div class='tipH'><h1>" + d.year + "</h1></div><div class='tipH' style='background-color: " + league_colours(d.sport) + "'><h3>" + replaceSports(d.sport) + "</h3></div><h2>" + d.team + "</h2>";
   }).direction("e").offset([25, 0]);
+
+  c2tip = d3.tip().attr("class", "d3-tip dark-tip").html(function(d) {
+    var list = d.newteams;
+    var titlesDisp = "",
+      finalsDisp = "",
+      finalFoursDisp = "";
+
+    var titles = [],
+      finals = [],
+      finalFours = [];
+
+    for (var j = 0; j < d.newteams.length; j++) {
+      if (d.newteams[j].result === "title") titles.push(d.newteams[j].team + " (" + replaceSports(d.newteams[j].sport) + ")&nbsp;")
+      if (d.newteams[j].result === "finals") finals.push(d.newteams[j].team + " (" + replaceSports(d.newteams[j].sport) + ")&nbsp;")
+      if (d.newteams[j].result === "finalFour") finalFours.push(d.newteams[j].team + " (" + replaceSports(d.newteams[j].sport) + ")&nbsp;")
+    }
+
+    if (titles.length > 0) titlesDisp = "<h2 style='color:" + event_colours("title") + "'>Titles</h2><p>" + titles + "</p>";
+    if (finals.length > 0) finalsDisp = "<h2 style='color:" + event_colours("finals") + "'>Finals Appearances</h2><p>" + finals + "</p>";
+    if (finalFours.length > 0) finalFoursDisp = "<h2 style='color:" + event_colours("finalFour") + "'>Final Four Appearances</h2><p>" + finalFours + "</p>";
+    return "<h1>" + d.season + "</h1>" + titlesDisp + finalsDisp + finalFoursDisp;
+  }).direction("s").offset([25, 0]);
 
   // Case One Switches
   $("#switch_actual").on("click", function() {
@@ -409,6 +414,41 @@ function setup() {
     caseone_filter()
   })
 
+  // Case Two Switches
+  $("#switch_dynasty").on("click", function() {
+    $("#switch_dynasty").addClass("isactive");
+    $("#switch_finalfour").removeClass("isactive");
+    $("#switch_dryspell-long").removeClass("isactive");
+    $("#switch_dryspell-short").removeClass("isactive");
+    sortmode2 = "descend_max_dynasty";
+    casetwo_filter()
+  })
+  $("#switch_finalfour").on("click", function() {
+    $("#switch_dynasty").removeClass("isactive");
+    $("#switch_finalfour").addClass("isactive");
+    $("#switch_dryspell-long").removeClass("isactive");
+    $("#switch_dryspell-short").removeClass("isactive");
+    sortmode2 = "descend_max_prettygooddynasty";
+    casetwo_filter()
+  })
+  $("#switch_dryspell-long").on("click", function() {
+    $("#switch_dynasty").removeClass("isactive");
+    $("#switch_finalfour").removeClass("isactive");
+    $("#switch_dryspell-long").addClass("isactive");
+    $("#switch_dryspell-short").removeClass("isactive");
+    sortmode2 = "descend_max_dryspell";
+    casetwo_filter()
+  })
+  $("#switch_dryspell-short").on("click", function() {
+    $("#switch_dynasty").removeClass("isactive");
+    $("#switch_finalfour").removeClass("isactive");
+    $("#switch_dryspell-long").removeClass("isactive");
+    $("#switch_dryspell-short").addClass("isactive");
+    sortmode2 = "ascend_max_dryspell";
+    casetwo_filter()
+  })
+
+  // Case Three Switches
   $("#casethree_los-angeles").on("mouseover", function() {
     userlocal = local;
     local = "Greater Los Angeles, CA";
@@ -444,7 +484,7 @@ function setup() {
 }
 
 function caseone() {
-  // var local = "New York Metro Area"
+  // local = "New York Metro Area"
   var filter = filters[level][league],
     total_titles = 0,
     total_seasons = 0,
@@ -571,7 +611,7 @@ function caseone() {
     .attr("height", 20)
     .style("opacity", c1rectO)
     .style("fill", function(d) {
-      return cLeagues[d.toLowerCase()]
+      return league_colours(d.toLowerCase());
     })
   legendg.selectAll(".legend_case1_phase1.text")
     .data(leagues)
@@ -632,18 +672,14 @@ function caseone() {
     .style("fill", "green")
     .style("opacity", c1expO)
 
-  var backback = g.selectAll(".backback")
-    .data(data)
-    .enter().append("rect").attr("class", function(d, i) {
-      return "backback backback-" + i;
-    })
+  var search_back = g.append("rect")
+    .attr("id", "c1searchback")
     .attr("x", -50)
-    .attr("y", function(d, i) {
-      return c1y(i) - 5
-    })
+    .attr("y", c1y(0) - 5)
     .attr("width", sideD.w + 45)
     .attr("height", h)
-    .style("fill", "rgba(0,0,0,0)")
+    .style("fill", "#efefef")
+    .style("opacity", 0)
   var text = g.selectAll(".label")
     .data(data)
     .enter().append("text").attr("class", function(d, i) {
@@ -742,7 +778,7 @@ function caseone() {
       g.selectAll(".c1label-" + i + ", .c1label_count-" + i).style("font-weight", "bold");
     })
     .on("mouseout", function(d, i) {
-      g.selectAll(".c1label-" + i + ", .c1label_count-" + i).style("font-weight", "normal");
+      if (d.key != local) g.selectAll(".c1label-" + i + ", .c1label_count-" + i).style("font-weight", "normal");
     })
   var group = g.selectAll(".c1rect")
     .data(data)
@@ -764,7 +800,7 @@ function caseone() {
     .attr("width", 2)
     .attr("height", 20)
     .style("fill", function(d) {
-      return cLeagues[d.sport]
+      return league_colours(d.sport)
     })
     .on("mouseover", function(d) {
       g.selectAll(".c1label-" + d.i + ", .c1label_count-" + d.i).style("font-weight", "bold");
@@ -781,14 +817,16 @@ function caseone() {
       return "c1rect_back c1rect_back-" + d.i
     })
     .attr("x", function(d) {
-      return c1x(d.n + 1) - 3
+      return c1x(d.n + 1) - 1
     })
     .attr("y", function(d) {
       return c1y(d.i) - 3
     })
-    .attr("width", 8)
+    .attr("width", 2)
     .attr("height", 26)
     .style("fill", "rgba(0,0,0,0)")
+    .style("stroke", "rgba(0,0,0,0)")
+    .style("stroke-width", 6)
     .on("mouseover", function(d) {
       g.selectAll(".c1label-" + d.i + ", .c1label_count-" + d.i).style("font-weight", "bold");
       c1tip.show(d);
@@ -807,6 +845,13 @@ function caseone() {
       .style("text-anchor", "end")
       .text("\uf124")
     g.select(".c1label-" + camelize(local)).style("font-weight", "bold")
+    g.append("line")
+      .attr("id", "c1locationLine")
+      .attr("x1", c1x(0) - getTextWidth(data[adjRank].key, "bold 16px aktiv-grotesk"))
+      .attr("x2", sideD.w)
+      .attr("y1", c1y(adjRank) - 5)
+      .attr("y2", c1y(adjRank) - 5)
+      .style("opacity", 0);
   }
   g.append("text")
     .attr("id", "c1searched")
@@ -817,12 +862,9 @@ function caseone() {
     .style("opacity", 0)
     .text("\uf002")
   if (adjRank > num - 2) {
-    g.append("line")
-      .attr("id", "c1locationLine")
-      .attr("x1", c1x(0) - getTextWidth(data[adjRank].key, "bold 16px aktiv-grotesk"))
-      .attr("x2", sideD.w)
-      .attr("y1", c1y(adjRank) - 5)
-      .attr("y2", c1y(adjRank) - 5);
+    g.select("#c1locationLine")
+      .transition()
+      .style("opacity", 1)
   }
 } //end caseone
 
@@ -849,6 +891,9 @@ function caseone_filter() {
     d.newvalues = d.values.filter(function(d) {
       return d.year >= start && d.year <= end && $.inArray(d.sport, filter) > -1;
     });
+    d.newvalues = d.newvalues.sort(function(a, b) {
+      return d3.ascending(+a.year, +b.year) || d3.ascending(a.team, b.team);
+    })
     d.newvalues.forEach(function(d, i) {
       d.n = i;
     });
@@ -870,12 +915,14 @@ function caseone_filter() {
   data.forEach(function(d, i) {
     if (d.key === local) rank = i;
     if (d.key === searched) searchedRank = i;
-    adjRank = rank;
-    searchedAdjRank = 0;
-    if (rank > num - 2) adjRank = num - 1;
-    if (searchedRank < num - 2) searchedAdjRank = searchedRank;
-    if (searched === local && rank > num - 2) searchedAdjRank = adjRank;
   })
+
+  adjRank = rank;
+  searchedAdjRank = 0;
+  if (rank > num - 2) adjRank = num - 1;
+  if (searchedRank < num) searchedAdjRank = searchedRank;
+  if (searched === local && rank > num - 2) searchedAdjRank = adjRank;
+  if (searchedRank > num - 1 && searchedAdjRank === 0) leader = 1;
   if (adjRank > num - 2) {
     var mainData = data.slice(0, num - 1)
   } else {
@@ -923,7 +970,7 @@ function caseone_filter() {
       $("#step1_local").html("(" + local + " teams have played ");
       $("#step1_totalseasons_local").html(data[0].local_seasons + ")")
       $("#step2_local").html(", while " + local + " has a ")
-      $("#step2_howmany_local").html(((data[0].newvalues.length - data[0].expected).toFixed(1) < 0 ? "" : "+") + (data[0].newvalues.length - data[0].expected).toFixed(1) + " differential")
+      $("#step2_howmany_local").html(((data[adjRank].newvalues.length - data[adjRank].expected).toFixed(1) < 0 ? "" : "+") + (data[adjRank].newvalues.length - data[adjRank].expected).toFixed(1) + " differential")
     }
     $("#step0_rank").html(rank);
   }
@@ -1159,6 +1206,25 @@ function caseone_filter() {
     .style("opacity", 0)
     .remove();
 
+  var back = g.selectAll(".back").data(data)
+  back.enter().append("rect").merge(back).attr("class", function(d, i) {
+      return "back back-" + i;
+    })
+    .attr("x", 0)
+    .attr("y", function(d, i) {
+      return c1y(i);
+    })
+    .attr("width", sideD.w)
+    .attr("height", h)
+    .style("fill", "rgba(0,0,0,0)")
+    .on("mouseover", function(d, i) {
+      g.selectAll(".c1label-" + i + ", .c1label_count-" + i).style("font-weight", "bold");
+    })
+    .on("mouseout", function(d, i) {
+      if (d.key != local && d.key != searched) g.selectAll(".c1label-" + i + ", .c1label_count-" + i).style("font-weight", "normal");
+    })
+  back.exit().remove();
+
   var group = g.selectAll(".c1rect").data(data)
   group.enter().append("g").attr("class", "c1rect").merge(group).attr("id", function(d) {
     return "";
@@ -1167,7 +1233,6 @@ function caseone_filter() {
 
   var rect = g.selectAll(".c1rect").selectAll(".c1rects")
     .data(function(d) {
-      // console.log(d)
       return d.newvalues
     });
   rect.enter().append("rect")
@@ -1178,10 +1243,10 @@ function caseone_filter() {
     })
     .attr("width", 0)
     .attr("height", 20)
-    .style("fill", function(d) {
-      return cLeagues[d.sport]
-    })
     .style("opacity", 0)
+    .style("fill", function(d) {
+      return league_colours(d.sport)
+    })
     .merge(rect)
     .transition().duration(500).delay(function(d, i) {
       return i
@@ -1197,10 +1262,13 @@ function caseone_filter() {
     })
     .attr("width", 2)
     .style("fill", function(d) {
-      return cLeagues[d.sport]
+      return league_colours(d.sport)
     })
     .style("opacity", c1rectO)
-  rect.exit().transition().duration(500)
+  g.selectAll(".c1rects").style("fill", function(d) {
+    return league_colours(d.sport);
+  })
+  rect.exit().transition().duration(250)
     .delay(function(d, i) {
       return 148 - i * 3
     })
@@ -1208,7 +1276,7 @@ function caseone_filter() {
     .style("opacity", 0)
     .remove();
 
-  var back_rect = group.selectAll(".c1rect_back")
+  var back_rect = g.selectAll(".c1rect").selectAll(".c1rect_back")
     .data(function(d) {
       return d.newvalues
     })
@@ -1226,9 +1294,11 @@ function caseone_filter() {
     .attr("width", 8)
     .attr("height", 26)
     .style("fill", "rgba(0,0,0,0)")
+    .style("stroke", "rgba(0,0,0,0)")
+    .style("opacity", c1rectO)
     .on("mouseover", function(d) {
       g.selectAll(".c1label-" + d.i + ", .c1label_count-" + d.i).style("font-weight", "bold");
-      c1tip.show(d);
+      if (c1rectO === 1) c1tip.show(d);
     })
     .on("mouseout", function(d) {
       g.selectAll(".c1label-" + d.i + ", .c1label_count-" + d.i).style("font-weight", "normal");
@@ -1236,45 +1306,21 @@ function caseone_filter() {
     })
   back_rect.exit().remove();
 
-  var back = g.selectAll(".back").data(data)
-  back.enter().append("rect").merge(back).attr("class", function(d, i) {
-      return "back back-" + i;
-    })
-    .attr("x", 0)
-    .attr("y", function(d, i) {
-      return c1y(i);
-    })
-    .attr("width", sideD.w)
-    .attr("height", h)
-    .style("fill", "rgba(0,0,0,0)")
-    .on("mouseover", function(d, i) {
-      g.selectAll(".c1label-" + i + ", .c1label_count-" + i).style("font-weight", "bold");
-    })
-    .on("mouseout", function(d, i) {
-      g.selectAll(".c1label-" + i + ", .c1label_count-" + i).style("font-weight", "normal");
-    })
-  back.exit().remove();
-
-  var backback = g.selectAll(".backback").data(data)
-  backback.enter().append("rect").merge(backback).attr("class", function(d, i) {
-      return "backback backback-" + i;
-    })
-    .attr("x", function() {
-      if (searched === local) return c1x(0) - getTextWidth(data[searchedAdjRank].key, "bold 13px aktiv-grotesk") - 45
-      return c1x(0) - getTextWidth(data[searchedAdjRank].key, "bold 13px aktiv-grotesk") - 30
-    })
-    .attr("y", function(d, i) {
-      return c1y(i) - 5
-    })
-    .attr("width", function() {
-      if (searched === local) return (sideD.w - c1x(0)) + getTextWidth(data[searchedAdjRank].key, "bold 13px aktiv-grotesk") + 45
-      return (sideD.w - c1x(0)) + getTextWidth(data[searchedAdjRank].key, "bold 13px aktiv-grotesk") + 30
-    })
-    .attr("height", h)
-    .style("fill", "rgba(0,0,0,0)")
-  backback.exit().remove();
-
   if (searched != undefined) {
+    g.select("#c1searchback")
+      .transition()
+      .attr("x", function() {
+        if (searched === local) return c1x(0) - getTextWidth(data[searchedAdjRank].key, "bold 13px aktiv-grotesk") - 45;
+        return c1x(0) - getTextWidth(data[searchedAdjRank].key, "bold 13px aktiv-grotesk") - 30
+      })
+      .attr("y", c1y(searchedAdjRank) - 5)
+      .attr("width", function() {
+        if (searched === local) return sideD.w - (c1x(0) - getTextWidth(data[searchedAdjRank].key, "bold 13px aktiv-grotesk") - 45);
+        return sideD.w - (c1x(0) - getTextWidth(data[searchedAdjRank].key, "bold 13px aktiv-grotesk") - 30)
+      })
+      .attr("height", h)
+      .style("opacity", 1)
+
     g.select("#c1searched")
       .attr("x", function() {
         if (searched === local) return c1x(0) - getTextWidth(data[searchedAdjRank].key, "bold 13px aktiv-grotesk") - 40
@@ -1285,22 +1331,20 @@ function caseone_filter() {
       .style("opacity", 1)
     g.selectAll(".label").style("font-weight", "normal")
     g.select(".c1label-" + camelize(searched)).style("font-weight", "bold")
-    g.select(".backback-" + searchedAdjRank).transition().style("fill", "rgba(0,0,0,.3)")
-    g.selectAll(".backback:not(.backback-" + searchedAdjRank + ")").transition().style("fill", "rgba(0,0,0,0)")
-  } else {
-    g.selectAll(".backback").style("fill", "rgba(0,0,0,0)")
   }
-
   if (local != undefined) {
     g.select("#c1location")
       .transition().duration(500)
       .attr("y", c1y(adjRank))
     g.select(".c1label-" + camelize(local)).style("font-weight", "bold")
     if (adjRank > num - 2) {
-      g.select("#c1locationLine").transition()
+      g.select("#c1locationLine")
+        .transition()
+        .attr("x1", c1x(0) - getTextWidth(data[adjRank].key, "bold 16px aktiv-grotesk"))
+        .attr("x2", sideD.w)
         .attr("y1", c1y(adjRank) - 5)
         .attr("y2", c1y(adjRank) - 5)
-        .style("opacity", 1)
+        .style("opacity", 1);
     } else {
       g.select("#c1locationLine").transition().style("opacity", 0)
     }
@@ -1309,7 +1353,7 @@ function caseone_filter() {
 
 function caseone_update(index, prev) {
   var g = d3.select(".group");
-  var rect = g.selectAll("rect");
+  var rect = g.selectAll(".c1rects");
   var actual = g.selectAll(".c1act");
   var expected = g.selectAll(".c1exp");
   var connect = g.selectAll(".c1connect");
@@ -1320,9 +1364,10 @@ function caseone_update(index, prev) {
   c1y = d3.scaleBand().domain(d3.range(num)).range([0, num * h]);
 
   if (index === 0) {
-    g.selectAll("rect:not(.c1rect-" + leader + ")").transition().duration(250).style("opacity", 1)
+    g.selectAll(".c1rects:not(.c1rect-" + leader + ")").transition().duration(250).style("opacity", 1)
     g.selectAll(".label:not(.c1label-" + leader + ")").transition().duration(250).style("opacity", 1)
     g.selectAll(".count:not(.c1label_count-" + leader + ")").transition().duration(250).style("opacity", 1)
+    caseone_filter();
   } else if (index === 1) {
     c1rectO = 1;
     c1expO = 0;
@@ -1332,7 +1377,7 @@ function caseone_update(index, prev) {
       // num = 21
       // if (small_screen) num = 11;
       caseone_filter();
-      g.selectAll("rect:not(.c1rect-" + leader + ")").transition().duration(250).style("opacity", .1)
+      g.selectAll(".c1rects:not(.c1rect-" + leader + ")").transition().duration(250).style("opacity", .1)
       g.selectAll(".label:not(.c1label-" + leader + ")").transition().duration(250).style("opacity", .1)
       g.selectAll(".count:not(.c1label_count-" + leader + ")").transition().duration(250).style("opacity", .1)
     } else if (prev === 2) {
@@ -1407,6 +1452,7 @@ function caseone_update(index, prev) {
     $("#switch_high_diff").addClass("isactive")
     $("#switch_low_diff").removeClass("isactive")
     caseone_filter()
+    if (prev === 2 && !casetwodrawn) casetwo();
   } else if (index === 4) {
     if (prev === 3 && !casetwodrawn) casetwo();
     // sortmode = "ascend_diff";
@@ -1433,9 +1479,11 @@ function caseone_update(index, prev) {
 }
 
 function casetwo() {
+  // local = "New York Metro Area"
   casetwodrawn = true;
   var filter = filters[level][league],
-    h = 30;
+    h = 30,
+    rank, adjRank;
 
   var data = case2data;
   data.forEach(function(d) {
@@ -1444,11 +1492,9 @@ function casetwo() {
     d.seasons.sort(function(a, b) {
       return d3.ascending(+a.season, +b.season);
     });
-
     d.newseasons = d.seasons.filter(function(d) {
       return d.season >= start && d.season <= end;
     });
-
     d.newseasons.forEach(function(d) {
       d.newteams = d.teams.filter(function(d) {
         return $.inArray(d.sport, filter) > -1
@@ -1467,18 +1513,26 @@ function casetwo() {
   data.sort(function(a, b) {
     return d3.descending(+a.newseasons.length, +b.newseasons.length) || d3.ascending(a.metro, b.metro);
   })
-  var addData = data.slice(0, case2num - 1);
+  data.forEach(function(d, i) {
+    if (d.metro === local) rank = i;
+  })
+
   if (local != undefined) {
-    addData = addData.filter(function(d) {
-      return d.metro != local
-    })
-    data = data.filter(function(d) {
-      return d.metro === local
-    })
-    Array.prototype.push.apply(data, addData);
+    if (rank > case2num - 2) {
+      adjRank = case2num - 1;
+      var mainData = data.slice(0, case2num - 1);
+      var localData = data.filter(function(d) {
+        return d.metro === local
+      })
+      Array.prototype.push.apply(mainData, localData);
+    } else {
+      adjRank = rank;
+      var mainData = data.slice(0, case2num);
+    }
   } else {
-    data = addData
+    var mainData = data.slice(0, case2num);
   }
+  data = mainData;
   data.forEach(function(d, i) {
     d.newseasons.forEach(function(d) {
       var row = i;
@@ -1497,6 +1551,12 @@ function casetwo() {
     });
   })
 
+  var DDdata = dynasties_and_droughts(case2data)
+  DDdata.sort(function(a, b) {
+    return d3.descending(+a.max_dynasty, +b.max_dynasty) || d3.ascending(a.metro, b.metro)
+  })
+  DDdata = DDdata.slice(0, case2num - 1);
+
   c2x = d3.scaleLinear().domain([start, end]).range([150, sideD.w]);
   c2y = d3.scaleBand().domain(d3.range(case2num)).range([0, case2num * h]);
 
@@ -1514,29 +1574,7 @@ function casetwo() {
     .tickSize(case2num * h)
     .tickFormat(d3.format(""));
 
-  tip = d3.tip().attr("class", "d3-tip").html(function(d) {
-    var list = d.newteams;
-    var titlesDisp = "",
-      finalsDisp = "",
-      finalFoursDisp = "";
-
-    var titles = [],
-      finals = [],
-      finalFours = [];
-
-    for (var j = 0; j < d.newteams.length; j++) {
-      if (d.newteams[j].result === "title") titles.push(d.newteams[j].team + " (" + replaceSports(d.newteams[j].sport) + ")&nbsp;")
-      if (d.newteams[j].result === "finals") finals.push(d.newteams[j].team + " (" + replaceSports(d.newteams[j].sport) + ")&nbsp;")
-      if (d.newteams[j].result === "finalFour") finalFours.push(d.newteams[j].team + " (" + replaceSports(d.newteams[j].sport) + ")&nbsp;")
-    }
-
-    if (titles.length > 0) titlesDisp = "<h2 style='color:" + cEvents.title + "'>Titles</h2><p>" + titles + "</p>";
-    if (finals.length > 0) finalsDisp = "<h2 style='color:" + cEvents.finals + "'>Finals Appearances</h2><p>" + finals + "</p>";
-    if (finalFours.length > 0) finalFoursDisp = "<h2 style='color:" + cEvents.finalFour + "'>Final Four Appearances</h2><p>" + finalFours + "</p>";
-    return "<h1>" + d.season + "</h1>" + titlesDisp + finalsDisp + finalFoursDisp;
-  }).direction("e").offset([25, 0]);
-
-  svg.call(tip)
+  svg.call(c2tip)
 
   svg.append("g")
     .attr("class", "x axis c2axis")
@@ -1556,7 +1594,6 @@ function casetwo() {
     .style("fill", function(d) {
       return d.colour;
     })
-
   legendg.selectAll(".legend_case2.text")
     .data(events)
     .enter().append("text").attr("class", "legend_case2 text legend")
@@ -1573,9 +1610,19 @@ function casetwo() {
       return d.event
     })
 
+  var search_back = g.append("rect")
+    .attr("id", "c2searchback")
+    .attr("x", 0)
+    .attr("y", c1y(0) - 5)
+    .attr("width", sideD.w)
+    .attr("height", h)
+    .style("fill", "rgba(255,255,255,.1)")
+    .style("opacity", 0)
   var text = g.selectAll(".label")
     .data(data)
-    .enter().append("text").attr("class", "label")
+    .enter().append("text").attr("class", function(d, i) {
+      return "label c2label c2label-" + camelize(d.metro) + " c2label-" + i
+    })
     .attr("x", function(d) {
       if (d.newseasons[0].season === undefined) return c2x(end);
       return c2x(d.newseasons[0].season) - 10
@@ -1588,7 +1635,24 @@ function casetwo() {
     .text(function(d) {
       return d.metro;
     });
-
+  var back = g.selectAll(".back")
+    .data(data)
+    .enter().append("rect").attr("class", function(d, i) {
+      return "back c2back-" + i
+    })
+    .attr("x", 0)
+    .attr("y", function(d, i) {
+      return c2y(i)
+    })
+    .attr("width", sideD.w)
+    .attr("height", h)
+    .style("fill", "rgba(0,0,0,0)")
+    .on("mouseover", function(d, i) {
+      d3.select(".c2label-" + i).style("font-weight", "bold")
+    })
+    .on("mouseout", function(d, i) {
+      if (d.metro != local && d.metro != searched) d3.select(".c2label-" + i).style("font-weight", "normal")
+    });
   var group = g.selectAll(".c2rect")
     .data(data)
     .enter().append("g").attr("class", "c2rect")
@@ -1612,7 +1676,6 @@ function casetwo() {
     .style("stroke-linecap", "round")
     .style("stroke", "#444")
     .style("stroke-width", 5)
-
   var subgroup = group.selectAll(".c2subrect")
     .data(function(d) {
       return d.newseasons
@@ -1631,9 +1694,8 @@ function casetwo() {
     })
     .attr("r", radius(end - start))
     .style("fill", function(d) {
-      return cEvents[d.result]
+      return event_colours(d.result)
     })
-
   var tiprect = group.selectAll(".tiprect")
     .data(function(d) {
       return d.newseasons
@@ -1655,14 +1717,58 @@ function casetwo() {
     .style("stroke-width", 10)
     .style("stroke", "rgba(0,0,0,0)")
     .on("mouseover", function(d) {
-      if (d.newteams.length > 0) tip.show(d);
+      d3.select(".c2label-" + d.i).style("font-weight", "bold")
+      if (d.newteams.length > 0) c2tip.show(d);
     })
-    .on("mouseout", tip.hide)
+    .on("mouseout", function(d) {
+      if (d.metro != local && d.metro != searched) d3.select(".c2label-" + d.i).style("font-weight", "normal")
+      c2tip.hide()
+    })
+  if (local != undefined) {
+    g.append("text")
+      .attr("id", "c2location")
+      .attr("class", "icon")
+      .attr("x", function() {
+        if (data[adjRank].newseasons[0].season === undefined) return c2x(end) - getTextWidth(data[adjRank].metro, "bold 13px aktiv-grotesk") - 15;
+        return c2x(data[adjRank].newseasons[0].season) - getTextWidth(data[adjRank].metro, "bold 13px aktiv-grotesk") - 15;
+      })
+      .attr("y", c1y(adjRank))
+      .attr("dy", 14)
+      .style("text-anchor", "end")
+      .text("\uf124")
+    g.select(".c2label-" + camelize(local)).style("font-weight", "bold")
+    g.append("line")
+      .attr("id", "c2locationLine")
+      .attr("x1", function() {
+        if (data[adjRank].newseasons[0].season === undefined) return c2x(end) - getTextWidth(data[adjRank].metro, "bold 13px aktiv-grotesk") - 15;
+        return c2x(data[adjRank].newseasons[0].season) - getTextWidth(data[adjRank].metro, "bold 13px aktiv-grotesk") - 15;
+      })
+      .attr("x2", c2x(end))
+      .attr("y1", c2y(adjRank) - 5)
+      .attr("y2", c2y(adjRank) - 5)
+      .style("opacity", 0)
+      .style("stroke", "rgba(255,255,255,0.5)");
+  }
+  g.append("text")
+    .attr("id", "c2searched")
+    .attr("class", "icon")
+    .attr("x", -100)
+    .attr("y", -100)
+    .attr("dy", 14)
+    .style("opacity", 0)
+    .text("\uf002")
+  if (adjRank > num - 2) {
+    g.select("#c2locationLine")
+      .transition()
+      .style("opacity", 1)
+  }
 }
 
 function casetwo_filter() {
+  // searched
   var filter = filters[level][league],
-    h = 30;
+    h = 30,
+    rank, adjRank, searchedRank, searchedAdjRank;
 
   d3.select("#selected_filters").transition().duration(250)
     .style("opacity", 0)
@@ -1700,41 +1806,90 @@ function casetwo_filter() {
     d.conversion = titles / d.newseasons.length
     if (isNaN(d.conversion)) d.conversion = 0;
   })
+  data = dynasties_and_droughts(data);
   data.sort(function(a, b) {
     if (sortmode2 === "descend_seasons") return d3.descending(+a.newseasons.length, +b.newseasons.length) || d3.ascending(a.metro, b.metro);
     if (sortmode2 === "descend_results") return d3.descending(+a.results, +b.results) || d3.ascending(a.metro, b.metro);
     if (sortmode2 === "descend_teams") return d3.descending(+a.teams, +b.teams) || d3.ascending(a.metro, b.metro);
     if (sortmode2 === "descend_titles") return d3.descending(+a.titles, +b.titles) || d3.ascending(a.metro, b.metro);
     if (sortmode2 === "descend_conversion_seasons") return d3.descending(+a.conversion, +b.conversion) || d3.ascending(a.metro, b.metro);
+    if (sortmode2 === "descend_max_dynasty") return d3.descending(+a.max_dynasty, +b.max_dynasty) || d3.descending(+a.titles, +b.titles) || d3.ascending(a.metro, b.metro);
+    if (sortmode2 === "descend_max_prettygooddynasty") return d3.descending(+a.max_prettygooddynasty, +b.max_prettygooddynasty) || d3.descending(+a.titles, +b.titles) || d3.ascending(a.metro, b.metro);
+    if (sortmode2 === "descend_max_dryspell") return d3.descending(+a.dryseasons.length, +b.dryseasons.length) || d3.descending(+a.titles, +b.titles) || d3.ascending(a.metro, b.metro);
+    if (sortmode2 === "ascend_max_dryspell") return d3.ascending(+a.dryseasons.length, +b.dryseasons.length) || d3.descending(+a.titles, +b.titles) || d3.ascending(a.metro, b.metro);
+    if (sortmode2 === "descend_total_dynasties") return d3.descending(+a.dynasties.length, +b.dynasties.length) || d3.descending(+a.titles, +b.titles) || d3.ascending(a.metro, b.metro);
+    if (sortmode2 === "descend_total_dryspells") return d3.descending(+a.dryspells.length, +b.dryspells.length) || d3.descending(+a.titles, +b.titles) || d3.ascending(a.metro, b.metro);
+    if (sortmode2 === "descend_total_prettygooddynasties") return d3.descending(+a.prettygooddynasties.length, +b.prettygooddynasties.length) || d3.descending(+a.titles, +b.titles) || d3.ascending(a.metro, b.metro);
   })
-  var addData = data.slice(0, case2num - 1);
-  if (local != undefined) {
-    addData = addData.filter(function(d) {
-      return d.metro != local
+  if (sortmode2 === "ascend_max_dryspell" || sortmode2 === "descend_max_dryspell") {
+    data = data.filter(function(d) {
+      return d.titles > 0
     })
     data = data.filter(function(d) {
-      return d.metro === local
+      return d.newseasons.length > 24
     })
-    Array.prototype.push.apply(data, addData);
-  } else {
-    data = addData
   }
+  data.forEach(function(d, i) {
+    if (d.metro === local) rank = i;
+    if (d.metro === searched) searchedRank = i;
+  })
+
+  adjRank = rank;
+  searchedAdjRank = 0;
+  if (rank > num - 2) adjRank = num - 1;
+  if (searchedRank < num) searchedAdjRank = searchedRank;
+  if (searched === local && rank > num - 2) searchedAdjRank = adjRank;
+  if (searchedRank > num - 1 && searchedAdjRank === 0) leader = 1;
+  if (adjRank > num - 2) {
+    var mainData = data.slice(0, num - 1)
+  } else {
+    var mainData = data.slice(0, num)
+  }
+  if (searchedRank > num - 2 && searched != local) {
+    mainData = mainData.slice(0, mainData.length - 1)
+  }
+  if (searched != undefined && searchedRank > num - 2 && searched != local) {
+    var searchData = data.filter(function(d) {
+      return d.metro === searched;
+    })
+    mainData = mainData.filter(function(d) {
+      return d.metro != searched;
+    })
+    Array.prototype.push.apply(searchData, mainData)
+    mainData = searchData;
+  }
+  if (local != undefined && rank > num - 2) {
+    var localData = data.filter(function(d) {
+      return d.metro === local;
+    })
+    Array.prototype.push.apply(mainData, localData)
+  }
+  data = mainData;
   data.forEach(function(d, i) {
     d.newseasons.forEach(function(d) {
       var row = i;
       d.i = row;
       var y = d.season
       d.newteams = d.newteams.filter(function(d) {
-        return d.result != "season"
-      })
+        return d.result != "season";
+      });
       d.newteams.sort(function(a, b) {
         return d3.descending(a.result, b.result);
       });
       d.newteams.forEach(function(d) {
-        d.row = row
-        d.y = y
-      })
+        d.row = row;
+        d.y = y;
+      });
     });
+    d.dynasties.forEach(function(d) {
+      d.row = i;
+    })
+    d.prettygooddynasties.forEach(function(d) {
+      d.row = i;
+    })
+    d.dryspells.forEach(function(d) {
+      d.row = i;
+    })
   })
 
   var svg = d3.select(".case2 svg").transition()
@@ -1744,29 +1899,7 @@ function casetwo_filter() {
   c2x.domain([start, end]).range([150, sideD.w]);
   c2y.domain(d3.range(case2num)).range([0, case2num * h]);
 
-  tip = d3.tip().attr("class", "d3-tip").html(function(d) {
-    var list = d.newteams;
-    var titlesDisp = "",
-      finalsDisp = "",
-      finalFoursDisp = "";
-
-    var titles = [],
-      finals = [],
-      finalFours = [];
-
-    for (var j = 0; j < d.newteams.length; j++) {
-      if (d.newteams[j].result === "title") titles.push(d.newteams[j].team + " (" + replaceSports(d.newteams[j].sport) + ")&nbsp;")
-      if (d.newteams[j].result === "finals") finals.push(d.newteams[j].team + " (" + replaceSports(d.newteams[j].sport) + ")&nbsp;")
-      if (d.newteams[j].result === "finalFour") finalFours.push(d.newteams[j].team + " (" + replaceSports(d.newteams[j].sport) + ")&nbsp;")
-    }
-
-    if (titles.length > 0) titlesDisp = "<h2 style='color:" + cEvents.title + "'>Titles</h2><p>" + titles + "</p>";
-    if (finals.length > 0) finalsDisp = "<h2 style='color:" + cEvents.finals + "'>Finals Appearances</h2><p>" + finals + "</p>";
-    if (finalFours.length > 0) finalFoursDisp = "<h2 style='color:" + cEvents.finalFour + "'>Final Four Appearances</h2><p>" + finalFours + "</p>";
-    return "<h1>" + d.season + "</h1>" + titlesDisp + finalsDisp + finalFoursDisp;
-  }).direction("s").offset([25, 0]);
-
-  svg.call(tip)
+  svg.call(c2tip)
 
   var xAxis = d3.axisTop(c2x)
     .tickFormat(d3.format(""))
@@ -1779,7 +1912,9 @@ function casetwo_filter() {
     .data(data, function(d) {
       return d.metro;
     })
-  text.enter().append("text").attr("class", "label")
+  text.enter().append("text").attr("class", function(d, i) {
+      return "label c2label c2label-" + d.metro + " c2label-" + i
+    })
     .attr("x", 0)
     .attr("y", function(d, i) {
       return c1y(i)
@@ -1790,7 +1925,11 @@ function casetwo_filter() {
     .text(function(d, i) {
       return d.metro
     })
-    .merge(text).transition().duration(500)
+    .merge(text)
+    .attr("class", function(d, i) {
+      return "label c2label c2label-" + d.metro + " c2label-" + i
+    })
+    .transition().duration(500)
     .attr("x", function(d) {
       if (d.newseasons[0] === undefined) return c2x(end);
       return c2x(d.newseasons[0].season) - 10
@@ -1798,11 +1937,33 @@ function casetwo_filter() {
     .attr("y", function(d, i) {
       return c1y(i)
     })
-    .style("opacity", 1)
+    .style("opacity", function(d) {
+      if (d.titles > 0) return 1
+      return 0.25
+    })
   text.exit().transition().duration(500)
     .attr("y", sideD.h)
     .style("opacity", 0)
     .remove();
+
+  var back = g.selectAll(".back").data(data)
+  back.enter().append("rect").merge(back).attr("class", function(d, i) {
+      return "back c2back-" + i;
+    })
+    .attr("x", 0)
+    .attr("y", function(d, i) {
+      return c1y(i);
+    })
+    .attr("width", sideD.w)
+    .attr("height", h)
+    .style("fill", "rgba(0,0,0,0)")
+    .on("mouseover", function(d, i) {
+      d3.select(".c2label-" + i).style("font-weight", "bold")
+    })
+    .on("mouseout", function(d, i) {
+      if (d.metro != local && d.metro != searched) d3.select(".c2label-" + i).style("font-weight", "normal")
+    })
+  back.exit().remove();
 
   var group = g.selectAll(".c2rect").data(data);
   group.enter().append("g").attr("class", "c1rect").merge(group);
@@ -1855,13 +2016,13 @@ function casetwo_filter() {
     .style("opacity", 0)
     .remove();
 
-  var subgroup = group.selectAll(".c2subrect").data(function(d) {
+  var subgroup = g.selectAll(".c2rect").selectAll(".c2subrect").data(function(d) {
     return d.newseasons;
   })
   subgroup.enter().append("g").attr("class", "c2subrect").merge(subgroup);
   subgroup.exit().remove();
 
-  var subrect = subgroup.selectAll(".result")
+  var subrect = g.selectAll(".c2rect").selectAll(".c2subrect").selectAll(".result")
     .data(function(d) {
       return d.newteams;
     });
@@ -1887,11 +2048,11 @@ function casetwo_filter() {
     .attr("r", radius(end - start))
     .style("opacity", 1)
     .style("fill", function(d) {
-      return cEvents[d.result]
+      return event_colours(d.result)
     })
   subrect.exit().transition().duration(500).style("opacity", 0).remove();
 
-  var tiprect = group.selectAll(".tiprect")
+  var tiprect = g.selectAll(".c2rect").selectAll(".tiprect")
     .data(function(d) {
       return d.newseasons
     })
@@ -1925,14 +2086,137 @@ function casetwo_filter() {
       return c2y(d.i) + 10 - (d.newteams.length * 4)
     })
     .on("mouseover", function(d) {
-      if (d.newteams.length > 0) tip.show(d);
+      d3.select(".c2label-" + d.i).style("font-weight", "bold")
+      if (d.newteams.length > 0) c2tip.show(d);
     })
-    .on("mouseout", tip.hide)
+    .on("mouseout", function(d) {
+      if (d.metro != local && d.metro != searched) d3.select(".c2label-" + d.i).style("font-weight", "normal")
+      c2tip.hide()
+    })
   tiprect.exit().remove();
+
+  if (sortmode2 === "descend_max_dynasty") {
+    var dyn_rect = g.selectAll(".c2rect").selectAll(".dyn_rect").data(function(d) {
+      return d.dynasties;
+    })
+  } else if (sortmode2 === "descend_max_prettygooddynasty") {
+    var dyn_rect = g.selectAll(".c2rect").selectAll(".dyn_rect").data(function(d) {
+      return d.prettygooddynasties;
+    })
+  } else if (sortmode2 === "ascend_max_dryspell" || sortmode2 === "descend_max_dryspell") {
+    var dyn_rect = g.selectAll(".c2rect").selectAll(".dyn_rect").data(function(d) {
+      return d.dryspells;
+    })
+  }
+
+  if (sortmode2 === "descend_max_dynasty" || sortmode2 === "descend_max_prettygooddynasty" || sortmode2 === "descend_max_dryspell" || sortmode2 === "ascend_max_dryspell") {
+    dyn_rect.enter().append("line").attr("class", "dyn_rect")
+      .attr("x1", function(d) {
+        return c2x(d.start)
+      })
+      .attr("y1", function(d) {
+        return c2y(d.row) + 15
+      })
+      .attr("x2", function(d) {
+        return c2x(d.start)
+      })
+      .attr("y2", function(d) {
+        return c2y(d.row) + 15
+      })
+      .style("stroke-linecap", "round")
+      .style("stroke", "white")
+      .style("stroke-width", 1)
+      .style("opacity", 0)
+      .merge(dyn_rect).transition().duration(500).delay(function(d, i) {
+        return i + 500
+      })
+      .attr("x1", function(d) {
+        return c2x(d.start)
+      })
+      .attr("y1", function(d) {
+        return c2y(d.row) + 15
+      })
+      .attr("x2", function(d) {
+        return c2x(d.end)
+      })
+      .attr("y2", function(d) {
+        return c2y(d.row) + 15
+      })
+      .style("opacity", 1)
+    dyn_rect.exit().transition().duration(500)
+      .delay(function(d, i) {
+        return i
+      })
+      .attr("x1", function(d) {
+        return c2x(d.end)
+      })
+      .style("opacity", 0)
+      .remove();
+  }
+
+
+
+  if (searched != undefined) {
+    g.select("#c2searchback")
+      .transition()
+      .attr("x", function() {
+        var offset = 30;
+        if (searched === local) offset = 45;
+        if (data[searchedAdjRank].newseasons[0] === undefined) return c2x(end) - getTextWidth(data[searchedAdjRank].metro, "bold 13px aktiv-grotesk") - offset;
+        return c2x(data[searchedAdjRank].newseasons[0].season) - getTextWidth(data[searchedAdjRank].metro, "bold 13px aktiv-grotesk") - offset;
+      })
+      .attr("y", c1y(searchedAdjRank) - 5)
+      .attr("width", function() {
+        var offset = 30;
+        if (searched === local) offset = 45;
+        if (data[searchedAdjRank].newseasons[0] === undefined) return sideD.w - (c2x(end) - getTextWidth(data[searchedAdjRank].metro, "bold 13px aktiv-grotesk") - offset) + 5;
+        return sideD.w - (c2x(data[searchedAdjRank].newseasons[0].season) - getTextWidth(data[searchedAdjRank].metro, "bold 13px aktiv-grotesk") - offset) + 5;
+      })
+      .attr("height", h)
+      .style("opacity", 1)
+
+    g.select("#c2searched")
+      .attr("x", function() {
+        var offset = 25;
+        if (searched === local) offset = 40;
+        if (data[searchedAdjRank].newseasons[0] === undefined) return c2x(end) - getTextWidth(data[searchedAdjRank].metro, "bold 13px aktiv-grotesk") - offset;
+        return c2x(data[searchedAdjRank].newseasons[0].season) - getTextWidth(data[searchedAdjRank].metro, "bold 13px aktiv-grotesk") - offset;
+      })
+      .attr("y", c1y(searchedAdjRank))
+      .transition()
+      .style("opacity", 1)
+    g.selectAll(".label").style("font-weight", "normal")
+    g.select(".c2label-" + camelize(searched)).style("font-weight", "bold")
+  }
+  if (local != undefined) {
+    g.select("#c2location")
+      .transition().duration(500)
+      .attr("x", function() {
+        if (data[adjRank].newseasons[0] === undefined) return c2x(end) - getTextWidth(data[adjRank].metro, "bold 13px aktiv-grotesk") - 15;
+        return c2x(data[adjRank].newseasons[0].season) - getTextWidth(data[adjRank].metro, "bold 13px aktiv-grotesk") - 15;
+      })
+      .attr("y", c1y(adjRank))
+    g.select(".c2label-" + camelize(local)).style("font-weight", "bold")
+    if (adjRank > num - 2) {
+      g.select("#c2locationLine")
+        .transition()
+        .attr("x1", function() {
+          if (data[adjRank].newseasons[0] === undefined) return c2x(end) - getTextWidth(data[adjRank].metro, "bold 13px aktiv-grotesk") - 15;
+          return c2x(data[adjRank].newseasons[0].season) - getTextWidth(data[adjRank].metro, "bold 13px aktiv-grotesk") - 15;
+        })
+        .attr("x2", c2x(end))
+        .attr("y1", c2y(adjRank) - 5)
+        .attr("y2", c2y(adjRank) - 5)
+        .style("opacity", 1);
+    } else {
+      g.select("#c2locationLine").transition().style("opacity", 0)
+    }
+  }
 }
 
 function casetwo_update(index) {
   if (index === 5) {
+    // $(".filter-container").addClass("ishidden");
     sortmode2 = "descend_seasons";
     upperSlider.value = 2018;
     end = 2018;
@@ -1941,10 +2225,10 @@ function casetwo_update(index) {
     casetwo_filter();
   } else if (index === 6) {
     sortmode2 = "descend_conversion_seasons";
-    // upperSlider.value = 1920;
-    $("#upper-left").val(1920)
     start = 1870;
     end = 1920;
+    $("#lower-left").val(1870)
+    $("#upper-left").val(1920)
     casetwo_filter();
   } else if (index === 7) {
     start = 1920;
@@ -1952,11 +2236,22 @@ function casetwo_update(index) {
     $("#lower-left").val(1920)
     $("#upper-left").val(1970)
     casetwo_filter();
-  } else if (index === 10) {
+  } else if (index === 8) {
+    sortmode2 = "descend_conversion_seasons";
+    start = 1970;
+    end = 2018;
+    $("#lower-left").val(1970)
+    $("#upper-left").val(2018)
+    casetwo_filter();
+  } else if (index === 9) {
+    sortmode2 = "descend_max_dynasty";
     start = 1870;
     end = 2018;
     $("#lower-left").val(1870)
     $("#upper-left").val(2018)
+    casetwo_filter();
+  } else if (index === 10) {
+    sortmode2 = "ascend_max_dryspell";
     casetwo_filter();
   }
 }
@@ -2619,6 +2914,200 @@ function casethree_update(index, prev) {
     sortmode3 = "ascend_tlq";
     casethree_filter();
   }
+}
+
+function dynasties_and_droughts(data) {
+  data.forEach(function(d, i) {
+    var index = i;
+    var dynasties = {
+        startyears: [],
+        endyears: [],
+        teams: [],
+        dynasties: []
+      },
+      prettygooddynasties = {
+        startyears: [],
+        endyears: [],
+        teams: [],
+        prettygooddynasties: []
+      },
+      dryspells = {
+        startyears: [],
+        endyears: [],
+        teams: [],
+        dryspells: []
+      }
+
+    d.newseasons.forEach(function(d, i) {
+      var title = false,
+        prettygood = false,
+        dry = true;
+      d.newteams.forEach(function(d) {
+        if (d.result === "title") title = true;
+        if (d.result === "title" || d.result === "finals" || d.result === "finalFour") prettygood = true;
+      })
+      if (title || prettygood) dry = false;
+      d.title = title;
+      d.prettygood = prettygood;
+      d.dry = dry;
+    })
+    d.dynastyseasons = d.newseasons.filter(function(d) {
+      return d.title === true;
+    })
+    d.prettygoodseasons = d.newseasons.filter(function(d) {
+      return d.prettygood === true;
+    })
+    d.dryseasons = d.newseasons.filter(function(d) {
+      return d.dry === true;
+    })
+    for (var n = 0; n < d.dynastyseasons.length; n++) {
+      d.dynastyseasons[n].dynasty = false;
+      if (n > 0 && d.dynastyseasons[n - 1].season === d.dynastyseasons[n].season - 1) d.dynastyseasons[n].dynasty = true;
+      if (n < d.dynastyseasons.length - 1 && d.dynastyseasons[n + 1].season === d.dynastyseasons[n].season + 1) d.dynastyseasons[n].dynasty = true;
+    }
+    for (var n = 0; n < d.prettygoodseasons.length; n++) {
+      d.prettygoodseasons[n].prettygood = false;
+      if (n > 0 && d.prettygoodseasons[n - 1].season === d.prettygoodseasons[n].season - 1) d.prettygoodseasons[n].prettygood = true;
+      if (n < d.prettygoodseasons.length - 1 && d.prettygoodseasons[n + 1].season === d.prettygoodseasons[n].season + 1) d.prettygoodseasons[n].prettygood = true;
+    }
+    for (var n = 0; n < d.dryseasons.length; n++) {
+      d.dryseasons[n].dry = false;
+      if (n > 0 && d.dryseasons[n - 1].season === d.dryseasons[n].season - 1) d.dryseasons[n].dry = true;
+      if (n < d.dryseasons.length - 1 && d.dryseasons[n + 1].season === d.dryseasons[n].season + 1) d.dryseasons[n].dry = true;
+    }
+    d.dynastyseasons = d.dynastyseasons.filter(function(d) {
+      return d.dynasty === true;
+    })
+    d.prettygoodseasons = d.prettygoodseasons.filter(function(d) {
+      return d.prettygood === true;
+    })
+    d.dryseasons = d.dryseasons.filter(function(d) {
+      return d.dry === true;
+    })
+    for (var n = 0; n < d.dynastyseasons.length; n++) {
+      var seasonteams = {
+        year: d.dynastyseasons[n].season,
+        teams: []
+      };
+      if (n === 0) d.dynastyseasons[n].status = "start";
+      if (n > 0 && d.dynastyseasons[n].season - d.dynastyseasons[n - 1].season === 1) d.dynastyseasons[n].status = "mid";
+      if (n < d.dynastyseasons.length - 1 && d.dynastyseasons[n + 1].season - d.dynastyseasons[n].season > 1) d.dynastyseasons[n].status = "end";
+      if (n > 0 && d.dynastyseasons[n].season - d.dynastyseasons[n - 1].season > 1) d.dynastyseasons[n].status = "start";
+      if (n === d.dynastyseasons.length - 1) d.dynastyseasons[n].status = "end";
+      if (d.dynastyseasons[n].status === "start") dynasties.startyears.push(d.dynastyseasons[n].season);
+      if (d.dynastyseasons[n].status === "end") dynasties.endyears.push(d.dynastyseasons[n].season);
+
+      d.dynastyseasons[n].teams.forEach(function(d) {
+        if (d.result === "title") seasonteams.teams.push(d.team)
+      })
+      dynasties.teams.push(seasonteams)
+    }
+    for (var n = 0; n < d.prettygoodseasons.length; n++) {
+      var seasonteams = {
+        year: d.prettygoodseasons[n].season,
+        teams: []
+      };
+      if (n === 0) d.prettygoodseasons[n].status = "start";
+      if (n > 0 && d.prettygoodseasons[n].season - d.prettygoodseasons[n - 1].season === 1) d.prettygoodseasons[n].status = "mid";
+      if (n < d.prettygoodseasons.length - 1 && d.prettygoodseasons[n + 1].season - d.prettygoodseasons[n].season > 1) d.prettygoodseasons[n].status = "end";
+      if (n > 0 && d.prettygoodseasons[n].season - d.prettygoodseasons[n - 1].season > 1) d.prettygoodseasons[n].status = "start";
+      if (n === d.prettygoodseasons.length - 1) d.prettygoodseasons[n].status = "end";
+      if (d.prettygoodseasons[n].status === "start") prettygooddynasties.startyears.push(d.prettygoodseasons[n].season);
+      if (d.prettygoodseasons[n].status === "end") prettygooddynasties.endyears.push(d.prettygoodseasons[n].season);
+
+      d.prettygoodseasons[n].teams.forEach(function(d) {
+        if (d.result === "title" || d.result === "finals" || d.result === "finalFour") seasonteams.teams.push(d.team)
+      })
+      prettygooddynasties.teams.push(seasonteams)
+    }
+    for (var n = 0; n < d.dryseasons.length; n++) {
+      var seasonteams = {
+        year: d.dryseasons[n].season,
+        teams: []
+      };
+      if (n === 0) d.dryseasons[n].status = "start";
+      if (n > 0 && d.dryseasons[n].season - d.dryseasons[n - 1].season === 1) d.dryseasons[n].status = "mid";
+      if (n < d.dryseasons.length - 1 && d.dryseasons[n + 1].season - d.dryseasons[n].season > 1) d.dryseasons[n].status = "end";
+      if (n > 0 && d.dryseasons[n].season - d.dryseasons[n - 1].season > 1) d.dryseasons[n].status = "start";
+      if (n === d.dryseasons.length - 1) d.dryseasons[n].status = "end";
+      if (d.dryseasons[n].status === "start") dryspells.startyears.push(d.dryseasons[n].season);
+      if (d.dryseasons[n].status === "end") dryspells.endyears.push(d.dryseasons[n].season);
+
+      d.dryseasons[n].teams.forEach(function(d) {
+        if (d.result != "title" && d.result != "finals" && d.result != "finalFour") seasonteams.teams.push(d.team)
+      })
+      dryspells.teams.push(seasonteams)
+    }
+    dynasties.startyears.forEach(function(d, i) {
+      var dynastyteams = [];
+      for (var j = 0; j < dynasties.teams.length; j++) {
+        if (dynasties.teams[j].year >= d && dynasties.teams[j].year <= dynasties.endyears[i]) Array.prototype.push.apply(dynastyteams, dynasties.teams[j].teams);
+      }
+      var dynasty = {
+        start: d,
+        end: dynasties.endyears[i],
+        time: dynasties.endyears[i] - d + 1,
+        teams: Array.from(new Set(dynastyteams))
+      }
+      dynasties.dynasties.push(dynasty)
+    })
+    prettygooddynasties.startyears.forEach(function(d, i) {
+      var dynastyteams = [];
+      for (var j = 0; j < prettygooddynasties.teams.length; j++) {
+        if (prettygooddynasties.teams[j].year >= d && prettygooddynasties.teams[j].year <= prettygooddynasties.endyears[i]) Array.prototype.push.apply(dynastyteams, prettygooddynasties.teams[j].teams);
+      }
+      var dynasty = {
+        start: d,
+        end: prettygooddynasties.endyears[i],
+        time: prettygooddynasties.endyears[i] - d + 1,
+        teams: Array.from(new Set(dynastyteams))
+      }
+      prettygooddynasties.prettygooddynasties.push(dynasty)
+    })
+    dryspells.startyears.forEach(function(d, i) {
+      var dynastyteams = [];
+      for (var j = 0; j < dryspells.teams.length; j++) {
+        if (dryspells.teams[j].year >= d && dryspells.teams[j].year <= dryspells.endyears[i]) Array.prototype.push.apply(dynastyteams, dryspells.teams[j].teams);
+      }
+      var dynasty = {
+        start: d,
+        end: dryspells.endyears[i],
+        time: dryspells.endyears[i] - d + 1,
+        teams: Array.from(new Set(dynastyteams))
+      }
+      dryspells.dryspells.push(dynasty)
+    })
+    d.dynasties = dynasties.dynasties;
+    d.prettygooddynasties = prettygooddynasties.prettygooddynasties;
+    d.dryspells = dryspells.dryspells;
+  })
+  data.forEach(function(d) {
+    d.dynasties.sort(function(a, b) {
+      return d3.descending(+a.time, +b.time)
+    })
+    d.prettygooddynasties.sort(function(a, b) {
+      return d3.descending(+a.time, +b.time)
+    })
+    d.dryspells.sort(function(a, b) {
+      return d3.descending(+a.time, +b.time)
+    })
+    d.max_dynasty = 0;
+    d.max_dryspell = 0;
+    d.max_prettygooddynasty = 0;
+    if (d.dynasties.length > 0) d.max_dynasty = d.dynasties[0].time;
+    if (d.dryspells.length > 0) d.max_dryspell = d.dryspells[0].time;
+    if (d.prettygooddynasties.length > 0) d.max_prettygooddynasties = d.prettygooddynasties[0].time;
+  })
+  data.sort(function(a, b) {
+    if (sortmode2 === "descend_max_dynasty") return d3.descending(+a.max_dynasty, +b.max_dynasty) || d3.descending(+a.titles, +b.titles) || d3.ascending(a.metro, b.metro);
+    if (sortmode2 === "descend_max_prettygooddynasty") return d3.descending(+a.max_prettygooddynasty, +b.max_prettygooddynasty) || d3.descending(+a.titles, +b.titles) || d3.ascending(a.metro, b.metro);
+    if (sortmode2 === "descend_max_dryspell") return d3.descending(+a.dryseasons.length, +b.dryseasons.length) || d3.descending(+a.titles, +b.titles) || d3.ascending(a.metro, b.metro);
+    if (sortmode2 === "ascend_max_dryspell") return d3.ascending(+a.dryseasons.length, +b.dryseasons.length) || d3.descending(+a.titles, +b.titles) || d3.ascending(a.metro, b.metro);
+    if (sortmode2 === "descend_total_dynasties") return d3.descending(+a.dynasties.length, +b.dynasties.length) || d3.descending(+a.titles, +b.titles) || d3.ascending(a.metro, b.metro);
+    if (sortmode2 === "descend_total_dryspells") return d3.descending(+a.dryspells.length, +b.dryspells.length) || d3.descending(+a.titles, +b.titles) || d3.ascending(a.metro, b.metro);
+    if (sortmode2 === "descend_total_prettygooddynasties") return d3.descending(+a.prettygooddynasties.length, +b.prettygooddynasties.length) || d3.descending(+a.titles, +b.titles) || d3.ascending(a.metro, b.metro);
+  })
+  return data;
 }
 
 function getLocal(metros) {
