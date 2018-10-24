@@ -1420,8 +1420,10 @@ function caseone_update(index, prev) {
     }
 
   } else if (index === 2) {
-    d3.select("#showMoreC1").style("display", "block").transition().style("opacity", 0)
     $(".filter-container").addClass("ishidden");
+    $(".filter-container").removeClass("isvisible");
+
+    d3.select("#showMoreC1").style("display", "block").transition().style("opacity", 0)
 
     if (prev === 1) {
       c1rectO = 0;
@@ -1451,6 +1453,7 @@ function caseone_update(index, prev) {
   } else if (index === 3) {
     sortmode = "descend_diff";
     $(".filter-container").removeClass("ishidden");
+
     d3.select("#showMoreC1").style("display", "block").transition().style("opacity", 1)
     c1rectO = 0;
     c1expO = 1;
@@ -1461,13 +1464,9 @@ function caseone_update(index, prev) {
     $("#switch_low_diff").removeClass("isactive")
     caseone_filter()
     if (prev === 2 && !casetwodrawn) casetwo();
-  } else if (index === 4) {
-    if (prev === 3 && !casetwodrawn) casetwo();
-    // sortmode = "ascend_diff";
-    sortmode = "descend_basic";
-    d3.select("#showMoreC1").style("display", "block").transition().style("opacity", 1)
-    caseone_filter()
-  } else if (index === 5) {} else if (index === 6) {
+  } else if (index === 5) {
+
+  } else if (index === 6) {
     caseone_filter();
   } else if (index === 7) {
     c1rectO = 0;
@@ -2173,6 +2172,16 @@ function casetwo_filter() {
       })
       .style("opacity", 0)
       .remove();
+  } else {
+    g.selectAll(".c2rect").selectAll(".dyn_rect").transition().duration(500)
+      .delay(function(d, i) {
+        return i
+      })
+      .attr("x1", function(d) {
+        return c2x(d.end)
+      })
+      .style("opacity", 0)
+      .remove();
   }
 
 
@@ -2238,8 +2247,11 @@ function casetwo_filter() {
 function casetwo_update(index) {
   if (index === 5) {
     $(".filter-container").addClass("ishidden");
+    $(".filter-container").removeClass("isvisible");
     sortmode2 = "descend_seasons";
-    upperSlider.value = 2018;
+    $("#lower-left").val(1870)
+    $("#upper-left").val(2018)
+    start = 1870;
     end = 2018;
     level = "all-levels";
     league = "all-leagues";
@@ -2266,6 +2278,7 @@ function casetwo_update(index) {
     casetwo_filter();
   } else if (index === 9) {
     $(".filter-container").addClass("ishidden");
+    $(".filter-container").removeClass("isvisible");
     d3.select("#showMoreC2").transition().style("opacity", 0).style("display", "none")
     sortmode2 = "descend_max_dynasty";
     start = 1870;
