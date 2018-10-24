@@ -447,6 +447,14 @@ function setup() {
     sortmode2 = "ascend_max_dryspell";
     casetwo_filter()
   })
+  $("#showMoreC2").on("click", function() {
+    case2num += 10;
+    // $("#case3_scrolly").css("margin-top", ((case2num - 1) * 30) - 500 + "px")
+    var newheight = $("#case2_scrolly").height();
+    newheight += (case2num - 1) * 30
+    $("#case2_scrolly").css("height", newheight + "px")
+    casetwo_filter()
+  })
 
   // Case Three Switches
   $("#casethree_los-angeles").on("mouseover", function() {
@@ -1441,8 +1449,8 @@ function caseone_update(index, prev) {
     // g.selectAll(".label:not(.c1label-" + leader + ")").transition().delay(250).style("opacity", c1expO)
 
   } else if (index === 3) {
-    $(".filter-container").removeClass("ishidden");
     sortmode = "descend_diff";
+    $(".filter-container").removeClass("ishidden");
     d3.select("#showMoreC1").style("display", "block").transition().style("opacity", 1)
     c1rectO = 0;
     c1expO = 1;
@@ -1696,22 +1704,27 @@ function casetwo() {
     .data(function(d) {
       return d.newseasons
     })
-    .enter().append("line").attr("class", "tiprect")
-    .attr("x1", function(d) {
-      return c2x(d.season)
+    .enter().append("rect").attr("class", "tiprect")
+    .attr("x", function(d) {
+      return c2x(d.season - .5)
     })
-    .attr("y1", function(d) {
-      return c2y(d.i) + 10
+    .attr("y", function(d) {
+      return c2y(d.i) - 10
     })
-    .attr("x2", function(d) {
-      return c2x(d.season)
+    .attr("width", function(d) {
+      return c2x(d.season + .5) - c2x(d.season - .5)
     })
-    .attr("y2", function(d) {
-      return c2y(d.i) + 10 - (d.newteams.length * 4)
+    .attr("height", function(d) {
+      return h
     })
-    .style("stroke-linecap", "round")
-    .style("stroke-width", 10)
-    .style("stroke", "rgba(0,0,0,0)")
+    // .style("stroke-linecap", "round")
+    // .style("stroke-width", 10)
+    // .style("stroke", "rgba(0,0,0,1)")
+    .style("fill", "rgba(0,0,0,0)")
+    .style("opacity", function(d) {
+      if (d.dry) return 0;
+      return 1;
+    })
     .on("mouseover", function(d) {
       d3.select(".c2label-" + d.i).style("font-weight", "bold")
       if (d.newteams.length > 0) c2tip.show(d);
@@ -1803,8 +1816,14 @@ function casetwo_filter() {
     if (isNaN(d.conversion)) d.conversion = 0;
   })
   if (sortmode2 === "ascend_max_dryspell" || sortmode2 === "descend_max_dryspell") {
+    // data = data.filter(function(d) {
+    //   return (d.titles > 0 && d.newseasons.length > 24) || (d.metro === local || d.metro === searched);
+    // })
     data = data.filter(function(d) {
-      return (d.titles > 0 && d.newseasons.length > 24) || d.metro === local;
+      return d.titles > 0 || d.metro === local || d.metro === searched;
+    })
+    data = data.filter(function(d) {
+      return d.newseasons.length > 24 || d.metro === local || d.metro === searched;
     })
     // data = data.filter(function(d) {
     //   return d.newseasons.length > 24 || d.metro === local;
@@ -1812,7 +1831,6 @@ function casetwo_filter() {
   } else {
     data = data;
   }
-  // data = filtereddata;
   data = dynasties_and_droughts(data);
   data.sort(function(a, b) {
     if (sortmode2 === "descend_seasons") return d3.descending(+a.newseasons.length, +b.newseasons.length) || d3.ascending(a.metro, b.metro);
@@ -1847,7 +1865,7 @@ function casetwo_filter() {
   if (searchedRank > case2num - 2 && searched != local) {
     mainData = mainData.slice(0, mainData.length - 1)
   }
-  if (searched != undefined && searchedRank > case2num - 2 && searched != local) {
+  if (searched != undefined && searchedRank > case2num - 1 && searched != local) {
     var searchData = data.filter(function(d) {
       return d.metro === searched;
     })
@@ -1916,12 +1934,12 @@ function casetwo_filter() {
     })
     .attr("x", 0)
     .attr("y", function(d, i) {
-      return c1y(i)
+      return c2y(i)
     })
     .attr("dy", 14)
     .style("text-anchor", "end")
     .style("opacity", 0)
-    .text(function(d, i) {
+    .text(function(d) {
       return d.metro
     })
     .merge(text)
@@ -1934,7 +1952,7 @@ function casetwo_filter() {
       return c2x(d.newseasons[0].season) - 10
     })
     .attr("y", function(d, i) {
-      return c1y(i)
+      return c2y(i)
     })
     .style("opacity", function(d) {
       if (d.titles > 0) return 1
@@ -2055,34 +2073,38 @@ function casetwo_filter() {
     .data(function(d) {
       return d.newseasons
     })
-  tiprect.enter().append("line").attr("class", "tiprect")
-    .attr("x1", function(d) {
-      return c2x(d.season)
+  tiprect.enter().append("rect").attr("class", "tiprect")
+    .attr("x", function(d) {
+      return c2x(d.season - .5)
     })
-    .attr("y1", function(d) {
-      return c2y(d.i) + 10
+    .attr("y", function(d) {
+      return c2y(d.i) - 10
     })
-    .attr("x2", function(d) {
-      return c2x(d.season)
+    .attr("width", function(d) {
+      return c2x(d.season + .5) - c2x(d.season - .5)
     })
-    .attr("y2", function(d) {
-      return c2y(d.i) + 10 - (d.newteams.length * 4)
+    .attr("height", function(d) {
+      return h
     })
-    .style("stroke-linecap", "round")
-    .style("stroke", "rgba(0,0,0,0)")
-    .style("stroke-width", 10)
+    // .style("stroke-linecap", "round")
+    .style("fill", "rgba(0,0,0,0)")
+    .style("opacity", function(d) {
+      if (d.dry) return 0;
+      return 1
+    })
+    // .style("stroke-width", 10)
     .merge(tiprect)
-    .attr("x1", function(d) {
-      return c2x(d.season)
+    .attr("x", function(d) {
+      return c2x(d.season - .5)
     })
-    .attr("y1", function(d) {
-      return c2y(d.i) + 10
+    .attr("y", function(d) {
+      return c2y(d.i) - 10
     })
-    .attr("x2", function(d) {
-      return c2x(d.season)
+    .attr("width", function(d) {
+      return c2x(d.season + .5) - c2x(d.season - .5)
     })
-    .attr("y2", function(d) {
-      return c2y(d.i) + 10 - (d.newteams.length * 4)
+    .attr("height", function(d) {
+      return h
     })
     .on("mouseover", function(d) {
       d3.select(".c2label-" + d.i).style("font-weight", "bold")
@@ -2164,7 +2186,7 @@ function casetwo_filter() {
         if (data[searchedAdjRank].newseasons[0] === undefined) return c2x(end) - getTextWidth(data[searchedAdjRank].metro, "bold 13px aktiv-grotesk") - offset;
         return c2x(data[searchedAdjRank].newseasons[0].season) - getTextWidth(data[searchedAdjRank].metro, "bold 13px aktiv-grotesk") - offset;
       })
-      .attr("y", c1y(searchedAdjRank) - 5)
+      .attr("y", c2y(searchedAdjRank) - 5)
       .attr("width", function() {
         var offset = 30;
         if (searched === local) offset = 45;
@@ -2194,7 +2216,7 @@ function casetwo_filter() {
         if (data[adjRank].newseasons[0] === undefined) return c2x(end) - getTextWidth(data[adjRank].metro, "bold 13px aktiv-grotesk") - 15;
         return c2x(data[adjRank].newseasons[0].season) - getTextWidth(data[adjRank].metro, "bold 13px aktiv-grotesk") - 15;
       })
-      .attr("y", c1y(adjRank))
+      .attr("y", c2y(adjRank))
     g.select(".c2label-" + camelize(local)).style("font-weight", "bold")
     if (adjRank > case2num - 2) {
       g.select("#c2locationLine")
@@ -2215,7 +2237,7 @@ function casetwo_filter() {
 
 function casetwo_update(index) {
   if (index === 5) {
-    // $(".filter-container").addClass("ishidden");
+    $(".filter-container").addClass("ishidden");
     sortmode2 = "descend_seasons";
     upperSlider.value = 2018;
     end = 2018;
@@ -2243,6 +2265,8 @@ function casetwo_update(index) {
     $("#upper-left").val(2018)
     casetwo_filter();
   } else if (index === 9) {
+    $(".filter-container").addClass("ishidden");
+    d3.select("#showMoreC2").transition().style("opacity", 0).style("display", "none")
     sortmode2 = "descend_max_dynasty";
     start = 1870;
     end = 2018;
@@ -2250,6 +2274,8 @@ function casetwo_update(index) {
     $("#upper-left").val(2018)
     casetwo_filter();
   } else if (index === 10) {
+    $(".filter-container").removeClass("ishidden");
+    d3.select("#showMoreC2").style("display", "block").transition().style("opacity", 1)
     sortmode2 = "ascend_max_dryspell";
     casetwo_filter();
   }

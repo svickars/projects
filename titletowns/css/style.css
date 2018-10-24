@@ -586,6 +586,10 @@ input[type=range] {
     cursor: pointer; }
     .showMore_wrapper .showMore:hover {
       background-color: #666; }
+    .showMore_wrapper .showMore.light {
+      background-color: #333; }
+      .showMore_wrapper .showMore.light:hover {
+        background-color: #191919; }
 
 .step_blank {
   opacity: .5;
