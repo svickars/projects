@@ -67,6 +67,30 @@ var leagues = ["MLB", "NBA", "NFL", "NHL", "CFL", "MLS", "NCAA"],
     "colour": event_colours("finalFour")
   }]
 
+var curved_annotation = d3.annotationCustomType(
+    d3.annotationLabel, {
+      "className": "custom",
+      "connector": {
+        "type": "curve"
+      },
+      "note": {
+        "align": "middle",
+        "orientation": "leftRight"
+      }
+    }),
+  note_annotation = d3.annotationCustomType(
+    d3.annotationLabel, {
+      "className": "custom-note",
+      "connector": {
+        "end": "arrow"
+      },
+      "note": {
+        "align": "middle",
+        "orientation": "leftRight"
+      }
+    }),
+  padding = 5;
+
 // DATA
 // const case1 = [];
 var case1data = [],
@@ -1896,7 +1920,7 @@ function casethree(first) {
     rank, adjRank, searchedRank, searchedAdjRank,
     total_titles = 0,
     total_pop = 0,
-    x_axis_translateY = (sideD.h / 2) + 30;
+    x_axis_translateY = (sideD.h / 2 + 15);
   leader = 0
 
   var data = case3data;
@@ -1993,11 +2017,11 @@ function casethree(first) {
     c3y.domain([0, 0]).range([sideD.h / 2, sideD.h / 2]);
     yAxis.tickFormat("");
   } else if (c3status === "scatter_basic") {
-    x_axis_translateY = sideD.h + 30;
+    x_axis_translateY = sideD.h + 15;
     c3y.domain([0, 80]).range([sideD.h, 0]);
   } else if (c3status === "scatter_tlq") {
     d3.select("#showMoreC3").transition().style("opacity", 0).style("display", "none")
-    x_axis_translateY = sideD.h + 30;
+    x_axis_translateY = sideD.h + 15;
     c3y.domain([0, 80]).range([sideD.h, 0]);
     c3r.domain([0, 1, 20, d3.max(data, function(d) {
       return d.tlq;
@@ -2035,7 +2059,9 @@ function casethree(first) {
       g = svg.append("g").attr("class", "group3")
       .attr("transform", "translate(" + sideD.left + "," + sideD.top + ")"),
       legendg = legend.append("g").attr("class", "c3legend")
-      .attr("transform", "translate(" + sideD.left + ")");
+      .attr("transform", "translate(" + sideD.left + ")"),
+      annotationg = g.append("g").attr("class", "annotationg"),
+      noteg = g.append("g").attr("class", "noteg");
     svg.append("g")
       .attr("class", "x axis c3axis")
       .attr("transform", "translate(" + sideD.left + "," + x_axis_translateY + ")")
@@ -2063,7 +2089,9 @@ function casethree(first) {
     var g = d3.select(".group3"),
       legendg = d3.select(".c3legend"),
       gbehind = d3.select(".group3-behind"),
-      grect = d3.select(".grect");
+      grect = d3.select(".grect"),
+      annotationg = d3.select(".annotationg"),
+      noteg = d3.select(".noteg");
     svg.select(".x.axis.c3axis").transition().duration(250).attr("transform", "translate(" + sideD.left + "," + x_axis_translateY + ")").call(xAxis);
     svg.select(".y.axis.c3axis").transition().duration(250).call(yAxis);
   }
@@ -2135,6 +2163,157 @@ function casethree(first) {
     })
     .style("opacity", 1);
   circle.exit().transition().duration(500).style("opacity", 0).remove();
+
+  var annotations = [];
+
+  if (c3status === "first" || c3status === "scatter_basic" || c3status === "scatter_tlq") {
+    var annotation1 = data.filter(function(d) {
+        return d.key === "New York Metro Area"
+      })[0],
+      annotation2 = data.filter(function(d) {
+        return d.key === "Greater Los Angeles, CA"
+      })[0];
+    annotations.push(({
+      note: {
+        title: "New York Metro Area",
+        bgPadding: 20
+      },
+      x: annotation1.population,
+      y: annotation1.newvalues.length,
+      dx: -25,
+      dy: -50
+    }));
+    annotations.push(({
+      note: {
+        title: "Greater Los Angeles",
+        bgPadding: 20
+      },
+      x: annotation2.population,
+      y: annotation2.newvalues.length,
+      dx: 25,
+      dy: -25
+    }));
+    if (local != undefined && local != "New York Metro Area" && local != "Greater Los Angeles, CA") {
+      var localannotation = data.filter(function(d) {
+        return d.key === local;
+      })[0];
+      annotations.push(({
+        note: {
+          title: local,
+          bgPadding: 20
+        },
+        className: "annotation-local",
+        x: localannotation.population,
+        y: localannotation.newvalues.length,
+        dx: 25,
+        dy: -25
+      }));
+    }
+    if (searched != undefined && searched != "New York Metro Area" && searched != "Greater Los Angeles, CA") {
+      var searchedannotation = data.filter(function(d) {
+        return d.key === searched;
+      })[0];
+      annotations.push(({
+        note: {
+          title: searched,
+          bgPadding: 20
+        },
+        className: "annotation-local",
+        x: searchedannotation.population,
+        y: searchedannotation.newvalues.length,
+        dx: 25,
+        dy: -50
+      }));
+    }
+  }
+
+  if (c3status === "first") {
+    notes = [{
+      note: {
+        title: "Larger Cities"
+      },
+      x: c3x(16000000),
+      y: 25,
+      dx: -25,
+      dy: 0,
+      color: "red"
+    }, {
+      note: {
+        title: "Smaller Cities"
+      },
+      x: c3x(6000000),
+      y: 25,
+      dx: 25,
+      dy: 0,
+      color: "red"
+    }]
+  } else if (c3status === "scatter_basic" || c3status === "scatter_tlq") {
+    notes = [{
+      note: {
+        title: "More titles per capita"
+      },
+      x: c3x(0),
+      y: c3y(79),
+      dx: 25,
+      dy: 25,
+      color: "red"
+    }]
+  }
+
+  annotations.forEach(function(d) {
+    d.x = c3x(d.x);
+    d.y = c3y(d.y);
+    d.connector = {
+      points: [
+        [(d.dx / 2), (d.dy / 2) + (d.dy / 5)]
+      ]
+    };
+  });
+
+  var makeAnnotations = d3.annotation().textWrap(150).type(curved_annotation);
+  var makeNotes = d3.annotation().textWrap(150).type(note_annotation);
+
+  if (c3status === "first" && first) {
+    makeAnnotations.annotations(annotations);
+    annotationg.call(makeAnnotations);
+    makeNotes.annotations(notes);
+    noteg.call(makeNotes);
+  } else if (c3status === "first" & !first) {
+    makeAnnotations.annotations(annotations);
+    makeAnnotations.update();
+    annotationg.call(makeAnnotations);
+    makeNotes.annotations(notes);
+    makeNotes.update();
+    noteg.call(makeNotes);
+  } else if (c3status === "scatter_basic") {
+    makeAnnotations.annotations(annotations);
+    makeNotes.annotations(notes);
+    noteg.transition().style("opacity", 0);
+    setTimeout(function() {
+      makeAnnotations.update();
+      makeNotes.update();
+      annotationg.call(makeAnnotations).style("opacity", 0)
+        .transition().duration(500).delay(2000)
+        .style("opacity", 1);
+      noteg.call(makeNotes).style("opacity", 0)
+        .transition().duration(500).delay(1000)
+        .style("opacity", 1);
+    }, 250);
+  } else if (c3status === "scatter_tlq") {
+    makeAnnotations.annotations(annotations);
+    makeAnnotations.update();
+    annotationg.call(makeAnnotations).style("opacity", 0)
+      .transition().duration(500).style("opacity", 1);
+    makeNotes.annotations(notes);
+    makeNotes.update();
+    noteg.call(makeNotes).style("opacity", 0)
+      .transition().duration(500).style("opacity", 1);
+  } else {
+    annotationg.transition().style("opacity", 0);
+    noteg.transition().style("opacity", 0);
+  }
+
+  noteg.selectAll("tspan").attr("dy", "1em")
 
   if (c3status === "ordering") {
     legendg.selectAll(".c3_legend_phase2_circle")

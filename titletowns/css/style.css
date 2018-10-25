@@ -698,6 +698,13 @@ input[type=range] {
   font-family: "Inconsolata", monospace !important;
   text-transform: uppercase; }
 
+.custom-note text {
+  font-family: "Inconsolata", monospace !important;
+  text-transform: uppercase;
+  fill: #666 !important;
+  letter-spacing: 1px;
+  font-size: 10px !important; }
+
 .filter-container {
   position: fixed;
   bottom: 0;
