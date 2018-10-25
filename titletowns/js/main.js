@@ -4,15 +4,15 @@ var local_coords = [],
   searchArray = [],
   sortmode = "descend_basic",
   sortmode2 = "descend_seasons",
-  sortmode3 = "descend_basic",
+  sortmode3 = "ascend_population",
   local, userlocal, searched, level, league, start, end;
 var sideD, c1x, c1y, c1tip, c2x, c2y, c3x, c3y, c3r, c3c, num = 10,
   case2num = 10,
-  case3num = 11,
+  case3num = 10,
   h = 30,
   radius = d3.scaleLinear().domain([0, 148]).range([3, 2]),
   casetwodrawn = false,
-  casethreestatus = "blank";
+  c3status = "first";
 
 var c1rectO = 1,
   c1expO = 0,
@@ -92,13 +92,13 @@ function resize() {
   if (!small_screen) {
     num = 20;
     case2num = 20;
-    case3num = 21;
+    case3num = 20;
   }
 
   if (windowH < 900 && windowH >= 700) {
     num = 15;
     case2num = 15;
-    case3num = 16;
+    case3num = 15;
   }
 
   sideD = {
@@ -130,7 +130,7 @@ function processData(error, metros, titleData, seasonData) {
   Array.prototype.push.apply(case3data, titleData);
   getLocal(metros);
   caseone(true);
-  casethree();
+  casethree("first", true);
 } // end processData
 
 function init() {
@@ -163,13 +163,13 @@ function setup() {
   if (!small_screen) {
     num = 20;
     case2num = 20;
-    case3num = 21;
+    case3num = 20;
   }
 
   if (windowH < 900 && windowH >= 700) {
     num = 15;
     case2num = 15;
-    case3num = 16;
+    case3num = 15;
   }
 
   sideD = {
@@ -211,19 +211,19 @@ function setup() {
     };
     caseone();
     if (casetwodrawn) casetwo();
-    casethree_filter()
+    casethree()
   });
   $("#filter-league").change(function() {
     league = $("#filter-league :selected").data("value");
     caseone();
     if (casetwodrawn) casetwo();
-    casethree_filter()
+    casethree()
   });
   $("#filter-sport").change(function() {
     league = $("#filter-sport :selected").data("value");
     caseone();
     if (casetwodrawn) casetwo();
-    casethree_filter()
+    casethree()
   });
 
   var w = 213,
@@ -253,7 +253,7 @@ function setup() {
   upperSlider.onchange = function() {
     caseone();
     if (casetwodrawn) casetwo();
-    casethree_filter()
+    casethree()
   };
   upperSlider.oninput = function() {
     start = parseInt(lowerSlider.value);
@@ -283,7 +283,7 @@ function setup() {
   lowerSlider.onchange = function() {
     caseone();
     if (casetwodrawn) casetwo();
-    casethree_filter()
+    casethree()
   }
   lowerSlider.oninput = function() {
     start = parseInt(lowerSlider.value);
@@ -350,13 +350,13 @@ function setup() {
         searched = $("#citysearch-left").val()
         caseone();
         if (casetwodrawn) casetwo();
-        casethree_filter();
+        casethree();
       },
       onKeyEnterEvent: function() {
         searched = $("#citysearch-left").val()
         caseone();
         if (casetwodrawn) casetwo();
-        casethree_filter();
+        casethree();
       }
     }
   };
@@ -459,34 +459,63 @@ function setup() {
   $("#casethree_los-angeles").on("mouseover", function() {
     userlocal = local;
     local = "Greater Los Angeles, CA";
-    casethree_filter();
+    casethree();
   }).on("mouseout", function() {
     local = userlocal;
-    casethree_filter();
+    casethree();
   })
   $("#casethree_newyork").on("mouseover", function() {
     userlocal = local;
     local = "New York Metro Area";
-    casethree_filter();
+    casethree();
   }).on("mouseout", function() {
     local = userlocal;
-    casethree_filter();
+    casethree();
   })
   $("#casethree_boston").on("mouseover", function() {
     userlocal = local;
     local = "Greater Boston, MA";
-    casethree_filter();
+    casethree();
   }).on("mouseout", function() {
     local = userlocal;
-    casethree_filter();
+    casethree();
   })
   $("#casethree_bay-area").on("mouseover", function() {
     userlocal = local;
     local = "San Francisco Bay Area, CA";
-    casethree_filter();
+    casethree();
   }).on("mouseout", function() {
     local = userlocal;
-    casethree_filter();
+    casethree();
+  })
+
+  $("#switch_c3_under").on("click", function() {
+    $("#switch_c3_under").addClass("isactive");
+    $("#switch_c3_over").removeClass("isactive");
+    $("#switch_c3_scatter").removeClass("isactive");
+    sortmode3 = "ascend_tlq";
+    c3status = "ordered_under"
+    if (c3status === "scatter_tlq") c3status = "ordering"
+    casethree();
+    c3status = "ordered_under"
+  })
+  $("#switch_c3_over").on("click", function() {
+    $("#switch_c3_under").removeClass("isactive");
+    $("#switch_c3_over").addClass("isactive");
+    $("#switch_c3_scatter").removeClass("isactive");
+    sortmode3 = "descend_tlq";
+    c3status = "ordered_over"
+    if (c3status === "scatter_tlq") c3status = "ordering"
+    casethree();
+    c3status = "ordered_over"
+  })
+  $("#switch_c3_scatter").on("click", function() {
+    $("#switch_c3_under").removeClass("isactive");
+    $("#switch_c3_over").removeClass("isactive");
+    $("#switch_c3_scatter").addClass("isactive");
+    sortmode3 = "descend_population";
+    c3status = "scatter_tlq"
+    casethree();
   })
 }
 
@@ -1813,181 +1842,13 @@ function casetwo_update(index) {
   }
 }
 
-function casethree() {
+function casethree(first) {
   var filter = filters[level][league],
+    rank, adjRank, searchedRank, searchedAdjRank,
     total_titles = 0,
     total_pop = 0,
-    leader = 0;
-  // sideD.left = 50;
-
-  var data = case3data;
-  data.forEach(function(d) {
-    d.values = d.values.sort(function(a, b) {
-      return d3.ascending(+a.year, +b.year);
-    });
-    d.newvalues = d.values.filter(function(d) {
-      return d.year >= start && d.year <= end && $.inArray(d.sport, filter) > -1;
-    });
-    total_titles += d.newvalues.length;
-    total_pop += d.population;
-  });
-  data = data.filter(function(d) {
-    return d.newvalues.length > 0;
-  });
-  data.forEach(function(d) {
-    d.tlq = (d.newvalues.length / d.population) / (total_titles / total_pop)
-  });
-  data = data.sort(function(a, b) {
-    // return d3.descending(+a.tlq, +b.tlq) || d3.ascending(a.key, b.key);
-    return d3.ascending(+a.population, +b.population) || d3.ascending(a.key, b.key);
-  })
-  // var addData = data.slice(0, num - 1);
-  // var leadingcity = addData[0].key;
-  // if (local != undefined) {
-  //   addData = addData.filter(function(d) {
-  //     return d.key != local
-  //   })
-  //   data = data.filter(function(d, i) {
-  //     if (d.key === local) rank = i;
-  //     return d.key === local
-  //   })
-  //   Array.prototype.push.apply(data, addData);
-  // } else {
-  //   data = addData
-  // }
-
-  c3x = d3.scaleLinear().domain([0, 22000000]).range([0, sideD.w]);
-  c3y = d3.scaleLinear().domain([0, 80]).range([(case3num * h), 0])
-  c3r = d3.scaleLinear().domain([0, 1, 20, d3.max(data, function(d) {
-    return d.tlq;
-  })]).range([1, 3, 8, 10])
-  c3c = d3.scaleLinear().domain([0, .5, 1, 10, d3.max(data, function(d) {
-    return d.tlq;
-  })]).range(["#fef198", "#cbb88b", "#9b827c", "#6f4d6b", "#500066"])
-
-  if (casethreestatus === "blank") {
-    c3y.domain([0, 0]).range([sideD.h / 2, sideD.h / 2]);
-    c3r.domain([0, 200]).range([3, 3]);
-    var x_translate = sideD.left + "," + ((sideD.h / 2) + sideD.top + 10)
-  } else if (casethreestatus === "scatter") {
-    c3y.domain([0, 0]).range([sideD.h / 2, sideD.h / 2]);
-    c3r.domain([0, 200]).range([3, 3]);
-    var x_translate = sideD.left + "," + (sideD.h + sideD.top);
-  }
-  // c3y = d3.scaleBand().domain(d3.range(case3num)).range([0, case3num * h]);
-
-  var svg = d3.select(".case3").append("svg")
-    .style("overlow", "visible")
-    .attr("width", sideD.w + sideD.left + sideD.right)
-    .attr("height", sideD.h + sideD.bottom + sideD.top);
-  var legend = d3.select("#case3_header").append("svg")
-    .attr("width", sideD.w + sideD.left + sideD.right)
-    .attr("height", h)
-    .style("margin-bottom", ".5rem")
-    .style("margin-top", "1rem");
-  svg.append("g").attr("class", "grect")
-    .attr("transform", "translate(" + sideD.left + "," + sideD.top + ")");
-  svg.append("g").attr("class", "group3-behind")
-    .attr("transform", "translate(" + sideD.left + "," + sideD.top + ")");
-  var g = svg.append("g").attr("class", "group3")
-    .attr("transform", "translate(" + sideD.left + "," + sideD.top + ")");
-  var legendg = legend.append("g").attr("class", "c3legend")
-    .attr("transform", "translate(" + sideD.left + ")");
-  var xAxis = d3.axisBottom(c3x)
-    // .tickSize(case3num * h)
-    .tickSize(0)
-    .tickFormat(d3.format(".2s"))
-    .tickValues([2000000, 4000000, 6000000, 8000000, 10000000, 12000000, 14000000, 16000000, 18000000, 20000000, 22000000]);
-  var yAxis = d3.axisLeft(c3y)
-    .tickFormat(function(d) {
-      if (casethreestatus === "blank") {
-        return ""
-      } else {
-        if (d === 80) return d + " titles";
-        return d;
-      }
-    })
-    .tickSize(-sideD.w)
-
-  // legendg.selectAll(".c3_legend_phase1_rect")
-  //   .data(c3c.range())
-  //   .enter().append("rect").attr("class", "c3_legend_phase1_rect")
-  //   .attr("x", function(d, i) {
-  //     return 30 + (15 * i);
-  //   })
-  //   .attr("y", 20)
-  //   .attr("width", 15)
-  //   .attr("height", 10)
-  //   .style("fill", function(d) {
-  //     return d;
-  //   })
-  //
-  // legendg.append("text")
-  //   .attr("class", "c3_legend_phase1_text")
-  //   .attr("x", 0)
-  //   .attr("y", 10)
-  //   .style("font-weight", "bold")
-  //   .text("PERFORMANCE VS EXPECATION")
-  //
-  // legendg.append("text")
-  //   .attr("class", "c3_legend_phase1_text")
-  //   .attr("x", 35)
-  //   .attr("y", 25)
-  //   .attr("dx", -3)
-  //   .attr("dy", 4)
-  //   .style("text-anchor", "end")
-  //   .text("BELOW")
-  //
-  // legendg.append("text")
-  //   .attr("class", "c3_legend_phase1_text")
-  //   .attr("x", 30 + (15 * c3c.range().length) + 15)
-  //   .attr("y", 25)
-  //   .attr("dx", 3)
-  //   .attr("dy", 4)
-  //   .style("text-anchor", "start")
-  //   .text("ABOVE")
-
-  svg.append("g")
-    .attr("class", "x axis c3axis")
-    .attr("transform", "translate(" + x_translate + ")")
-    .call(xAxis)
-    .append("text")
-    .attr("class", "xlabel")
-    .attr("x", sideD.w / 2)
-    .attr("y", 30)
-    .style("text-anchor", "middle")
-    .text("Population");
-  svg.append("g")
-    .attr("class", "y axis c3axis")
-    .attr("transform", "translate(" + sideD.left + "," + sideD.top + ")")
-    .call(yAxis);
-
-  var circle = g.selectAll(".city-circle")
-    .data(data)
-    .enter().append("circle").attr("class", "city-circle")
-    .attr("cx", function(d) {
-      return c3x(d.population)
-    })
-    .attr("cy", function(d) {
-      return c3y(d.newvalues.length)
-    })
-    .attr("r", function(d) {
-      return c3r(d.tlq)
-    })
-    .style("fill", function(d) {
-      return c3c(d.tlq)
-    })
-  // .style("stroke", "#b5b5b5")
-  // .style("opacity", .75)
-
-}
-
-function casethree_filter() {
-  var filter = filters[level][league],
-    total_titles = 0,
-    total_pop = 0,
-    leader = 0,
-    x_translate = sideD.left + "," + (sideD.h + 300);
+    x_axis_translateY = (sideD.h / 2) + 30;
+  leader = 0
 
   var data = case3data;
   data.forEach(function(d) {
@@ -2009,204 +1870,214 @@ function casethree_filter() {
   data = data.sort(function(a, b) {
     if (sortmode3 === "descend_tlq") return d3.descending(+a.tlq, +b.tlq) || d3.ascending(a.key, b.key)
     if (sortmode3 === "ascend_tlq") return d3.ascending(+a.tlq, +b.tlq) || d3.ascending(a.key, b.key)
-    return d3.ascending(+a.population, +b.population) || d3.ascending(a.key, b.key);
+    if (sortmode3 === "ascend_population") return d3.ascending(+a.population, +b.population) || d3.ascending(a.key, b.key);
   })
-  if (casethreestatus === "ordered" || casethreestatus === "ordering") {
-    var addData = data.slice(0, num - 1);
-    var leadingcity = addData[0].key;
-    if (local != undefined) {
-      addData = addData.filter(function(d) {
-        return d.key != local
-      })
-      data = data.filter(function(d, i) {
-        if (d.key === local) rank = i;
-        return d.key === local
-      })
-      Array.prototype.push.apply(data, addData);
+  data.forEach(function(d, i) {
+    if (d.key === local) rank = i;
+    if (d.key === searched) searchedRank = i;
+  })
+
+  adjRank = rank;
+  searchedAdjRank = 0;
+  if (rank > case3num - 2) adjRank = case3num - 1;
+  if (searchedRank < case3num) searchedAdjRank = searchedRank;
+  if (searched === local && rank > case3num - 2) searchedAdjRank = adjRank;
+  if (searchedRank > case3num - 1 && searchedAdjRank === 0) leader = 1;
+
+  if (c3status != "first" && c3status != "scatter_basic" && c3status != "scatter_tlq") {
+    if (adjRank > case3num - 2) {
+      var mainData = data.slice(0, case3num - 1)
     } else {
-      data = addData
+      var mainData = data.slice(0, case3num)
     }
+    if (searchedRank > case3num - 2 && searched != local) {
+      mainData = mainData.slice(0, mainData.length - 1)
+    }
+    if (searched != undefined && searchedRank > case3num - 1 && searched != local) {
+      var searchData = data.filter(function(d) {
+        return d.key === searched;
+      })
+      mainData = mainData.filter(function(d) {
+        return d.key != searched;
+      })
+      Array.prototype.push.apply(searchData, mainData)
+      mainData = searchData;
+    }
+    if (local != undefined && rank > case3num - 2) {
+      var localData = data.filter(function(d) {
+        return d.key === local;
+      })
+      Array.prototype.push.apply(mainData, localData)
+    }
+    data = mainData;
   }
 
-  c3y = d3.scaleLinear().domain([0, 80]).range([300, 0]);
+  c3y = d3.scaleLinear();
+  c3r = d3.scaleLinear().domain([0, 200]).range([3, 3]);
   c3x = d3.scaleLinear().domain([0, 22000000]).range([0, sideD.w]);
-  c3r = d3.scaleLinear().domain([0, 1, 20, d3.max(data, function(d) {
-    return d.tlq;
-  })]).range([2, 4, 8, 12])
   c3c = d3.scaleLinear().domain([0, .5, 1, 10, d3.max(data, function(d) {
     return d.tlq;
-  })]).range(["#500066", "#6f4d6b", "#9b827c", "#cbb88b", "#fef198"])
+  })]).range(["#b21bb6", "#B993BA", "#DBCBDA", "#F3AB67", "#F6902F"]);
 
-  if (casethreestatus === "blank") {
-    c3y.domain([0, 80]).range([150, 150]);
-    c3r.domain([0, 200]).range([3, 3]);
-    x_translate = sideD.left + "," + ((150) + sideD.top + 10);
-  } else if (casethreestatus === "scattering" || casethreestatus === "scatter") {
-    c3y.domain([0, 80]).range([300, 0]);
-    c3r.domain([0, 200]).range([3, 3]);
-    x_translate = sideD.left + "," + (300 + sideD.top);
-  } else if (casethreestatus === "scattersized") {
-    c3r.domain([0, 1, 20, d3.max(data, function(d) {
-      return d.tlq;
-    })]).range([1, 3, 8, 12]);
-    x_translate = sideD.left + "," + (300 + sideD.top);
-  } else if (casethreestatus === "ordered" || casethreestatus === "ordering") {
-    var extent = d3.extent(data, function(d) {
-      return d.tlq;
-    });
-    c3x = d3.scaleLinear().domain([0, 1, 10, extent[1]]).range([0, sideD.w / 3, sideD.w * (3 / 6), sideD.w - 25]);
-    c3y = d3.scaleBand().domain(d3.range(case3num)).range([0, case3num * h]);
-    x_translate = sideD.left + "," + (case3num * h);
-  }
-
-  var svg = d3.select(".case3 svg").transition()
-    .attr("width", sideD.w + sideD.left + sideD.right)
-    .attr("height", 300 + sideD.bottom + sideD.top);
-  var g = d3.select(".group3");
-  var legendg = d3.select(".c3legend")
-  var gbehind = d3.select(".group3-behind");
-  var grect = d3.select(".grect");
+  var xAxis = d3.axisBottom(c3x)
+    .tickSize(0)
+    .tickFormat(d3.format(".2s"))
+    .tickValues([2000000, 4000000, 6000000, 8000000, 10000000, 12000000, 14000000, 16000000, 18000000, 20000000, 22000000]);
   var yAxis = d3.axisLeft(c3y)
     .tickFormat(function(d) {
-      if (casethreestatus === "blank" || casethreestatus === "ordered" || casethreestatus === "ordering") {
-        return ""
-      } else {
-        if (d === 80) return d + " titles";
-        return d;
-      }
-    });
+      if (d === 80) return d + " titles";
+      return d;
+    })
+    .tickSize(-sideD.w);
 
+  if (c3status === "first") {
+    c3y.domain([0, 0]).range([sideD.h / 2, sideD.h / 2]);
+    yAxis.tickFormat("");
+  } else if (c3status === "scatter_basic") {
+    x_axis_translateY = sideD.h + 30;
+    c3y.domain([0, 80]).range([sideD.h, 0]);
+  } else if (c3status === "scatter_tlq") {
+    x_axis_translateY = sideD.h + 30;
+    c3y.domain([0, 80]).range([sideD.h, 0]);
+    c3r.domain([0, 1, 20, d3.max(data, function(d) {
+      return d.tlq;
+    })]).range([1, 3, 8, 10])
+  } else if (c3status === "ordering" || c3status === "ordered_over" || c3status === "ordered_under") {
+    var extent = d3.extent(data, function(d) {
+      return d.tlq;
+    })
+    c3x.domain([0, 1, 10, extent[1]]).range([0, sideD.w / 3, sideD.w * (3 / 6), sideD.w - 25])
+    c3y = d3.scaleBand().domain(d3.range(case3num)).range([0, case3num * h]);
+    c3r.domain([0, 1, 20, d3.max(data, function(d) {
+      return d.tlq;
+    })]).range([1, 3, 8, 10])
+    yAxis.tickSize(0).tickFormat("");
+    xAxis.tickSize(0).tickFormat("");
+    d3.select(".xlabel").transition().style("opacity", 0)
+    // svg.select(".xlabel").style("opacity", 0)
+  }
 
-  if (casethreestatus === "ordered" || casethreestatus === "ordering") {
-    yAxis.tickSize(0);
-
-    var xAxis = d3.axisTop(c3x)
-      .tickSize(0)
-      // .tickValues([0, .5, 1, 5, 10, 120])
-      .tickFormat(function(d) {
-        return "";
-      })
-
-    svg.select(".y.axis.c3axis").transition().duration(250).call(yAxis);
-    svg.select(".x.axis.c3axis").transition().duration(250).attr("transform", "translate(" + x_translate + ")").call(xAxis);
-    svg.select(".xlabel").transition().style("opacity", 0)
+  if (first) {
+    var svg = d3.select(".case3").append("svg")
+      .attr("width", sideD.w + sideD.left + sideD.right)
+      .attr("height", sideD.h + sideD.bottom + sideD.top),
+      // .style("overflow", "visible"),
+      legend = d3.select("#case3_header").append("svg")
+      .attr("width", sideD.w + sideD.left + sideD.right)
+      .attr("height", h)
+      .style("margin-bottom", ".5rem")
+      .style("margin-top", "1rem"),
+      grect = svg.append("g").attr("class", "grect")
+      .attr("transform", "translate(" + sideD.left + "," + sideD.top + ")"),
+      gbehind = svg.append("g").attr("class", "group3-behind")
+      .attr("transform", "translate(" + sideD.left + "," + sideD.top + ")"),
+      g = svg.append("g").attr("class", "group3")
+      .attr("transform", "translate(" + sideD.left + "," + sideD.top + ")"),
+      legendg = legend.append("g").attr("class", "c3legend")
+      .attr("transform", "translate(" + sideD.left + ")");
+    svg.append("g")
+      .attr("class", "x axis c3axis")
+      .attr("transform", "translate(" + sideD.left + "," + x_axis_translateY + ")")
+      .call(xAxis)
+      .append("text")
+      .attr("class", "xlabel")
+      .attr("x", sideD.w / 2)
+      .attr("y", 30)
+      .style("text-anchor", "middle")
+      .text("Population");
+    svg.append("g")
+      .attr("class", "y axis c3axis")
+      .attr("transform", "translate(" + sideD.left + "," + sideD.top + ")")
+      .call(yAxis);
   } else {
-    yAxis.tickSize(-sideD.w);
-
-    var xAxis = d3.axisBottom(c3x).tickValues([2000000, 4000000, 6000000, 8000000, 10000000, 12000000, 14000000, 16000000, 18000000, 20000000, 22000000])
-      .tickSize(0)
-      .tickFormat(d3.format(".2s"));
-
+    var svg = d3.select(".case3 svg").transition()
+      .attr("width", sideD.w + sideD.left + sideD.right)
+      .attr("height", sideD.h + sideD.bottom + sideD.top),
+      g = d3.select(".group3"),
+      legendg = d3.select(".c3legend"),
+      gbehind = d3.select(".group3-behind"),
+      grect = d3.select(".grect");
+    svg.select(".x.axis.c3axis").transition().duration(250).attr("transform", "translate(" + sideD.left + "," + x_axis_translateY + ")").call(xAxis);
     svg.select(".y.axis.c3axis").transition().duration(250).call(yAxis);
-    svg.select(".x.axis.c3axis").transition().duration(250).attr("transform", "translate(" + x_translate + ")").call(xAxis);
-    svg.select(".xlabel").transition().style("opacity", 1)
   }
 
-  if (casethreestatus === "scattering") {
-    g.selectAll(".city-circle").transition().duration(250)
-      .delay(250)
-      .attr("cy", c3y(0))
-      .transition().duration(function(d) {
-        return 500 + (d.newvalues.length)
-      })
-      .delay(function(d, i) {
-        return 250 + (i * 10);
-      })
-      .attr("cy", function(d) {
-        return c3y(d.newvalues.length);
-      });
-  } else if (casethreestatus === "ordering") {
-    var connect = gbehind.selectAll("line")
-      .data(data, function(d) {
-        return d.key;
-      });
-    connect.enter().append("line")
-      .merge(connect).transition().duration(250)
-      .attr("x1", c3x(1))
-      .attr("x2", c3x(1))
-      .attr("y1", function(d, i) {
-        return c3y(i) + (h / 2)
-      })
-      .attr("y2", function(d, i) {
-        return c3y(i) + (h / 2)
-      })
-      .style("stroke", function(d) {
-        return c3c(d.tlq)
-      })
-      .style("stroke-width", 2)
-      .transition().duration(250)
-      .delay(function(d, i) {
-        return 100 * i;
-      })
-      .attr("x2", function(d) {
-        return c3x(d.tlq)
-      })
-      .style("stroke", function(d) {
-        return c3c(d.tlq)
-      });
-    connect.exit().transition().duration(250).style("opacity", 0).remove();
+  var circle = g.selectAll(".city-circle")
+    .data(data, function(d) {
+      return d.key;
+    });
+  circle.enter().append("circle").attr("class", "city-circle")
+    .attr("cx", function(d) {
+      if (c3status === "first" || c3status === "scatter_basic" || c3status === "scatter_tlq") return c3x(0);
+      if (c3status === "ordering" || c3status === "ordered_over" || c3status === "ordered_under") return c3x(1);
+    })
+    .attr("cy", function(d, i) {
+      if (c3status === "first" || c3status === "scatter_tlq") return c3y(d.newvalues.length);
+      if (c3status === "scatter_basic") return c3y(0);
+      if (c3status === "ordering" || c3status === "ordered_over" || c3status === "ordered_under") return c3y(i) + (h / 2);
+    })
+    .attr("r", function(d) {
+      return 0;
+    })
+    .style("fill", function(d) {
+      return c3c(d.tlq);
+    })
+    .style("opacity", 0)
+    .merge(circle).transition().duration(function() {
+      if (c3status === "ordered_over" || c3status === "ordered_under") return 500;
+      return 250;
+    })
+    .delay(function(d, i) {
+      if (c3status === "first" || c3status === "scatter_basic") return 250;
+      if (c3status === "scatter_tlq") return i * 10;
+      return 0;
+    })
+    .attr("cx", function(d) {
+      if (c3status === "first" || c3status === "scatter_basic" || c3status === "scatter_tlq") return c3x(d.population);
+      if (c3status === "ordering") return c3x(1)
+      if (c3status === "ordered_over" || c3status === "ordered_under") return c3x(d.tlq);
+    })
+    .attr("cy", function(d, i) {
+      if (c3status === "first" || c3status === "scatter_tlq") return c3y(d.newvalues.length);
+      if (c3status === "scatter_basic") return c3y(0);
+      if (c3status === "ordering" || c3status === "ordered_over" || c3status === "ordered_under") return c3y(i) + (h / 2);
+    })
+    .attr("r", function(d) {
+      return c3r(d.tlq);
+    })
+    .transition().duration(function(d) {
+      if (c3status === "scatter_basic") return 250 + d.newvalues.length;
+      if (c3status === "ordering") return 250;
+      if (c3status === "ordered_over" || c3status === "ordered_under") return 500;
+      return 0;
+    })
+    .delay(function(d, i) {
+      if (c3status === "scatter_basic") return 10 * i;
+      if (c3status === "ordering") return i * 50;
+      return 0;
+    })
+    .attr("cx", function(d) {
+      if (c3status === "first" || c3status === "scatter_basic" || c3status === "scatter_tlq") return c3x(d.population);
+      if (c3status === "ordering" || c3status === "ordered_over" || c3status === "ordered_under") return c3x(d.tlq);
+    })
+    .attr("cy", function(d, i) {
+      if (c3status === "first" || c3status === "scatter_basic" || c3status === "scatter_tlq") return c3y(d.newvalues.length);
+      if (c3status === "ordering" || c3status === "ordered_over" || c3status === "ordered_under") return c3y(i) + (h / 2);
+    })
+    .style("fill", function(d) {
+      return c3c(d.tlq);
+    })
+    .style("opacity", 1);
+  circle.exit().transition().duration(500).style("opacity", 0).remove();
 
-    var circle = g.selectAll(".city-circle")
-      .data(data, function(d) {
-        return d.key
-      })
-    circle.enter().append("circle").attr("class", "city-circle")
-      .merge(circle).transition().duration(250)
-      .attr("cx", c3x(1))
-      .attr("cy", function(d, i) {
-        return c3y(i) + (h / 2)
-      })
-      .transition().duration(250)
-      .delay(function(d, i) {
-        return 100 * i
-      })
-      .attr("cx", function(d) {
-        return c3x(d.tlq)
-      })
-    circle.exit().transition().duration(250).style("opacity", 0).remove();
-  } else if (casethreestatus === "ordered") {
-    var connect = gbehind.selectAll("line")
-      .data(data, function(d) {
-        return d.key;
-      });
-    connect.enter().append("line")
-      .attr("x1", c3x(1))
-      .attr("x2", c3x(1))
-      .attr("y1", function(d, i) {
-        return c3y(i) + (h / 2)
-      })
-      .attr("y2", function(d, i) {
-        return c3y(i) + (h / 2)
-      })
-      .style("opacity", 0)
-      .style("stroke", function(d) {
-        return c3c(d.tlq)
-      })
-      .style("stroke-width", 2)
-      .merge(connect).transition().duration(250)
-      .attr("y1", function(d, i) {
-        return c3y(i) + (h / 2)
-      })
-      .attr("y2", function(d, i) {
-        return c3y(i) + (h / 2)
-      })
-      .attr("x2", function(d) {
-        return c3x(d.tlq)
-      })
-      .style("stroke", function(d) {
-        return c3c(d.tlq)
-      })
-      .style("opacity", 1);
-    connect.exit().transition().duration(250).style("opacity", 0).remove();
-  }
-
-  if (casethreestatus === "ordering") {
+  if (c3status === "ordering") {
     legendg.selectAll(".c3_legend_phase2_circle")
       .data(c3r.domain())
       .enter().append("circle").attr("class", "c3_legend_phase2_circle")
-      .attr("cx", function(d, i) {
-        if (d > 20) return (c3x(1) + ((c3r(d) * 4) + 8)) - 30;
-        return (c3x(1) + (c3r(d) * 4)) - 30;
+      .attr("cx", function(d) {
+        if (d === 0) return c3x(1) - 17
+        if (d === 1) return c3x(1) - 12
+        if (d === 20) return c3x(1)
+        return c3x(1) + 20
       })
       .attr("cy", 24)
       .attr("r", function(d) {
@@ -2216,20 +2087,7 @@ function casethree_filter() {
         return c3c(d);
       })
       .style("opacity", 0)
-      .transition().style("opacity", 1)
-
-    // legendg.append("text")
-    //   .attr("class", "c3_legend_phase2_text")
-    //   .attr("x", c3x(1))
-    //   .attr("y", 10)
-    //   .attr("dx", 10)
-    //   .style("font-weight", "bold")
-    //   .style("text-anchor", "middle")
-    //   .style("letter-spacing", "1px")
-    //   .text("PERFORMANCE")
-    //   .style("opacity", 0)
-    //   .transition().style("opacity", 1)
-
+      .transition().style("opacity", 1);
     legendg.append("text")
       .attr("class", "c3_legend_phase2_text")
       .attr("x", c3x(1) - 25)
@@ -2241,7 +2099,6 @@ function casethree_filter() {
       .style("opacity", 0)
       .text("BELOW EXPECTATION")
       .transition().style("opacity", 1)
-
     legendg.append("text")
       .attr("class", "c3_legend_phase2_text fontawesome")
       .attr("x", c3x(1) + 135)
@@ -2252,7 +2109,6 @@ function casethree_filter() {
       .style("opacity", 0)
       .text("\uf178")
       .transition().style("opacity", 1)
-
     legendg.append("text")
       .attr("class", "c3_legend_phase2_text")
       .attr("x", c3x(1) + 40)
@@ -2264,7 +2120,6 @@ function casethree_filter() {
       .style("opacity", 0)
       .text("ABOVE EXPECTATION")
       .transition().style("opacity", 1)
-
     legendg.append("text")
       .attr("class", "c3_legend_phase2_text fontawesome")
       .attr("x", c3x(1) - 120)
@@ -2276,36 +2131,215 @@ function casethree_filter() {
       .text("\uf177")
       .transition().style("opacity", 1)
 
-    var rect = grect.selectAll("rect")
-      .data(data)
-      .enter().append("rect")
+    if (local != undefined) {
+      g.append("text")
+        .attr("id", "c3location")
+        .attr("class", "icon")
+        .attr("x", function() {
+          if (data[adjRank].tlq > 1) return c3x(1) - getTextWidth(data[adjRank].key, "bold 13px aktiv-grotesk") - 15
+          return c3x(1) + getTextWidth(data[adjRank].key, "bold 13px aktiv-grotesk") + 15;
+        })
+        .attr("y", c3y(adjRank) + (h / 2))
+        .attr("dx", function() {
+          if (data[adjRank].tlq > 1) return -12;
+          return 12;
+        })
+        .attr("dy", 5)
+        .style("text-anchor", "end")
+        .text("\uf124")
+        .style("opacity", 0).transition().delay(1000).style("opacity", 1)
+      g.select(".label-" + camelize(local)).style("font-weight", "bold")
+      g.append("line")
+        .attr("id", "c3locationLine")
+        .attr("x1", function() {
+          if (data[adjRank].tlq > 1) return c3x(1) - getTextWidth(data[adjRank].key, "bold 13px aktiv-grotesk") - 50
+          return c3x(1) + getTextWidth(data[adjRank].key, "bold 13px aktiv-grotesk") + 50;
+        })
+        .attr("x2", c3x(data[adjRank].tlq))
+        .attr("y1", c3y(adjRank))
+        .attr("y2", c3y(adjRank))
+        .style("opacity", 0);
+    }
+    g.append("text")
+      .attr("id", "c3searched")
+      .attr("class", "icon")
+      .attr("x", -100)
+      .attr("y", -100)
+      .attr("dy", 5)
+      .style("opacity", 0)
+      .text("\uf002")
+    if (adjRank > num - 2) {
+      g.select("#c3locationLine").transition().delay(1000).style("opacity", 1);
+    }
+
+    gbehind.append("rect")
+      .attr("id", "c3searchback")
       .attr("x", 0)
-      .attr("y", function(d, i) {
-        return c3y(i)
-      })
+      .attr("y", c3y(0))
       .attr("width", sideD.w)
       .attr("height", h)
-      .style("fill", "rgba(247,247,247,0)")
-      .on("mouseover", function(d, i) {
-        d3.select("#label-count-" + i).style("opacity", 1)
-        d3.select("#label-" + i).style("font-weight", "bold")
-      })
-      .on("mouseout", function() {
-        d3.selectAll(".label-count").style("opacity", 0)
-        d3.selectAll(".label").style("font-weight", "normal")
-      });
+      .style("fill", "#efefef")
+      .style("opacity", 0)
+
+  } else if (c3status === "ordered_over" || c3status === "ordered_under") {
+    if (searched != undefined) {
+      gbehind.select("#c3searchback")
+        .transition()
+        .attr("x", 0)
+        .attr("y", c3y(searchedAdjRank))
+        .attr("width", sideD.w)
+        .attr("height", h)
+        .style("opacity", 1)
+      g.select("#c3searched")
+        .attr("x", function() {
+          var adj = 25;
+          if (searched === local) adj = 40;
+          if (data[searchedAdjRank].tlq > 1) return c3x(1) - getTextWidth(data[searchedAdjRank].key, "bold 13px aktiv-grotesk") - adj
+          return c3x(1) + getTextWidth(data[searchedAdjRank].key, "bold 13px aktiv-grotesk") + adj;
+        })
+        .attr("y", c3y(searchedAdjRank) + (h / 2))
+        .attr("dx", function() {
+          if (data[searchedAdjRank].tlq > 1) return -12;
+          return 12;
+        })
+        .transition()
+        .style("opacity", 1)
+      g.selectAll(".label").style("font-weight", "normal")
+      g.select(".label-" + camelize(searched)).style("font-weight", "bold")
+    }
+    if (local != undefined && adjRank != undefined) {
+      g.select("#c3location")
+        .transition().duration(500)
+        .attr("x", function() {
+          if (data[adjRank].tlq > 1) return c3x(1) - getTextWidth(data[adjRank].key, "bold 13px aktiv-grotesk") - 15
+          return c3x(1) + getTextWidth(data[adjRank].key, "bold 13px aktiv-grotesk") + 15;
+        })
+        .attr("y", c3y(adjRank) + (h / 2))
+        .attr("dx", function() {
+          if (data[adjRank].tlq > 1) return -12;
+          return 12;
+        })
+        .style("opacity", 1)
+      g.select(".label-" + camelize(local)).style("font-weight", "bold")
+      if (adjRank > num - 2) {
+        g.select("#c3locationLine")
+          .transition()
+          .attr("x1", function() {
+            if (data[adjRank].tlq > 1) return c3x(1) - getTextWidth(data[adjRank].key, "bold 13px aktiv-grotesk") - 50
+            return c3x(1) + getTextWidth(data[adjRank].key, "bold 13px aktiv-grotesk") + 50;
+          })
+          .attr("x2", c3x(data[adjRank].tlq))
+          .attr("y1", c3y(adjRank))
+          .attr("y2", c3y(adjRank))
+          .style("opacity", 1);
+      } else {
+        g.select("#c3locationLine").transition().style("opacity", 0)
+      }
+    } else {
+      g.select("#c3locationLine").transition().style("opacity", 0)
+      g.select("#c3location").transition().style("opacity", 0)
+    }
+  } else if (c3status != "ordering" && c3status != "ordered_over" && c3status != "ordered_under") {
+    d3.selectAll(".c3_legend_phase2_text, .c3_legend_phase2_circle, #c3searchback, #c3searched, #c3location, #c3locationLine").transition().style("opacity", 0).remove();
   }
 
-  if (casethreestatus === "ordering" || casethreestatus === "ordered") {
+  if (c3status === "ordering" || c3status === "ordered_over" || c3status === "ordered_under") {
+    var connect = gbehind.selectAll("line")
+      .data(data, function(d) {
+        return d.key
+      });
+    connect.enter().append("line")
+      .attr("x1", c3x(1))
+      .attr("y1", function(d, i) {
+        return c3y(i) + (h / 2);
+      })
+      .attr("x2", c3x(1))
+      .attr("y2", function(d, i) {
+        return c3y(i) + (h / 2);
+      })
+      .style("opacity", 0)
+      .merge(connect).transition().duration(function() {
+        if (c3status === "ordering") return 250;
+        if (c3status === "ordered_over" || c3status === "ordered_under") return 500;
+        return 0;
+      })
+      .delay(function(d, i) {
+        if (c3status === "ordering") return 50 * i;
+        return 0;
+      })
+      .attr("x1", c3x(1))
+      .attr("y1", function(d, i) {
+        return c3y(i) + (h / 2);
+      })
+      .attr("x2", function(d) {
+        return c3x(d.tlq);
+      })
+      .attr("y2", function(d, i) {
+        return c3y(i) + (h / 2);
+      })
+      .style("stroke", function(d) {
+        return c3c(d.tlq);
+      })
+      .style("opacity", 1)
+      .style("stroke-width", 2)
+      .style("stroke", function(d) {
+        return c3c(d.tlq);
+      })
+    connect.exit().transition().duration(250).style("opacity", 0).remove();
+
+    var text = g.selectAll(".label")
+      .data(data, function(d) {
+        return d.key;
+      });
+    text.enter().append("text")
+      .attr("class", function(d, i) {
+        return "label label-" + i + " label-" + camelize(d.key);
+      })
+      .attr("x", c3x(1))
+      .attr("y", function(d, i) {
+        return c3y(i) + (h / 2);
+      })
+      .attr("dy", 5)
+      .style("opacity", 0)
+      .text(function(d) {
+        return d.key;
+      })
+      .merge(text).transition().duration(500)
+      .delay(function(d, i) {
+        if (c3status === "ordering") return 50 * i + 100;
+        return 0;
+      })
+      .attr("class", function(d, i) {
+        return "label label-" + i + " label-" + camelize(d.key);
+      })
+      .attr("x", c3x(1))
+      .attr("y", function(d, i) {
+        return c3y(i) + (h / 2);
+      })
+      .attr("dx", function(d) {
+        if (d.tlq > 1) return -12;
+        return 12;
+      })
+      .style("text-anchor", function(d) {
+        if (d.tlq > 1) return "end";
+        return "start";
+      })
+      .text(function(d) {
+        return d.key;
+      })
+      .style("opacity", 1);
+    text.exit().transition().duration(250).style("opacity", 0).remove();
 
     var text_count = g.selectAll(".label-count")
       .data(data, function(d) {
         return d.key;
+      });
+    text_count.enter().append("text").attr("class", function(d, i) {
+        return "label-count label-count-" + i;
       })
-    text_count.enter().append("text").attr("class", "label-count")
       .merge(text_count)
-      .attr("id", function(d, i) {
-        return "label-count-" + i;
+      .attr("class", function(d, i) {
+        return "label-count label-count-" + i;
       })
       .attr("x", function(d) {
         if (d.tlq > 1) return c3x(d.tlq) + c3r(d.tlq)
@@ -2329,146 +2363,74 @@ function casethree_filter() {
       })
     text_count.exit().remove();
 
-    var text = g.selectAll(".label")
-      .data(data, function(d) {
-        return d.key;
-      });
-    text.enter().append("text").attr("class", "label")
-      .attr("id", function(d, i) {
-        return "label-" + i;
-      })
-      .attr("x", c3x(1))
+    var rect = grect.selectAll("rect").data(data);
+    rect.enter().append("rect")
+      .merge(rect)
+      .attr("x", 0)
       .attr("y", function(d, i) {
-        return c3y(i) + (h / 2)
+        return c3y(i);
       })
-      .style("opacity", 0)
-      .merge(text).transition().duration(500)
-      .attr("id", function(d, i) {
-        return "label-" + i;
+      .attr("width", sideD.w)
+      .attr("height", h)
+      .style("fill", "rgba(0,0,0,0)")
+      .on("mouseover", function(d, i) {
+        d3.select(".label-count-" + i).style("opacity", 1)
+        d3.select(".label-" + i).style("font-weight", "bold")
       })
-      .attr("x", c3x(1))
-      .attr("y", function(d, i) {
-        return c3y(i) + (h / 2)
-      })
-      .attr("dx", function(d) {
-        if (d.tlq > 1) return -12;
-        return 12;
-      })
-      .attr("dy", 5)
-      .style("text-anchor", function(d) {
-        if (d.tlq > 1) return "end";
-        return "start";
-      })
-      .style("opacity", 1)
-      .text(function(d) {
-        return d.key;
+      .on("mouseout", function() {
+        d3.selectAll(".label-count").style("opacity", 0)
+        d3.selectAll(".label").style("font-weight", "normal")
       });
-    text.exit().transition().duration(500).attr("y", sideD.h).style("opacity", 0).remove();
-
-    var basecircle = gbehind.selectAll(".base-circle")
-      .data(data, function(d) {
-        return d.key;
-      });
-    basecircle.enter().append("circle").attr("class", "base-circle")
-      .attr("cx", c3x(1))
-      .attr("cy", function(d, i) {
-        return c3y(i) + (h / 2)
-      })
-      .attr("r", 3)
-      .style("fill", "black")
-      .style("opacity", 0)
-      .merge(basecircle).transition().duration(250)
-      .attr("cy", function(d, i) {
-        return c3y(i) + (h / 2)
-      })
-      .style("opacity", 1);
-    basecircle.exit().transition().duration(250).style("opacity", 0).remove();
-  }
-
-  if (casethreestatus != "ordered" && casethreestatus != "ordering") {
-    g.selectAll(".label").transition().attr("y", sideD.h).style("opacity", 0).remove();
-    gbehind.selectAll("line").transition().style("opacity", 0).remove();
-    gbehind.selectAll("circle").transition().style("opacity", 0).remove();
-    grect.selectAll("rect").remove();
+    rect.exit().remove();
+  } else {
+    gbehind.selectAll("line").transition().duration(250).style("opacity", 0).remove();
+    g.selectAll(".label").transition().duration(250).style("opacity", 0).remove();
     g.selectAll(".label-count").remove();
-    d3.selectAll(".c3_legend_phase2_circle, .c3_legend_phase2_text").transition().style("opacity", 0).style("display", "none").remove();
+    grect.selectAll("rect").remove();
   }
 
-  if (casethreestatus != "scattering" && casethreestatus != "ordering") {
-    var circle = g.selectAll(".city-circle")
-      .data(data, function(d) {
-        return d.key;
-      })
-    circle.enter().append("circle").attr("class", "city-circle")
-      .attr("cx", 0)
-      .attr("cy", function(d, i) {
-        if (casethreestatus === "ordered") return c3y(i) + (h / 2)
-        return c3y(d.newvalues.length);
-      })
-      .attr("r", 0)
-      .style("opacity", 0)
-      .merge(circle).transition().duration(250)
-      .delay(function(d, i) {
-        return i * 3;
-      })
-      .attr("cx", function(d) {
-        if (casethreestatus === "ordered") return c3x(d.tlq)
-        return c3x(d.population);
-      })
-      .attr("cy", function(d, i) {
-        if (casethreestatus === "ordered") return c3y(i) + (h / 2)
-        return c3y(d.newvalues.length);
-      })
-      .attr("r", function(d) {
-        return c3r(d.tlq);
-      })
-      .style("fill", function(d) {
-        return c3c(d.tlq);
-      })
-      // .style("stroke", "black")
-      .style("opacity", 1)
-    circle.exit().transition().duration(1000).delay(function(d, i) {
-        return i * 3;
-      })
-      .attr("cy", sideD.h)
-      .attr("r", 0)
-      .style("opacity", 0)
-      .remove();
-  };
-}
+} // end casethree
 
 function casethree_update(index, prev) {
   if (index === 11) {
-    casethreestatus = "blank";
-    casethree_filter();
+    c3status = "first";
+    casethree();
   } else if (index === 12) {
-    if (prev === 11) {
-      casethreestatus = "scattering";
-      casethree_filter();
-      casethreestatus = "scatter";
-    } else {
-      casethreestatus = "scatter";
-      casethree_filter();
-    }
+    c3status = "scatter_basic";
+    casethree();
   } else if (index === 13) {
-    casethreestatus = "scattersized";
-    sortmode3 = "descend_basic";
-    casethree_filter();
+    c3status = "scatter_tlq";
+    casethree();
   } else if (index === 14) {
-    if (prev === 13) {
-      casethreestatus = "ordering"
-      sortmode3 = "descend_tlq";
-      casethree_filter();
-      casethreestatus = "ordered";
-    } else {
-      sortmode3 = "descend_tlq";
-      casethreestatus = "ordered";
-      casethree_filter();
-    }
+    if (prev === 13) c3status = "ordering";
+    if (prev === 15) c3status = "ordered_over";
+    sortmode3 = "descend_tlq";
+    casethree();
+    c3status = "ordered_over";
   } else if (index === 15) {
+    c3status = "ordered_under";
     sortmode3 = "ascend_tlq";
-    casethree_filter();
+    casethree();
   }
+  // } else if (index === 13) {
+  //   c3status = "scattersized";
+  //   sortmode3 = "descend_basic";
+  //   casethree_filter();
+  // } else if (index === 14) {
+  //   if (prev === 13) {
+  //     c3status = "ordering"
+  //     sortmode3 = "descend_tlq";
+  //     casethree_filter();
+  //     c3status = "ordered";
+  //   } else {
+  //     sortmode3 = "descend_tlq";
+  //     c3status = "ordered";
+  //     casethree_filter();
+  //   }
+  // } else if (index === 15) {
+  //   sortmode3 = "ascend_tlq";
+  //   casethree_filter();
+  // }
 }
 
 function dynasties_and_droughts(data) {

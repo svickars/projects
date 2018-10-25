@@ -569,7 +569,10 @@ input[type=range] {
       font-size: .6em;
       text-anchor: middle; }
 
-#c1locationLine, #c2locationLine {
+.case3 svg {
+  overflow: hidden; }
+
+#c1locationLine, #c2locationLine, #c3locationLine {
   stroke: #666;
   stroke-dasharray: 1,1; }
 
@@ -589,7 +592,7 @@ input[type=range] {
     .showMore_wrapper .showMore.light {
       background-color: #333; }
       .showMore_wrapper .showMore.light:hover {
-        background-color: #191919; }
+        background-color: black; }
 
 .step_blank {
   opacity: .5;
