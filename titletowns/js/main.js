@@ -596,6 +596,7 @@ function caseone(first) {
   } else {
     var mainData = data.slice(0, num)
   }
+  if (local != undefined && searched != local && searchedAdjRank === num - 1) searchedAdjRank = 0;
   if (searchedRank > num - 2 && searched != local) {
     mainData = mainData.slice(0, mainData.length - 1)
   }
@@ -668,7 +669,6 @@ function caseone(first) {
     $("#step3_includes").html(data[leader + 8].key + ", " + data[leader + 7].key + ", and " + data[leader + 6].key)
   }
 
-
   c1x = d3.scaleLinear().domain([0, 80]).range([150, sideD.w]);
   c1y = d3.scaleBand().domain(d3.range(num)).range([0, num * h]);
 
@@ -705,18 +705,22 @@ function caseone(first) {
       .attr("height", 20)
       .style("opacity", c1rectO)
       .style("fill", function(d) {
-        return league_colours(d.toLowerCase());
+        // return league_colours(d.toLowerCase());
+        return "none";
       })
     legendg.selectAll(".legend_case1_phase1.text")
       .data(leagues)
       .enter().append("text").attr("class", "legend_case1_phase1 text legend")
       .attr("x", function(d, i) {
-        return i * 50
+        return i * 30
       })
       .attr("y", 0)
-      .attr("dx", 7)
+      .attr("dx", -7)
       .attr("dy", 4)
       .style("opacity", c1rectO)
+      .style("fill", function(d) {
+        return league_colours(d.toLowerCase());
+      })
       .text(function(d) {
         return replaceSports(d)
       })
