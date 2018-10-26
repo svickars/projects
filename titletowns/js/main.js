@@ -144,18 +144,18 @@ function resize() {
 
 function loadData() {
   queue()
-    .defer(d3.csv, "data/metros.csv")
+    // .defer(d3.csv, "data/metros.csv")
     .defer(d3.json, "data/case1_v2.json")
     .defer(d3.json, "data/case2.json")
     .await(processData)
   // .await(caseone())
 } // end loadData
 
-function processData(error, metros, titleData, seasonData) {
+function processData(error, titleData, seasonData) {
   Array.prototype.push.apply(case1data, titleData);
   Array.prototype.push.apply(case2data, seasonData);
   Array.prototype.push.apply(case3data, titleData);
-  getLocal(metros);
+  // getLocal(metros);
   caseone(true);
   casethree(true);
 } // end processData
@@ -2866,43 +2866,60 @@ function dynasties_and_droughts(data) {
   return data;
 }
 
-function getLocal(metros) {
+function getLocal() {
   var mindif = 99999;
   var closest;
 
-  metros.forEach(function(metros) {
-    searchArray.push(metros.metro)
+  console.log("hey");
+
+  for (var i = 0; i < 4; i++) {
+    d3.select("#intro-emoji-" + i).transition().duration(500).delay(200 * i).style("opacity", 1)
+  }
+
+  d3.csv("data/metros.csv", function(error, data) {
+    if (error) console.log(error);
+    metros = data;
+
+
+
+    for (i = 0; i < metros.length; ++i) {
+      var dif = PythagorasEquirectangular(local_coords[0], local_coords[1], parseArray(metros[i].lngLat)[1], parseArray(metros[i].lngLat)[0]);
+      if (dif < mindif) {
+        closest = i;
+        mindif = dif;
+      }
+    }
+    if (metros[closest] != undefined) local = metros[closest].metro
+    // local = undefined;
+    console.log(local);
+
+    if (local != undefined) {
+      $("#citysearch-left").attr("value", local)
+      $("#subtitle-user-city").html("And is " + local + " the winningest city in North American sports?")
+      d3.select("#subtitle-user-city").transition().duration(500).delay(100).style("opacity", 1);
+      $("#groundrules-user-city").html(local + "? Or maybe it&rsquo;s Green Bay, Wisconsin")
+      d3.select("#subtitle-user-city").transition().duration(500).delay(100).style("opacity", 1);
+      $("#groundrules-filter-city").html("It looks like you&rsquo;re in " + local + ". Is this right?")
+      if (local === "New York Metro Area") $("#groundrules-user-biggercity").html("Los Angeles, California")
+    } else {
+      $("#subtitle-user-city").html("The Winningest Cities in North American Sports")
+      d3.select("#subtitle-user-city").transition().duration(500).delay(100).style("opacity", 1);
+      $("#groundrules-user-city").html("Is it Green Bay, Wisconsin")
+    }
+
+    metros.forEach(function(metros) {
+      searchArray.push(metros.metro)
+    })
   })
 
-  for (i = 0; i < metros.length; ++i) {
-    var dif = PythagorasEquirectangular(local_coords[0], local_coords[1], parseArray(metros[i].lngLat)[1], parseArray(metros[i].lngLat)[0]);
-    if (dif < mindif) {
-      closest = i;
-      mindif = dif;
-    }
-  }
-  if (metros[closest] != undefined) local = metros[closest].metro
-  // local = "New York Metro Area";
-
-  if (local != undefined) {
-    $("#citysearch-left").attr("value", local)
-    $("#subtitle-user-city").html("And is " + local + " the winningest city in North American sports?")
-    d3.select("#subtitle-user-city").transition().duration(500).delay(100).style("opacity", 1);
-    $("#groundrules-user-city").html(local + "? Or maybe it&rsquo;s Green Bay, Wisconsin")
-    d3.select("#subtitle-user-city").transition().duration(500).delay(100).style("opacity", 1);
-    $("#groundrules-filter-city").html("It looks like you&rsquo;re in " + local + ". Is this right?")
-    if (local === "New York Metro Area") $("#groundrules-user-biggercity").html("Los Angeles, California")
-  } else {
-    $("#subtitle-user-city").html("The Winningest Cities in North American Sports")
-    d3.select("#subtitle-user-city").transition().duration(500).delay(0).style("opacity", 1);
-    $("#groundrules-user-city").html("Is it Green Bay, Wisconsin")
-  }
+  // if (local === undefined) {
+  //   $("#subtitle-user-city").html("The Winningest Cities in North American Sports")
+  //   d3.select("#subtitle-user-city").transition().duration(500).delay(250).style("opacity", 1);
+  //   $("#groundrules-user-city").html("Is it Green Bay, Wisconsin")
+  // }
 
   d3.selectAll(".intro-fade").transition().duration(500).delay(500).style("opacity", 1);
 
-  for (var i = 0; i < 4; i++) {
-    d3.select("#intro-emoji-" + i).transition().duration(500).delay(500 + 100 * i).style("opacity", 1)
-  }
 }
 
 // SUPPLEMENTARY, MY DEAR WATSON
@@ -2929,6 +2946,7 @@ function PythagorasEquirectangular(lat1, lon1, lat2, lon2) {
   var x = (lon2 - lon1) * Math.cos((lat1 + lat2) / 2);
   var y = (lat2 - lat1);
   var d = Math.sqrt(x * x + y * y) * R;
+  // console.log(d);
   return d;
 }
 
@@ -2936,7 +2954,9 @@ function ipLookup() {
   $.ajax('http://ip-api.com/json')
     .then(
       function success(response) {
+        console.log(response);
         local_coords.push(response.lat, response.lon)
+        getLocal();
       }
     );
 }
