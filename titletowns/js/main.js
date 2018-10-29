@@ -12,6 +12,7 @@ var sideD, c1x, c1y, c1tip, c2x, c2y, c2tip, c3x, c3y, c3r, c3c, num = 10,
   h = 30,
   radius = d3.scaleLinear().domain([0, 148]).range([3, 2]),
   casetwodrawn = false,
+  wrapupdrawn = false,
   c3status = "first";
 
 var c1rectO = 1,
@@ -95,7 +96,8 @@ var curved_annotation = d3.annotationCustomType(
 // const case1 = [];
 var case1data = [],
   case2data = [],
-  case3data = [];
+  case3data = [],
+  data1, data2, data3;
 
 function resize() {
   windowW = window.innerWidth;
@@ -242,18 +244,21 @@ function setup() {
     caseone();
     if (casetwodrawn) casetwo();
     casethree()
+    if (wrapupdrawn) wrapup();
   });
   $("#filter-league").change(function() {
     league = $("#filter-league :selected").data("value");
     caseone();
     if (casetwodrawn) casetwo();
     casethree()
+    if (wrapupdrawn) wrapup();
   });
   $("#filter-sport").change(function() {
     league = $("#filter-sport :selected").data("value");
     caseone();
     if (casetwodrawn) casetwo();
     casethree()
+    if (wrapupdrawn) wrapup();
   });
 
   var w = 213,
@@ -284,6 +289,7 @@ function setup() {
     caseone();
     if (casetwodrawn) casetwo();
     casethree()
+    if (wrapupdrawn) wrapup();
   };
   upperSlider.oninput = function() {
     start = parseInt(lowerSlider.value);
@@ -314,6 +320,7 @@ function setup() {
     caseone();
     if (casetwodrawn) casetwo();
     casethree()
+    if (wrapupdrawn) wrapup();
   }
   lowerSlider.oninput = function() {
     start = parseInt(lowerSlider.value);
@@ -381,12 +388,14 @@ function setup() {
         caseone();
         if (casetwodrawn) casetwo();
         casethree();
+        if (wrapupdrawn) wrapup();
       },
       onKeyEnterEvent: function() {
         searched = $("#citysearch-left").val()
         caseone();
         if (casetwodrawn) casetwo();
         casethree();
+        if (wrapupdrawn) wrapup();
       }
     }
   };
@@ -440,7 +449,7 @@ function setup() {
   $("#showMoreC1").on("click", function() {
     num += 10;
     $("#case2_scrolly").css("margin-top", ((num - 1) * 30) - 500 + "px")
-    caseone()
+    caseone();
   })
 
   // Case Two Switches
@@ -608,6 +617,7 @@ function caseone(first) {
     if (d.key === local) rank = i;
     if (d.key === searched) searchedRank = i;
   })
+  data1 = data;
 
   adjRank = rank;
   searchedAdjRank = 0;
@@ -1368,6 +1378,7 @@ function casetwo(first) {
     if (d.metro === local) rank = i;
     if (d.metro === searched) searchedRank = i;
   })
+  data2 = data;
 
   adjRank = rank;
   searchedAdjRank = 0;
@@ -1450,25 +1461,25 @@ function casetwo(first) {
       .attr("height", h),
       g = svg.append("g").attr("class", "group2")
       .attr("transform", "translate(" + sideD.left + "," + sideD.top + ")"),
-      legendg = legend.append("g")
-      .attr("transform", "translate(" + sideD.left + "," + sideD.top + ")");
+      legendg = legend.append("g");
+    // .attr("transform", "translate(" + sideD.left + "," + sideD.top + ")");
     svg.append("g")
       .attr("class", "x axis c2axis")
       .attr("transform", "translate(" + sideD.left + "," + (case2num * h) + ")")
       .call(xAxis);
-    legendg.selectAll(".legend_case2.circle")
-      .data(events)
-      .enter().append("circle").attr("class", "legend_case2 circle legend")
-      .attr("cx", function(d, i) {
-        if (d.event === "finals appearance") return 50
-        if (d.event === "final four appearance") return 175
-        return 0
-      })
-      .attr("cy", 0)
-      .attr("r", 3)
-      .style("fill", function(d) {
-        return d.colour;
-      })
+    // legendg.selectAll(".legend_case2.circle")
+    //   .data(events)
+    //   .enter().append("circle").attr("class", "legend_case2 circle legend")
+    //   .attr("cx", function(d, i) {
+    //     if (d.event === "finals appearance") return 50
+    //     if (d.event === "final four appearance") return 175
+    //     return 0
+    //   })
+    //   .attr("cy", 0)
+    //   .attr("r", 3)
+    //   .style("fill", function(d) {
+    //     return d.colour;
+    //   })
     legendg.selectAll(".legend_case2.text")
       .data(events)
       .enter().append("text").attr("class", "legend_case2 text legend")
@@ -1477,10 +1488,12 @@ function casetwo(first) {
         if (d.event === "final four appearance") return 175
         return 0
       })
-      .attr("cy", 0)
-      .attr("dx", 6)
+      .attr("y", 0)
+      .attr("dx", 0)
       .attr("dy", 4)
-      .style("fill", "#b5b5b5")
+      .style("fill", function(d) {
+        return d.colour
+      })
       .text(function(d) {
         return d.event
       })
@@ -1955,6 +1968,7 @@ function casethree(first) {
     if (d.key === local) rank = i;
     if (d.key === searched) searchedRank = i;
   })
+  data3 = data;
 
   adjRank = rank;
   searchedAdjRank = 0;
@@ -2665,11 +2679,295 @@ function casethree_update(index, prev) {
     d3.select("#showMoreC3").style("display", "block").transition().style("opacity", 1)
     casethree();
     c3status = "ordered_over";
+    if (!wrapupdrawn) wrapup(true);
+    // sortmode = "descend_diff";
+    // caseone();
   } else if (index === 15) {
     c3status = "ordered_under";
     sortmode3 = "ascend_tlq";
     casethree();
+    if (!wrapupdrawn) wrapup();
   }
+}
+
+function wrapupData(set, data, sort) {
+  data = data.sort(function(a, b) {
+    if (set === "one" && sort === "basic") return d3.descending(+(a.newvalues.length - a.expected), +(b.newvalues.length - b.expected))
+    if (set === "two" && sort === "basic") return d3.descending(+a.conversion, +b.conversion)
+    if (set === "three" && sort === "basic") return d3.descending(+a.tlq, +b.tlq)
+  });
+  data.forEach(function(d, i) {
+    d.rank = i + 1;
+    // if (set === "one") console.log(d.key + " " + i + " " + d.rank)
+  })
+  data = data.slice(0, 10);
+  return data;
+}
+
+function searchWrapUpData(set, data) {
+  if (local != undefined && searched != undefined) var term = searched;
+  if (local != undefined && searched === undefined) var term = local;
+  if (local === undefined && searched != undefined) var term = searched;
+  var searchdata = data.filter(function(d) {
+    if (set == "one") return d.key === term;
+    return d.metro === term;
+  })
+  if (searchdata[0].rank > 10) return searchdata;
+  return [];
+}
+
+function wrapup(first) {
+  wrapupdrawn = true;
+  var wh = 20;
+  var y = d3.scaleBand().domain(d3.range(12)).range([0, 12 * wh]),
+    opacity = d3.scaleLinear().domain([0, 10]).range([1, .25]);
+
+  data1top = wrapupData("one", data1, "basic");
+  console.log(data1top)
+  data2top = wrapupData("two", data2, "basic");
+  data3top = wrapupData("three", data3, "basic");
+
+  if (first) {
+    var svg1 = d3.select("#case1list").append("svg").attr("width", 300).attr("height", (10 + 2) * wh),
+      svg2 = d3.select("#case2list").append("svg").attr("width", 300).attr("height", (10 + 2) * wh),
+      svg3 = d3.select("#case3list").append("svg").attr("width", 300).attr("height", (10 + 2) * wh);
+    var g1 = svg1.append("g")
+      .attr("class", "g1")
+      .attr("transform", "translate(" + 0 + "," + 10 + ")"),
+      g2 = svg2.append("g")
+      .attr("class", "g2")
+      .attr("transform", "translate(" + 0 + "," + 10 + ")"),
+      g3 = svg3.append("g")
+      .attr("class", "g3")
+      .attr("transform", "translate(" + 0 + "," + 10 + ")");
+  } else {
+    var svg1 = d3.select("#case1list svg"),
+      svg2 = d3.select("#case2list svg"),
+      svg3 = d3.select("#case3list svg"),
+      g1 = d3.select(".g1"),
+      g2 = d3.select(".g2"),
+      g3 = d3.select(".g3");
+  }
+
+  if (searched != undefined || local != undefined) {
+    var data1search = searchWrapUpData("one", data1)
+    var data2search = searchWrapUpData("two", data2)
+    var data3search = searchWrapUpData("one", data3)
+
+    Array.prototype.push.apply(data1top, data1search)
+    Array.prototype.push.apply(data2top, data2search)
+    Array.prototype.push.apply(data3top, data3search)
+
+    g1.append("line")
+      .attr("x1", 0)
+      .attr("x2", 200)
+      .attr("y1", y(10))
+      .attr("y2", y(10))
+      .style("stroke-width", 1)
+      .style("opacity", 0)
+      .transition().style("opacity", 1)
+    g2.append("line")
+      .attr("x1", 0)
+      .attr("x2", 200)
+      .attr("y1", y(10))
+      .attr("y2", y(10))
+      .style("stroke-width", 1)
+      .style("opacity", 0)
+      .transition().style("opacity", 1)
+    g3.append("line")
+      .attr("x1", 0)
+      .attr("x2", 200)
+      .attr("y1", y(10))
+      .attr("y2", y(10))
+      .style("stroke-width", 1)
+      .style("opacity", 0)
+      .transition().style("opacity", 1)
+  } else {
+    svg.selectAll("line").transition().style("opacity", 0).remove();
+  }
+
+  var text1 = g1.selectAll(".city")
+    .data(data1top, function(d) {
+      return d.key;
+    });
+  text1.enter().append("text").attr("class", "city")
+    .attr("x", -25)
+    .attr("y", function(d, i) {
+      return y(i) + (wh / 2);
+    })
+    .style("opacity", 0)
+    .text(function(d) {
+      return d.key;
+    })
+    .merge(text1).transition().duration(500)
+    .attr("x", 20)
+    .attr("y", function(d, i) {
+      return y(i) + (wh / 2);
+    })
+    .attr("dy", function(d, i) {
+      if (i === 10) return 7;
+    })
+    .style("opacity", function(d, i) {
+      return opacity(i)
+    })
+    .style("font-weight", function(d) {
+      if (d.key === searched) return "bold";
+      return "normal";
+    });
+  text1.exit().transition().duration(500).attr("y", (num + 2) * wh).style("opacity", 0).remove();
+
+  var placement1 = g1.selectAll(".placement")
+    .data(data1top, function(d) {
+      return d.key;
+    });
+  placement1.enter().append("text").attr("class", "placement")
+    .attr("x", -25)
+    .attr("y", function(d, i) {
+      return y(i) + (wh / 2);
+    })
+    .attr("text-anchor", "end")
+    .attr("dx", 0)
+    .style("opacity", 0)
+    .merge(placement1).transition().duration(500)
+    .attr("x", 18)
+    .attr("y", function(d, i) {
+      return y(i) + (wh / 2);
+    })
+    .attr("dy", function(d, i) {
+      if (i === 10) return 6;
+      return -1
+    })
+    .attr("dx", 0)
+    .attr("text-anchor", "end")
+    .style("opacity", function(d, i) {
+      return opacity(i)
+    })
+    .text(function(d, i) {
+      if (i > 0 && d.newvalues.length - d.expected === data1[i - 1].newvalues.length - data1[i - 1].expected) return "";
+      return d.rank + ".";
+    });
+  placement1.exit().transition().duration(500).attr("y", (num + 2) * wh).style("opacity", 0).remove();
+
+  var text2 = g2.selectAll(".city")
+    .data(data2top, function(d) {
+      return d.metro;
+    });
+  text2.enter().append("text").attr("class", "city")
+    .attr("x", -25)
+    .attr("y", function(d, i) {
+      return y(i) + (wh / 2);
+    })
+    .style("opacity", 0)
+    .text(function(d) {
+      return d.metro;
+    })
+    .merge(text2).transition().duration(500)
+    .attr("x", 20)
+    .attr("y", function(d, i) {
+      return y(i) + (wh / 2);
+    })
+    .attr("dy", function(d, i) {
+      if (i === 10) return 7;
+    })
+    .style("opacity", function(d, i) {
+      return opacity(i)
+    })
+    .style("font-weight", function(d) {
+      if (d.metro === searched) return "bold";
+      return "normal";
+    });
+  text2.exit().transition().duration(500).attr("y", (num + 2) * wh).style("opacity", 0).remove();
+
+  var placement2 = g2.selectAll(".placement")
+    .data(data2top, function(d) {
+      return d.metro;
+    });
+  placement2.enter().append("text").attr("class", "placement")
+    .attr("x", -25)
+    .attr("y", function(d, i) {
+      return y(i) + (wh / 2);
+    })
+    .attr("text-anchor", "end")
+    .style("opacity", 0)
+    .merge(placement2).transition().duration(500)
+    .attr("x", 18)
+    .attr("y", function(d, i) {
+      return y(i) + (wh / 2);
+    })
+    .attr("dy", function(d, i) {
+      if (i === 10) return 6;
+      return -1
+    })
+    .attr("text-anchor", "end")
+    .style("opacity", function(d, i) {
+      return opacity(i)
+    })
+    .text(function(d, i) {
+      if (i > 0 && d.conversion.toFixed(2) === data2[i - 1].conversion.toFixed(2)) return "";
+      return d.rank + ".";
+    });
+  placement2.exit().transition().duration(500).attr("y", (num + 2) * wh).style("opacity", 0).remove();
+
+  var text3 = g3.selectAll(".city")
+    .data(data3top, function(d) {
+      return d.key;
+    });
+  text3.enter().append("text").attr("class", "city")
+    .attr("x", -25)
+    .attr("y", function(d, i) {
+      return y(i) + (wh / 2);
+    })
+    .style("opacity", 0)
+    .text(function(d) {
+      return d.key;
+    })
+    .merge(text3).transition().duration(500)
+    .attr("x", 20)
+    .attr("y", function(d, i) {
+      return y(i) + (wh / 2);
+    })
+    .attr("dy", function(d, i) {
+      if (i === 10) return 7;
+    })
+    .style("opacity", function(d, i) {
+      return opacity(i)
+    })
+    .style("font-weight", function(d) {
+      if (d.key === searched) return "bold";
+      return "normal";
+    });
+  text3.exit().transition().duration(500).attr("y", (num + 2) * wh).style("opacity", 0).remove();
+
+  var placement3 = g3.selectAll(".placement")
+    .data(data3top, function(d) {
+      return d.key;
+    });
+  placement3.enter().append("text").attr("class", "placement")
+    .attr("x", -25)
+    .attr("y", function(d, i) {
+      return y(i) + (wh / 2);
+    })
+    .attr("text-anchor", "end")
+    .style("opacity", 0)
+    .merge(placement3).transition().duration(500)
+    .attr("x", 18)
+    .attr("y", function(d, i) {
+      return y(i) + (wh / 2);
+    })
+    .attr("dy", function(d, i) {
+      if (i === 10) return 6;
+      return -1
+    })
+    .attr("text-anchor", "end")
+    .style("opacity", function(d, i) {
+      return opacity(i)
+    })
+    .text(function(d, i) {
+      if (i > 0 && d.tlq.toFixed(2) === data3[i - 1].tlq.toFixed(2)) return "";
+      return d.rank + ".";
+    });
+  placement3.exit().transition().duration(500).attr("y", (num + 2) * wh).style("opacity", 0).remove();
+
 }
 
 function dynasties_and_droughts(data) {
@@ -2996,13 +3294,4 @@ function filterConvert(league, level) {
   if (level === "college" && league != "all-sports") return "college " + replaceSports(league)
 }
 
-function getTextWidth(text, font) {
-  var canvas =
-    getTextWidth.canvas ||
-    (getTextWidth.canvas = document.createElement("canvas"));
-  var context = canvas.getContext("2d");
-  context.font = font;
-  var metrics = context.measureText(text);
-  return metrics.width;
-}
 //
