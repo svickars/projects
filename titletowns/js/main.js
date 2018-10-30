@@ -2020,7 +2020,7 @@ function casethree(first) {
 
   c3y = d3.scaleLinear();
   c3r = d3.scaleLinear().domain([0, 200]).range([3, 3]);
-  c3x = d3.scaleLinear().domain([0, 22000000]).range([0, sideD.w]);
+  c3x = d3.scaleLinear().domain([0, 22000000]).range([50, sideD.w - 50]);
   c3c = d3.scaleLinear().domain([0, .5, 1, 10, d3.max(data, function(d) {
     return d.tlq;
   })]).range(["#b21bb6", "#B993BA", "#DBCBDA", "#F3AB67", "#F6902F"]);
@@ -2034,27 +2034,28 @@ function casethree(first) {
       if (d === 80) return d + " titles";
       return d;
     })
-    .tickSize(-sideD.w);
+    .tickSize(-sideD.w - 50);
 
   if (c3status === "first") {
     c3y.domain([0, 0]).range([sideD.h / 2, sideD.h / 2]);
     yAxis.tickFormat("");
   } else if (c3status === "scatter_basic") {
-    x_axis_translateY = sideD.h + 15;
-    c3y.domain([0, 80]).range([sideD.h, 0]);
+    x_axis_translateY = sideD.h;
+    c3y.domain([0, 80]).range([sideD.h - 25, 0]);
   } else if (c3status === "scatter_tlq") {
     d3.select("#showMoreC3").transition().style("opacity", 0).style("display", "none")
-    x_axis_translateY = sideD.h + 15;
-    c3y.domain([0, 80]).range([sideD.h, 0]);
+    x_axis_translateY = sideD.h;
+    c3y.domain([0, 80]).range([sideD.h - 25, 0]);
     c3r.domain([0, 1, 20, d3.max(data, function(d) {
       return d.tlq;
     })]).range([1, 3, 8, 10])
+    d3.select(".xlabel").transition().style("opacity", 1)
   } else if (c3status === "ordering" || c3status === "ordered_over" || c3status === "ordered_under") {
     d3.select("#showMoreC3").style("display", "block").transition().style("opacity", 1)
     var extent = d3.extent(data, function(d) {
       return d.tlq;
     })
-    c3x.domain([0, 1, 10, extent[1]]).range([0, sideD.w / 3, sideD.w * (3 / 6), sideD.w - 25])
+    c3x.domain([0, 1, 10, extent[1]]).range([sideD.left, sideD.w / 3, sideD.w * (3 / 6), sideD.w - 75])
     c3y = d3.scaleBand().domain(d3.range(case3num)).range([0, case3num * h]);
     c3r.domain([0, 1, 20, d3.max(data, function(d) {
       return d.tlq;
@@ -2062,7 +2063,6 @@ function casethree(first) {
     yAxis.tickSize(0).tickFormat("");
     xAxis.tickSize(0).tickFormat("");
     d3.select(".xlabel").transition().style("opacity", 0)
-    // svg.select(".xlabel").style("opacity", 0)
   }
 
   if (first) {
@@ -2087,7 +2087,7 @@ function casethree(first) {
       noteg = g.append("g").attr("class", "noteg");
     svg.append("g")
       .attr("class", "x axis c3axis")
-      .attr("transform", "translate(" + sideD.left + "," + x_axis_translateY + ")")
+      .attr("transform", "translate(" + 25 + "," + x_axis_translateY + ")")
       .call(xAxis)
       .append("text")
       .attr("class", "xlabel")
@@ -2097,7 +2097,7 @@ function casethree(first) {
       .text("Population");
     svg.append("g")
       .attr("class", "y axis c3axis")
-      .attr("transform", "translate(" + sideD.left + "," + sideD.top + ")")
+      .attr("transform", "translate(" + 50 + "," + sideD.top + ")")
       .call(yAxis);
   } else {
     if (c3status != "first" && c3status != "scatter_basic" && c3status != "scatter_tlq") {
@@ -2115,7 +2115,7 @@ function casethree(first) {
       grect = d3.select(".grect"),
       annotationg = d3.select(".annotationg"),
       noteg = d3.select(".noteg");
-    svg.select(".x.axis.c3axis").transition().duration(250).attr("transform", "translate(" + sideD.left + "," + x_axis_translateY + ")").call(xAxis);
+    svg.select(".x.axis.c3axis").transition().duration(250).attr("transform", "translate(" + 25 + "," + x_axis_translateY + ")").call(xAxis);
     svg.select(".y.axis.c3axis").transition().duration(250).call(yAxis);
   }
 
@@ -2257,11 +2257,18 @@ function casethree(first) {
   }
 
   if (c3status === "first") {
+    if (small_screen) {
+      var large = 21000000,
+        small = 1000000
+    } else {
+      var large = 16000000,
+        small = 6000000
+    }
     notes = [{
       note: {
         title: "Larger Cities"
       },
-      x: c3x(16000000),
+      x: c3x(large),
       y: 25,
       dx: -25,
       dy: 0,
@@ -2270,7 +2277,7 @@ function casethree(first) {
       note: {
         title: "Smaller Cities"
       },
-      x: c3x(6000000),
+      x: c3x(small),
       y: 25,
       dx: 25,
       dy: 0,
