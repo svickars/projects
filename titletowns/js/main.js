@@ -2259,7 +2259,7 @@ function casethree(first) {
   if (c3status === "first") {
     if (small_screen) {
       var large = 21000000,
-        small = 1000000
+        small = 500000
     } else {
       var large = 16000000,
         small = 6000000

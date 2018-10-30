@@ -310,11 +310,12 @@ p.caption {
   .button.isactive {
     border-color: #191919;
     color: #191919; }
-  .button.light {
-    background-color: #b5b5b5; }
-    .button.light.isactive {
-      border-color: #b5b5b5;
-      background-color: white; }
+  @media screen and (min-width: 768px) {
+    .button.light {
+      background-color: #b5b5b5; }
+      .button.light.isactive {
+        border-color: #b5b5b5;
+        background-color: white; } }
 
 .lightgray {
   color: #666; }
@@ -565,33 +566,30 @@ input[type=range] {
   100% {
     transform: translateY(0); } }
 
-.case1 svg, .case3 svg {
+.case1 svg {
   overflow: visible; }
-  .case1 svg g, .case3 svg g {
+  .case1 svg g {
     overflow: visible; }
-  .case1 svg text, .case3 svg text {
+  .case1 svg text {
     font-family: "aktiv-grotesk", sans-serif;
     font-size: 13px;
     fill: #666; }
     @media screen and (max-width: 375px) {
-      .case1 svg text, .case3 svg text {
+      .case1 svg text {
         font-size: .7em; } }
-    .case1 svg text.label_actual, .case1 svg text.label_expected, .case3 svg text.label_actual, .case3 svg text.label_expected {
+    .case1 svg text.label_actual, .case1 svg text.label_expected {
       font-family: "aktiv-grotesk", sans-serif;
       font-size: 8px;
       text-transform: uppercase;
       letter-spacing: 1px; }
-    .case1 svg text.count, .case1 svg text.label-count, .case3 svg text.count, .case3 svg text.label-count {
+    .case1 svg text.count, .case1 svg text.label-count {
       font-family: "Inconsolata", monospace;
       fill: #666; }
-    .case1 svg text.expected, .case3 svg text.expected {
+    .case1 svg text.expected {
       font-family: "Inconsolata", monospace;
       fill: #333;
       font-size: .6em;
       text-anchor: middle; }
-
-.case3 svg {
-  overflow: hidden; }
 
 #c1locationLine, #c2locationLine, #c3locationLine {
   stroke: #666;
@@ -699,6 +697,27 @@ input[type=range] {
   font-size: .6em;
   margin: 2px 0 8px 0; }
 
+.case3 svg text {
+  font-family: "aktiv-grotesk", sans-serif;
+  font-size: 13px;
+  fill: #666; }
+  @media screen and (max-width: 375px) {
+    .case3 svg text {
+      font-size: .7em; } }
+  .case3 svg text.label_actual, .case3 svg text.label_expected {
+    font-family: "aktiv-grotesk", sans-serif;
+    font-size: 8px;
+    text-transform: uppercase;
+    letter-spacing: 1px; }
+  .case3 svg text.count, .case3 svg text.label-count {
+    font-family: "Inconsolata", monospace;
+    fill: #666; }
+  .case3 svg text.expected {
+    font-family: "Inconsolata", monospace;
+    fill: #333;
+    font-size: .6em;
+    text-anchor: middle; }
+
 .group3, .group3-behind {
   pointer-events: none; }
 
@@ -709,6 +728,8 @@ input[type=range] {
   min-height: 25px;
   width: 250px;
   display: inline-block; }
+  .wrapup-list svg {
+    overflow: visible; }
   .wrapup-list svg text {
     font-size: .9em;
     fill: #f9f9fa; }
