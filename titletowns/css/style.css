@@ -175,6 +175,14 @@ section.side {
 .intro {
   width: 100%; }
 
+.footnotes {
+  margin-top: 50px;
+  opacity: .5; }
+  .footnotes:hover {
+    opacity: .8; }
+  .footnotes ol, .footnotes p {
+    font-size: .75rem; }
+
 h1 {
   font-family: "Cormorant Garamond", serif;
   font-size: 2rem;
