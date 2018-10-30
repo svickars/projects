@@ -404,9 +404,11 @@ function setup() {
   $("#citysearch-left").easyAutocomplete(options);
 
   // Tooltips
+  var offset = [25, 0];
+  if (small_screen) offset = [25, -150];
   c1tip = d3.tip().attr("class", "d3-tip").html(function(d) {
     return "<div class='tipH'><h1>" + d.year + "</h1></div><div class='tipH' style='background-color: " + league_colours(d.sport) + "'><h3>" + replaceSports(d.sport) + "</h3></div><h2>" + d.team + "</h2>";
-  }).direction("e").offset([25, 0]);
+  }).direction("e").offset(offset);
   c2tip = d3.tip().attr("class", "d3-tip dark-tip").html(function(d) {
     var list = d.newteams;
     var titlesDisp = "",
@@ -427,7 +429,7 @@ function setup() {
     if (finals.length > 0) finalsDisp = "<h2 style='color:" + event_colours("finals") + "'>Finals Appearances</h2><p>" + finals + "</p>";
     if (finalFours.length > 0) finalFoursDisp = "<h2 style='color:" + event_colours("finalFour") + "'>Final Four Appearances</h2><p>" + finalFours + "</p>";
     return "<h1>" + d.season + "</h1>" + titlesDisp + finalsDisp + finalFoursDisp;
-  }).direction("s").offset([25, 0]);
+  }).direction("s").offset(offset);
 
   // Case One Switches
   $("#switch_actual").on("click", function() {
@@ -435,6 +437,8 @@ function setup() {
     $("#switch_expected").removeClass("isactive");
     c1rectO = 1;
     c1expO = 0;
+    d3.selectAll(".legend_case1_phase1").transition().style("opacity", c1rectO);
+    d3.selectAll(".legend_case1_phase2").transition().style("opacity", c1expO);
     caseone();
   })
   $("#switch_expected").on("click", function() {
@@ -442,6 +446,8 @@ function setup() {
     $("#switch_expected").addClass("isactive");
     c1rectO = 0;
     c1expO = 1;
+    d3.selectAll(".legend_case1_phase1").transition().style("opacity", c1rectO);
+    d3.selectAll(".legend_case1_phase2").transition().style("opacity", c1expO);
     caseone();
   })
   $("#switch_high_diff").on("click", function() {
@@ -453,7 +459,7 @@ function setup() {
   $("#switch_low_diff").on("click", function() {
     $("#switch_high_diff").removeClass("isactive")
     $("#switch_low_diff").addClass("isactive")
-    sortmode = "ascend_diff";
+    sortmode = "descend_basic";
     caseone();
   })
   $("#showMoreC1").on("click", function() {
@@ -614,15 +620,18 @@ function caseone(first) {
     total_titles += d.newvalues.length;
     total_seasons += local_seasons;
   })
+  data = data.filter(function(d) {
+    return d.local_seasons > 0 || d.key === local || d.key === searched;
+  })
   data.forEach(function(d) {
     d.expected = (total_titles / total_seasons) * d.local_seasons;
     d.differential = d.newvalues.length - d.expected;
-  })
+  });
   data = data.sort(function(a, b) {
     if (sortmode === "descend_basic") return d3.descending(+a.newvalues.length, +b.newvalues.length) || d3.ascending(a.key, b.key);
-    if (sortmode === "descend_diff") return d3.descending(+a.differential, +b.differential) || d3.ascending(a.key, b.key);
-    if (sortmode === "ascend_diff") return d3.ascending(+a.differential, +b.differential) || d3.ascending(a.key, b.key);
-  })
+    if (sortmode === "descend_diff") return d3.descending(+a.differential, +b.differential) || d3.descending(+a.newvalues.length, +b.newvalues.length) || d3.ascending(a.key, b.key);
+    if (sortmode === "ascend_diff") return d3.ascending(+a.differential, +b.differential) || d3.descending(+a.newvalues.length, +b.newvalues.length) || d3.ascending(a.key, b.key);
+  });
   data.forEach(function(d, i) {
     d.i = i + 1;
     if (d.key === local) rank = i;
@@ -656,11 +665,11 @@ function caseone(first) {
     mainData = searchData;
   }
   if (mainData.length > 0) var leadingcity = mainData[leader].key;
-  if (local != undefined && rank > num - 2) {
+  if (local != undefined) {
     var localData = data.filter(function(d) {
       return d.key === local;
     })
-    Array.prototype.push.apply(mainData, localData)
+    if (rank > num - 2) Array.prototype.push.apply(mainData, localData)
   }
   data = mainData;
   data.forEach(function(d, i) {
@@ -1349,18 +1358,15 @@ function casetwo(first) {
     d.conversion = titles / d.newseasons.length
     if (isNaN(d.conversion)) d.conversion = 0;
   })
+  data = data.filter(function(d) {
+    return d.results > 0 || d.metro === local || d.metro === searched;
+  })
   if (sortmode2 === "ascend_max_dryspell" || sortmode2 === "descend_max_dryspell") {
-    // data = data.filter(function(d) {
-    //   return (d.titles > 0 && d.newseasons.length > 24) || (d.metro === local || d.metro === searched);
-    // })
-    data = data.filter(function(d) {
-      return d.titles > 0 || d.metro === local || d.metro === searched;
-    })
     if (filter != "mls" && filter != "cfl" && filter != "soccer_w" && filter != "volleyball_w") data = data.filter(function(d) {
       return d.newseasons.length > 24 || d.metro === local || d.metro === searched;
     })
   } else {
-    data = data;
+    // data = data;
   }
   data = dynasties_and_droughts(data);
   data.sort(function(a, b) {
@@ -1969,8 +1975,8 @@ function casethree(first) {
     // }
   });
   data = data.sort(function(a, b) {
-    if (sortmode3 === "descend_tlq") return d3.descending(+a.tlq, +b.tlq) || d3.ascending(a.key, b.key)
-    if (sortmode3 === "ascend_tlq") return d3.ascending(+a.tlq, +b.tlq) || d3.ascending(a.key, b.key)
+    if (sortmode3 === "descend_tlq") return d3.descending(+a.tlq, +b.tlq) || d3.descending(+a.newvalues.length, +b.newvalues.length) || d3.ascending(a.key, b.key)
+    if (sortmode3 === "ascend_tlq") return d3.ascending(+a.tlq, +b.tlq) || d3.descending(+a.newvalues.length, +b.newvalues.length) || d3.ascending(a.key, b.key)
     if (sortmode3 === "ascend_population") return d3.ascending(+a.population, +b.population) || d3.ascending(a.key, b.key);
   })
   data.forEach(function(d, i) {
@@ -1988,9 +1994,9 @@ function casethree(first) {
   if (searchedRank > case3num - 1 && searchedAdjRank === 0) leader = 1;
 
   if (c3status != "first" && c3status != "scatter_basic" && c3status != "scatter_tlq") {
-    if (filter != "mls" && filter != "cfl" && filter != "soccer_w" && filter != "volleyball_w") data = data.filter(function(d) {
-      return d.local_seasons > 25 || d.key === local || d.key === searched;
-    })
+    // if (filter != "mls" && filter != "cfl" && filter != "soccer_w" && filter != "volleyball_w") data = data.filter(function(d) {
+    //   return d.local_seasons > 24 || d.key === local || d.key === searched;
+    // })
     if (adjRank > case3num - 2) {
       var mainData = data.slice(0, case3num - 1)
     } else {
@@ -2009,11 +2015,11 @@ function casethree(first) {
       Array.prototype.push.apply(searchData, mainData)
       mainData = searchData;
     }
-    if (local != undefined && rank > case3num - 2) {
+    if (local != undefined) {
       var localData = data.filter(function(d) {
         return d.key === local;
       })
-      Array.prototype.push.apply(mainData, localData)
+      if (rank > case3num - 2) Array.prototype.push.apply(mainData, localData)
     }
     data = mainData;
   }
@@ -2418,12 +2424,12 @@ function casethree(first) {
         .attr("id", "c3location")
         .attr("class", "icon")
         .attr("x", function() {
-          if (data[adjRank].tlq > 1) return c3x(1) - getTextWidth(data[adjRank].key, "bold 13px aktiv-grotesk") - 15
-          return c3x(1) + getTextWidth(data[adjRank].key, "bold 13px aktiv-grotesk") + 15;
+          if (localData[0].tlq > 1) return c3x(1) - getTextWidth(localData[0].key, "bold 13px aktiv-grotesk") - 15
+          return c3x(1) + getTextWidth(localData[0].key, "bold 13px aktiv-grotesk") + 15;
         })
         .attr("y", c3y(adjRank) + (h / 2))
         .attr("dx", function() {
-          if (data[adjRank].tlq > 1) return -12;
+          if (localData[0].tlq > 1) return -12;
           return 12;
         })
         .attr("dy", 5)
@@ -2434,10 +2440,10 @@ function casethree(first) {
       g.append("line")
         .attr("id", "c3locationLine")
         .attr("x1", function() {
-          if (data[adjRank].tlq > 1) return c3x(1) - getTextWidth(data[adjRank].key, "bold 13px aktiv-grotesk") - 50
-          return c3x(1) + getTextWidth(data[adjRank].key, "bold 13px aktiv-grotesk") + 50;
+          if (localData[0].tlq > 1) return c3x(1) - getTextWidth(localData[0].key, "bold 13px aktiv-grotesk") - 50
+          return c3x(1) + getTextWidth(localData[0].key, "bold 13px aktiv-grotesk") + 50;
         })
-        .attr("x2", c3x(data[adjRank].tlq))
+        .attr("x2", c3x(localData[0].tlq))
         .attr("y1", c3y(adjRank))
         .attr("y2", c3y(adjRank))
         .style("opacity", 0);
@@ -2765,13 +2771,20 @@ function searchWrapUpData(set, data) {
   if (local != undefined && searched === undefined) var term = local;
   if (local === undefined && searched != undefined) var term = searched;
   var searchdata = data.filter(function(d) {
-    if (set == "one") return d.key === term;
+    if (set == "one" || set === "three") return d.key === term;
     return d.metro === term;
   })
-  if (searchdata[0].rank > 10) return {
-    data: searchdata,
-    searchdata: searchdata
-  };
+  if (set === "one") {
+    if (searchdata[0].i > 10) return {
+      data: searchdata,
+      searchdata: searchdata
+    };
+  } else {
+    if (searchdata[0].rank > 10) return {
+      data: searchdata,
+      searchdata: searchdata
+    };
+  }
   return {
     data: [],
     searchdata: searchdata
@@ -2820,7 +2833,7 @@ function wrapup(first) {
   if (searched != undefined || local != undefined) {
     var data1search = searchWrapUpData("one", data1);
     var data2search = searchWrapUpData("two", data2);
-    var data3search = searchWrapUpData("one", data3);
+    var data3search = searchWrapUpData("three", data3);
 
     Array.prototype.push.apply(data1top, data1search.data)
     Array.prototype.push.apply(data2top, data2search.data)
@@ -2932,7 +2945,7 @@ function wrapup(first) {
     .attr("dx", 0)
     .attr("text-anchor", "end")
     .style("opacity", function(d, i) {
-      if (d.newvalues.length < 1) return 0
+      if (d.expected < 1) return 0
       return opacity(i)
     })
     .text(function(d, i) {
