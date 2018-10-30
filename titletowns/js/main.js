@@ -2897,7 +2897,7 @@ function wrapup(first) {
       return "none";
     })
     .text(function(d) {
-      return d.key + " (" + ((d.differential).toFixed(1) < 0 ? "" : "+") + (d.newvalues.length - d.expected).toFixed(1) + ")";
+      return d.key + " (" + (d.differential < 0 ? "" : "+") + d.differential.toString().substr(0, 4) + ")";
     })
   text1.exit().transition().duration(500).attr("y", (num + 2) * wh).style("opacity", 0).remove();
 
@@ -2929,7 +2929,7 @@ function wrapup(first) {
       return opacity(i)
     })
     .text(function(d, i) {
-      if (i > 0 && d.newvalues.length - d.expected === data1[i - 1].newvalues.length - data1[i - 1].expected) return "";
+      if (i > 0 && d.differential === data1[i - 1].differential) return "";
       return d.i + ".";
     });
   placement1.exit().transition().duration(500).attr("y", (num + 2) * wh).style("opacity", 0).remove();
@@ -2968,7 +2968,7 @@ function wrapup(first) {
       return "white";
     })
     .text(function(d) {
-      return d.metro + " (" + (d.conversion.toFixed(2) * 100) + "%)";
+      return d.metro + " (" + (d.conversion * 100).toFixed(1) + "%)";
     });
   text2.exit().transition().duration(500).attr("y", (num + 2) * wh).style("opacity", 0).remove();
 
