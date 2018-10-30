@@ -78,7 +78,7 @@ section.side {
     flex-direction: column;
     flex-grow: 1;
     height: 330px;
-    margin: 0;
+    margin: 25px 0 0 0;
     width: 100%;
     top: 175px;
     -webkit-transform: translate(0, -50%);
@@ -107,6 +107,7 @@ section.side {
         flex: 2;
         height: 630px;
         top: 50px;
+        margin: 0;
         -webkit-transform: translate(0, 0);
         -moz-transform: translate(0, 0);
         -ms-transform: translate(0, 0);
