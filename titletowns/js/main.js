@@ -556,7 +556,6 @@ function setup() {
   })
   $("#showMoreC3").on("click", function() {
     case3num += 10;
-    console.log(case3num);
     var newheight = $("#case3_scrolly").height();
     newheight += (case3num - 1) * 30
     $("#case3_scrolly").css("height", newheight + "px")
@@ -616,6 +615,10 @@ function caseone(first) {
   data.forEach(function(d, i) {
     if (d.key === local) rank = i;
     if (d.key === searched) searchedRank = i;
+    // d.newvalues.forEach(function(d) {
+    //   d.i = i;
+    // });
+    // d.expected = (total_titles / total_seasons) * d.local_seasons;
   })
   data1 = data;
 
@@ -1872,17 +1875,25 @@ function casetwo(first) {
   }
 }
 
-function casetwo_update(index) {
+function casetwo_update(index, prev) {
   if (index === 5) {
     sortmode2 = "descend_seasons";
-    start = 1870;
-    end = 2018;
-    level = "all-levels";
-    league = "all-leagues";
     $(".filter-container").addClass("ishidden");
     $(".filter-container").removeClass("isvisible");
-    $("#lower-left").val(1870)
-    $("#upper-left").val(2018)
+
+    if (prev === 4) {
+      $("#lower-left").val(1870)
+      $("#upper-left").val(2018)
+      $("#filter-level").val("any")
+      $("#filter-league").val("all leagues")
+      $("#filter-sports").val("all sports")
+
+      start = 1870;
+      end = 2018;
+      level = "all-levels";
+      league = "all-leagues";
+    }
+
     casetwo();
   } else if (index === 6) {
     sortmode2 = "descend_conversion_seasons";
@@ -2661,6 +2672,18 @@ function casethree_update(index, prev) {
     c3status = "first";
     $(".filter-container").addClass("ishidden");
     $(".filter-container").removeClass("isvisible");
+    if (prev === 10) {
+      $("#lower-left").val(1870)
+      $("#upper-left").val(2018)
+      $("#filter-level").val("any")
+      $("#filter-league").val("all leagues")
+      $("#filter-sports").val("all sports")
+
+      start = 1870;
+      end = 2018;
+      level = "all-levels";
+      league = "all-leagues";
+    }
     casethree();
   } else if (index === 12) {
     c3status = "scatter_basic";
@@ -2722,15 +2745,16 @@ function wrapup(first) {
   var y = d3.scaleBand().domain(d3.range(12)).range([0, 12 * wh]),
     opacity = d3.scaleLinear().domain([0, 10]).range([1, .25]);
 
+  console.log(data1);
+  console.log(case1data);
   data1top = wrapupData("one", data1, "basic");
-  console.log(data1top)
   data2top = wrapupData("two", data2, "basic");
   data3top = wrapupData("three", data3, "basic");
 
   if (first) {
-    var svg1 = d3.select("#case1list").append("svg").attr("width", 300).attr("height", (10 + 2) * wh),
-      svg2 = d3.select("#case2list").append("svg").attr("width", 300).attr("height", (10 + 2) * wh),
-      svg3 = d3.select("#case3list").append("svg").attr("width", 300).attr("height", (10 + 2) * wh);
+    var svg1 = d3.select("#case1list").append("svg").attr("width", 250).attr("height", (10 + 2) * wh),
+      svg2 = d3.select("#case2list").append("svg").attr("width", 250).attr("height", (10 + 2) * wh),
+      svg3 = d3.select("#case3list").append("svg").attr("width", 250).attr("height", (10 + 2) * wh);
     var g1 = svg1.append("g")
       .attr("class", "g1")
       .attr("transform", "translate(" + 0 + "," + 10 + ")"),

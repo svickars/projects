@@ -681,16 +681,10 @@ input[type=range] {
 .group3, .group3-behind {
   pointer-events: none; }
 
-.wrapup-chart {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-evenly;
-  align-items: flex-start; }
-
 .wrapup-list {
   min-height: 25px;
-  width: 30px;
-  flex-basis: 300px; }
+  flex-basis: auto;
+  display: inline-block; }
   .wrapup-list svg text {
     font-size: .9em;
     color: #191919; }
