@@ -36,7 +36,7 @@ input:focus, select:focus, textarea:focus, button:focus {
   padding-bottom: 25vh; }
 
 .dark {
-  background-color: #191919;
+  background-color: #1b2129;
   color: white; }
 
 section {
@@ -129,11 +129,11 @@ section.side {
           margin: 150px 0 0 0;
           flex: 1;
           min-height: 30vh; } }
-      section.side article .step.laststep {
+      section.side article .step.last {
         min-height: 150vh; }
         @media screen and (min-width: 768px) {
-          section.side article .step.laststep {
-            min-height: 95vh; } }
+          section.side article .step.last {
+            min-height: 50vh; } }
       section.side article .step.active {
         color: white; }
         @media screen and (max-width: 768px) {
@@ -178,22 +178,32 @@ section.side {
 h1 {
   font-family: "Cormorant Garamond", serif;
   font-size: 2rem;
-  font-weight: normal;
+  line-height: 1;
+  letter-spacing: 0.025em;
+  font-weight: 700;
   margin: 0; }
   @media screen and (min-width: 768px) {
     h1 {
-      font-size: 3rem; } }
+      font-size: 3rem;
+      line-height: 1;
+      letter-spacing: 0.025em; } }
 
 h2 {
   font-family: "Cormorant Garamond", serif;
-  font-size: 1.75rem;
+  font-weight: 700;
+  font-size: 2rem;
+  letter-spacing: 0.025em;
   margin: .5rem 0 .5rem 0;
   color: #191919; }
+  @media screen and (min-width: 768px) {
+    h2 {
+      font-size: 2.5rem;
+      line-height: 1; } }
 
 h3 {
   font-family: "aktiv-grotesk", sans-serif;
   font-weight: normal;
-  color: #666;
+  color: #FF6A68;
   font-size: .7rem;
   text-transform: uppercase;
   letter-spacing: 2px;
@@ -204,7 +214,7 @@ h4 {
   font-weight: normal;
   font-size: 1.5em;
   margin: 0 0 .75em 0;
-  color: #666; }
+  color: #FF6A68; }
 
 h5 {
   color: #666;
@@ -212,8 +222,11 @@ h5 {
   font-size: .8em;
   line-height: normal; }
 
+.offsetcolour {
+  color: #FF6A68; }
+
 .dark h3, .dark h4 {
-  color: #b5b5b5; }
+  color: #FF6A68; }
 
 .dark h2 {
   color: #f9f9fa; }
@@ -681,19 +694,29 @@ input[type=range] {
 .group3, .group3-behind {
   pointer-events: none; }
 
+.wrapup-chart {
+  margin: 25px 0 25px 0; }
+
 .wrapup-list {
   min-height: 25px;
-  flex-basis: auto;
+  width: 250px;
   display: inline-block; }
   .wrapup-list svg text {
     font-size: .9em;
-    color: #191919; }
+    fill: #f9f9fa; }
   .wrapup-list svg .placement {
     font-size: .75em;
     font-family: "Inconsolata", monospace; }
   .wrapup-list svg line {
     stroke: #666;
     stroke-dasharray: 1,1; }
+  .wrapup-list h4 {
+    margin-bottom: 0; }
+  .wrapup-list .wrapup-sub {
+    height: 50px;
+    margin: 5px 0 5px 0;
+    color: #666;
+    font-size: .9em; }
 
 .y.axis path, .x.axis path {
   display: none; }

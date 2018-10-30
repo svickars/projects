@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-POYwD7xcktv3gUeZO5s/9nUbRJG/WOmV6jfEGikMJu77LGYO8Rfs2X7URG822aum" crossorigin="anonymous">
 
-    <link href="https://fonts.googleapis.com/css?family=Cormorant+Garamond:300|Inconsolata" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Cormorant+Garamond:300,500,700|Inconsolata" rel="stylesheet">
     <link rel="stylesheet" href="https://use.typekit.net/dpo4ptz.css">
     <!-- <link href="https://cdnjs.cloudflare.com/ajax/libs/d3-annotation/1.17.0/d3-annotation.min.css" rel="stylesheet"> -->
 
@@ -34,7 +34,7 @@
           </h2>
         </div>
         <div class="intro">
-          <h1>What makes a titletown?</h1>
+          <h1 id="title-fade">What makes a titletown?</h1>
           <h1 id="subtitle-user-city">The Winningest Cities in North American Sports</h1>
         </div>
         <div class="prose">
@@ -42,14 +42,17 @@
             When Golden State won its third NBA championship in four years a few months ago, I started thinking. Of all the cities to field a professional or college level team in the last 150 years, which is the winningest?
           </p>
           <p class="intro-fade">
-            <span id="groundrules-user-city">Is it Green Bay, WI</span>, a city literally <em>called</em> Titletown? Or maybe
-            it&rsquo;s some
-            place bigger, like <span id="ground-rules-biggercity">New York City</span>.
+            <span id="worldseries-winner">And now, with the Red Sox recent World Series win, I’m wondering, is it Boston?</span> <span id="groundrules-user-city">Or maybe it’s Green Bay, WI</span>, a city literally <em>called</em> Titletown?
           </p>
-          <p class="intro-fade">
-            Well, that depends. I've dug through the data and come up with three cases in which any of these cities could be crowned Titletown. Before we dive in though, we&rsquo;ve got to lay out some ground rules. Use the filters in the bottom
-            left to set your parameters and we'll get started.
-          </p>
+          <p class="intro-fade">Since 1870, 458 distinct professional sports franchises<sup><a href="#fn1-21562" id="fnr1-21562" title="see footnote" class="footnote">1</a></sup> and at least 1917 college teams representing 352
+            schools, have played for 199 cities and towns across Canada and the United States, competing for 995 titles. I’ve dug through the data and come up with three cases in which any of these places could be crowned Titletown — the winningest
+            cities, the capitals of championships. Before we dive in though, we need to set some ground rules. </p>
+
+          <p class="intro-fade">For the purpose of this study, we’re looking at cities to field a team in professional baseball, basketball, football, hockey, and soccer, and NCAA Div I sports (women’s basketball, soccer, and volleyball, and men’s
+            baseball, basketball, and football), between 1870 and 2018<sup><a href="#fn2-21562" id="fnr2-21562" title="see footnote" class="footnote">2</a></sup>.</p>
+
+          <p class="intro-fade">We totally get that not everyone will agree on what sports/levels we should include, or what time frame we should look at. No problem, you’ll have the opportunity to set your own parameters a little later on. Look out
+            for these filters in the bottom left of your screen. When it comes to making a titletown, <span class='offsetcolour'>you define it</span>.</p>
         </div>
       </section>
     </div>
@@ -132,21 +135,20 @@
           </div>
         </figure>
         <article>
-          <div class="step light" data-index="0">
+          <div class="step c1step light" data-index="0">
             <div class="inner">
               <h4>Actual Titles</h4>
-              Our first way to determine titletowns is to simply look at the numbers &mdash; total championships won by a metro area. And in this case, looking at <span class="step_blank" id="step0_filter">all sports</span> between <span class="step_blank"
-                id="step0_start">1870</span> and <span class="step_blank" id="step0_end">2018</span>, the winningest city in North America is
-              <span id="step0_leader">Greater Los Angeles, CA</span>.
+              Our first way to determine titletowns is to simply look at the numbers &mdash; total championships won by a metro area. And in this case, looking at all sports between 1870 and 2018, the winningest city in North America is
+              <span class="offsetcolour" id="step0_leader">Greater Los Angeles, CA</span>.
             </div>
           </div>
-          <div class="step light" data-index="1">
+          <div class="step c1step light" data-index="1">
             <div class="inner">
-              This makes sense, considering <span class="step1_leader">Greater Los Angeles</span> teams have played a combined <span id="step1_totalseasons">x</span> seasons <span id="step1_local"></span> <span id="step1_totalseasons_local"></span>
-              . But is <span id="step1_totaltitles">74</span> titles what we should expect based on the number of opportunites they&rsquo;ve had to win?
+              This makes sense, considering <span class="step1_leader">Greater Los Angeles</span> teams have played a combined <span id="step1_totalseasons">x</span> seasons <span id="step1_local"></span>. But is <span id="step1_totaltitles">74</span>
+              titles what we should expect based on the number of opportunites they&rsquo;ve had to win?
             </div>
           </div>
-          <div class="step light" data-index="2">
+          <div class="step c1step light" data-index="2">
             <div class="inner">
               Well actually, no. We&rsquo;d expect them to have won <span id="step2_lessormore">a lot fewer</span>. By giving each team in a given season an equal chance of winning its respective championship, and adding those odds up over time, we
               can get an
@@ -154,7 +156,7 @@
               should have won <span id="step2_howmany">24</span><span id="step2_local"></span><span id="step2_howmany_local"></span>.
             </div>
           </div>
-          <div class="step light" data-index="3">
+          <div class="step c1step light last" data-index="3">
             <div class="inner">
               <h4>Expected Titles</h4>
               So <span class="step1_leader"></span> is doing better than expected. What other metro areas are overperforming? How about underperforming?
@@ -201,37 +203,37 @@
           </div>
         </figure>
         <article>
-          <div class="step" data-index="5">
+          <div class="step c2step" data-index="5">
             <div class="inner">
               <h4>Conversion Rates</h4>
               But what about a metro area’s performance over time? How has the idea of a titletown changed over the past 150 years?
             </div>
           </div>
-          <div class="step" data-index="6">
+          <div class="step c2step" data-index="6">
             <div class="inner">
               Let’s consider a metro area’s conversion rate — that is, how well a city’s teams perform when given a real shot at winning it all. Between 1870 and 1920, in all sports, the best teams came from New Haven (the Yale Bulldogs competed in
               47 seasons, winning 17 times, or in 36% of their attempts) — Vancouver teams hadn’t even started playing yet.
             </div>
           </div>
-          <div class="step" data-index="7">
+          <div class="step c2step" data-index="7">
             <div class="inner">
               Between 1920 and 1970, however, New Haven falls of the map, replaced by New York, whose teams won a title in 35 of 51 combined seasons (a 69% conversion rate!), and Toronto, which went 23 for 51 for a 45% conversion.
             </div>
           </div>
-          <div class="step" data-index="8">
+          <div class="step c2step" data-index="8">
             <div class="inner">
               In the last 48 years though, it’s all Los Angeles. As a city, LA has won 50 championships since 1970 — a conversion rate of 104% — and has finished in the final four or better <strong>131</strong> times.</br></br>
               So where’s the real titletown here? The winningest city in North America has, of course, changed over time. Let’s look at metro areas that have been good (or bad) for a long time.
             </div>
           </div>
-          <div class="step" data-index="9">
+          <div class="step c2step" data-index="9">
             <div class="inner">
               <h4>Dry Spells and Dynasties</h4>
               If we look at streaks of final four appearances, we can see <em>how long</em> a city has been good for. And if we look at dynasties — championships in a row, — we can see how long a metro area has been <em>great</em> for. Maybe more
               importantly though, we can look at dry spells. Every city’s going to go some time without making the top four, but for me, a metro area that can avoid that as much as possible is a real titletown.
             </div>
           </div>
-          <div class="step" data-index="10">
+          <div class="step c2step last" data-index="10">
             <div class="inner">
               <div class="button-wrapper">
                 Show me:<br>
@@ -332,24 +334,34 @@
       </section>
     </div>
 
-    <div class="container full">
+    <div class="container dark full">
       <section id="wrapup">
         <div class="prose">
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis
-            aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+          <h1 id="wrapuph1" style="opacity: .5">So what makes a titletown?</h1>
+          <h1>And is it <span class="offsetcolour" id="wrapup-local">Vancouver</span>?</h1>
+          <p>There’s a lot of ways to look title towns. Metro area population, titles over time, dynasties and droughts, and performance above expectations are just a few. In short though, <span id="wrapup-conclusion">it’s probably <span class="offsetcolour">Los
+                Angeles</span>.</p>
         </div>
         <div class="prose">
           <div class="wrapup-chart">
             <div class="wrapup-list" id="case1list">
-              <h4>Expected Titles</h4>
+              <h4>Above Expectations</h4>
+              <div class="wrapup-sub">Actual vs expected title differential, based on number of seasons.</div>
             </div>
             <div class="wrapup-list" id="case2list">
-              <h4>Expected Titles</h4>
+              <h4>Conversion Rates</h4>
+              <div class="wrapup-sub">Titles vs attempts over time.</div>
             </div>
             <div class="wrapup-list" id="case3list">
-              <h4>Expected Titles</h4>
+              <h4>Metro Area Size</h4>
+              <div class="wrapup-sub">Actual titles vs expectations based on population.</div>
             </div>
           </div>
+        </div>
+        <div class="prose">
+          <p>Again, we know not everybody agrees on the same ground rules (trust me, we couldn’t even all agree on what time period to look at), so go ahead and try out some different parameters for yourself in the bottom left and scroll back up to
+            explore for yourself. When it comes to making a titletown, <span class="step_blank offsetcolour">you define it</span>.</p>
+          <p>But for now, the debate continues.</p>
         </div>
       </section>
     </div>
@@ -425,6 +437,26 @@
           </div>
         </div>
       </div>
+    </div>
+
+    <div class="footnotes">
+      <hr />
+      <ol>
+
+        <li id="fn1-21562">
+          <p>counting teams that have relocated or transferred ownership as one franchise and including now-defunct franchises which played at least once game. <a href="#fnr1-21562" title="return to article" class="reversefootnote">&#8617;&#xFE0E;</a></p>
+        </li>
+
+        <li id="fn2-21562">
+          <p>I included the four major pro leagues in North America, including teams that played at one in game in the MLB (including the AL and the NL, but only organized, modern World Series played since 1903); the NBA (and its direct predecessor,
+            the BAA, which played from 1946 to 1949); the NFL (and the the APFL, its original name, but not the AFL before its merger with the NFL, as these records are disputed); and the NHL. I also included the CFL (and its early iterations, known
+            as the IRFU, WIFU, OFU, CRU, and the league’s American expansion, which all competed for Grey Cup) and the MLS as the continent’s other two professional sports leagues that <em>we have records for</em>. I did not include any leagues that
+            are considered feeder leagues (like AAA baseball), farm leagues/minors (like the AHL or G league), junior leagues (WHL, OHL, QMJHL), or otherwise amateur leagues. I also included the NCAA Div I as the top level college programs are
+            considered by many to be (almost) comparable to to pro sports and are (almost) always involved in titletown discussions. I limited this to the three most played sports by each sex, because, well, you’ve got to stop somewhere. <a href="#fnr2-21562"
+              title="return to article" class="reversefootnote">&#8617;&#xFE0E;</a></p>
+        </li>
+
+      </ol>
     </div>
 
     <script src=" //ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js "></script>

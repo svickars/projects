@@ -358,14 +358,16 @@ function setup() {
     offset: 0.5,
     enter: function(el) {
       var index = +d3.select(el).attr("data-index");
-      stepSel.classed("active", (d, i) => i === index);
+      $(".step").removeClass("active");
+      $(el).addClass("active");
       if (index < 5) caseone_update(index, index - 1)
       if (index > 4 && index < 11) casetwo_update(index, index - 1)
       if (index > 10) casethree_update(index, index - 1)
     },
     exit: function(el) {
       var index = +d3.select(el).attr("data-index");
-      stepSel.classed("active", (d, i) => i === index);
+      $(".step").removeClass("active");
+      $(el).addClass("active");
       if (index < 5) caseone_update(index, index + 1)
       if (index > 4 && index < 11) casetwo_update(index, index + 1)
       if (index > 10) casethree_update(index, index + 1)
@@ -673,12 +675,10 @@ function caseone(first) {
   if (local != undefined) {
     if (leadingcity === local) {
       $("#step1_local").html("");
-      $("#step1_totalseasons_local").html("")
       $("#step2_local").html("")
       $("#step2_howmany_local").html("")
     } else {
-      $("#step1_local").html("(" + local + " teams have played ");
-      $("#step1_totalseasons_local").html(data[0].local_seasons + ")")
+      $("#step1_local").html("(<span class='offsetcolour'>" + local + "</span> teams have played " + localData[0].local_seasons + ")");
       $("#step2_local").html(", while " + local + " has a ")
       $("#step2_howmany_local").html(((data[adjRank].newvalues.length - data[adjRank].expected).toFixed(1) < 0 ? "" : "+") + (data[adjRank].newvalues.length - data[adjRank].expected).toFixed(1) + " differential")
     }
@@ -1260,8 +1260,6 @@ function caseone_update(index, prev) {
     }
     sortmode = "descend_basic";
 
-    $(".filter-container").addClass("ishidden");
-    $(".filter-container").removeClass("isvisible");
     d3.select("#showMoreC1").style("display", "block").transition().style("opacity", 0)
     d3.selectAll(".legend_case1_phase1").transition().style("opacity", c1rectO);
     d3.selectAll(".legend_case1_phase2").transition().style("opacity", c1expO);
@@ -1882,8 +1880,6 @@ function casetwo(first) {
 function casetwo_update(index, prev) {
   if (index === 5) {
     sortmode2 = "descend_seasons";
-    $(".filter-container").addClass("ishidden");
-    $(".filter-container").removeClass("isvisible");
 
     if (prev === 4) {
       $("#lower-left").val(1870)
@@ -1896,6 +1892,9 @@ function casetwo_update(index, prev) {
       end = 2018;
       level = "all-levels";
       league = "all-leagues";
+
+      $(".filter-container").addClass("ishidden");
+      $(".filter-container").removeClass("isvisible");
     }
 
     casetwo();
@@ -1917,8 +1916,6 @@ function casetwo_update(index, prev) {
     sortmode2 = "descend_max_dynasty";
     start = 1870;
     end = 2018;
-    $(".filter-container").addClass("ishidden");
-    $(".filter-container").removeClass("isvisible");
     d3.select("#showMoreC2").transition().style("opacity", 0).style("display", "none")
     casetwo();
   } else if (index === 10) {
@@ -2666,8 +2663,6 @@ function casethree(first) {
 function casethree_update(index, prev) {
   if (index === 11) {
     c3status = "first";
-    $(".filter-container").addClass("ishidden");
-    $(".filter-container").removeClass("isvisible");
     if (prev === 10) {
       $("#lower-left").val(1870)
       $("#upper-left").val(2018)
@@ -2679,6 +2674,9 @@ function casethree_update(index, prev) {
       end = 2018;
       level = "all-levels";
       league = "all-leagues";
+
+      $(".filter-container").addClass("ishidden");
+      $(".filter-container").removeClass("isvisible");
     }
     casethree();
   } else if (index === 12) {
@@ -2686,8 +2684,6 @@ function casethree_update(index, prev) {
     casethree();
   } else if (index === 13) {
     c3status = "scatter_tlq";
-    $(".filter-container").addClass("ishidden");
-    $(".filter-container").removeClass("isvisible");
     d3.select("#showMoreC3").transition().style("opacity", 0).style("display", "block")
     casethree();
   } else if (index === 14) {
@@ -2710,14 +2706,20 @@ function casethree_update(index, prev) {
 }
 
 function wrapupData(set, data, sort) {
+  if (set === "one") {
+    data = case1data;
+    data.forEach(function(d) {
+      d.differential = d.newvalues.length - d.expected;
+    })
+  }
   data = data.sort(function(a, b) {
-    if (set === "one" && sort === "basic") return d3.descending(+(a.newvalues.length - a.expected), +(b.newvalues.length - b.expected))
+    if (set === "one" && sort === "basic") return d3.descending(+a.differential, +b.differential)
     if (set === "two" && sort === "basic") return d3.descending(+a.conversion, +b.conversion)
     if (set === "three" && sort === "basic") return d3.descending(+a.tlq, +b.tlq)
   });
   data.forEach(function(d, i) {
     d.rank = i + 1;
-    // if (set === "one") console.log(d.key + " " + i + " " + d.rank)
+    // if (set === "one") console.log(i + 1 + " " + d.key + " " + " " + d.rank)
   })
   data = data.slice(0, 10);
   return data;
@@ -2731,8 +2733,14 @@ function searchWrapUpData(set, data) {
     if (set == "one") return d.key === term;
     return d.metro === term;
   })
-  if (searchdata[0].rank > 10) return searchdata;
-  return [];
+  if (searchdata[0].rank > 10) return {
+    data: searchdata,
+    searchdata: searchdata
+  };
+  return {
+    data: [],
+    searchdata: searchdata
+  };
 }
 
 function wrapup(first) {
@@ -2740,6 +2748,13 @@ function wrapup(first) {
   var wh = 20;
   var y = d3.scaleBand().domain(d3.range(12)).range([0, 12 * wh]),
     opacity = d3.scaleLinear().domain([0, 10]).range([1, .25]);
+
+  if (local != undefined) {
+    $("#wrapup-local").html(local);
+  } else {
+    $("#wrapup-local").html("");
+    $("#wrapuph1").css("opacity", 1);
+  }
 
   data1top = wrapupData("one", data1, "basic");
   data2top = wrapupData("two", data2, "basic");
@@ -2768,13 +2783,13 @@ function wrapup(first) {
   }
 
   if (searched != undefined || local != undefined) {
-    var data1search = searchWrapUpData("one", data1)
-    var data2search = searchWrapUpData("two", data2)
-    var data3search = searchWrapUpData("one", data3)
+    var data1search = searchWrapUpData("one", data1);
+    var data2search = searchWrapUpData("two", data2);
+    var data3search = searchWrapUpData("one", data3);
 
-    Array.prototype.push.apply(data1top, data1search)
-    Array.prototype.push.apply(data2top, data2search)
-    Array.prototype.push.apply(data3top, data3search)
+    Array.prototype.push.apply(data1top, data1search.data)
+    Array.prototype.push.apply(data2top, data2search.data)
+    Array.prototype.push.apply(data3top, data3search.data)
 
     g1.append("line")
       .attr("x1", 0)
@@ -2800,6 +2815,19 @@ function wrapup(first) {
       .style("stroke-width", 1)
       .style("opacity", 0)
       .transition().style("opacity", 1)
+
+    var term = local;
+    if (searched != undefined) term = searched;
+    if (term != "New York Metro Area") term = term.substring(0, term.length - 4)
+
+    if (data1search.searchdata[0].newvalues.length > 0 && data2search.searchdata[0].conversion > 0) {
+      if (data1search.searchdata[0].rank > 3 && data2search.searchdata[0].rank > 3 && data3search.searchdata[0].rank > 3) $("#wrapup-conclusion").html("it’s definitely not <span class='offsetcolour'>" + term + "</span>.");
+      if (data1search.searchdata[0].rank < 4 || data2search.searchdata[0].rank < 4 || data3search.searchdata[0].rank < 4) $("#wrapup-conclusion").html("it might be <span class='offsetcolour'>" + term + "</span>.");
+      if (data1search.searchdata[0].rank < 2 || data2search.searchdata[0].rank < 2 || data3search.searchdata[0].rank < 2) $("#wrapup-conclusion").html("it could probably be <span class='offsetcolour'>" + term + "</span>.");
+      if (data1search.searchdata[0].rank < 2 && data2search.searchdata[0].rank < 2 && data3search.searchdata[0].rank < 2) $("#wrapup-conclusion").html("it’s definitely <span class='offsetcolour'>" + term + "</span>.");
+    } else {
+      $("#wrapup-conclusion").html("it’s probably not <span class='offsetcolour'>" + term + "</span>.");
+    }
   } else {
     svg1.selectAll("line").transition().style("opacity", 0).remove();
     svg2.selectAll("line").transition().style("opacity", 0).remove();
@@ -2831,6 +2859,14 @@ function wrapup(first) {
       if (d.key === searched) return "bold";
       return "normal";
     })
+    .style("fill", function(d) {
+      if (d.key === searched || d.key === local) return "#FF6A68";
+      return "white";
+    })
+    .style("text-decoration", function(d) {
+      if (d.newvalues.length < 1) return "line-through";
+      return "none";
+    })
     .text(function(d) {
       return d.key + " (" + ((d.newvalues.length - d.expected).toFixed(1) < 0 ? "" : "+") + (d.newvalues.length - d.expected).toFixed(1) + ")";
     });
@@ -2860,6 +2896,7 @@ function wrapup(first) {
     .attr("dx", 0)
     .attr("text-anchor", "end")
     .style("opacity", function(d, i) {
+      if (d.newvalues.length < 1) return 0
       return opacity(i)
     })
     .text(function(d, i) {
@@ -2893,6 +2930,14 @@ function wrapup(first) {
       if (d.metro === searched) return "bold";
       return "normal";
     })
+    .style("text-decoration", function(d) {
+      if (d.conversion === 0) return "line-through";
+      return "none";
+    })
+    .style("fill", function(d) {
+      if (d.metro === searched || d.metro === local) return "#FF6A68";
+      return "white";
+    })
     .text(function(d) {
       return d.metro + " (" + (d.conversion.toFixed(2) * 100) + "%)";
     });
@@ -2920,6 +2965,7 @@ function wrapup(first) {
     })
     .attr("text-anchor", "end")
     .style("opacity", function(d, i) {
+      if (d.conversion === 0) return 0
       return opacity(i)
     })
     .text(function(d, i) {
@@ -2953,8 +2999,16 @@ function wrapup(first) {
       if (d.key === searched) return "bold";
       return "normal";
     })
+    .style("text-decoration", function(d) {
+      if (d.newvalues.length < 1) return "line-through";
+      return "none";
+    })
+    .style("fill", function(d) {
+      if (d.key === searched || d.key === local) return "#FF6A68";
+      return "white";
+    })
     .text(function(d) {
-      return d.key + " (" + d.tlq.toFixed(2) + ")";
+      return d.key + " (" + d.tlq.toFixed(2) + "x)";
     });
   text3.exit().transition().duration(500).attr("y", (num + 2) * wh).style("opacity", 0).remove();
 
@@ -2980,6 +3034,7 @@ function wrapup(first) {
     })
     .attr("text-anchor", "end")
     .style("opacity", function(d, i) {
+      if (d.newvalues.length < 1) return 0
       return opacity(i)
     })
     .text(function(d, i) {
@@ -3198,8 +3253,6 @@ function getLocal() {
     if (error) console.log(error);
     metros = data;
 
-
-
     for (i = 0; i < metros.length; ++i) {
       var dif = PythagorasEquirectangular(local_coords[0], local_coords[1], parseArray(metros[i].lngLat)[1], parseArray(metros[i].lngLat)[0]);
       if (dif < mindif) {
@@ -3212,13 +3265,16 @@ function getLocal() {
     console.log(local);
 
     if (local != undefined) {
+      d3.select("#title-fade").transition().duration(500).style("opacity", .5)
       $("#citysearch-left").attr("value", local)
-      $("#subtitle-user-city").html("And is " + local + " the winningest city in North American sports?")
-      d3.select("#subtitle-user-city").transition().duration(500).delay(100).style("opacity", 1);
-      $("#groundrules-user-city").html(local + "? Or maybe it&rsquo;s Green Bay, Wisconsin")
-      d3.select("#subtitle-user-city").transition().duration(500).delay(100).style("opacity", 1);
-      $("#groundrules-filter-city").html("It looks like you&rsquo;re in " + local + ". Is this right?")
-      if (local === "New York Metro Area") $("#groundrules-user-biggercity").html("Los Angeles, California")
+      $("#subtitle-user-city").html("And is <span class='offsetcolour'>" + local + "</span> the winningest city in North American sports?")
+      d3.select("#subtitle-user-city").transition().duration(1000).delay(250).style("opacity", 1);
+      if (local === "Greater Boston, MA") $("#worldseries-winner").html("And now, with the Dodgers recent return to the World Series, I’m wondering, is it LA?");
+      if (local === "Green Bay, WI") {
+        $("#groundrules-user-city").html("Or maybe it’s <span class='offsetcolour'>Green Bay, Wisconsin</span>")
+      } else {
+        $("#groundrules-user-city").html("Or maybe it’s <span class='offsetcolour'>" + local + "</span>? Or maybe Green Bay, Wisconsin")
+      }
     } else {
       $("#subtitle-user-city").html("The Winningest Cities in North American Sports")
       d3.select("#subtitle-user-city").transition().duration(500).delay(100).style("opacity", 1);
@@ -3236,7 +3292,7 @@ function getLocal() {
   //   $("#groundrules-user-city").html("Is it Green Bay, Wisconsin")
   // }
 
-  d3.selectAll(".intro-fade").transition().duration(500).delay(500).style("opacity", 1);
+  d3.selectAll(".intro-fade").transition().duration(1000).delay(1250).style("opacity", 1);
 
 }
 
