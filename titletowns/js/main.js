@@ -429,22 +429,30 @@ function setup() {
 
   // Case One Switches
   $("#switch_actual").on("click", function() {
-    $("#switch_actual").addClass("isactive")
-    $("#switch_high_diff").removeClass("isactive")
-    $("#switch_low_diff").removeClass("isactive")
-    caseone_update(1)
+    $("#switch_actual").addClass("isactive");
+    $("#switch_expected").removeClass("isactive");
+    c1rectO = 1;
+    c1expO = 0;
+    caseone();
+  })
+  $("#switch_expected").on("click", function() {
+    $("#switch_actual").removeClass("isactive");
+    $("#switch_expected").addClass("isactive");
+    c1rectO = 0;
+    c1expO = 1;
+    caseone();
   })
   $("#switch_high_diff").on("click", function() {
-    $("#switch_actual").removeClass("isactive")
-    $("#switch_high_diff").addClass("isactive")
-    $("#switch_low_diff").removeClass("isactive")
-    caseone_update(7)
+    $("#switch_high_diff").addClass("isactive");
+    $("#switch_low_diff").removeClass("isactive");
+    sortmode = "descend_diff";
+    caseone();
   })
   $("#switch_low_diff").on("click", function() {
-    $("#switch_actual").removeClass("isactive")
     $("#switch_high_diff").removeClass("isactive")
     $("#switch_low_diff").addClass("isactive")
-    caseone_update(8)
+    sortmode = "ascend_diff";
+    caseone();
   })
   $("#showMoreC1").on("click", function() {
     num += 10;
@@ -615,10 +623,6 @@ function caseone(first) {
   data.forEach(function(d, i) {
     if (d.key === local) rank = i;
     if (d.key === searched) searchedRank = i;
-    // d.newvalues.forEach(function(d) {
-    //   d.i = i;
-    // });
-    // d.expected = (total_titles / total_seasons) * d.local_seasons;
   })
   data1 = data;
 
@@ -1899,21 +1903,15 @@ function casetwo_update(index, prev) {
     sortmode2 = "descend_conversion_seasons";
     start = 1870;
     end = 1920;
-    $("#lower-left").val(1870)
-    $("#upper-left").val(1920)
     casetwo();
   } else if (index === 7) {
     start = 1920;
     end = 1970;
-    $("#lower-left").val(1920)
-    $("#upper-left").val(1970)
     casetwo();
   } else if (index === 8) {
     sortmode2 = "descend_conversion_seasons";
     start = 1970;
     end = 2018;
-    $("#lower-left").val(1970)
-    $("#upper-left").val(2018)
     casetwo();
   } else if (index === 9) {
     sortmode2 = "descend_max_dynasty";
@@ -1922,8 +1920,6 @@ function casetwo_update(index, prev) {
     $(".filter-container").addClass("ishidden");
     $(".filter-container").removeClass("isvisible");
     d3.select("#showMoreC2").transition().style("opacity", 0).style("display", "none")
-    $("#lower-left").val(1870)
-    $("#upper-left").val(2018)
     casetwo();
   } else if (index === 10) {
     sortmode2 = "ascend_max_dryspell";
@@ -2745,8 +2741,6 @@ function wrapup(first) {
   var y = d3.scaleBand().domain(d3.range(12)).range([0, 12 * wh]),
     opacity = d3.scaleLinear().domain([0, 10]).range([1, .25]);
 
-  console.log(data1);
-  console.log(case1data);
   data1top = wrapupData("one", data1, "basic");
   data2top = wrapupData("two", data2, "basic");
   data3top = wrapupData("three", data3, "basic");
@@ -2807,7 +2801,9 @@ function wrapup(first) {
       .style("opacity", 0)
       .transition().style("opacity", 1)
   } else {
-    svg.selectAll("line").transition().style("opacity", 0).remove();
+    svg1.selectAll("line").transition().style("opacity", 0).remove();
+    svg2.selectAll("line").transition().style("opacity", 0).remove();
+    svg3.selectAll("line").transition().style("opacity", 0).remove();
   }
 
   var text1 = g1.selectAll(".city")
@@ -2820,9 +2816,6 @@ function wrapup(first) {
       return y(i) + (wh / 2);
     })
     .style("opacity", 0)
-    .text(function(d) {
-      return d.key;
-    })
     .merge(text1).transition().duration(500)
     .attr("x", 20)
     .attr("y", function(d, i) {
@@ -2837,6 +2830,9 @@ function wrapup(first) {
     .style("font-weight", function(d) {
       if (d.key === searched) return "bold";
       return "normal";
+    })
+    .text(function(d) {
+      return d.key + " (" + ((d.newvalues.length - d.expected).toFixed(1) < 0 ? "" : "+") + (d.newvalues.length - d.expected).toFixed(1) + ")";
     });
   text1.exit().transition().duration(500).attr("y", (num + 2) * wh).style("opacity", 0).remove();
 
@@ -2882,9 +2878,6 @@ function wrapup(first) {
       return y(i) + (wh / 2);
     })
     .style("opacity", 0)
-    .text(function(d) {
-      return d.metro;
-    })
     .merge(text2).transition().duration(500)
     .attr("x", 20)
     .attr("y", function(d, i) {
@@ -2899,6 +2892,9 @@ function wrapup(first) {
     .style("font-weight", function(d) {
       if (d.metro === searched) return "bold";
       return "normal";
+    })
+    .text(function(d) {
+      return d.metro + " (" + (d.conversion.toFixed(2) * 100) + "%)";
     });
   text2.exit().transition().duration(500).attr("y", (num + 2) * wh).style("opacity", 0).remove();
 
@@ -2942,9 +2938,6 @@ function wrapup(first) {
       return y(i) + (wh / 2);
     })
     .style("opacity", 0)
-    .text(function(d) {
-      return d.key;
-    })
     .merge(text3).transition().duration(500)
     .attr("x", 20)
     .attr("y", function(d, i) {
@@ -2959,6 +2952,9 @@ function wrapup(first) {
     .style("font-weight", function(d) {
       if (d.key === searched) return "bold";
       return "normal";
+    })
+    .text(function(d) {
+      return d.key + " (" + d.tlq.toFixed(2) + ")";
     });
   text3.exit().transition().duration(500).attr("y", (num + 2) * wh).style("opacity", 0).remove();
 
