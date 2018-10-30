@@ -616,13 +616,15 @@ function caseone(first) {
   })
   data.forEach(function(d) {
     d.expected = (total_titles / total_seasons) * d.local_seasons;
+    d.differential = d.newvalues.length - d.expected;
   })
   data = data.sort(function(a, b) {
     if (sortmode === "descend_basic") return d3.descending(+a.newvalues.length, +b.newvalues.length) || d3.ascending(a.key, b.key);
-    if (sortmode === "descend_diff") return d3.descending(+(a.newvalues.length - a.expected), +(b.newvalues.length - b.expected)) || d3.ascending(a.key, b.key);
-    if (sortmode === "ascend_diff") return d3.ascending(+(a.newvalues.length - a.expected), +(b.newvalues.length - b.expected)) || d3.ascending(a.key, b.key);
+    if (sortmode === "descend_diff") return d3.descending(+a.differential, +b.differential) || d3.ascending(a.key, b.key);
+    if (sortmode === "ascend_diff") return d3.ascending(+a.differential, +b.differential) || d3.ascending(a.key, b.key);
   })
   data.forEach(function(d, i) {
+    d.i = i + 1;
     if (d.key === local) rank = i;
     if (d.key === searched) searchedRank = i;
   })
@@ -665,7 +667,6 @@ function caseone(first) {
     d.newvalues.forEach(function(d) {
       d.i = i;
     });
-    d.expected = (total_titles / total_seasons) * d.local_seasons;
   })
 
   var filtertext = filterConvert(league, level)
@@ -1355,12 +1356,9 @@ function casetwo(first) {
     data = data.filter(function(d) {
       return d.titles > 0 || d.metro === local || d.metro === searched;
     })
-    data = data.filter(function(d) {
+    if (filter != "mls" && filter != "cfl" && filter != "soccer_w" && filter != "volleyball_w") data = data.filter(function(d) {
       return d.newseasons.length > 24 || d.metro === local || d.metro === searched;
     })
-    // data = data.filter(function(d) {
-    //   return d.newseasons.length > 24 || d.metro === local;
-    // })
   } else {
     data = data;
   }
@@ -1564,7 +1562,6 @@ function casetwo(first) {
         .attr("x", function() {
           var offset = 30;
           if (searched === local) offset = 45;
-          // console.log(data[searchedAdjRank])
           if (data[searchedAdjRank].newseasons[0] === undefined) return c2x(end) - getTextWidth(data[searchedAdjRank].metro, "bold 13px aktiv-grotesk") - offset;
           return c2x(data[searchedAdjRank].newseasons[0].season) - getTextWidth(data[searchedAdjRank].metro, "bold 13px aktiv-grotesk") - offset;
         })
@@ -1882,16 +1879,24 @@ function casetwo_update(index, prev) {
     sortmode2 = "descend_seasons";
 
     if (prev === 4) {
-      $("#lower-left").val(1870)
-      $("#upper-left").val(2018)
-      $("#filter-level").val("any")
-      $("#filter-league").val("all leagues")
-      $("#filter-sports").val("all sports")
+      $("#lower-left").val(1870);
+      $("#upper-left").val(2018);
+      $("#filter-level").val("any");
+      $("#filter-league").val("all leagues");
+      d3.select("#filter-league").style("display", "none");
+      $("#filter-sport").val("all sports");
+      d3.select("#filter-sport").style("display", "none");
 
       start = 1870;
       end = 2018;
       level = "all-levels";
       league = "all-leagues";
+
+      d3.select("#selected_filters").transition().duration(250)
+        .style("opacity", 0)
+        .transition().duration(250).delay(50)
+        .text(level + " / " + league + " / " + start + "-" + end)
+        .style("opacity", 1)
 
       $(".filter-container").addClass("ishidden");
       $(".filter-container").removeClass("isvisible");
@@ -1958,7 +1963,7 @@ function casethree(first) {
   data.forEach(function(d) {
     // if (d.newvalues.length > 0) {
     d.tlq = (d.newvalues.length / d.population) / (total_titles / total_pop);
-    if (d.tlq === 0) d.tlq = 1;
+    if (d.tlq === 0) d.tlq = 0;
     // } else {
     //   d.tlq = 1
     // }
@@ -1983,9 +1988,9 @@ function casethree(first) {
   if (searchedRank > case3num - 1 && searchedAdjRank === 0) leader = 1;
 
   if (c3status != "first" && c3status != "scatter_basic" && c3status != "scatter_tlq") {
-    // data = data.filter(function(d) {
-    //   return d.local_seasons > 25;
-    // })
+    if (filter != "mls" && filter != "cfl" && filter != "soccer_w" && filter != "volleyball_w") data = data.filter(function(d) {
+      return d.local_seasons > 25 || d.key === local || d.key === searched;
+    })
     if (adjRank > case3num - 2) {
       var mainData = data.slice(0, case3num - 1)
     } else {
@@ -2179,7 +2184,13 @@ function casethree(first) {
     .style("fill", function(d) {
       return c3c(d.tlq);
     })
-    .style("opacity", 1);
+    .style("opacity", function(d) {
+      if (c3status === "ordering" || c3status === "ordered_over" || c3status === "ordered_under") {
+        if (d.tlq === 0) return 0;
+        return 1;
+      };
+      return 1;
+    })
   circle.exit().transition().duration(500).style("opacity", 0).remove();
 
   var annotations = [];
@@ -2191,7 +2202,7 @@ function casethree(first) {
       annotation2 = data.filter(function(d) {
         return d.key === "Greater Los Angeles, CA"
       })[0];
-    annotations.push(({
+    if (annotation1 != undefined) annotations.push(({
       note: {
         title: "New York Metro Area",
         bgPadding: 20
@@ -2201,7 +2212,7 @@ function casethree(first) {
       dx: -25,
       dy: -50
     }));
-    annotations.push(({
+    if (annotation2 != undefined) annotations.push(({
       note: {
         title: "Greater Los Angeles",
         bgPadding: 20
@@ -2475,15 +2486,23 @@ function casethree(first) {
       g.select("#c3location")
         .transition().duration(500)
         .attr("x", function() {
-          if (data[adjRank].tlq > 1) return c3x(1) - getTextWidth(data[adjRank].key, "bold 13px aktiv-grotesk") - 15
-          return c3x(1) + getTextWidth(data[adjRank].key, "bold 13px aktiv-grotesk") + 15;
+          if (data[adjRank] != undefined) {
+            if (data[adjRank].tlq > 1) return c3x(1) - getTextWidth(data[adjRank].key, "bold 13px aktiv-grotesk") - 15
+            return c3x(1) + getTextWidth(data[adjRank].key, "bold 13px aktiv-grotesk") + 15;
+          };
+          return c3x(1);
         })
         .attr("y", c3y(adjRank) + (h / 2))
         .attr("dx", function() {
-          if (data[adjRank].tlq > 1) return -12;
+          if (data[adjRank] != undefined) {
+            if (data[adjRank].tlq > 1) return -12;
+          };
           return 12;
         })
-        .style("opacity", 1)
+        .style("opacity", function(d) {
+          if (data[adjRank] != undefined) return 1;
+          return 0;
+        })
       g.select(".label-" + camelize(local)).style("font-weight", "bold")
       if (adjRank > num - 2) {
         g.select("#c3locationLine")
@@ -2544,7 +2563,10 @@ function casethree(first) {
       .style("stroke", function(d) {
         return c3c(d.tlq);
       })
-      .style("opacity", 1)
+      .style("opacity", function(d) {
+        if (d.tlq === 0) return 0;
+        return 1;
+      })
       .style("stroke-width", 2)
       .style("stroke", function(d) {
         return c3c(d.tlq);
@@ -2592,7 +2614,7 @@ function casethree(first) {
         return d.key;
       })
       .style("opacity", function(d) {
-        if (d.tlq === 1) return 0.25;
+        if (d.tlq === 0) return 0.25;
         return 1;
       });
     text.exit().transition().duration(250).style("opacity", 0).remove();
@@ -2664,16 +2686,24 @@ function casethree_update(index, prev) {
   if (index === 11) {
     c3status = "first";
     if (prev === 10) {
-      $("#lower-left").val(1870)
-      $("#upper-left").val(2018)
-      $("#filter-level").val("any")
-      $("#filter-league").val("all leagues")
-      $("#filter-sports").val("all sports")
+      $("#lower-left").val(1870);
+      $("#upper-left").val(2018);
+      $("#filter-level").val("any");
+      $("#filter-league").val("all leagues");
+      d3.select("#filter-league").style("display", "none");
+      $("#filter-sport").val("all sports");
+      d3.select("#filter-sport").style("display", "none");
 
       start = 1870;
       end = 2018;
       level = "all-levels";
       league = "all-leagues";
+
+      d3.select("#selected_filters").transition().duration(250)
+        .style("opacity", 0)
+        .transition().duration(250).delay(50)
+        .text(level + " / " + league + " / " + start + "-" + end)
+        .style("opacity", 1)
 
       $(".filter-container").addClass("ishidden");
       $(".filter-container").removeClass("isvisible");
@@ -2707,7 +2737,6 @@ function casethree_update(index, prev) {
 
 function wrapupData(set, data, sort) {
   if (set === "one") {
-    data = case1data;
     data.forEach(function(d) {
       d.differential = d.newvalues.length - d.expected;
     })
@@ -2719,7 +2748,6 @@ function wrapupData(set, data, sort) {
   });
   data.forEach(function(d, i) {
     d.rank = i + 1;
-    // if (set === "one") console.log(i + 1 + " " + d.key + " " + " " + d.rank)
   })
   data = data.slice(0, 10);
   return data;
@@ -2861,15 +2889,16 @@ function wrapup(first) {
     })
     .style("fill", function(d) {
       if (d.key === searched || d.key === local) return "#FF6A68";
+      if (d.key != searched && d.key != local && d.local_seasons < 1) return "none";
       return "white";
     })
     .style("text-decoration", function(d) {
-      if (d.newvalues.length < 1) return "line-through";
+      if (d.local_seasons < 1) return "line-through";
       return "none";
     })
     .text(function(d) {
-      return d.key + " (" + ((d.newvalues.length - d.expected).toFixed(1) < 0 ? "" : "+") + (d.newvalues.length - d.expected).toFixed(1) + ")";
-    });
+      return d.key + " (" + ((d.differential).toFixed(1) < 0 ? "" : "+") + (d.newvalues.length - d.expected).toFixed(1) + ")";
+    })
   text1.exit().transition().duration(500).attr("y", (num + 2) * wh).style("opacity", 0).remove();
 
   var placement1 = g1.selectAll(".placement")
@@ -2901,7 +2930,7 @@ function wrapup(first) {
     })
     .text(function(d, i) {
       if (i > 0 && d.newvalues.length - d.expected === data1[i - 1].newvalues.length - data1[i - 1].expected) return "";
-      return d.rank + ".";
+      return d.i + ".";
     });
   placement1.exit().transition().duration(500).attr("y", (num + 2) * wh).style("opacity", 0).remove();
 
@@ -3242,8 +3271,6 @@ function dynasties_and_droughts(data) {
 function getLocal() {
   var mindif = 99999;
   var closest;
-
-  console.log("hey");
 
   for (var i = 0; i < 4; i++) {
     d3.select("#intro-emoji-" + i).transition().duration(500).delay(200 * i).style("opacity", 1)
