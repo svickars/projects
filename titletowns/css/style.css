@@ -265,6 +265,12 @@ a {
   a:hover {
     color: #333; }
 
+.footnote {
+  color: #FF6A68;
+  border: none;
+  font-size: .75em;
+  font-family: "Inconsolata", monospace; }
+
 p.caption {
   font-family: "aktiv-grotesk", sans-serif;
   font-weight: normal;
