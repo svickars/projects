@@ -46,8 +46,12 @@ section {
   align-items: center;
   justify-content: center; }
 
-section#title, section#wrapup {
+section#title {
   width: 50%;
+  min-width: 345px; }
+
+section#wrapup {
+  width: 60%;
   min-width: 345px; }
 
 section.content {
@@ -178,7 +182,9 @@ section.side {
 
 .footnotes {
   margin-top: 50px;
-  opacity: .5; }
+  opacity: .5;
+  width: 75%;
+  min-width: 345px; }
   .footnotes:hover {
     opacity: .8; }
   .footnotes ol, .footnotes p {
@@ -747,12 +753,13 @@ input[type=range] {
   pointer-events: none; }
 
 .wrapup-chart {
-  margin: 25px 0 25px 0; }
+  margin: 25px 0 25px 0;
+  text-align: center; }
 
 .wrapup-list {
+  text-align: left;
   min-height: 25px;
-  min-width: 150px;
-  width: 33%;
+  width: 250px;
   display: inline-block; }
   .wrapup-list svg {
     overflow: visible; }
