@@ -261,6 +261,63 @@ function setup() {
     if (wrapupdrawn) wrapup();
   });
 
+  $("#filter_mobile_all").on("mouseover", function() {
+    $(".filter_mobile").removeClass("active");
+    $("#filter_mobile_all").addClass("active");
+    level = "all-levels";
+    league = "all-leagues";
+    caseone();
+    if (casetwodrawn) casetwo();
+    casethree()
+    if (wrapupdrawn) wrapup();
+  })
+  $("#filter_mobile_pro").on("mouseover", function() {
+    $(".filter_mobile").removeClass("active");
+    $("#filter_mobile_pro").addClass("active");
+    level = "pro";
+    league = "all-leagues";
+    caseone();
+    if (casetwodrawn) casetwo();
+    casethree()
+    if (wrapupdrawn) wrapup();
+  })
+  $("#filter_mobile_big4").on("mouseover", function() {
+    $(".filter_mobile").removeClass("active");
+    $("#filter_mobile_big4").addClass("active");
+    level = "pro";
+    league = "big4";
+    caseone();
+    if (casetwodrawn) casetwo();
+    casethree()
+    if (wrapupdrawn) wrapup();
+  })
+  $("#filter_mobile_college").on("mouseover", function() {
+    $(".filter_mobile").removeClass("active");
+    $("#filter_mobile_college").addClass("active");
+    level = "college";
+    league = "all-sports";
+    caseone();
+    if (casetwodrawn) casetwo();
+    casethree()
+    if (wrapupdrawn) wrapup();
+  })
+
+  $("#filter_mobile_start").on("change", function() {
+    start = $("#filter_mobile_start").val();
+    caseone();
+    if (casetwodrawn) casetwo();
+    casethree()
+    if (wrapupdrawn) wrapup();
+  });
+
+  $("#filter_mobile_end").on("change", function() {
+    start = $("#filter_mobile_end").val();
+    caseone();
+    if (casetwodrawn) casetwo();
+    casethree()
+    if (wrapupdrawn) wrapup();
+  });
+
   var w = 213,
     h = $(".filter-year").height();
 
@@ -3308,8 +3365,6 @@ function getLocal() {
       }
     }
     if (metros[closest] != undefined) local = metros[closest].metro
-    // local = undefined;
-    console.log(local);
 
     if (local != undefined) {
       d3.select("#title-fade").transition().duration(500).style("opacity", .5)
@@ -3367,7 +3422,6 @@ function PythagorasEquirectangular(lat1, lon1, lat2, lon2) {
   var x = (lon2 - lon1) * Math.cos((lat1 + lat2) / 2);
   var y = (lat2 - lat1);
   var d = Math.sqrt(x * x + y * y) * R;
-  // console.log(d);
   return d;
 }
 
@@ -3375,7 +3429,6 @@ function ipLookup() {
   $.ajax('http://ip-api.com/json')
     .then(
       function success(response) {
-        console.log(response);
         local_coords.push(response.lat, response.lon)
         getLocal();
       }

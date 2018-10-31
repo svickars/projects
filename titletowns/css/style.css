@@ -184,6 +184,18 @@ section.side {
   .footnotes ol, .footnotes p {
     font-size: .75rem; }
 
+.desktop {
+  display: none !important; }
+  @media screen and (min-width: 768px) {
+    .desktop {
+      display: inline-block; } }
+
+.mobile {
+  display: inline-block; }
+  @media screen and (min-width: 768px) {
+    .mobile {
+      display: none; } }
+
 h1 {
   font-family: "Cormorant Garamond", serif;
   font-size: 2rem;
@@ -308,6 +320,9 @@ p.caption {
   @media screen and (min-width: 768px) {
     .button {
       margin-right: .25em; } }
+  .button.mobile {
+    margin-top: 0;
+    margin-right: -5px !important; }
   .button:hover {
     -webkit-transform: translate(0, -2px);
     -moz-transform: translate(0, -2px);
