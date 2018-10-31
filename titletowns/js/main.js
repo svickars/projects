@@ -309,7 +309,6 @@ function setup() {
     casethree()
     if (wrapupdrawn) wrapup();
   });
-
   $("#filter_mobile_end").on("change", function() {
     start = $("#filter_mobile_end").val();
     caseone();
@@ -1327,7 +1326,7 @@ function caseone_update(index, prev) {
     }
     sortmode = "descend_basic";
 
-    d3.select("#showMoreC1").style("display", "block").transition().style("opacity", 0)
+    d3.select("#showMoreC1").transition().style("opacity", 0).style("display", "block")
     d3.selectAll(".legend_case1_phase1").transition().style("opacity", c1rectO);
     d3.selectAll(".legend_case1_phase2").transition().style("opacity", c1expO);
     caseone();
@@ -1337,7 +1336,7 @@ function caseone_update(index, prev) {
     sortmode = "descend_diff";
 
     $(".filter-container").removeClass("ishidden");
-    d3.select("#showMoreC1").style("display", "block").transition().style("opacity", 1)
+    if (!small_screen) d3.select("#showMoreC1").style("display", "block").transition().style("opacity", 1)
     d3.selectAll(".legend_case1_phase1").transition().style("opacity", c1rectO);
     d3.selectAll(".legend_case1_phase2").transition().style("opacity", c1expO);
 
@@ -1989,7 +1988,7 @@ function casetwo_update(index, prev) {
   } else if (index === 10) {
     sortmode2 = "ascend_max_dryspell";
     $(".filter-container").removeClass("ishidden");
-    d3.select("#showMoreC2").style("display", "block").transition().style("opacity", 1)
+    if (!small_screen) d3.select("#showMoreC2").style("display", "block").transition().style("opacity", 1)
     casetwo();
   }
 }
@@ -2114,7 +2113,7 @@ function casethree(first) {
     })]).range([1, 3, 8, 10])
     d3.select(".xlabel").transition().style("opacity", 1)
   } else if (c3status === "ordering" || c3status === "ordered_over" || c3status === "ordered_under") {
-    d3.select("#showMoreC3").style("display", "block").transition().style("opacity", 1)
+    if (!small_screen) d3.select("#showMoreC3").style("display", "block").transition().style("opacity", 1)
     var extent = d3.extent(data, function(d) {
       return d.tlq;
     })
@@ -2784,14 +2783,14 @@ function casethree_update(index, prev) {
     casethree();
   } else if (index === 13) {
     c3status = "scatter_tlq";
-    d3.select("#showMoreC3").transition().style("opacity", 0).style("display", "block")
+    d3.select("#showMoreC3").transition().style("opacity", 0).style("display", "none")
     casethree();
   } else if (index === 14) {
     if (prev === 13) c3status = "ordering";
     if (prev === 15) c3status = "ordered_over";
     sortmode3 = "descend_tlq";
     $(".filter-container").removeClass("ishidden");
-    d3.select("#showMoreC3").style("display", "block").transition().style("opacity", 1)
+    if (!small_screen) d3.select("#showMoreC3").style("display", "block").transition().style("opacity", 1)
     casethree();
     c3status = "ordered_over";
     if (!wrapupdrawn) wrapup(true);
