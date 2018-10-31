@@ -188,13 +188,13 @@ section.side {
   display: none !important; }
   @media screen and (min-width: 768px) {
     .desktop {
-      display: inline-block; } }
+      display: inline-block !important; } }
 
 .mobile {
-  display: inline-block; }
+  display: inline-block !important; }
   @media screen and (min-width: 768px) {
     .mobile {
-      display: none; } }
+      display: none !important; } }
 
 h1 {
   font-family: "Cormorant Garamond", serif;
@@ -635,6 +635,9 @@ input[type=range] {
       .showMore_wrapper .showMore.light:hover {
         background-color: black; }
 
+#showMoreC3 {
+  padding-bottom: 50px; }
+
 .step_blank {
   opacity: .5;
   border-bottom: 1px solid;
@@ -748,7 +751,8 @@ input[type=range] {
 
 .wrapup-list {
   min-height: 25px;
-  width: 250px;
+  min-width: 150px;
+  width: 33%;
   display: inline-block; }
   .wrapup-list svg {
     overflow: visible; }

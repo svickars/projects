@@ -631,6 +631,7 @@ function setup() {
     var newheight = $("#case3_scrolly").height();
     newheight += (case3num - 1) * 30
     $("#case3_scrolly").css("height", newheight + "px")
+    $("#case3_scrolly").css("margin-bottom", ((case3num - 1) * 30) - 500 + "px")
     casethree();
   })
 }
