@@ -189,11 +189,9 @@ section.side {
 
 .footnotes {
   margin-top: 50px;
-  opacity: .5;
   width: 75%;
-  min-width: 345px; }
-  .footnotes:hover {
-    opacity: .8; }
+  min-width: 345px;
+  color: #b5b5b5; }
   .footnotes ol, .footnotes p {
     font-size: .75rem; }
 
@@ -801,6 +799,7 @@ input[type=range] {
   text-align: left;
   min-height: 25px;
   width: 250px;
+  cursor: default;
   display: inline-block; }
   .wrapup-list svg {
     overflow: visible; }
