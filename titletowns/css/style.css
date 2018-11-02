@@ -13,7 +13,7 @@ body {
   font-size: 1rem;
   font-family: "aktiv-grotesk", sans-serif;
   color: #191919;
-  background-color: white;
+  background-color: #1b2129;
   overflow-x: hidden; }
 
 input:focus, select:focus, textarea:focus, button:focus {
@@ -34,6 +34,9 @@ input:focus, select:focus, textarea:focus, button:focus {
 .container.full {
   padding-top: 25vh;
   padding-bottom: 25vh; }
+  .container.full#titlecontainer {
+    padding-top: 25vh;
+    padding-bottom: 0; }
 
 .dark {
   background-color: #1b2129;
@@ -49,6 +52,10 @@ section {
 section#title {
   width: 50%;
   min-width: 345px; }
+  section#title #title-fade {
+    transition: all 1s linear;
+    -webkit-transition: all 1s linear;
+    -moz-transition: all 1s linear; }
 
 section#wrapup {
   width: 60%;
@@ -98,7 +105,7 @@ section.side {
         section.side figure .header svg text {
           font-family: "Inconsolata", monospace;
           font-size: .8em;
-          fill: #333;
+          fill: white;
           text-transform: capitalize; }
           @media screen and (max-width: 375px) {
             section.side figure .header svg text {
@@ -230,7 +237,7 @@ h2 {
 h3 {
   font-family: "aktiv-grotesk", sans-serif;
   font-weight: normal;
-  color: #FF6A68;
+  color: #6c7a89;
   font-size: .7rem;
   text-transform: uppercase;
   letter-spacing: 2px;
@@ -241,7 +248,7 @@ h4 {
   font-weight: normal;
   font-size: 1.5em;
   margin: 0 0 .75em 0;
-  color: #FF6A68; }
+  color: #6c7a89; }
 
 h5 {
   color: #666;
@@ -250,10 +257,10 @@ h5 {
   line-height: normal; }
 
 .offsetcolour {
-  color: #FF6A68; }
+  color: #6c7a89; }
 
 .dark h3, .dark h4 {
-  color: #FF6A68; }
+  color: #6c7a89; }
 
 .dark h2 {
   color: #f9f9fa; }
@@ -285,7 +292,7 @@ a {
     color: #333; }
 
 .footnote {
-  color: #FF6A68;
+  color: #6c7a89;
   border: none;
   font-size: .75em;
   font-family: "Inconsolata", monospace; }
@@ -318,8 +325,8 @@ p.caption {
   display: inline-block;
   padding: 0px 5px;
   border-radius: 1px 3px;
-  border-right: 3px solid #666;
-  border-bottom: 3px solid #666;
+  border-right: 3px solid #6c7a89;
+  border-bottom: 3px solid #6c7a89;
   -webkit-transition: all .2s ease;
   -o-transition: all .2s ease;
   transition: all .2s ease; }
@@ -336,13 +343,13 @@ p.caption {
     -o-transform: translate(0, -2px);
     transform: translate(0, -2px); }
   .button.isactive {
-    border-color: #191919;
-    color: #191919; }
+    border-color: #6c7a89;
+    color: #6c7a89; }
   @media screen and (min-width: 768px) {
     .button.light {
       background-color: #b5b5b5; }
       .button.light.isactive {
-        border-color: #b5b5b5;
+        border-color: #6c7a89;
         background-color: white; } }
 
 .lightgray {
@@ -357,6 +364,36 @@ p.caption {
 
 .intro-fade {
   opacity: 0; }
+
+.hr-text {
+  margin-top: 150px;
+  margin-bottom: 0;
+  width: 60%;
+  line-height: 1.5em;
+  position: relative;
+  outline: 0;
+  border: 0;
+  text-align: center;
+  height: 1.5em; }
+  .hr-text.postcase {
+    margin-top: -100px;
+    margin-bottom: 100px; }
+  .hr-text:before {
+    content: '';
+    background: linear-gradient(to right, transparent, #818078, transparent);
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: 100%;
+    height: 1px; }
+  .hr-text:after {
+    content: attr(data-content);
+    position: relative;
+    display: inline-block;
+    padding: 0 .1em 0 .5em;
+    line-height: 1.5em;
+    color: #818078;
+    background-color: #1b2129; }
 
 .filter-wrapper {
   display: flex;
@@ -606,7 +643,7 @@ input[type=range] {
   .case1 svg text {
     font-family: "aktiv-grotesk", sans-serif;
     font-size: 13px;
-    fill: #666; }
+    fill: #f9f9fa; }
     @media screen and (max-width: 375px) {
       .case1 svg text {
         font-size: .7em; } }
@@ -617,7 +654,7 @@ input[type=range] {
       letter-spacing: 1px; }
     .case1 svg text.count, .case1 svg text.label-count {
       font-family: "Inconsolata", monospace;
-      fill: #666; }
+      fill: #f9f9fa; }
     .case1 svg text.expected {
       font-family: "Inconsolata", monospace;
       fill: #333;
@@ -629,22 +666,31 @@ input[type=range] {
   stroke-dasharray: 1,1; }
 
 .showMore_wrapper {
-  font-size: .5em;
+  font-size: .7em;
   text-transform: uppercase;
-  letter-spacing: 2px;
+  font-weight: bold;
+  color: #6c7a89;
   margin-top: 30px;
   display: none;
-  opacity: 0; }
+  opacity: 0;
+  -webkit-transition: all .2s ease;
+  -o-transition: all .2s ease;
+  transition: all .2s ease; }
+  .showMore_wrapper:hover {
+    -webkit-transform: translate(0, -2px);
+    -moz-transform: translate(0, -2px);
+    -ms-transform: translate(0, -2px);
+    -o-transform: translate(0, -2px);
+    transform: translate(0, -2px); }
   .showMore_wrapper .showMore {
-    background-color: #f9f9fa;
-    padding: 5px 10px;
-    cursor: pointer; }
-    .showMore_wrapper .showMore:hover {
-      background-color: #666; }
+    background-color: #b5b5b5;
+    padding: 10px 5px;
+    cursor: pointer;
+    border-radius: 1px 3px;
+    border-right: 3px solid #6c7a89;
+    border-bottom: 3px solid #6c7a89; }
     .showMore_wrapper .showMore.light {
-      background-color: #333; }
-      .showMore_wrapper .showMore.light:hover {
-        background-color: black; }
+      background-color: white; }
 
 #showMoreC3 {
   padding-bottom: 50px; }
@@ -736,23 +782,13 @@ input[type=range] {
 .case3 svg text {
   font-family: "aktiv-grotesk", sans-serif;
   font-size: 13px;
-  fill: #666; }
+  fill: white; }
   @media screen and (max-width: 375px) {
     .case3 svg text {
       font-size: .7em; } }
-  .case3 svg text.label_actual, .case3 svg text.label_expected {
-    font-family: "aktiv-grotesk", sans-serif;
-    font-size: 8px;
-    text-transform: uppercase;
-    letter-spacing: 1px; }
   .case3 svg text.count, .case3 svg text.label-count {
     font-family: "Inconsolata", monospace;
-    fill: #666; }
-  .case3 svg text.expected {
-    font-family: "Inconsolata", monospace;
-    fill: #333;
-    font-size: .6em;
-    text-anchor: middle; }
+    fill: #f9f9fa; }
 
 .group3, .group3-behind {
   pointer-events: none; }
@@ -791,10 +827,11 @@ input[type=range] {
 .axis text {
   font-family: "Inconsolata", monospace !important;
   text-transform: uppercase;
-  font-size: 1em !important; }
+  font-size: 1em !important;
+  fill: #b5b5b5 !important; }
 
 .tick line {
-  stroke: #666;
+  stroke: #b5b5b5;
   stroke-dasharray: 1,1;
   opacity: .5; }
 
@@ -802,10 +839,14 @@ input[type=range] {
   font-family: "Inconsolata", monospace !important;
   text-transform: uppercase; }
 
+.annotation-note text {
+  fill: white !important;
+  text-shadow: -2px -2px 0 #112129, 2px -2px 0 #112129, -2px 2px 0 #112129, 2px 2px 0 #112129; }
+
 .custom-note text {
   font-family: "Inconsolata", monospace !important;
   text-transform: uppercase;
-  fill: #666 !important;
+  fill: #6c7a89 !important;
   letter-spacing: 1px;
   font-size: 10px !important; }
 

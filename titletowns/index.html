@@ -23,7 +23,7 @@
 
   <body>
 
-    <div class="container dark full">
+    <div class="container dark full" id="titlecontainer">
       <section id="title">
         <div class="intro">
           <h2>
@@ -55,9 +55,11 @@
             for these filters in the bottom left of your screen. When it comes to making a titletown, <span class='offsetcolour'>you define it</span>.</p>
         </div>
       </section>
+      <hr class="hr-text" data-content="&#x1F947;">
     </div>
 
-    <div class="container full">
+
+    <div class="container dark full">
       <section class="side" id="case1_scrolly">
         <figure id="case1_figure">
           <div class="header" id="case1_header">
@@ -67,24 +69,24 @@
           <div class="case1">
           </div>
           <div class="showMore_wrapper" id="showMoreC1">
-            <span class="showMore">Show more</span>
+            <span class="showMore light">Show more</span>
           </div>
         </figure>
         <article>
-          <div class="step light" data-index="0">
+          <div class="step" data-index="0">
             <div class="inner">
               <h4>Actual Titles</h4>
               Our first way to determine titletowns is to simply look at the numbers &mdash; total championships won by a metro area. And in this case, looking at all sports between 1870 and 2018, <span class="offsetcolour" id="step0_leader">Greater
                 Los Angeles, CA</span> is the winningest city in North America.
             </div>
           </div>
-          <div class="step light" data-index="1">
+          <div class="step" data-index="1">
             <div class="inner">
               This makes sense, considering <span class="step1_leader">Greater Los Angeles</span> teams have played a combined <span id="step1_totalseasons">x</span> seasons <span id="step1_local"></span>. Based on that, should we expect <span id="step1_totaltitles">74</span>
               titles?
             </div>
           </div>
-          <div class="step light" data-index="2">
+          <div class="step" data-index="2">
             <div class="inner">
               Actually, no. We&rsquo;d expect them to have won <span id="step2_lessormore">a lot fewer</span>. By giving each team in a given season an equal chance of winning its respective championship, and adding those odds up over time, we
               can get an
@@ -92,7 +94,7 @@
               should have won <span id="step2_howmany">24</span><span id="step2_local"></span><span id="step2_howmany_local"></span>.
             </div>
           </div>
-          <div class="step light last" data-index="3">
+          <div class="step last" data-index="3">
             <div class="inner">
               <h4>Expected Titles</h4>
               So <span class="step1_leader"></span> is doing better than expected. What other metro areas are overperforming? How about underperforming?
@@ -100,18 +102,18 @@
 
               <div class="button-wrapper">
                 Sort by:
-                <div class="button isactive" id="switch_high_diff">
+                <div class="button light isactive" id="switch_high_diff">
                   Differential
                 </div>
-                <div class="button" id="switch_low_diff">
+                <div class="button light" id="switch_low_diff">
                   Title count
                 </div></br>
                 Show me:
-                <div class="button" id="switch_actual">
-                  Actual
-                </div>
-                <div class="button isactive" id="switch_expected">
+                <div class="button light isactive" id="switch_expected">
                   Expected
+                </div>
+                <div class="button light" id="switch_actual">
+                  Actual
                 </div>
               </div>
               <h5>Use the filters in the bottom left to explore the data for yourself.</h5>
@@ -126,7 +128,9 @@
       </section>
     </div>
 
+
     <div class="container dark full" id="case2_scrolly">
+      <hr class="hr-text postcase" data-content="&#x1F948;">
       <section class="side">
         <figure>
           <div class="header" id="case2_header">
@@ -195,8 +199,9 @@
       </section>
     </div>
 
-    <div class="container full">
-      <section class="side" id="case3_scrolly">
+    <div class="container dark full" id="case3_scrolly">
+      <hr class="hr-text postcase" data-content="&#x1F949;">
+      <section class="side">
         <figure id="case3_figure">
           <div class="header" id="case3_header">
             <h3>Case 3.</h3>
@@ -204,32 +209,33 @@
           </div>
           <div class="case3">
           </div>
+
           <div class="showMore_wrapper" id="showMoreC3">
-            <span class="showMore">Show more</span>
+            <div class="showMore light">Show more</div>
           </div>
         </figure>
         <article>
-          <div class="step light" data-index="11">
+          <div class="step" data-index="11">
             <div class="inner">
               <h4>Home Field Advantage</h4>
               Bigger metro equals bigger market, and a bigger market can translate to bigger payrolls. Teams in these places can spend the big bucks on superstars,
               tempting them away from smaller markets, their cost spread out across more fans (read: consumers).
             </div>
           </div>
-          <div class="step light" data-index="12">
+          <div class="step" data-index="12">
             <div class="inner">
               So how does this relationship factor into the makings of a titletown? In our first case above, we looked at how many championships we’d expect a city to win based on the number of seasons its teams had played. Now we’ll look at
               how many we’d expect based on its population.
 
             </div>
           </div>
-          <div class="step light" data-index="13">
+          <div class="step" data-index="13">
             <div class="inner">
               We do this using a location quotient. This compares a metro area’s titles per capita to the overall. This graph plots number of titles vs. population size, while circle sizes represent a metro area’s TLQ, or its performance above
-              expectation. The more orange the circle is, the better a city is doing; the more blue, the worse.
+              expectation. The more blue the circle is, the better a city is doing; the more red, the worse.
             </div>
           </div>
-          <div class="step light last" data-index="14">
+          <div class="step last" data-index="14">
             <div class="inner">
               <h4>The Overperformers</h4>
               The biggest cities may win the most titles, but they aren’t necessarily very well. LA, for instance, has won just 1.4x what they should have, while NYC has won 30% fewer titles.
@@ -237,29 +243,29 @@
               </br>
               <div class="button-wrapper">
                 Take a look for yourself:</br>
-                <div class="button" id="casethree_los-angeles">
+                <div class="button light" id="casethree_los-angeles">
                   Los Angeles
                 </div>
-                <div class="button" id="casethree_newyork">
+                <div class="button light" id="casethree_newyork">
                   New York
                 </div>
-                <div class="button" id="casethree_boston">
+                <div class="button light" id="casethree_boston">
                   Boston
                 </div>
-                <div class="button" id="casethree_bay-area">
+                <div class="button light" id="casethree_bay-area">
                   Bay Area
                 </div>
               </div>
               </br>
               <div class="button-wrapper">
                 Show me:<br>
-                <div class="button" id="switch_c3_under">
+                <div class="button light" id="switch_c3_under">
                   Underperformers*
                 </div>
-                <div class="button isactive" id="switch_c3_over">
+                <div class="button light isactive" id="switch_c3_over">
                   Overperformers*
                 </div>
-                <div class="button" id="switch_c3_scatter">
+                <div class="button light" id="switch_c3_scatter">
                   Population vs Titles
                 </div>
               </div>
@@ -271,7 +277,8 @@
       </section>
     </div>
 
-    <div class="container dark full">
+    <div class="container dark full" id="wrapup_container">
+      <hr class="hr-text postcase" data-content="&#x1F3C6;">
       <section id="wrapup">
         <div class="prose">
           <h1 id="wrapuph1" style="opacity: .5">So what makes a titletown?</h1>

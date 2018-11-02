@@ -5,7 +5,7 @@ var local_coords = [],
   sortmode = "descend_basic",
   sortmode2 = "descend_seasons",
   sortmode3 = "ascend_population",
-  local, userlocal, searched, level, league, start, end;
+  local, userSearched, searched, level, league, start, end;
 var sideD, c1x, c1y, c1tip, c2x, c2y, c2tip, c3x, c3y, c3r, c3c, num = 10,
   case2num = 10,
   case3num = 10,
@@ -16,7 +16,6 @@ var sideD, c1x, c1y, c1tip, c2x, c2y, c2tip, c3x, c3y, c3r, c3c, num = 10,
   c3status = "first";
 
 var c1rectO = 1,
-  c1expO = 0,
   c1expO = 0;
 
 var lowerSlider = document.querySelector('#lower-left'),
@@ -53,8 +52,12 @@ var filters = {
 }
 
 var league_colours = d3.scaleOrdinal()
-  .range(["#beaed4", "#7fc97f", "#fdc086", "#ccba15", "#f0027f", "#bf5b17", "#386cb0", "#386cb0", "#386cb0", "#386cb0", "#386cb0", "#386cb0", "#386cb0"]).domain(["mlb", "cfl", "mls", "nba", "nfl", "nhl", "ncaa", "baseball_m", "basketball_m", "basketball_w", "football_m", "soccer_w", "volleyball_w"]),
-  event_colours = d3.scaleOrdinal().range(["#f9ed35", "#a17bff", "#fc545d"]).domain(["title", "finals", "finalFour"])
+  .range(["#00FF7F", "#89C4F4", "#7462E0", "#F4D03F", "#FDE3A7", "#D24D57", "#6C7A89", "#6C7A89", "#6C7A89", "#6C7A89", "#6C7A89", "#6C7A89", "#6C7A89"]).domain(["mlb", "nba", "nfl", "nhl", "mls", "cfl", "ncaa", "baseball_m", "basketball_m", "basketball_w", "football_m", "soccer_w", "volleyball_w"]),
+  event_colours = d3.scaleOrdinal().range(["#F1F227", "#00AA00", "#22A7F0"]).domain(["title", "finals", "finalFour"]),
+  light_colour = "#b5b5b5",
+  bg_colour = "#1b2129",
+  dark_colour = "#191919",
+  accent_colour = "#6c7a89";
 
 var leagues = ["MLB", "NBA", "NFL", "NHL", "CFL", "MLS", "NCAA"],
   events = [{
@@ -520,7 +523,8 @@ function setup() {
   })
   $("#showMoreC1").on("click", function() {
     num += 10;
-    $("#case2_scrolly").css("margin-top", ((num - 1) * 30) - 500 + "px")
+    $("#case2_scrolly").css("margin-top", ((num - 1) * 30) - 600 + "px")
+    // $("#case1_hr").css("margin-top", ((num - 1) * 30) - 500 + "px")
     caseone();
   })
 
@@ -559,46 +563,48 @@ function setup() {
   })
   $("#showMoreC2").on("click", function() {
     case2num += 10;
-    // $("#case3_scrolly").css("margin-top", ((case2num - 1) * 30) - 500 + "px")
-    var newheight = $("#case2_scrolly").height();
-    newheight += (case2num - 1) * 30
-    $("#case2_scrolly").css("height", newheight + "px")
+    $("#case3_scrolly").css("margin-top", ((case2num - 1) * 30) - 600 + "px")
     casetwo()
   })
 
   // Case Three Switches
-  $("#casethree_los-angeles").on("mouseover", function() {
-    userlocal = local;
-    local = "Greater Los Angeles, CA";
-    casethree();
-  }).on("mouseout", function() {
-    local = userlocal;
-    casethree();
-  })
-  $("#casethree_newyork").on("mouseover", function() {
-    userlocal = local;
-    local = "New York Metro Area";
-    casethree();
-  }).on("mouseout", function() {
-    local = userlocal;
+  $("#casethree_los-angeles").on("click", function() {
+    $("#casethree_los-angeles").addClass("isactive");
+    $("#casethree_newyork").removeClass("isactive");
+    $("#casethree_boston").removeClass("isactive");
+    $("#casethree_bay-area").removeClass("isactive");
+    userSearched = searched;
+    searched = "Greater Los Angeles, CA";
     casethree();
   })
-  $("#casethree_boston").on("mouseover", function() {
-    userlocal = local;
-    local = "Greater Boston, MA";
-    casethree();
-  }).on("mouseout", function() {
-    local = userlocal;
-    casethree();
-  })
-  $("#casethree_bay-area").on("mouseover", function() {
-    userlocal = local;
-    local = "San Francisco Bay Area, CA";
-    casethree();
-  }).on("mouseout", function() {
-    local = userlocal;
+  $("#casethree_newyork").on("click", function() {
+    $("#casethree_los-angeles").removeClass("isactive");
+    $("#casethree_newyork").addClass("isactive");
+    $("#casethree_boston").removeClass("isactive");
+    $("#casethree_bay-area").removeClass("isactive");
+    userSearched = searched;
+    searched = "New York Metro Area";
     casethree();
   })
+  $("#casethree_boston").on("click", function() {
+    $("#casethree_los-angeles").removeClass("isactive");
+    $("#casethree_newyork").removeClass("isactive");
+    $("#casethree_boston").addClass("isactive");
+    $("#casethree_bay-area").removeClass("isactive");
+    userSearched = searched;
+    searched = "Greater Boston, MA";
+    casethree();
+  })
+  $("#casethree_bay-area").on("click", function() {
+    $("#casethree_los-angeles").removeClass("isactive");
+    $("#casethree_newyork").removeClass("isactive");
+    $("#casethree_boston").removeClass("isactive");
+    $("#casethree_bay-area").addClass("isactive");
+    userSearched = searched;
+    searched = "San Francisco Bay Area, CA";
+    casethree();
+  })
+
 
   $("#switch_c3_under").on("click", function() {
     $("#switch_c3_under").addClass("isactive");
@@ -628,10 +634,11 @@ function setup() {
   })
   $("#showMoreC3").on("click", function() {
     case3num += 10;
-    var newheight = $("#case3_scrolly").height();
-    newheight += (case3num - 1) * 30
-    $("#case3_scrolly").css("height", newheight + "px")
-    $("#case3_scrolly").css("margin-bottom", ((case3num - 1) * 30) - 500 + "px")
+    $("#wrapup_container").css("margin-top", ((case3num - 1) * 30) - 600 + "px")
+    // var newheight = $("#case3_scrolly").height();
+    // newheight += (case3num - 1) * 30
+    // $("#case3_scrolly").css("height", newheight + "px")
+    // $("#case3_scrolly").css("margin-bottom", ((case3num - 1) * 30) - 500 + "px")
     casethree();
   })
 }
@@ -649,9 +656,7 @@ function caseone(first) {
     rank, adjRank, searchedRank, searchedAdjRank;
   leader = 0;
 
-  d3.select("#selected_filters").transition().duration(250)
-    .style("opacity", 0)
-    .transition().duration(250).delay(50)
+  d3.select("#selected_filters")
     .text(level + " / " + league + " / " + start + "-" + end)
     .style("opacity", 1)
 
@@ -838,7 +843,7 @@ function caseone(first) {
       .attr("y1", 0)
       .attr("x2", c1x(0))
       .attr("y2", 0)
-      .style("stroke", "#333")
+      .style("stroke", "white")
       .style("opacity", c1expO)
       .style("stroke-width", 1)
     legendg.append("text")
@@ -868,14 +873,15 @@ function caseone(first) {
       .attr("cx", 5)
       .attr("y", 0)
       .attr("r", 2)
-      .style("fill", "#666")
+      .style("fill", "white")
       .style("opacity", c1expO)
     legendg.append("circle")
       .attr("class", "legend_case1_phase2 legend")
       .attr("cx", c1x(0))
       .attr("y", 0)
-      .attr("r", 3)
-      .style("fill", "green")
+      .attr("r", 4)
+      .style("fill", bg_colour)
+      .style("stroke", "white")
       .style("opacity", c1expO)
 
     g.append("rect")
@@ -884,7 +890,7 @@ function caseone(first) {
       .attr("y", c1y(0) - 5)
       .attr("width", sideD.w + 45)
       .attr("height", h)
-      .style("fill", "#efefef")
+      .style("fill", dark_colour)
       .style("opacity", 0)
 
     if (local != undefined) {
@@ -895,6 +901,7 @@ function caseone(first) {
         .attr("y", c1y(adjRank))
         .attr("dy", 14)
         .style("text-anchor", "end")
+        .style("fill", accent_colour)
         .text("\uf124")
       g.select(".c1label-" + camelize(local)).style("font-weight", "bold")
       g.append("line")
@@ -912,6 +919,7 @@ function caseone(first) {
       .attr("y", -100)
       .attr("dy", 14)
       .style("opacity", 0)
+      .style("fill", accent_colour)
       .text("\uf002")
     if (adjRank > num - 2) {
       g.select("#c1locationLine")
@@ -984,7 +992,7 @@ function caseone(first) {
     .attr("y", function(d, i) {
       return c1y(i)
     })
-    .attr("dy", 14)
+    .attr("dy", 12)
     .style("text-anchor", "end")
     .style("opacity", 0)
     .text(function(d, i) {
@@ -1002,6 +1010,10 @@ function caseone(first) {
       if (i === leader && c1expO > 0) return c1expO * 10
       if (i != leader && c1expO > 0) return c1expO
       1
+    })
+    .style("fill", function(d) {
+      if (d.key === local || d.key === searched) return accent_colour;
+      // return "#191919";
     })
   text.exit().transition().duration(500)
     .attr("y", sideD.h)
@@ -1027,7 +1039,7 @@ function caseone(first) {
       return "count c1label_count-" + i
     })
     .transition().duration(500)
-    .attr("dy", 14)
+    .attr("dy", 12)
     .attr("dx", 6)
     .attr("y", function(d, i) {
       return c1y(i)
@@ -1040,6 +1052,10 @@ function caseone(first) {
       if (i === leader && c1expO > 0) return c1expO * 10
       if (i != leader && c1expO > 0) return c1expO
       1
+    })
+    .style("fill", function(d) {
+      if (d.key === local || d.key === searched) return accent_colour;
+      return "white"
     })
     .style("text-anchor", "start")
     .text(function(d) {
@@ -1059,16 +1075,18 @@ function caseone(first) {
       return c1x(d.newvalues.length)
     })
     .attr("y1", function(d, i) {
-      return c1y(i) + (h / 2) - 4
+      return c1y(i) + (h / 2) - 7
     })
     .attr("x2", function(d) {
       return c1x(d.newvalues.length)
-      // return c1x(d.expected)
     })
     .attr("y2", function(d, i) {
-      return c1y(i) + (h / 2) - 4
+      return c1y(i) + (h / 2) - 7
     })
-    .style("stroke", "#333")
+    .style("stroke", function(d) {
+      if (d.key === local || d.key === searched) return accent_colour;
+      return "white"
+    })
     .style("stroke-width", 1)
     .style("opacity", 0)
     .merge(connect).transition().duration(500)
@@ -1079,13 +1097,13 @@ function caseone(first) {
       return c1x(d.newvalues.length)
     })
     .attr("y1", function(d, i) {
-      return c1y(i) + (h / 2) - 4
+      return c1y(i) + (h / 2) - 7
     })
     .attr("x2", function(d) {
       return c1x(d.expected)
     })
     .attr("y2", function(d, i) {
-      return c1y(i) + (h / 2) - 4
+      return c1y(i) + (h / 2) - 7
     })
     .style("opacity", function(d, i) {
       if (i === leader) return c1expO * 10
@@ -1109,11 +1127,11 @@ function caseone(first) {
     .attr("cy", function(d, i) {
       return c1y(i)
     })
-    .attr("r", 3)
-    .style("fill", "white")
-    .style("fill", function(d) {
-      if (c1expO > 0 && d.expected > d.newvalues.length) return "red"
-      return "green"
+    .attr("r", 4)
+    .style("fill", bg_colour)
+    .style("stroke", function(d) {
+      if (d.key === local || d.key === searched) return accent_colour;
+      return "white"
     })
     .style("opacity", 0)
     .merge(actual).transition().duration(500)
@@ -1124,7 +1142,7 @@ function caseone(first) {
       return c1x(d.newvalues.length)
     })
     .attr("cy", function(d, i) {
-      return c1y(i) + (h / 2) - 4
+      return c1y(i) + (h / 2) - 7
     })
     .style("opacity", function(d, i) {
       if (i === leader) return c1expO * 10
@@ -1147,7 +1165,10 @@ function caseone(first) {
       return c1y(i)
     })
     .attr("r", 2)
-    .style("fill", "#666")
+    .style("fill", function(d) {
+      if (d.key === local || d.key === searched) return accent_colour;
+      return "white"
+    })
     .style("opacity", 0)
     .merge(expected).transition().duration(500)
     .attr("class", function(d, i) {
@@ -1157,7 +1178,7 @@ function caseone(first) {
       return c1x(d.expected)
     })
     .attr("cy", function(d, i) {
-      return c1y(i) + (h / 2) - 4
+      return c1y(i) + (h / 2) - 7
     })
     .style("opacity", function(d, i) {
       if (i === leader) return c1expO * 10
@@ -1204,7 +1225,7 @@ function caseone(first) {
       return c1y(d.i)
     })
     .attr("width", 0)
-    .attr("height", 20)
+    .attr("height", 15)
     .style("opacity", 0)
     .style("fill", function(d) {
       return league_colours(d.sport)
@@ -1328,8 +1349,8 @@ function caseone_update(index, prev) {
     sortmode = "descend_basic";
 
     d3.select("#showMoreC1").transition().style("opacity", 0).style("display", "block")
-    d3.selectAll(".legend_case1_phase1").transition().style("opacity", c1rectO);
-    d3.selectAll(".legend_case1_phase2").transition().style("opacity", c1expO);
+    d3.selectAll(".legend_case1_phase1").transition().style("opacity", 0);
+    d3.selectAll(".legend_case1_phase2").transition().style("opacity", 1);
     caseone();
   } else if (index === 3) {
     c1rectO = 0;
@@ -1338,8 +1359,8 @@ function caseone_update(index, prev) {
 
     $(".filter-container").removeClass("ishidden");
     if (!small_screen) d3.select("#showMoreC1").style("display", "block").transition().style("opacity", 1)
-    d3.selectAll(".legend_case1_phase1").transition().style("opacity", c1rectO);
-    d3.selectAll(".legend_case1_phase2").transition().style("opacity", c1expO);
+    d3.selectAll(".legend_case1_phase1").transition().style("opacity", 0);
+    d3.selectAll(".legend_case1_phase2").transition().style("opacity", 1);
 
     $("#switch_actual").removeClass("isactive")
     $("#switch_high_diff").addClass("isactive")
@@ -1379,9 +1400,7 @@ function casetwo(first) {
   var filter = filters[level][league],
     rank, adjRank, searchedRank, searchedAdjRank;
 
-  d3.select("#selected_filters").transition().duration(250)
-    .style("opacity", 0)
-    .transition().duration(250).delay(50)
+  d3.select("#selected_filters")
     .text(level + " / " + league + " / " + start + "-" + end)
     .style("opacity", 1)
 
@@ -1554,7 +1573,7 @@ function casetwo(first) {
         if (d.event === "final four appearance") return 175
         return 0
       })
-      .attr("y", 0)
+      .attr("y", 10)
       .attr("dx", 0)
       .attr("dy", 4)
       .style("fill", function(d) {
@@ -1569,7 +1588,7 @@ function casetwo(first) {
       .attr("y", c1y(0) - 5)
       .attr("width", sideD.w)
       .attr("height", h)
-      .style("fill", "rgba(255,255,255,.1)")
+      .style("fill", dark_colour)
       .style("opacity", 0)
     if (local != undefined) {
       g.append("text")
@@ -1582,6 +1601,7 @@ function casetwo(first) {
         .attr("y", c1y(adjRank))
         .attr("dy", 14)
         .style("text-anchor", "end")
+        .style("fill", accent_colour)
         .text("\uf124")
       g.select(".c2label-" + camelize(local)).style("font-weight", "bold")
       g.append("line")
@@ -1603,6 +1623,7 @@ function casetwo(first) {
       .attr("y", -100)
       .attr("dy", 14)
       .style("opacity", 0)
+      .style("fill", accent_colour)
       .text("\uf002")
     if (adjRank > case2num - 2) {
       g.select("#c2locationLine")
@@ -1707,9 +1728,15 @@ function casetwo(first) {
     .attr("y", function(d, i) {
       return c2y(i)
     })
-    .style("opacity", function(d) {
-      if (d.titles > 0) return 1
-      return 0.25
+    .style("opacity", 1)
+    .style("font-weight", function(d) {
+      if (d.metro === local || d.metro === searched) return "bold";
+      return "normal";
+    })
+    .style("fill", function(d) {
+      if (d.metro === local || d.metro === searched) return accent_colour;
+      if (d.titles > 0) return "#fff";
+      return light_colour;
     })
   text.exit().transition().duration(500)
     .attr("y", sideD.h)
@@ -1955,9 +1982,7 @@ function casetwo_update(index, prev) {
       level = "all-levels";
       league = "all-leagues";
 
-      d3.select("#selected_filters").transition().duration(250)
-        .style("opacity", 0)
-        .transition().duration(250).delay(50)
+      d3.select("#selected_filters")
         .text(level + " / " + league + " / " + start + "-" + end)
         .style("opacity", 1)
 
@@ -2084,9 +2109,7 @@ function casethree(first) {
   c3y = d3.scaleLinear();
   c3r = d3.scaleLinear().domain([0, 200]).range([3, 3]);
   c3x = d3.scaleLinear().domain([0, 22000000]).range([50, sideD.w - 50]);
-  c3c = d3.scaleLinear().domain([0, .5, 1, 10, d3.max(data, function(d) {
-    return d.tlq;
-  })]).range(["#b21bb6", "#B993BA", "#DBCBDA", "#F3AB67", "#F6902F"]);
+  c3c = d3.scaleLinear().domain([0, .5, 1, 10, 120]).range(["#d7191c", "#fdae61", "#ffffbf", "#abd9e9", "#2c7bb6"]);
 
   var xAxis = d3.axisBottom(c3x)
     .tickSize(0)
@@ -2109,7 +2132,7 @@ function casethree(first) {
     d3.select("#showMoreC3").transition().style("opacity", 0).style("display", "none")
     x_axis_translateY = sideD.h;
     c3y.domain([0, 80]).range([sideD.h - 25, 0]);
-    c3r.domain([0, 1, 20, d3.max(data, function(d) {
+    c3r.domain([0, 1, 15, d3.max(data, function(d) {
       return d.tlq;
     })]).range([1, 3, 8, 10])
     d3.select(".xlabel").transition().style("opacity", 1)
@@ -2120,9 +2143,7 @@ function casethree(first) {
     })
     c3x.domain([0, 1, 10, extent[1]]).range([sideD.left, sideD.w / 3, sideD.w * (3 / 6), sideD.w - 75])
     c3y = d3.scaleBand().domain(d3.range(case3num)).range([0, case3num * h]);
-    c3r.domain([0, 1, 20, d3.max(data, function(d) {
-      return d.tlq;
-    })]).range([1, 3, 8, 10])
+    c3r.domain([0, 1, 15, 120]).range([2, 5, 8, 10])
     yAxis.tickSize(0).tickFormat("");
     xAxis.tickSize(0).tickFormat("");
     d3.select(".xlabel").transition().style("opacity", 0)
@@ -2146,8 +2167,10 @@ function casethree(first) {
       .attr("transform", "translate(" + sideD.left + "," + sideD.top + ")"),
       legendg = legend.append("g").attr("class", "c3legend")
       .attr("transform", "translate(" + sideD.left + ")"),
-      annotationg = g.append("g").attr("class", "annotationg"),
-      noteg = g.append("g").attr("class", "noteg");
+      annotationg = svg.append("g").attr("class", "annotationg")
+      .attr("transform", "translate(" + sideD.left + "," + sideD.top + ")"),
+      noteg = svg.append("g").attr("class", "noteg")
+      .attr("transform", "translate(" + sideD.left + "," + sideD.top + ")");
     svg.append("g")
       .attr("class", "x axis c3axis")
       .attr("transform", "translate(" + 25 + "," + x_axis_translateY + ")")
@@ -2298,7 +2321,7 @@ function casethree(first) {
         x: localannotation.population,
         y: localannotation.newvalues.length,
         dx: 25,
-        dy: -25
+        dy: -37.5
       }));
     }
     if (searched != undefined && searched != "New York Metro Area" && searched != "Greater Los Angeles, CA") {
@@ -2314,15 +2337,15 @@ function casethree(first) {
         x: searchedannotation.population,
         y: searchedannotation.newvalues.length,
         dx: 25,
-        dy: -50
+        dy: -62.5
       }));
     }
   }
 
   if (c3status === "first") {
     if (small_screen) {
-      var large = 21000000,
-        small = 500000
+      var large = 22000000,
+        small = 0
     } else {
       var large = 16000000,
         small = 6000000
@@ -2335,7 +2358,7 @@ function casethree(first) {
       y: 25,
       dx: -25,
       dy: 0,
-      color: "red"
+      color: accent_colour
     }, {
       note: {
         title: "Smaller Cities"
@@ -2344,7 +2367,7 @@ function casethree(first) {
       y: 25,
       dx: 25,
       dy: 0,
-      color: "red"
+      color: accent_colour
     }]
   } else if (c3status === "scatter_basic" || c3status === "scatter_tlq") {
     notes = [{
@@ -2355,7 +2378,7 @@ function casethree(first) {
       y: c3y(79),
       dx: 25,
       dy: 25,
-      color: "red"
+      color: accent_colour
     }]
   }
 
@@ -2412,17 +2435,17 @@ function casethree(first) {
     noteg.transition().style("opacity", 0);
   }
 
-  noteg.selectAll("tspan").attr("dy", "1em")
+  noteg.selectAll("tspan").attr("dy", "1.25em")
 
   if (c3status === "ordering") {
     legendg.selectAll(".c3_legend_phase2_circle")
       .data(c3r.domain())
       .enter().append("circle").attr("class", "c3_legend_phase2_circle")
-      .attr("cx", function(d) {
-        if (d === 0) return c3x(1) - 17
-        if (d === 1) return c3x(1) - 12
-        if (d === 20) return c3x(1)
-        return c3x(1) + 20
+      .attr("cx", function(d, i) {
+        if (d === 0) return c3x(1) - 21
+        if (d === 1) return c3x(1) - 9
+        if (d === 15) return c3x(1) + 9
+        return c3x(1) + 31
       })
       .attr("cy", 24)
       .attr("r", function(d) {
@@ -2492,6 +2515,7 @@ function casethree(first) {
         .attr("dy", 5)
         .style("text-anchor", "end")
         .text("\uf124")
+        .style("fill", accent_colour)
         .style("opacity", 0).transition().delay(1000).style("opacity", 1)
       g.select(".label-" + camelize(local)).style("font-weight", "bold")
       g.append("line")
@@ -2512,6 +2536,7 @@ function casethree(first) {
       .attr("y", -100)
       .attr("dy", 5)
       .style("opacity", 0)
+      .style("fill", accent_colour)
       .text("\uf002")
     if (adjRank > num - 2) {
       g.select("#c3locationLine").transition().delay(1000).style("opacity", 1);
@@ -2523,7 +2548,7 @@ function casethree(first) {
       .attr("y", c3y(0))
       .attr("width", sideD.w)
       .attr("height", h)
-      .style("fill", "#efefef")
+      .style("fill", dark_colour)
       .style("opacity", 0)
 
   } else if (c3status === "ordered_over" || c3status === "ordered_under") {
@@ -2536,6 +2561,7 @@ function casethree(first) {
         .attr("height", h)
         .style("opacity", 1)
       g.select("#c3searched")
+        .transition()
         .attr("x", function() {
           var adj = 25;
           if (searched === local) adj = 40;
@@ -2680,6 +2706,9 @@ function casethree(first) {
         if (d.tlq > 1) return "end";
         return "start";
       })
+      .style("fill", function(d) {
+        if (d.key === local || d.key === searched) return accent_colour;
+      })
       .text(function(d) {
         return d.key;
       })
@@ -2715,6 +2744,9 @@ function casethree(first) {
       .style("text-anchor", function(d) {
         if (d.tlq > 1) return "start";
         return "end";
+      })
+      .style("fill", function(d) {
+        if (d.key === local || d.key === searched) return accent_colour;
       })
       .style("opacity", 0)
       .text(function(d) {
@@ -2769,9 +2801,7 @@ function casethree_update(index, prev) {
       level = "all-levels";
       league = "all-leagues";
 
-      d3.select("#selected_filters").transition().duration(250)
-        .style("opacity", 0)
-        .transition().duration(250).delay(50)
+      d3.select("#selected_filters")
         .text(level + " / " + league + " / " + start + "-" + end)
         .style("opacity", 1)
 
@@ -2950,6 +2980,9 @@ function wrapup(first) {
     })
     .style("opacity", 0)
     .merge(text1).transition().duration(500)
+    .attr("class", function(d) {
+      return "city wu1-city-" + camelize(d.key)
+    })
     .attr("x", 20)
     .attr("y", function(d, i) {
       return y(i) + (wh / 2);
@@ -3022,6 +3055,9 @@ function wrapup(first) {
     })
     .style("opacity", 0)
     .merge(text2).transition().duration(500)
+    .attr("class", function(d) {
+      return "city wu-city-" + camelize(d.metro)
+    })
     .attr("x", 20)
     .attr("y", function(d, i) {
       return y(i) + (wh / 2);
@@ -3091,6 +3127,9 @@ function wrapup(first) {
     })
     .style("opacity", 0)
     .merge(text3).transition().duration(500)
+    .attr("class", function(d) {
+      return "city wu-city-" + camelize(d.key)
+    })
     .attr("x", 20)
     .attr("y", function(d, i) {
       return y(i) + (wh / 2);
@@ -3148,6 +3187,28 @@ function wrapup(first) {
       return d.rank + ".";
     });
   placement3.exit().transition().duration(500).attr("y", (num + 2) * wh).style("opacity", 0).remove();
+
+  d3.selectAll(".city").on("mouseover", function(data) {
+    var sele = data.key;
+    if (data.key === undefined) sele = data.metro;
+    d3.selectAll(".wu1-city-" + camelize(sele)).style("font-weight", "bold").style("opacity", 1);
+    d3.selectAll(".wu-city-" + camelize(sele)).style("font-weight", "bold").style("opacity", 1);
+  }).on("mouseout", function(data) {
+    var sele = data.key;
+    if (data.key === undefined) {
+      sele = data.metro;
+    };
+    d3.selectAll(".wu1-city-" + camelize(sele)).style("font-weight", "normal").style("opacity", function(d, i) {
+      var opa = d.i;
+      if (opa > 10) opa = 10
+      return opacity(opa)
+    });
+    d3.selectAll(".wu-city-" + camelize(sele)).style("font-weight", "normal").style("opacity", function(d, i) {
+      var opa = d.rank;
+      if (opa > 10) opa = 10
+      return opacity(opa)
+    })
+  })
 
 }
 
@@ -3367,9 +3428,10 @@ function getLocal() {
     if (metros[closest] != undefined) local = metros[closest].metro
 
     if (local != undefined) {
-      d3.select("#title-fade").transition().duration(500).style("opacity", .5)
+      // d3.select("#title-fade").transition().duration(500).style("color", light_colour)
+      $("#title-fade").css("color", accent_colour);
       $("#citysearch-left").attr("value", local)
-      $("#subtitle-user-city").html("And is <span class='offsetcolour'>" + local + "</span> the winningest city in North American sports?")
+      $("#subtitle-user-city").html("And how does <span class='offsetcolour'>" + local + "</span> compare to the winningest cities in North American sports?")
       d3.select("#subtitle-user-city").transition().duration(1000).delay(250).style("opacity", 1);
       if (local === "Greater Boston, MA") $("#worldseries-winner").html("And now, with the Dodgers recent return to the World Series, I’m wondering, is it LA?");
       if (local === "Green Bay, WI") {
@@ -3387,12 +3449,6 @@ function getLocal() {
       searchArray.push(metros.metro)
     })
   })
-
-  // if (local === undefined) {
-  //   $("#subtitle-user-city").html("The Winningest Cities in North American Sports")
-  //   d3.select("#subtitle-user-city").transition().duration(500).delay(250).style("opacity", 1);
-  //   $("#groundrules-user-city").html("Is it Green Bay, Wisconsin")
-  // }
 
   d3.selectAll(".intro-fade").transition().duration(1000).delay(1250).style("opacity", 1);
 
