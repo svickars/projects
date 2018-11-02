@@ -1539,7 +1539,7 @@ function casetwo(first) {
     .tickSize(case2num * h);
 
   if (first) {
-    var svg = d3.select(".case2").append("svg")
+    var svg = d3.select(".case2 svg")
       .attr("width", sideD.w + sideD.left + sideD.right)
       .attr("height", case2num * h),
       legend = d3.select("#case2_header").append("svg")
