@@ -162,6 +162,7 @@ function processData(error, titleData, seasonData) {
   Array.prototype.push.apply(case3data, titleData);
   // getLocal(metros);
   caseone(true);
+  casetwo(true);
   casethree(true);
 } // end processData
 
