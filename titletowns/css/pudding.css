@@ -1,0 +1,46 @@
+html,
+body {
+  margin: 0;
+}
+
+.skip-to-main {
+  border: none;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+}
+header {
+  z-index: 1000;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+
+header a.logo {
+  display: block;
+  border: none;
+  max-width: 9rem;
+  margin: 1rem auto;
+}
+
+header svg {
+  fill: #efefef;
+  display: block;
+  width: 100%;
+}
+
+.container.full#titlecontainer {
+  padding-top: 7rem;
+}
+
+.byline {
+  font-size: 14px;
+}
+
+section#title .prose,
+section#title .intro {
+  max-width: 40rem;
+  margin: 1rem auto;
+}
