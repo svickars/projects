@@ -4,6 +4,7 @@ $gray3: #666;
 $gray4: #b5b5b5;
 $gray5: #f9f9fa;
 $red: #E00000;
+$offset: #6c7a89;
 $serif: "Cormorant Garamond", serif;
 $sans: "aktiv-grotesk", sans-serif;
 $mono: "Inconsolata", monospace;
@@ -36,7 +37,7 @@ body {
   font-size: 1rem;
   font-family: $sans;
   color: $gray1;
-  background-color: white;
+  background-color: #1b2129;
   overflow-x: hidden;
 }
 
@@ -63,10 +64,15 @@ input:focus, select:focus, textarea:focus, button:focus {
 .container.full {
   padding-top: 25vh;
   padding-bottom: 25vh;
+
+  &#titlecontainer {
+    padding-top: 25vh;
+    padding-bottom: 0;
+  }
 }
 
 .dark {
-  background-color: $gray1;
+  background-color: #1b2129;
   color: white;
 }
 
@@ -80,6 +86,17 @@ section {
 
 section#title {
   width: 50%;
+  min-width: 345px;
+
+  #title-fade {
+    transition: all 1s linear;
+    -webkit-transition: all 1s linear;
+    -moz-transition: all 1s linear;
+  }
+}
+
+section#wrapup {
+  width: 60%;
   min-width: 345px;
 }
 
@@ -123,7 +140,7 @@ section.side {
     flex-direction: column;
     flex-grow: 1;
     height: 330px;
-    margin: 0;
+    margin: 25px 0 0 0;
     width: 100%;
     top: 175px;
     -webkit-transform: translate(0, -50%);
@@ -142,7 +159,7 @@ section.side {
         text {
           font-family: $mono;
           font-size: .8em;
-          fill: $gray2;
+          fill: white;
           text-transform: capitalize;
           @media screen and (max-width: 375px) {
             font-size: .7em;
@@ -160,6 +177,7 @@ section.side {
       flex: 2;
       height: 630px;
       top: 50px;
+      margin: 0;
       -webkit-transform: translate(0, 0);
       -moz-transform: translate(0, 0);
       -ms-transform: translate(0, 0);
@@ -188,11 +206,11 @@ section.side {
         min-height: 30vh;
       }
 
-      &.laststep {
+      &.last {
         min-height: 150vh;
 
         @media screen and (min-width: 768px) {
-          min-height: 95vh;
+          min-height: 50vh;
         }
       }
 
@@ -256,31 +274,67 @@ section.side {
   width: 100%;
 }
 
+.footnotes {
+  margin-top: 50px;
+  width: 75%;
+  min-width: 345px;
+  color: $gray4;
+
+  ol, p {
+    font-size: .75rem;
+  }
+
+}
+
+.nomobile {
+  display: none !important;
+  @media screen and (min-width: 768px) {
+    display: flex !important;
+  }
+}
+
+.mobile {
+  display: inline-block !important;
+  @media screen and (min-width: 768px) {
+    display: none !important;
+  }
+}
+
 
 // TEXT
 h1 {
   font-family: $serif;
   font-size: 2rem;
-  font-weight: normal;
+  line-height: 1;
+  letter-spacing: 0.025em;
+  font-weight: 700;
   margin: 0;
 
   @media screen and (min-width: 768px) {
     font-size: 3rem;
+    line-height: 1;
+    letter-spacing: 0.025em;
   }
 }
 
 h2 {
   font-family: $serif;
-  // font-weight: normal;
-  font-size: 1.75rem;
+  font-weight: 700;
+  font-size: 2rem;
+  letter-spacing: 0.025em;
   margin: .5rem 0 .5rem 0;
   color: $gray1;
+
+  @media screen and (min-width: 768px) {
+    font-size: 2.5rem;
+    line-height: 1;
+  }
 }
 
 h3 {
   font-family: $sans;
   font-weight: normal;
-  color: $gray3;
+  color: $offset;
   font-size: .7rem;
   text-transform: uppercase;
   letter-spacing: 2px;
@@ -292,11 +346,22 @@ h4 {
   font-weight: normal;
   font-size: 1.5em;
   margin: 0 0 .75em 0;
+  color: $offset;
+}
+
+h5 {
   color: $gray3;
+  font-weight: bold;
+  font-size: .8em;
+  line-height: normal;
+}
+
+.offsetcolour {
+  color: $offset;
 }
 
 .dark h3, .dark h4 {
-  color: $gray4;
+  color: $offset;
 }
 
 .dark h2 {
@@ -336,6 +401,13 @@ a {
   }
 }
 
+.footnote {
+  color: $offset;
+  border: none;
+  font-size: .75em;
+  font-family: $mono;
+}
+
 p.caption {
   font-family: $sans;
   font-weight: normal;
@@ -351,7 +423,7 @@ p.caption {
   position: relative;
   width: 100%;
 }
-
+// HERE
 .button {
   font-family: $sans;
   font-size: .7em;
@@ -366,8 +438,8 @@ p.caption {
   display: inline-block;
   padding: 0px 5px;
   border-radius: 1px 3px;
-  border-right: 3px solid $gray3;
-  border-bottom: 3px solid $gray3;
+  border-right: 3px solid $offset;
+  border-bottom: 3px solid $offset;
 
   -webkit-transition: all .2s ease;
   -o-transition: all .2s ease;
@@ -375,6 +447,11 @@ p.caption {
 
   @media screen and (min-width: 768px) {
     margin-right: .25em;
+  }
+
+  &.mobile {
+    margin-top: 0;
+    margin-right: -5px !important;
   }
 
   &:hover {
@@ -388,8 +465,20 @@ p.caption {
   }
 
   &.isactive {
-    border-color: $gray1;
-    color: $gray1;
+    border-color: $offset;
+    color: $offset;
+  }
+  @media screen and (min-width: 768px) {
+    &.light {
+      // color: $gray4;
+      // border-color: white;
+      background-color: $gray4;
+
+      &.isactive {
+        border-color: $offset;
+        background-color: white;
+      }
+    }
   }
 }
 
@@ -413,29 +502,43 @@ p.caption {
   opacity: 0;
 }
 
-
-// GROUNDRULES
-.groundrules {
-  width: 100%;
-  font-family: $mono;
-  // font-size: 1em;
-}
-
-.filter-title {
-  font-size: .9em;
-  font-family: $sans;
-  margin-bottom: .5em;
-  @media screen and (min-width: 768px) {
-    font-size: 1.2rem;
+.hr-text {
+  margin-top: 150px;
+  margin-bottom: 0;
+  width: 60%;
+  line-height: 1.5em;
+  position: relative;
+  outline: 0;
+  border: 0;
+  text-align: center;
+  height: 1.5em;
+  // opacity: .5;
+  &.postcase {
+    margin-top: -100px;
+    margin-bottom: 100px;
+  }
+  &:before {
+    content: '';
+    background: linear-gradient(to right, transparent, #818078, transparent);
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: 100%;
+    height: 1px;
+  }
+  &:after {
+    content: attr(data-content);
+    position: relative;
+    display: inline-block;
+    padding: 0 .1em 0 .5em;
+    line-height: 1.5em;
+    color: #818078;
+    background-color: #1b2129;
   }
 }
 
-.filter-caption {
-  font-family: $sans;
-  color: $gray4;
-  font-size: .75em;
-  margin-top: 10px;
-}
+
+// GROUNDRULES
 
 .filter-wrapper {
   display: flex;
@@ -463,51 +566,81 @@ input[type=range] {
   width: 100%; /* Specific width is required for Firefox. */
   background: transparent; /* Otherwise white in Chrome */
 
-   box-sizing: border-box;
-   appearance: none;
-   overflow: visible;
-   outline: none;
-   background: linear-gradient($gray4, $gray4) no-repeat center;
-   background-size: 100% 2px;
-   pointer-events: none;
+ box-sizing: border-box;
+ appearance: none;
+ overflow: visible;
+ outline: none;
+ background: linear-gradient($gray4, $gray4) no-repeat center;
+ background-size: 100% 2px;
+ pointer-events: none;
 
-   &:active,
-   &:focus {
-      outline: none;
-   }
-
-   &::-ms-track {
-     width: 100%;
-     cursor: pointer;
-
-     /* Hides the slider so custom styles can be added */
-     background: transparent;
-     border-color: transparent;
-     color: transparent;
-   }
-
-   &::-webkit-slider-thumb {
-     -webkit-appearance: none;
-      height: 10px;
-      width: 10px;
-      border-radius: 5px;
-      background-color: $red;
-      position: relative;
-      cursor: pointer;
-      appearance: none;
-      pointer-events: all;
-      z-index: 99;
-      &::before {
-            content: ' ';
-            display: block;
-            position: absolute;
-            top: 13px;
-            left: 100%;
-            width: 2000px;
-            height: 2px;
-      }
-   }
+ @-moz-document url-prefix() {
+    margin-left: 2px;
+    margin-top: -12px !important;
+    pointer-events: all;
 }
+
+ &:active,
+ &:focus {
+    outline: none;
+ }
+
+ &::-ms-track {
+   width: 100%;
+   cursor: pointer;
+
+   /* Hides the slider so custom styles can be added */
+   background: transparent;
+   border-color: transparent;
+   color: transparent;
+ }
+
+ &::-moz-range-track {
+  width: 100%;
+  cursor: pointer;
+  pointer-events: none;
+
+  background: transparent;
+  border-color: transparent;
+  color: transparent;
+
+  margin-top: -15px !important;
+  margin-left: 0;
+}
+
+ &::-webkit-slider-thumb {
+   -webkit-appearance: none;
+    height: 10px;
+    width: 10px;
+    border-radius: 5px;
+    background-color: $red;
+    position: relative;
+    cursor: pointer;
+    appearance: none;
+    pointer-events: all;
+    z-index: 99;
+    &::before {
+      content: ' ';
+      display: block;
+      position: absolute;
+      top: 13px;
+      left: 100%;
+      width: 2000px;
+      height: 2px;
+    }
+ }
+
+ &::-moz-range-thumb {
+   border: none;
+   height: 10px;
+   width: 10px;
+   border-radius: 50%;
+   cursor: pointer;
+   background: $gray2;
+   pointer-events: all;
+ }
+}
+
 
 .yearrange {
    overflow: visible;
@@ -716,7 +849,7 @@ input[type=range] {
 
 
 // CASE ONE
-.case1 svg, .case3 svg {
+.case1 svg {
   overflow: visible;
   g {
     overflow: visible;
@@ -724,7 +857,7 @@ input[type=range] {
   text {
     font-family: $sans;
     font-size: 13px;
-    fill: $gray3;
+    fill: $gray5;
     @media screen and (max-width: 375px) {
       font-size: .7em;
     }
@@ -736,7 +869,7 @@ input[type=range] {
     }
     &.count, &.label-count {
       font-family: $mono;
-      fill: $gray3;
+      fill: $gray5;
     }
     &.expected {
       font-family: $mono;
@@ -747,28 +880,49 @@ input[type=range] {
   }
 }
 
-#c1locationLine {
+#c1locationLine, #c2locationLine, #c3locationLine {
   stroke: $gray3;
   stroke-dasharray: 1,1;
 }
-
+// HERE
 .showMore_wrapper {
-  font-size: .5em;
+  font-size: .7em;
   text-transform: uppercase;
-  letter-spacing: 2px;
+  font-weight: bold;
+  color: $offset;
   margin-top: 30px;
   display: none;
   opacity: 0;
 
+  -webkit-transition: all .2s ease;
+  -o-transition: all .2s ease;
+  transition: all .2s ease;
+
+  &:hover {
+    -webkit-transform: translate(0, -2px);
+    -moz-transform: translate(0, -2px);
+    -ms-transform: translate(0, -2px);
+    -o-transform: translate(0, -2px);
+    transform: translate(0, -2px);
+  }
+
   .showMore {
-    background-color: $gray5;
-    padding: 5px 10px;
+    background-color: $gray4;
+    padding: 10px 5px;
     cursor: pointer;
 
-    &:hover {
-      background-color: $gray3;
+    border-radius: 1px 3px;
+    border-right: 3px solid $offset;
+    border-bottom: 3px solid $offset;
+
+    &.light {
+      background-color: white;
     }
   }
+}
+
+#showMoreC3 {
+  padding-bottom: 50px;
 }
 
 .step_blank {
@@ -824,40 +978,129 @@ input[type=range] {
   line-height: 1;
   font-weight: bold;
   padding: 12px;
-  background: rgba(0, 0, 0, 0.8);
-  color: #fff;
+  background: #ffffff;
+  color: $gray2;
   border-radius: 2px;
   pointer-events: none;
   width: 200px;
+
+  -webkit-box-shadow: 0px 0px 5px 2px rgba(153,153,153,0.5);
+  -moz-box-shadow: 0px 0px 5px 2px rgba(153,153,153,0.5);
+  box-shadow: 0px 0px 5px 2px rgba(153,153,153,0.5);
+
+  &.dark-tip {
+    background: #000000;
+    color: white;
+    -webkit-box-shadow: 0px 0px 5px 2px rgba(53,53,53,0.5);
+    -moz-box-shadow: 0px 0px 5px 2px rgba(53,53,53,0.5);
+    box-shadow: 0px 0px 5px 2px rgba(53,53,53,0.5);
+  }
+}
+
+.d3-tip .tipH {
+  display: inline-block;
+  margin-right: 5px;
 }
 
 .d3-tip h1 {
-  font-family: $mono;
+  font-family: $sans;
   font-size: 1em;
+  font-weight: bold;
   margin: 0 0 10px 0;
 }
 
 .d3-tip h2 {
   font-family: $sans;
-  font-size: .6em;
+  font-size: .8em;
   margin: 5px 0 0 0;
   font-weight: normal;
-  text-transform: uppercase;
+  // text-transform: uppercase;
+}
+
+.d3-tip h3 {
+  font-family: $sans;
+  font-size: .8em;
+  text-transform: none;
   letter-spacing: 1px;
+  color: #ffffff;
+  padding: 2px;
 }
 
 .d3-tip p {
   font-size: .6em;
   margin: 2px 0 8px 0;
-  color: white;
+  // color: white;
 }
 
 
 // CASE THREE
+.case3 svg {
+  // overflow: visible;
+  g {
+    // overflow: visible;
+  }
+  text {
+    font-family: $sans;
+    font-size: 13px;
+    fill: white;
+    @media screen and (max-width: 375px) {
+      font-size: .7em;
+    }
+    &.count, &.label-count {
+      font-family: $mono;
+      fill: $gray5;
+    }
+  }
+}
+
 .group3, .group3-behind {
   pointer-events: none;
 }
 
+
+// WRAP UP
+.wrapup-chart {
+  margin: 25px 0 25px 0;
+  text-align: center;
+}
+
+.wrapup-list {
+  text-align: left;
+  min-height: 25px;
+  width: 250px;
+  cursor: default;
+  display: inline-block;
+
+  svg {
+    overflow: visible;
+  }
+
+  svg text {
+    font-size: .9em;
+    fill: $gray5;
+  }
+
+  svg .placement {
+    font-size: .75em;
+    font-family: $mono;
+  }
+
+  svg line {
+    stroke: $gray3;
+    stroke-dasharray: 1,1;
+  }
+
+  h4 {
+    margin-bottom: 0;
+  }
+
+  .wrapup-sub {
+    height: 50px;
+    margin: 5px 0 5px 0;
+    color: $gray3;
+    font-size: .9em;
+  }
+}
 
 // CHART ELEMENTS
 .y.axis path, .x.axis path {
@@ -868,10 +1111,11 @@ input[type=range] {
   font-family: $mono !important;
   text-transform: uppercase;
   font-size: 1em !important;
+  fill: $gray4 !important;
 }
 
 .tick line {
-  stroke: $gray3;
+  stroke: $gray4;
   stroke-dasharray: 1,1;
   opacity: .5;
 }
@@ -879,6 +1123,25 @@ input[type=range] {
 .tick text {
   font-family: $mono !important;
   text-transform: uppercase;
+}
+
+.annotation-note {
+  text {
+    fill: white !important;
+    text-shadow:
+    -2px -2px 0 #112129,
+    2px -2px 0 #112129,
+    -2px 2px 0 #112129,
+    2px 2px 0 #112129;
+  }
+}
+
+.custom-note text {
+  font-family: $mono !important;
+  text-transform: uppercase;
+  fill: $offset !important;
+  letter-spacing: 1px;
+  font-size: 10px !important;
 }
 
 // FILTER
@@ -1029,6 +1292,9 @@ input[type=range] {
       margin-top: -10px;
       &::-webkit-slider-thumb {
         background-color: $gray2;
+      }
+      &::-moz-range-thumb {
+        cursor: pointer;
       }
     }
   }
