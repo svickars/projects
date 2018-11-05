@@ -112,19 +112,19 @@ var filters = {
 var league_colours = d3
     .scaleOrdinal()
     .range([
-      '#00FF7F',
-      '#89C4F4',
-      '#7462E0',
-      '#F4D03F',
-      '#FDE3A7',
-      '#D24D57',
-      '#6C7A89',
-      '#6C7A89',
-      '#6C7A89',
-      '#6C7A89',
-      '#6C7A89',
-      '#6C7A89',
-      '#6C7A89'
+      '#30D840',
+      '#3EA3DB',
+      '#2E46BC',
+      '#ECE833',
+      '#EF4723',
+      '#BAB8BC',
+      '#5E5D63',
+      '#5E5D63',
+      '#5E5D63',
+      '#5E5D63',
+      '#5E5D63',
+      '#5E5D63',
+      '#5E5D63'
     ])
     .domain([
       'mlb',
@@ -143,7 +143,7 @@ var league_colours = d3
     ]),
   event_colours = d3
     .scaleOrdinal()
-    .range(['#F1F227', '#00AA00', '#22A7F0'])
+    .range(['#F1F227', '#30D840', '#22A7F0'])
     .domain(['title', 'finals', 'finalFour']),
   light_colour = '#b5b5b5',
   bg_colour = '#1b2129',
@@ -626,18 +626,18 @@ function setup() {
   if (small_screen) offset = [25, -150];
   c1tip = d3
     .tip()
-    .attr('class', 'd3-tip')
+    .attr('class', 'd3-tip dark-tip')
     .html(function(d) {
       return (
         "<div class='tipH'><h1>" +
         d.year +
-        "</h1></div><div class='tipH' style='background-color: " +
+        "</h1></div><div class='tipH'><h3 style='color: " +
         league_colours(d.sport) +
-        "'><h3>" +
+        "'>" +
         replaceSports(d.sport) +
-        '</h3></div><h2>' +
+        '</h3></div><p>' +
         d.team +
-        '</h2>'
+        '</p>'
       );
     })
     .direction('e')
@@ -2918,7 +2918,7 @@ function casethree(first) {
   c3c = d3
     .scaleLinear()
     .domain([0, 0.5, 1, 10, 120])
-    .range(['#d7191c', '#fdae61', '#ffffbf', '#abd9e9', '#2c7bb6']);
+    .range(['#EF4723', '#6c7a89', '#ECE833', '#ED9C2A', '#3D51A3']);
 
   var xAxis = d3
     .axisBottom(c3x)

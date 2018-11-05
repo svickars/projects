@@ -1,6 +1,76 @@
+/* FONTS */
+@font-face {
+	font-family: 'Canela Web';
+	src: url('{{basepath}}assets/fonts/canela/Canela-Light-Web.woff2') format('woff2'),
+	url('{{basepath}}assets/fonts/canela/Canela-Light-Web.woff') format('woff');
+	font-weight: 300;
+	font-style: normal;
+	font-stretch: normal;
+}
+@font-face {
+	font-family: 'Canela Web';
+	src: url('../assets/fonts/canela/Canela-Bold-Web.woff2') format('woff2'),
+	url('../assets/fonts/canela/Canela-Bold-Web.woff') format('woff');
+	font-weight: 700;
+	font-style: normal;
+	font-stretch: normal;
+}
+/* Publico Text */
+@font-face {
+	font-family: 'Publico Text Web';
+	src: url('../assets/fonts/publico/PublicoText-Roman-Web.woff2') format('woff2'),
+	url('../assets/fonts/publico/PublicoText-Roman-Web.woff') format('woff');
+	font-weight: 400;
+	font-style: normal;
+	font-stretch: normal;
+}
+@font-face {
+	font-family: 'Publico Text Web';
+	src: url('../assets/fonts/publico/PublicoText-Bold-Web.woff2') format('woff2'),
+	url('../assets/fonts/publico/PublicoText-Bold-Web.woff') format('woff');
+	font-weight: 700;
+	font-style: normal;
+	font-stretch: normal;
+}
+@font-face {
+	font-family: 'Publico Text Web';
+	src: url('../assets/fonts/publico/PublicoText-Italic-Web.woff2') format('woff2'),
+	url('../assets/fonts/publico/PublicoText-Italic-Web.woff') format('woff');
+	font-weight: 400;
+	font-style: italic;
+	font-stretch: normal;
+}
+/* Atlast Grotesk */
+@font-face {
+	font-family: 'Atlas Grotesk Web';
+	src: url('../assets/fonts/atlas/AtlasGrotesk-Regular-Web.woff2') format('woff2'),
+	url('../assets/fonts/atlas/AtlasGrotesk-Regular-Web.woff') format('woff');
+	font-weight: 400;
+	font-style: normal;
+	font-stretch: normal;
+}
+@font-face {
+	font-family: 'Atlas Grotesk Web';
+	src: url('../assets/fonts/atlas/AtlasGrotesk-Medium-Web.woff2') format('woff2'),
+	url('../assets/fonts/atlas/AtlasGrotesk-Medium-Web.woff') format('woff');
+	font-weight: 500;
+	font-style: normal;
+	font-stretch: normal;
+}
+@font-face {
+	font-family: 'Atlas Grotesk Web';
+	src: url('../assets/fonts/atlas/AtlasGrotesk-Bold-Web.woff2') format('woff2'),
+	url('../assets/fonts/atlas/AtlasGrotesk-Bold-Web.woff') format('woff');
+	font-weight: 600;
+	font-style: normal;
+	font-stretch: normal;
+}
+
+
 html,
 body {
   margin: 0;
+  font-family: 'Atlas Grotesk Web';
 }
 
 .skip-to-main {
@@ -39,8 +109,113 @@ header svg {
   font-size: 14px;
 }
 
+section#title {
+  max-width: 40rem
+}
+
 section#title .prose,
 section#title .intro {
   max-width: 40rem;
   margin: 1rem auto;
+}
+
+section#title #title-fade {
+  font-family: 'Publico Text Web';
+  margin-bottom: 0.5em;
+}
+
+section#title #subtitle-user-city {
+}
+
+h1 {
+  font-family: 'Publico Text Web';
+  line-height: 1.25em;
+}
+
+.hr-text {
+  height: 3em;
+}
+
+.hr-text:after {
+  font-size: 2rem;
+  content: attr(data-content);
+  position: relative;
+  display: inline-block;
+  padding: 0.125em 0.25em 0 0.25em;
+  line-height: 1.5em;
+  color: #818078;
+  background-color: #1b2129;
+}
+
+p {
+  font-family: 'Atlas Grotesk Web'
+}
+
+.container.full {
+  padding-top: 10vh;
+}
+
+section.side figure .header svg text {
+  font-family: Menlo, Consolas, Monaco, 'Courier New', monospace;
+}
+
+section.side article .step, h3 {
+  font-family: 'Atlas Grotesk Web'
+}
+
+.dark h3 {
+  color: #88868B;
+  font-size: .8rem
+}
+
+.dark h4 {
+  color: #88868B;
+  font-family: 'Publico Text Web';
+}
+
+.tick text {
+  font-family: Menlo, Consolas, Monaco, 'Courier New', monospace !important;
+}
+
+section#wrapup h1, section#wrapup p {
+  max-width: 40rem;
+  margin: 1rem auto;
+}
+
+.wrapup-list {
+  margin: 0 0.5em;
+}
+
+.placement, .legend_case1_phase2 {
+  font-family: Menlo, Consolas, Monaco, 'Courier New', monospace !important;
+}
+
+.byline {
+  font-family: 'Atlas Grotesk Web';
+  text-align: center;
+  width: 100%;
+  margin: 2rem 0 0 0;
+  font-size: 1em;
+}
+
+.byline a {
+  color: #ffffff;
+  font-weight: 700;
+}
+
+.footnotes {
+  max-width: 40rem;
+}
+
+.d3-tip h1 {
+  font-family: 'Atlas Grotesk Web';
+}
+
+.d3-tip h2 {
+  font-family: 'Atlas Grotesk Web';
+  color: #ffffff;
+}
+
+.d3-tip h3 {
+  font-family: 'Atlas Grotesk Web';
 }
