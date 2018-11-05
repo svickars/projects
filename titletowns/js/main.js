@@ -148,9 +148,9 @@ function resize() {
 } //end resize
 
 function loadData() {
-  queue()
+  d3.queue()
     // .defer(d3.csv, "data/metros.csv")
-    .defer(d3.json, "data/case1_v2.json")
+    .defer(d3.json, "data/case1.json")
     .defer(d3.json, "data/case2.json")
     .await(processData)
   // .await(caseone())
