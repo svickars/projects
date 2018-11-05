@@ -1,0 +1,540 @@
+$gray1: #191919;
+$gray2: #333;
+$gray3: #666;
+$gray4: #b5b5b5;
+$gray5: #f9f9fa;
+$red: #E00000;
+$serif: "Cormorant Garamond", serif;
+$sans: "aktiv-grotesk", sans-serif;
+$mono: "Inconsolata", monospace;
+
+@font-face {
+  font-family: "FontAwesome";
+  font-weight: normal;
+  font-style : normal;
+       src : url("https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/fonts/fontawesome-webfont.eot?v=4.3.0");
+       src : url("https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/fonts/fontawesome-webfont.eot?#iefix&v=4.3.0") format("embedded-opentype"),
+             url("https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/fonts/fontawesome-webfont.woff2?v=4.3.0") format("woff2"),
+             url("https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/fonts/fontawesome-webfont.woff?v=4.3.0") format("woff"),
+             url("https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/fonts/fontawesome-webfont.ttf?v=4.3.0") format("truetype"),
+             url("https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/fonts/fontawesome-webfont.svg?v=4.3.0#fontawesomeregular") format("svg");
+}
+
+
+// BASICS
+html {
+  height: 100%;
+}
+
+body {
+  height: 100%;
+  font-size: 1rem;
+  font-family: $sans;
+  color: $gray1;
+  background-color: white;
+  overflow-x: hidden;
+}
+
+input:focus, select:focus, textarea:focus, button:focus {
+    outline: none;
+}
+
+* {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+   box-sizing: border-box;
+}
+
+
+// LAYOUT
+.container {
+  width: 100%;
+  min-height: -mox-calc(100% - 16px);
+  min-height: -webkit-calc(100% - 16px);
+  min-height: calc(100% - 16px);
+  align-items: center;
+}
+
+.container.full {
+  padding-top: 25vh;
+  padding-bottom: 25vh;
+}
+
+.container.lead {
+  min-height: 0;
+  padding-top: 25vh;
+}
+
+.dark {
+  background-color: $gray1;
+  color: white;
+}
+
+section {
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+section#title {
+  width: 50%;
+  min-width: 345px;
+}
+
+section.content {
+  width: 50%;
+  min-width: 345px;
+  margin: 0 auto 0 auto;
+
+  @media screen and (min-width: 768px) {
+    flex-direction: row;
+  }
+
+  > * {
+    flex: 1;
+  }
+
+  .prose {
+    margin-top: 5em;
+  }
+
+  figure {
+    display: flex;
+    align-items: center;
+    align-self: flex-start;
+    justify-content: flex-start;
+    flex-direction: column;
+    flex-grow: 1;
+    height: 330px;
+    margin: 0;
+    width: 100%;
+    top: 175px;
+    -webkit-transform: translate(0, -50%);
+    -moz-transform: translate(0, -50%);
+    -ms-transform: translate(0, -50%);
+    -o-transform: translate(0, -50%);
+    transform: translate(0, -50%);
+
+    .header {
+      width: 100%;
+
+      svg {
+        margin-bottom: 1rem;
+        overflow: visible;
+
+        text {
+          font-family: $mono;
+          font-size: .8em;
+          fill: $gray2;
+          text-transform: capitalize;
+          @media screen and (max-width: 375px) {
+            font-size: .7em;
+          }
+
+          &.fontawesome {
+            text-transform: none;
+            font-family: FontAwesome;
+          }
+        }
+      }
+    }
+
+    @media screen and (min-width: 768px) {
+      flex: 2;
+      height: 800px;
+      top: 50px;
+      -webkit-transform: translate(0, 0);
+      -moz-transform: translate(0, 0);
+      -ms-transform: translate(0, 0);
+      -o-transform: translate(0, 0);
+      transform: translate(0, 0);
+    }
+  }
+}
+
+section.wide {
+  width: 75%;
+  min-width: 378px;
+}
+
+section.side {
+  width: 75%;
+  min-width: 345px;
+  margin: 0 auto 0 auto;
+
+  @media screen and (min-width: 768px) {
+    flex-direction: row;
+  }
+
+  > * {
+    flex: 1;
+  }
+
+  figure {
+    position: -webkit-sticky;
+    position: sticky;
+    display: flex;
+    align-items: center;
+    align-self: flex-start;
+    justify-content: flex-start;
+    flex-direction: column;
+    flex-grow: 1;
+    height: 330px;
+    margin: 0;
+    width: 100%;
+    top: 175px;
+    -webkit-transform: translate(0, -50%);
+    -moz-transform: translate(0, -50%);
+    -ms-transform: translate(0, -50%);
+    -o-transform: translate(0, -50%);
+    transform: translate(0, -50%);
+
+    svg {
+      overflow: visible;
+    }
+
+    .header {
+      width: 100%;
+
+      svg {
+        margin-bottom: 1rem;
+        overflow: visible;
+
+        text {
+          font-family: $mono;
+          font-size: .8em;
+          fill: $gray2;
+          text-transform: capitalize;
+          @media screen and (max-width: 375px) {
+            font-size: .7em;
+          }
+
+          &.fontawesome {
+            text-transform: none;
+            font-family: FontAwesome;
+          }
+        }
+      }
+    }
+
+    @media screen and (min-width: 768px) {
+      flex: 2;
+      height: 800px;
+      top: 50px;
+      -webkit-transform: translate(0, 0);
+      -moz-transform: translate(0, 0);
+      -ms-transform: translate(0, 0);
+      -o-transform: translate(0, 0);
+      transform: translate(0, 0);
+    }
+  }
+
+  article {
+    padding: 0 1rem;
+    pointer-events: none;
+    z-index: 99;
+
+    .step {
+      font-family: $sans;
+      font-size: 1.1em;
+      line-height: 1.8em;
+      min-height: 100vh;
+      margin-top: 150px;
+      color: $gray3;
+      transition: all 250ms ease-in-out;
+
+      @media screen and (min-width: 768px) {
+        margin: 150px 0 0 0;
+        flex: 1;
+        min-height: 30vh;
+      }
+
+      &.laststep {
+        min-height: 150vh;
+
+        @media screen and (min-width: 768px) {
+          min-height: 95vh;
+        }
+      }
+
+      // &:first-of-type {
+      //   margin-top: 50vh;
+      // }
+
+      &.active {
+        color: white;
+        @media screen and (max-width: 768px) {
+          color: $gray1;
+        }
+      }
+
+      &.light {
+        color: $gray4;
+        &.active {
+          color: $gray1;
+        }
+      }
+
+      .inner {
+        @media screen and (max-width: 768px) {
+          background-color: white;
+          -webkit-box-shadow: 0px 0px 5px 2px rgba(153,153,153,0.5);
+          -moz-box-shadow: 0px 0px 5px 2px rgba(153,153,153,0.5);
+          box-shadow: 0px 0px 5px 2px rgba(153,153,153,0.5);
+          // border-radius: 2px;
+          padding: 10px 25px;
+          width: 75%;
+          min-width: 300px;
+          margin: auto;
+        }
+      }
+    }
+  }
+}
+
+.sticky {
+  position: sticky;
+  width: 100%;
+	height: auto;
+	margin: 0;
+	top: 0;
+	left: 0;
+  z-index: 1;
+}
+
+.prose, .intro {
+  padding: 0 10px;
+  width: 100%;
+}
+
+.prose img {
+  height: 30px;
+  margin: 40px 0 0 0;
+  line-height: 60px;
+}
+
+.intro {
+  width: 100%;
+}
+
+
+// TEXT
+h1 {
+  font-family: $serif;
+  font-size: 2rem;
+  font-weight: normal;
+  margin: 0;
+
+  @media screen and (min-width: 768px) {
+    font-size: 3rem;
+  }
+}
+
+h2 {
+  font-family: $serif;
+  // font-weight: normal;
+  font-size: 1.75rem;
+  margin: .5rem 0 .5rem 0;
+  color: $gray1;
+}
+
+h3 {
+  font-family: $sans;
+  font-weight: normal;
+  color: $gray3;
+  font-size: .7rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin:0;
+}
+
+h4 {
+  font-family: $serif;
+  font-weight: normal;
+  font-size: 1.5em;
+  margin: 0 0 .75em 0;
+  color: $gray3;
+}
+
+.dark h3, .dark h4 {
+  color: $gray4;
+}
+
+.dark h2 {
+  color: $gray5;
+}
+
+p {
+  font-family: $sans;
+  font-weight: normal;
+  font-size: 1em;
+  line-height: 1.5em;
+
+  @media screen and (min-width: 768px) {
+    font-size: 1.2rem;
+    line-height: 1.75em;
+  }
+}
+
+a {
+  font-family: inherit;
+  color: $gray3;
+  text-decoration: none;
+  border-bottom: 1.5px solid;
+
+  -webkit-transition: all 0.1s ease-in-out;
+  -moz-transition:    all 0.1s ease-in-out;
+  -ms-transition:     all 0.1s ease-in-out;
+  -o-transition:      all 0.1s ease-in-out;
+  transition:         all 0.1s ease-in-out;
+
+  &:hover {
+    color: $gray2;
+  }
+}
+
+p.caption {
+  font-family: $sans;
+  font-weight: normal;
+  font-size: .75em;
+  width: 50%;
+  min-width: 320px;
+  margin: auto;
+  color: $gray4;
+  margin-top: 25vh;
+}
+
+.button-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.button {
+  font-family: $sans;
+  font-size: 1em;
+  // font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  // background-color: yellow;
+  color: black;
+  padding: 0;
+  cursor: pointer;
+  pointer-events: all;
+  display: inline-block;
+  position: relative;
+
+  -webkit-transition: all .2s ease;
+  -o-transition: all .2s ease;
+  transition: all .2s ease;
+
+  &:hover {
+    -webkit-transform: translate(0, -2px);
+    -moz-transform: translate(0, -2px);
+    -ms-transform: translate(0, -2px);
+    -o-transform: translate(0, -2px);
+    transform: translate(0, -2px);
+  }
+
+  .highlight {
+    background-color: yellow;
+    position: absolute;
+    top: 14px;
+    left: 3px;
+    width: 100%;
+    height: 40%;
+    z-index: -99;
+  }
+}
+
+
+// .button {
+//   font-family: $sans;
+//   font-size: .7em;
+//   font-weight: bold;
+//   text-transform: uppercase;
+//   color: $gray3;
+//   cursor: pointer;
+//   pointer-events: all;
+//   margin-top: 1em;
+//   margin-right: .1em;
+//   width: auto;
+//   display: inline-block;
+//   padding: 0px 5px;
+//   border-radius: 1px 3px;
+//   border-right: 3px solid $gray3;
+//   border-bottom: 3px solid $gray3;
+//
+//   -webkit-transition: all .2s ease;
+//   -o-transition: all .2s ease;
+//   transition: all .2s ease;
+//
+//   @media screen and (min-width: 768px) {
+//     margin-right: .25em;
+//   }
+//
+//   &:hover {
+//     // background-color: $gray2;
+//     // color: white;
+//     -webkit-transform: translate(0, -2px);
+//     -moz-transform: translate(0, -2px);
+//     -ms-transform: translate(0, -2px);
+//     -o-transform: translate(0, -2px);
+//     transform: translate(0, -2px);
+//   }
+//
+//   &.isactive {
+//     border-color: $gray1;
+//     color: $gray1;
+//   }
+// }
+
+// SPECIFICS
+.outfield_overlay {
+  height: 800px;
+}
+
+
+// CHART ELEMENTS
+.annotation.custom {
+  path {
+    stroke: black;
+    stroke-width: 1.5px;
+    &.connector-dot {
+      fill: white;
+    }
+  }
+  .annotation-note-label {
+    font-size: .8rem;
+    fill: $gray3;
+  }
+  .annotation-note-title {
+    font-size: 13px;
+    font-weight: normal;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    fill: black;
+  }
+}
+
+.y.axis path, .x.axis path {
+  display: none;
+}
+
+.axis text{
+  font-family: $mono !important;
+  text-transform: uppercase;
+  font-size: 1em !important;
+}
+
+.tick line {
+  stroke: $gray3;
+  stroke-dasharray: 1,1;
+  opacity: .5;
+}
+
+.tick text {
+  font-family: $mono !important;
+  text-transform: uppercase;
+}
