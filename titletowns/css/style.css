@@ -421,7 +421,7 @@ input[type=range] {
   appearance: none;
   overflow: visible;
   outline: none;
-  background: linear-gradient(#b5b5b5, #b5b5b5) no-repeat center;
+  background: linear-gradient(#9da3ae, #9da3ae) no-repeat center;
   background-size: 100% 2px;
   pointer-events: none; }
 

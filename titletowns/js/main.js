@@ -118,13 +118,13 @@ var league_colours = d3
       '#ECE833',
       '#EF4723',
       '#BAB8BC',
-      '#5E5D63',
-      '#5E5D63',
-      '#5E5D63',
-      '#5E5D63',
-      '#5E5D63',
-      '#5E5D63',
-      '#5E5D63'
+      '#58626b',
+      '#58626b',
+      '#58626b',
+      '#58626b',
+      '#58626b',
+      '#58626b',
+      '#58626b'
     ])
     .domain([
       'mlb',
@@ -145,10 +145,11 @@ var league_colours = d3
     .scaleOrdinal()
     .range(['#F1F227', '#30D840', '#22A7F0'])
     .domain(['title', 'finals', 'finalFour']),
-  light_colour = '#b5b5b5',
+  light_colour = '#9da3ae',
   bg_colour = '#1b2129',
   dark_colour = '#191919',
   accent_colour = '#6c7a89';
+  accent_colour_light = '#8797a5';
 
 var leagues = ['MLB', 'NBA', 'NFL', 'NHL', 'CFL', 'MLS', 'NCAA'],
   events = [
@@ -1199,7 +1200,7 @@ function caseone(first) {
         .attr('y', c1y(adjRank))
         .attr('dy', 14)
         .style('text-anchor', 'end')
-        .style('fill', accent_colour)
+        .style('fill', '#8797a5')
         .text('\uf124');
       g.select('.c1label-' + camelize(local)).style('font-weight', 'bold');
       g.append('line')
@@ -1220,7 +1221,7 @@ function caseone(first) {
       .attr('y', -100)
       .attr('dy', 14)
       .style('opacity', 0)
-      .style('fill', accent_colour)
+      .style('fill', '#8797a5')
       .text('\uf002');
     if (adjRank > num - 2) {
       g.select('#c1locationLine')
@@ -1367,7 +1368,7 @@ function caseone(first) {
       1;
     })
     .style('fill', function(d) {
-      if (d.key === local || d.key === searched) return accent_colour;
+      if (d.key === local || d.key === searched) return accent_colour_light;
       // return "#191919";
     });
   text
@@ -1415,7 +1416,7 @@ function caseone(first) {
       1;
     })
     .style('fill', function(d) {
-      if (d.key === local || d.key === searched) return accent_colour;
+      if (d.key === local || d.key === searched) return accent_colour_light;
       return 'white';
     })
     .style('text-anchor', 'start')
@@ -1456,7 +1457,7 @@ function caseone(first) {
       return c1y(i) + h / 2 - 7;
     })
     .style('stroke', function(d) {
-      if (d.key === local || d.key === searched) return accent_colour;
+      if (d.key === local || d.key === searched) return accent_colour_light;
       return 'white';
     })
     .style('stroke-width', 1)
@@ -1509,7 +1510,7 @@ function caseone(first) {
     .attr('r', 4)
     .style('fill', bg_colour)
     .style('stroke', function(d) {
-      if (d.key === local || d.key === searched) return accent_colour;
+      if (d.key === local || d.key === searched) return accent_colour_light;
       return 'white';
     })
     .style('opacity', 0)
@@ -1552,7 +1553,7 @@ function caseone(first) {
     })
     .attr('r', 2)
     .style('fill', function(d) {
-      if (d.key === local || d.key === searched) return accent_colour;
+      if (d.key === local || d.key === searched) return accent_colour_light;
       return 'white';
     })
     .style('opacity', 0)
@@ -2201,7 +2202,7 @@ function casetwo(first) {
         .attr('y', c1y(adjRank))
         .attr('dy', 14)
         .style('text-anchor', 'end')
-        .style('fill', accent_colour)
+        .style('fill', accent_colour_light)
         .text('\uf124');
       g.select('.c2label-' + camelize(local)).style('font-weight', 'bold');
       g.append('line')
@@ -2232,7 +2233,7 @@ function casetwo(first) {
       .attr('y', -100)
       .attr('dy', 14)
       .style('opacity', 0)
-      .style('fill', accent_colour)
+      .style('fill', accent_colour_light)
       .text('\uf002');
     if (adjRank > case2num - 2) {
       g.select('#c2locationLine')
@@ -2417,7 +2418,7 @@ function casetwo(first) {
       return 'normal';
     })
     .style('fill', function(d) {
-      if (d.metro === local || d.metro === searched) return accent_colour;
+      if (d.metro === local || d.metro === searched) return accent_colour_light;
       if (d.titles > 0) return '#fff';
       return light_colour;
     });
@@ -2484,7 +2485,7 @@ function casetwo(first) {
       return c2y(d.i) + 10;
     })
     .style('stroke-linecap', 'round')
-    .style('stroke', '#444')
+    .style('stroke', '#2d343a')
     .style('stroke-width', 5)
     .style('opacity', 0)
     .merge(rect)
@@ -3322,7 +3323,7 @@ function casethree(first) {
         y: 25,
         dx: -25,
         dy: 0,
-        color: accent_colour
+        color: accent_colour_light
       },
       {
         note: {
@@ -3332,7 +3333,7 @@ function casethree(first) {
         y: 25,
         dx: 25,
         dy: 0,
-        color: accent_colour
+        color: accent_colour_light
       }
     ];
   } else if (c3status === 'scatter_basic' || c3status === 'scatter_tlq') {
@@ -3345,7 +3346,7 @@ function casethree(first) {
         y: c3y(79),
         dx: 25,
         dy: 25,
-        color: accent_colour
+        color: accent_colour_light
       }
     ];
   }
@@ -3524,7 +3525,7 @@ function casethree(first) {
         .attr('dy', 5)
         .style('text-anchor', 'end')
         .text('\uf124')
-        .style('fill', accent_colour)
+        .style('fill', accent_colour_light)
         .style('opacity', 0)
         .transition()
         .delay(1000)
@@ -3557,7 +3558,7 @@ function casethree(first) {
       .attr('y', -100)
       .attr('dy', 5)
       .style('opacity', 0)
-      .style('fill', accent_colour)
+      .style('fill', accent_colour_light)
       .text('\uf002');
     if (adjRank > num - 2) {
       g.select('#c3locationLine')
@@ -3794,7 +3795,7 @@ function casethree(first) {
         return 'start';
       })
       .style('fill', function(d) {
-        if (d.key === local || d.key === searched) return accent_colour;
+        if (d.key === local || d.key === searched) return accent_colour_light;
       })
       .text(function(d) {
         return d.key;
@@ -3840,7 +3841,7 @@ function casethree(first) {
         return 'end';
       })
       .style('fill', function(d) {
-        if (d.key === local || d.key === searched) return accent_colour;
+        if (d.key === local || d.key === searched) return accent_colour_light;
       })
       .style('opacity', 0)
       .text(function(d) {
