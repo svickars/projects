@@ -392,3 +392,13 @@ a {
 h2 {
   margin: 0.5rem 0 1rem 0;
 }
+
+.filter-container .searchwrapper #searchsubmit {
+  margin: -22px 0 0 0;
+}
+
+.dropdownicon {
+  position: absolute;
+  right: 0;
+  top: 0;
+}
