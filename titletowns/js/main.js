@@ -33,9 +33,9 @@ var sideD,
   case3num = 10,
   h = 30,
   radius = d3
-    .scaleLinear()
-    .domain([0, 148])
-    .range([3, 2]),
+  .scaleLinear()
+  .domain([0, 148])
+  .range([3, 2]),
   casetwodrawn = false,
   wrapupdrawn = false,
   c3status = 'first';
@@ -110,50 +110,49 @@ var filters = {
 };
 
 var league_colours = d3
-    .scaleOrdinal()
-    .range([
-      '#30D840',
-      '#3EA3DB',
-      '#2E46BC',
-      '#ECE833',
-      '#EF4723',
-      '#BAB8BC',
-      '#58626b',
-      '#58626b',
-      '#58626b',
-      '#58626b',
-      '#58626b',
-      '#58626b',
-      '#58626b'
-    ])
-    .domain([
-      'mlb',
-      'nba',
-      'nfl',
-      'nhl',
-      'mls',
-      'cfl',
-      'ncaa',
-      'baseball_m',
-      'basketball_m',
-      'basketball_w',
-      'football_m',
-      'soccer_w',
-      'volleyball_w'
-    ]),
+  .scaleOrdinal()
+  .range([
+    '#30D840',
+    '#3EA3DB',
+    '#2E46BC',
+    '#ECE833',
+    '#EF4723',
+    '#BAB8BC',
+    '#58626b',
+    '#58626b',
+    '#58626b',
+    '#58626b',
+    '#58626b',
+    '#58626b',
+    '#58626b'
+  ])
+  .domain([
+    'mlb',
+    'nba',
+    'nfl',
+    'nhl',
+    'mls',
+    'cfl',
+    'ncaa',
+    'baseball_m',
+    'basketball_m',
+    'basketball_w',
+    'football_m',
+    'soccer_w',
+    'volleyball_w'
+  ]),
   event_colours = d3
-    .scaleOrdinal()
-    .range(['#F1F227', '#30D840', '#22A7F0'])
-    .domain(['title', 'finals', 'finalFour']),
+  .scaleOrdinal()
+  .range(['#F1F227', '#30D840', '#22A7F0'])
+  .domain(['title', 'finals', 'finalFour']),
   light_colour = '#9da3ae',
   bg_colour = '#1b2129',
   dark_colour = '#191919',
   accent_colour = '#6c7a89';
-  accent_colour_light = '#8797a5';
+accent_colour_light = '#8797a5';
 
 var leagues = ['MLB', 'NBA', 'NFL', 'NHL', 'CFL', 'MLS', 'NCAA'],
-  events = [
-    {
+  events = [{
       event: 'title',
       colour: event_colours('title')
     },
@@ -308,10 +307,10 @@ function processData(error, titleData, seasonData) {
 } // end processData
 
 function init() {
-	locate(function (err, response) {
-		local_coords.push(response.latitude, response.longitude);
-		getLocal();
-	});
+  locate(function(err, response) {
+    local_coords.push(response.latitude, response.longitude);
+    getLocal();
+  });
   window.addEventListener('resize', resize);
   setup();
   loadData();
@@ -359,6 +358,8 @@ function setup() {
     bottom: 30,
     left: 10
   };
+
+  feather.replace()
 
   level = $('#filter-level :selected').data('value');
   league = $('#filter-league :selected').data('value');
@@ -662,47 +663,47 @@ function setup() {
         if (d.newteams[j].result === 'title')
           titles.push(
             d.newteams[j].team +
-              ' (' +
-              replaceSports(d.newteams[j].sport) +
-              ')&nbsp;'
+            ' (' +
+            replaceSports(d.newteams[j].sport) +
+            ')&nbsp;'
           );
         if (d.newteams[j].result === 'finals')
           finals.push(
             d.newteams[j].team +
-              ' (' +
-              replaceSports(d.newteams[j].sport) +
-              ')&nbsp;'
+            ' (' +
+            replaceSports(d.newteams[j].sport) +
+            ')&nbsp;'
           );
         if (d.newteams[j].result === 'finalFour')
           finalFours.push(
             d.newteams[j].team +
-              ' (' +
-              replaceSports(d.newteams[j].sport) +
-              ')&nbsp;'
+            ' (' +
+            replaceSports(d.newteams[j].sport) +
+            ')&nbsp;'
           );
       }
 
       if (titles.length > 0)
         titlesDisp =
-          "<h2 style='color:" +
-          event_colours('title') +
-          "'>Titles</h2><p>" +
-          titles +
-          '</p>';
+        "<h2 style='color:" +
+        event_colours('title') +
+        "'>Titles</h2><p>" +
+        titles +
+        '</p>';
       if (finals.length > 0)
         finalsDisp =
-          "<h2 style='color:" +
-          event_colours('finals') +
-          "'>Finals Appearances</h2><p>" +
-          finals +
-          '</p>';
+        "<h2 style='color:" +
+        event_colours('finals') +
+        "'>Finals Appearances</h2><p>" +
+        finals +
+        '</p>';
       if (finalFours.length > 0)
         finalFoursDisp =
-          "<h2 style='color:" +
-          event_colours('finalFour') +
-          "'>Final Four Appearances</h2><p>" +
-          finalFours +
-          '</p>';
+        "<h2 style='color:" +
+        event_colours('finalFour') +
+        "'>Final Four Appearances</h2><p>" +
+        finalFours +
+        '</p>';
       return (
         '<h1>' + d.season + '</h1>' + titlesDisp + finalsDisp + finalFoursDisp
       );
@@ -999,19 +1000,19 @@ function caseone(first) {
     } else {
       $('#step1_local').html(
         "(<span class='offsetcolour'>" +
-          local +
-          '</span> teams have played ' +
-          localData[0].local_seasons +
-          ')'
+        local +
+        '</span> teams have played ' +
+        localData[0].local_seasons +
+        ')'
       );
       $('#step2_local').html(', while ' + local + ' has a ');
       $('#step2_howmany_local').html(
         ((data[adjRank].newvalues.length - data[adjRank].expected).toFixed(1) <
-        0
-          ? ''
-          : '+') +
-          (data[adjRank].newvalues.length - data[adjRank].expected).toFixed(1) +
-          ' differential'
+          0 ?
+          '' :
+          '+') +
+        (data[adjRank].newvalues.length - data[adjRank].expected).toFixed(1) +
+        ' differential'
       );
     }
     $('#step0_rank').html(rank);
@@ -1045,10 +1046,10 @@ function caseone(first) {
     $('#step2_howmany').html(data[leader].expected.toFixed(1));
     $('#step3_includes').html(
       data[leader + 8].key +
-        ', ' +
-        data[leader + 7].key +
-        ', and ' +
-        data[leader + 6].key
+      ', ' +
+      data[leader + 7].key +
+      ', and ' +
+      data[leader + 6].key
     );
   }
 
@@ -1071,22 +1072,22 @@ function caseone(first) {
 
   if (first) {
     var svg = d3
-        .select('.case1')
-        .append('svg')
-        .attr('width', sideD.w + sideD.left + sideD.right)
-        .attr('height', num * h),
+      .select('.case1')
+      .append('svg')
+      .attr('width', sideD.w + sideD.left + sideD.right)
+      .attr('height', num * h),
       legend = d3
-        .select('#case1_header')
-        .append('svg')
-        .attr('width', sideD.w + sideD.left + sideD.right)
-        .attr('height', h),
+      .select('#case1_header')
+      .append('svg')
+      .attr('width', sideD.w + sideD.left + sideD.right)
+      .attr('height', h),
       g = svg
-        .append('g')
-        .attr('class', 'group')
-        .attr('transform', 'translate(' + sideD.left + ',' + sideD.top + ')'),
+      .append('g')
+      .attr('class', 'group')
+      .attr('transform', 'translate(' + sideD.left + ',' + sideD.top + ')'),
       legendg = legend
-        .append('g')
-        .attr('transform', 'translate(' + sideD.left + ',' + sideD.top + ')');
+      .append('g')
+      .attr('transform', 'translate(' + sideD.left + ',' + sideD.top + ')');
     svg
       .append('g')
       .attr('class', 'x axis c1axis')
@@ -1183,27 +1184,20 @@ function caseone(first) {
     g.append('rect')
       .attr('id', 'c1searchback')
       .attr('x', -50)
-      .attr('y', c1y(0) - 5)
+      .attr('y', c1y(0) - 10)
       .attr('width', sideD.w + 45)
       .attr('height', h)
       .style('fill', dark_colour)
       .style('opacity', 0);
 
     if (local != undefined) {
-      g.append('text')
+      g.append('polygon')
         .attr('id', 'c1location')
-        .attr('class', 'icon')
-        .attr(
-          'x',
-          c1x(0) -
-            getTextWidth(data[adjRank].key, 'bold 13px Atlas Grotesk Web') -
-            15
-        )
-        .attr('y', c1y(adjRank))
-        .attr('dy', 14)
-        .style('text-anchor', 'end')
-        .style('fill', '#8797a5')
-        .text('\uf124');
+        .attr('points', '3 11 22 2 13 21 11 13 3 11')
+        .attr('transform', 'translate(' + (c1x(0) - getTextWidth(data[adjRank].key, 'bold 13px Atlas Grotesk Web') - 28) + ',' + c1y(adjRank) + ') scale(.67)')
+        .attr('fill', '#8797a5')
+        .attr('height', '16')
+        .attr('width', '16');
       g.select('.c1label-' + camelize(local)).style('font-weight', 'bold');
       g.append('line')
         .attr('id', 'c1locationLine')
@@ -1216,15 +1210,6 @@ function caseone(first) {
         .attr('y2', c1y(adjRank) - 5)
         .style('opacity', 0);
     }
-    g.append('text')
-      .attr('id', 'c1searched')
-      .attr('class', 'icon')
-      .attr('x', -100)
-      .attr('y', -100)
-      .attr('dy', 14)
-      .style('opacity', 0)
-      .style('fill', '#8797a5')
-      .text('\uf002');
     if (adjRank > num - 2) {
       g.select('#c1locationLine')
         .transition()
@@ -1232,10 +1217,10 @@ function caseone(first) {
     }
   } else {
     var svg = d3
-        .select('.case1 svg')
-        .transition()
-        .attr('width', sideD.w + sideD.left + sideD.right)
-        .attr('height', num * h),
+      .select('.case1 svg')
+      .transition()
+      .attr('width', sideD.w + sideD.left + sideD.right)
+      .attr('height', num * h),
       g = d3.select('.group');
     d3.select('.c1axis')
       .transition()
@@ -1253,15 +1238,15 @@ function caseone(first) {
                 data[searchedAdjRank].key,
                 'bold 13px Atlas Grotesk Web'
               ) -
-              45
+              32
             );
           return (
             c1x(0) -
             getTextWidth(data[searchedAdjRank].key, 'bold 13px Atlas Grotesk Web') -
-            30
+            16
           );
         })
-        .attr('y', c1y(searchedAdjRank) - 5)
+        .attr('y', c1y(searchedAdjRank) - 7)
         .attr('width', function() {
           if (searched === local)
             return (
@@ -1271,7 +1256,7 @@ function caseone(first) {
                   data[searchedAdjRank].key,
                   'bold 13px Atlas Grotesk Web'
                 ) -
-                45)
+                32)
             );
           return (
             sideD.w -
@@ -1280,32 +1265,12 @@ function caseone(first) {
                 data[searchedAdjRank].key,
                 'bold 13px Atlas Grotesk Web'
               ) -
-              30)
+              16)
           );
         })
         .attr('height', h)
         .style('opacity', 1);
 
-      g.select('#c1searched')
-        .attr('x', function() {
-          if (searched === local)
-            return (
-              c1x(0) -
-              getTextWidth(
-                data[searchedAdjRank].key,
-                'bold 13px Atlas Grotesk Web'
-              ) -
-              40
-            );
-          return (
-            c1x(0) -
-            getTextWidth(data[searchedAdjRank].key, 'bold 13px Atlas Grotesk Web') -
-            25
-          );
-        })
-        .attr('y', c1y(searchedAdjRank))
-        .transition()
-        .style('opacity', 1);
       g.selectAll('.label').style('font-weight', 'normal');
       g.select('.c1label-' + camelize(searched)).style('font-weight', 'bold');
     }
@@ -1313,7 +1278,7 @@ function caseone(first) {
       g.select('#c1location')
         .transition()
         .duration(500)
-        .attr('y', c1y(adjRank));
+        .attr('transform', 'translate(' + (c1x(0) - getTextWidth(data[adjRank].key, 'bold 13px Atlas Grotesk Web') - 28) + ',' + c1y(adjRank) + ') scale(.67)')
       g.select('.c1label-' + camelize(local)).style('font-weight', 'bold');
       if (adjRank > num - 2) {
         g.select('#c1locationLine')
@@ -1846,9 +1811,9 @@ function caseone_update(index, prev) {
     $('.filter-container').removeClass('ishidden');
     if (!small_screen)
       d3.select('#showMoreC1')
-        .style('display', 'block')
-        .transition()
-        .style('opacity', 1);
+      .style('display', 'block')
+      .transition()
+      .style('opacity', 1);
     d3.selectAll('.legend_case1_phase1')
       .transition()
       .style('opacity', 0);
@@ -1862,8 +1827,7 @@ function caseone_update(index, prev) {
 
     caseone();
     if (prev === 2 && !casetwodrawn) casetwo(true);
-  } else if (index === 5) {
-  } else if (index === 6) {
+  } else if (index === 5) {} else if (index === 6) {
     caseone();
   } else if (index === 7) {
     c1rectO = 0;
@@ -2124,18 +2088,18 @@ function casetwo(first) {
 
   if (first) {
     var svg = d3
-        .select('.case2 svg')
-        .attr('width', sideD.w + sideD.left + sideD.right)
-        .attr('height', case2num * h),
+      .select('.case2 svg')
+      .attr('width', sideD.w + sideD.left + sideD.right)
+      .attr('height', case2num * h),
       legend = d3
-        .select('#case2_header')
-        .append('svg')
-        .attr('width', sideD.w + sideD.left + sideD.right)
-        .attr('height', h),
+      .select('#case2_header')
+      .append('svg')
+      .attr('width', sideD.w + sideD.left + sideD.right)
+      .attr('height', h),
       g = svg
-        .append('g')
-        .attr('class', 'group2')
-        .attr('transform', 'translate(' + sideD.left + ',' + sideD.top + ')'),
+      .append('g')
+      .attr('class', 'group2')
+      .attr('transform', 'translate(' + sideD.left + ',' + sideD.top + ')'),
       legendg = legend.append('g');
     // .attr("transform", "translate(" + sideD.left + "," + sideD.top + ")");
     svg
@@ -2185,27 +2149,14 @@ function casetwo(first) {
       .style('fill', dark_colour)
       .style('opacity', 0);
     if (local != undefined) {
-      g.append('text')
+      g.append('polygon')
         .attr('id', 'c2location')
-        .attr('class', 'icon')
-        .attr('x', function() {
-          if (data[adjRank].newseasons[0].season === undefined)
-            return (
-              c2x(end) -
-              getTextWidth(data[adjRank].metro, 'bold 13px Atlas Grotesk Web') -
-              15
-            );
-          return (
-            c2x(data[adjRank].newseasons[0].season) -
-            getTextWidth(data[adjRank].metro, 'bold 13px Atlas Grotesk Web') -
-            15
-          );
+        .attr('points', '3 11 22 2 13 21 11 13 3 11')
+        .attr('transform', function() {
+          if (data[adjRank].newseasons[0] === undefined) return 'translate(' + (c2x(end) - getTextWidth(data[adjRank].metro, 'bold 13px Atlas Grotesk Web') - 28) + ',' + (c2y(adjRank) + 2) + ') scale(.67)';
+          return 'translate(' + (c2x(data[adjRank].newseasons[0].season) - getTextWidth(data[adjRank].metro, 'bold 13px Atlas Grotesk Web') - 28) + ',' + (c2y(adjRank) + 2) + ') scale(.67)';
         })
-        .attr('y', c1y(adjRank))
-        .attr('dy', 14)
-        .style('text-anchor', 'end')
-        .style('fill', accent_colour_light)
-        .text('\uf124');
+        .attr('fill', '#8797a5');
       g.select('.c2label-' + camelize(local)).style('font-weight', 'bold');
       g.append('line')
         .attr('id', 'c2locationLine')
@@ -2228,15 +2179,6 @@ function casetwo(first) {
         .style('opacity', 0)
         .style('stroke', 'rgba(255,255,255,0.5)');
     }
-    g.append('text')
-      .attr('id', 'c2searched')
-      .attr('class', 'icon')
-      .attr('x', -100)
-      .attr('y', -100)
-      .attr('dy', 14)
-      .style('opacity', 0)
-      .style('fill', accent_colour_light)
-      .text('\uf002');
     if (adjRank > case2num - 2) {
       g.select('#c2locationLine')
         .transition()
@@ -2244,10 +2186,10 @@ function casetwo(first) {
     }
   } else {
     var svg = d3
-        .select('.case2 svg')
-        .transition()
-        .attr('width', sideD.w + sideD.left + sideD.right)
-        .attr('height', case2num * h),
+      .select('.case2 svg')
+      .transition()
+      .attr('width', sideD.w + sideD.left + sideD.right)
+      .attr('height', case2num * h),
       g = d3.select('.group2');
     d3.select('.c2axis')
       .transition()
@@ -2257,8 +2199,8 @@ function casetwo(first) {
       g.select('#c2searchback')
         .transition()
         .attr('x', function() {
-          var offset = 30;
-          if (searched === local) offset = 45;
+          var offset = 16;
+          if (searched === local) offset = 32;
           if (data[searchedAdjRank].newseasons[0] === undefined)
             return (
               c2x(end) -
@@ -2279,8 +2221,8 @@ function casetwo(first) {
         })
         .attr('y', c2y(searchedAdjRank) - 5)
         .attr('width', function() {
-          var offset = 30;
-          if (searched === local) offset = 45;
+          var offset = 16;
+          if (searched === local) offset = 32;
           if (data[searchedAdjRank].newseasons[0] === undefined)
             return (
               sideD.w -
@@ -2305,31 +2247,6 @@ function casetwo(first) {
         })
         .attr('height', h)
         .style('opacity', 1);
-      g.select('#c2searched')
-        .attr('x', function() {
-          var offset = 25;
-          if (searched === local) offset = 40;
-          if (data[searchedAdjRank].newseasons[0] === undefined)
-            return (
-              c2x(end) -
-              getTextWidth(
-                data[searchedAdjRank].metro,
-                'bold 13px Atlas Grotesk Web'
-              ) -
-              offset
-            );
-          return (
-            c2x(data[searchedAdjRank].newseasons[0].season) -
-            getTextWidth(
-              data[searchedAdjRank].metro,
-              'bold 13px Atlas Grotesk Web'
-            ) -
-            offset
-          );
-        })
-        .attr('y', c1y(searchedAdjRank))
-        .transition()
-        .style('opacity', 1);
       g.selectAll('.label').style('font-weight', 'normal');
       g.select('.c2label-' + camelize(searched)).style('font-weight', 'bold');
     }
@@ -2337,20 +2254,24 @@ function casetwo(first) {
       g.select('#c2location')
         .transition()
         .duration(500)
-        .attr('x', function() {
-          if (data[adjRank].newseasons[0] === undefined)
-            return (
-              c2x(end) -
-              getTextWidth(data[adjRank].metro, 'bold 13px Atlas Grotesk Web') -
-              15
-            );
-          return (
-            c2x(data[adjRank].newseasons[0].season) -
-            getTextWidth(data[adjRank].metro, 'bold 13px Atlas Grotesk Web') -
-            15
-          );
-        })
-        .attr('y', c2y(adjRank));
+        .attr('transform', function() {
+          if (data[adjRank].newseasons[0] === undefined) return 'translate(' + (c2x(end) - getTextWidth(data[adjRank].metro, 'bold 13px Atlas Grotesk Web') - 28) + ',' + (c2y(adjRank) + 2) + ') scale(.67)';
+          return 'translate(' + (c2x(data[adjRank].newseasons[0].season) - getTextWidth(data[adjRank].metro, 'bold 13px Atlas Grotesk Web') - 28) + ',' + (c2y(adjRank) + 2) + ') scale(.67)';
+        });
+      // .attr('x', function() {
+      //   if (data[adjRank].newseasons[0] === undefined)
+      //     return (
+      //       c2x(end) -
+      //       getTextWidth(data[adjRank].metro, 'bold 13px Atlas Grotesk Web') -
+      //       15
+      //     );
+      //   return (
+      //     c2x(data[adjRank].newseasons[0].season) -
+      //     getTextWidth(data[adjRank].metro, 'bold 13px Atlas Grotesk Web') -
+      //     15
+      //   );
+      // })
+      // .attr('y', c2y(adjRank));
       g.select('.c2label-' + camelize(local)).style('font-weight', 'bold');
       if (adjRank > case2num - 2) {
         g.select('#c2locationLine')
@@ -2784,9 +2705,9 @@ function casetwo_update(index, prev) {
     $('.filter-container').removeClass('ishidden');
     if (!small_screen)
       d3.select('#showMoreC2')
-        .style('display', 'block')
-        .transition()
-        .style('opacity', 1);
+      .style('display', 'block')
+      .transition()
+      .style('opacity', 1);
     casetwo();
   }
 }
@@ -2981,9 +2902,9 @@ function casethree(first) {
   ) {
     if (!small_screen)
       d3.select('#showMoreC3')
-        .style('display', 'block')
-        .transition()
-        .style('opacity', 1);
+      .style('display', 'block')
+      .transition()
+      .style('opacity', 1);
     var extent = d3.extent(data, function(d) {
       return d.tlq;
     });
@@ -3004,42 +2925,42 @@ function casethree(first) {
 
   if (first) {
     var svg = d3
-        .select('.case3')
-        .append('svg')
-        .attr('width', sideD.w + sideD.left + sideD.right)
-        .attr('height', sideD.h + sideD.bottom + sideD.top),
+      .select('.case3')
+      .append('svg')
+      .attr('width', sideD.w + sideD.left + sideD.right)
+      .attr('height', sideD.h + sideD.bottom + sideD.top),
       // .style("overflow", "visible"),
       legend = d3
-        .select('#case3_header')
-        .append('svg')
-        .attr('width', sideD.w + sideD.left + sideD.right)
-        .attr('height', h)
-        .style('margin-bottom', '.5rem')
-        .style('margin-top', '1rem'),
+      .select('#case3_header')
+      .append('svg')
+      .attr('width', sideD.w + sideD.left + sideD.right)
+      .attr('height', h)
+      .style('margin-bottom', '.5rem')
+      .style('margin-top', '1rem'),
       grect = svg
-        .append('g')
-        .attr('class', 'grect')
-        .attr('transform', 'translate(' + sideD.left + ',' + sideD.top + ')'),
+      .append('g')
+      .attr('class', 'grect')
+      .attr('transform', 'translate(' + sideD.left + ',' + sideD.top + ')'),
       gbehind = svg
-        .append('g')
-        .attr('class', 'group3-behind')
-        .attr('transform', 'translate(' + sideD.left + ',' + sideD.top + ')'),
+      .append('g')
+      .attr('class', 'group3-behind')
+      .attr('transform', 'translate(' + sideD.left + ',' + sideD.top + ')'),
       g = svg
-        .append('g')
-        .attr('class', 'group3')
-        .attr('transform', 'translate(' + sideD.left + ',' + sideD.top + ')'),
+      .append('g')
+      .attr('class', 'group3')
+      .attr('transform', 'translate(' + sideD.left + ',' + sideD.top + ')'),
       legendg = legend
-        .append('g')
-        .attr('class', 'c3legend')
-        .attr('transform', 'translate(' + sideD.left + ')'),
+      .append('g')
+      .attr('class', 'c3legend')
+      .attr('transform', 'translate(' + sideD.left + ')'),
       annotationg = svg
-        .append('g')
-        .attr('class', 'annotationg')
-        .attr('transform', 'translate(' + sideD.left + ',' + sideD.top + ')'),
+      .append('g')
+      .attr('class', 'annotationg')
+      .attr('transform', 'translate(' + sideD.left + ',' + sideD.top + ')'),
       noteg = svg
-        .append('g')
-        .attr('class', 'noteg')
-        .attr('transform', 'translate(' + sideD.left + ',' + sideD.top + ')');
+      .append('g')
+      .attr('class', 'noteg')
+      .attr('transform', 'translate(' + sideD.left + ',' + sideD.top + ')');
     svg
       .append('g')
       .attr('class', 'x axis c3axis')
@@ -3316,8 +3237,7 @@ function casethree(first) {
       var large = 16000000,
         small = 6000000;
     }
-    notes = [
-      {
+    notes = [{
         note: {
           title: 'Larger Cities'
         },
@@ -3339,25 +3259,25 @@ function casethree(first) {
       }
     ];
   } else if (c3status === 'scatter_basic' || c3status === 'scatter_tlq') {
-    notes = [
-      {
-        note: {
-          title: 'More titles per capita'
-        },
-        x: c3x(0),
-        y: c3y(79),
-        dx: 25,
-        dy: 25,
-        color: accent_colour_light
-      }
-    ];
+    notes = [{
+      note: {
+        title: 'More titles per capita'
+      },
+      x: c3x(0),
+      y: c3y(79),
+      dx: 25,
+      dy: 25,
+      color: accent_colour_light
+    }];
   }
 
   annotations.forEach(function(d) {
     d.x = c3x(d.x);
     d.y = c3y(d.y);
     d.connector = {
-      points: [[d.dx / 2, d.dy / 2 + d.dy / 5]]
+      points: [
+        [d.dx / 2, d.dy / 2 + d.dy / 5]
+      ]
     };
   });
 
@@ -3503,31 +3423,14 @@ function casethree(first) {
       .style('opacity', 1);
 
     if (local != undefined) {
-      g.append('text')
+      g.append('polygon')
         .attr('id', 'c3location')
-        .attr('class', 'icon')
-        .attr('x', function() {
-          if (localData[0].tlq > 1)
-            return (
-              c3x(1) -
-              getTextWidth(localData[0].key, 'bold 13px Atlas Grotesk Web') -
-              15
-            );
-          return (
-            c3x(1) +
-            getTextWidth(localData[0].key, 'bold 13px Atlas Grotesk Web') +
-            15
-          );
+        .attr('points', '3 11 22 2 13 21 11 13 3 11')
+        .attr('transform', function() {
+          if (localData[0].tlq > 1) return 'translate(' + (c3x(1) - getTextWidth(localData[0].key, 'bold 13px Atlas Grotesk Web') - 28) + ',' + (c3y(adjRank) + 8) + ') scale(.67)';
+          return 'translate(' + (c3x(1) + getTextWidth(localData[0].key, 'bold 13px Atlas Grotesk Web') + 16) + ',' + (c3y(adjRank) + 8) + ') scale(.67)';
         })
-        .attr('y', c3y(adjRank) + h / 2)
-        .attr('dx', function() {
-          if (localData[0].tlq > 1) return -12;
-          return 12;
-        })
-        .attr('dy', 5)
-        .style('text-anchor', 'end')
-        .text('\uf124')
-        .style('fill', accent_colour_light)
+        .attr('fill', '#8797a5')
         .style('opacity', 0)
         .transition()
         .delay(1000)
@@ -3553,15 +3456,6 @@ function casethree(first) {
         .attr('y2', c3y(adjRank))
         .style('opacity', 0);
     }
-    g.append('text')
-      .attr('id', 'c3searched')
-      .attr('class', 'icon')
-      .attr('x', -100)
-      .attr('y', -100)
-      .attr('dy', 5)
-      .style('opacity', 0)
-      .style('fill', accent_colour_light)
-      .text('\uf002');
     if (adjRank > num - 2) {
       g.select('#c3locationLine')
         .transition()
@@ -3588,33 +3482,6 @@ function casethree(first) {
         .attr('width', sideD.w)
         .attr('height', h)
         .style('opacity', 1);
-      g.select('#c3searched')
-        .transition()
-        .attr('x', function() {
-          var adj = 25;
-          if (searched === local) adj = 40;
-          if (data[searchedAdjRank].tlq > 1)
-            return (
-              c3x(1) -
-              getTextWidth(
-                data[searchedAdjRank].key,
-                'bold 13px Atlas Grotesk Web'
-              ) -
-              adj
-            );
-          return (
-            c3x(1) +
-            getTextWidth(data[searchedAdjRank].key, 'bold 13px Atlas Grotesk Web') +
-            adj
-          );
-        })
-        .attr('y', c3y(searchedAdjRank) + h / 2)
-        .attr('dx', function() {
-          if (data[searchedAdjRank].tlq > 1) return -12;
-          return 12;
-        })
-        .transition()
-        .style('opacity', 1);
       g.selectAll('.label').style('font-weight', 'normal');
       g.select('.label-' + camelize(searched)).style('font-weight', 'bold');
     }
@@ -3622,28 +3489,9 @@ function casethree(first) {
       g.select('#c3location')
         .transition()
         .duration(500)
-        .attr('x', function() {
-          if (data[adjRank] != undefined) {
-            if (data[adjRank].tlq > 1)
-              return (
-                c3x(1) -
-                getTextWidth(data[adjRank].key, 'bold 13px Atlas Grotesk Web') -
-                15
-              );
-            return (
-              c3x(1) +
-              getTextWidth(data[adjRank].key, 'bold 13px Atlas Grotesk Web') +
-              15
-            );
-          }
-          return c3x(1);
-        })
-        .attr('y', c3y(adjRank) + h / 2)
-        .attr('dx', function() {
-          if (data[adjRank] != undefined) {
-            if (data[adjRank].tlq > 1) return -12;
-          }
-          return 12;
+        .attr('transform', function() {
+          if (localData[0].tlq > 1) return 'translate(' + (c3x(1) - getTextWidth(localData[0].key, 'bold 13px Atlas Grotesk Web') - 28) + ',' + (c3y(adjRank) + 8) + ') scale(.67)';
+          return 'translate(' + (c3x(1) + getTextWidth(localData[0].key, 'bold 13px Atlas Grotesk Web') + 16) + ',' + (c3y(adjRank) + 8) + ') scale(.67)';
         })
         .style('opacity', function(d) {
           if (data[adjRank] != undefined) return 1;
@@ -3689,8 +3537,8 @@ function casethree(first) {
     c3status != 'ordered_under'
   ) {
     d3.selectAll(
-      '.c3_legend_phase2_text, .c3_legend_phase2_circle, #c3searchback, #c3searched, #c3location, #c3locationLine'
-    )
+        '.c3_legend_phase2_text, .c3_legend_phase2_circle, #c3searchback, #c3location, #c3locationLine'
+      )
       .transition()
       .style('opacity', 0)
       .remove();
@@ -3938,9 +3786,9 @@ function casethree_update(index, prev) {
     $('.filter-container').removeClass('ishidden');
     if (!small_screen)
       d3.select('#showMoreC3')
-        .style('display', 'block')
-        .transition()
-        .style('opacity', 1);
+      .style('display', 'block')
+      .transition()
+      .style('opacity', 1);
     casethree();
     c3status = 'ordered_over';
     if (!wrapupdrawn) wrapup(true);
@@ -4006,13 +3854,13 @@ function wrapup(first) {
   wrapupdrawn = true;
   var wh = 25;
   var y = d3
-      .scaleBand()
-      .domain(d3.range(12))
-      .range([0, 12 * wh]),
+    .scaleBand()
+    .domain(d3.range(12))
+    .range([0, 12 * wh]),
     opacity = d3
-      .scaleLinear()
-      .domain([0, 10])
-      .range([1, 0.25]);
+    .scaleLinear()
+    .domain([0, 10])
+    .range([1, 0.25]);
 
   if (local != undefined) {
     $('#wrapup-local').html(local);
@@ -4027,32 +3875,32 @@ function wrapup(first) {
 
   if (first) {
     var svg1 = d3
-        .select('#case1list')
-        .append('svg')
-        .attr('width', 250)
-        .attr('height', (10 + 2) * wh),
+      .select('#case1list')
+      .append('svg')
+      .attr('width', 250)
+      .attr('height', (10 + 2) * wh),
       svg2 = d3
-        .select('#case2list')
-        .append('svg')
-        .attr('width', 250)
-        .attr('height', (10 + 2) * wh),
+      .select('#case2list')
+      .append('svg')
+      .attr('width', 250)
+      .attr('height', (10 + 2) * wh),
       svg3 = d3
-        .select('#case3list')
-        .append('svg')
-        .attr('width', 250)
-        .attr('height', (10 + 2) * wh);
+      .select('#case3list')
+      .append('svg')
+      .attr('width', 250)
+      .attr('height', (10 + 2) * wh);
     var g1 = svg1
-        .append('g')
-        .attr('class', 'g1')
-        .attr('transform', 'translate(' + 0 + ',' + 10 + ')'),
+      .append('g')
+      .attr('class', 'g1')
+      .attr('transform', 'translate(' + 0 + ',' + 10 + ')'),
       g2 = svg2
-        .append('g')
-        .attr('class', 'g2')
-        .attr('transform', 'translate(' + 0 + ',' + 10 + ')'),
+      .append('g')
+      .attr('class', 'g2')
+      .attr('transform', 'translate(' + 0 + ',' + 10 + ')'),
       g3 = svg3
-        .append('g')
-        .attr('class', 'g3')
-        .attr('transform', 'translate(' + 0 + ',' + 10 + ')');
+      .append('g')
+      .attr('class', 'g3')
+      .attr('transform', 'translate(' + 0 + ',' + 10 + ')');
   } else {
     var svg1 = d3.select('#case1list svg'),
       svg2 = d3.select('#case2list svg'),
@@ -4843,8 +4691,8 @@ function getLocal() {
       $('#citysearch-left').attr('value', local);
       $('#subtitle-user-city').html(
         "And how does <span class='offsetcolour'>" +
-          local +
-          '</span> compare to the winningest cities in North American sports?'
+        local +
+        '</span> compare to the winningest cities in North American sports?'
       );
       d3.select('#subtitle-user-city')
         .transition()
@@ -4862,8 +4710,8 @@ function getLocal() {
       } else {
         $('#groundrules-user-city').html(
           "Or maybe it’s <span class='offsetcolour'>" +
-            local +
-            '</span>? Or maybe Green Bay, Wisconsin'
+          local +
+          '</span>? Or maybe Green Bay, Wisconsin'
         );
       }
     } else {
