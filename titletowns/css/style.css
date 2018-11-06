@@ -209,14 +209,14 @@ section.side {
 
 h1 {
   font-family: "Cormorant Garamond", serif;
-  font-size: 2rem;
+  font-size: 3rem;
   line-height: 1;
   letter-spacing: 0.025em;
   font-weight: 700;
   margin: 0; }
   @media screen and (min-width: 768px) {
     h1 {
-      font-size: 3rem;
+      font-size: 4rem;
       line-height: 1;
       letter-spacing: 0.025em; } }
 

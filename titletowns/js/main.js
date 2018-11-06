@@ -1175,7 +1175,7 @@ function caseone(first) {
       .attr('y', 0)
       .attr('r', 4)
       .style('fill', bg_colour)
-      .style('stroke', 'white')
+      .style('stroke', '#ECE833')
       .style('opacity', c1expO);
 
     g.append('rect')
@@ -1194,7 +1194,7 @@ function caseone(first) {
         .attr(
           'x',
           c1x(0) -
-            getTextWidth(data[adjRank].key, 'bold 13px aktiv-grotesk') -
+            getTextWidth(data[adjRank].key, 'bold 13px Atlas Grotesk Web') -
             15
         )
         .attr('y', c1y(adjRank))
@@ -1511,7 +1511,7 @@ function caseone(first) {
     .style('fill', bg_colour)
     .style('stroke', function(d) {
       if (d.key === local || d.key === searched) return accent_colour_light;
-      return 'white';
+      return '#ECE833';
     })
     .style('opacity', 0)
     .merge(actual)
@@ -2162,7 +2162,7 @@ function casetwo(first) {
       .attr('class', 'legend_case2 text legend')
       .attr('x', function(d, i) {
         if (d.event === 'finals appearance') return 50;
-        if (d.event === 'final four appearance') return 175;
+        if (d.event === 'final four appearance') return 195;
         return 0;
       })
       .attr('y', 10)
@@ -2919,7 +2919,7 @@ function casethree(first) {
   c3c = d3
     .scaleLinear()
     .domain([0, 0.5, 1, 10, 120])
-    .range(['#EF4723', '#6c7a89', '#ECE833', '#ED9C2A', '#3D51A3']);
+    .range(['#ef4723', '#ed9c2a', '#ece833', '#a9cf3f', '#5bba47']);
 
   var xAxis = d3
     .axisBottom(c3x)
@@ -4194,7 +4194,7 @@ function wrapup(first) {
       return 'normal';
     })
     .style('fill', function(d) {
-      if (d.key === searched || d.key === local) return '#FF6A68';
+      if (d.key === searched || d.key === local) return '#ef4723';
       if (d.key != searched && d.key != local && d.local_seasons < 1)
         return 'none';
       return 'white';
@@ -4300,7 +4300,7 @@ function wrapup(first) {
       return 'none';
     })
     .style('fill', function(d) {
-      if (d.metro === searched || d.metro === local) return '#FF6A68';
+      if (d.metro === searched || d.metro === local) return '#ef4723';
       return 'white';
     })
     .text(function(d) {
@@ -4396,7 +4396,7 @@ function wrapup(first) {
       return 'none';
     })
     .style('fill', function(d) {
-      if (d.key === searched || d.key === local) return '#FF6A68';
+      if (d.key === searched || d.key === local) return '#ef4723';
       return 'white';
     })
     .text(function(d) {
