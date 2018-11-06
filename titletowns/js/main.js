@@ -200,6 +200,8 @@ var case1data = [],
 
 // Russell
 
+const commaFormat = d3.format(",")
+
 function getIP() {
   var url = 'https://api.ipify.org?format=json';
   return new Promise(function(resolve, reject) {
@@ -1029,7 +1031,7 @@ function caseone(first) {
   if (leadingcity === 'New York Metro Area')
     $('#step2_leader').html('New York Metro Area');
   if (data.length > 0) {
-    $('#step1_totalseasons').html(data[leader].local_seasons);
+    $('#step1_totalseasons').html(commaFormat(data[leader].local_seasons));
     $('#step1_totaltitles').html(data[leader].newvalues.length);
     if (data[leader].expected < data[leader].newvalues.length) {
       if (data[leader].newvalues.length - data[leader].expected > 10)
@@ -1140,7 +1142,7 @@ function caseone(first) {
       .append('text')
       .attr('class', 'legend_case1_phase2 legend')
       .attr('x', 5)
-      .attr('y', 10)
+      .attr('y', 15)
       .attr('dy', 5)
       .attr('dx', -8)
       .style('text-anchor', 'start')
@@ -1152,7 +1154,7 @@ function caseone(first) {
       .append('text')
       .attr('class', 'legend_case1_phase2 legend')
       .attr('x', c1x(0))
-      .attr('y', 10)
+      .attr('y', 15)
       .attr('dy', 5)
       .attr('dx', -8)
       .style('text-anchor', 'start')
@@ -1207,7 +1209,7 @@ function caseone(first) {
         .attr('id', 'c1locationLine')
         .attr(
           'x1',
-          c1x(0) - getTextWidth(data[adjRank].key, 'bold 16px aktiv-grotesk')
+          c1x(0) - getTextWidth(data[adjRank].key, 'bold 16px Atlas Grotesk Web')
         )
         .attr('x2', sideD.w)
         .attr('y1', c1y(adjRank) - 5)
@@ -1249,13 +1251,13 @@ function caseone(first) {
               c1x(0) -
               getTextWidth(
                 data[searchedAdjRank].key,
-                'bold 13px aktiv-grotesk'
+                'bold 13px Atlas Grotesk Web'
               ) -
               45
             );
           return (
             c1x(0) -
-            getTextWidth(data[searchedAdjRank].key, 'bold 13px aktiv-grotesk') -
+            getTextWidth(data[searchedAdjRank].key, 'bold 13px Atlas Grotesk Web') -
             30
           );
         })
@@ -1267,7 +1269,7 @@ function caseone(first) {
               (c1x(0) -
                 getTextWidth(
                   data[searchedAdjRank].key,
-                  'bold 13px aktiv-grotesk'
+                  'bold 13px Atlas Grotesk Web'
                 ) -
                 45)
             );
@@ -1276,7 +1278,7 @@ function caseone(first) {
             (c1x(0) -
               getTextWidth(
                 data[searchedAdjRank].key,
-                'bold 13px aktiv-grotesk'
+                'bold 13px Atlas Grotesk Web'
               ) -
               30)
           );
@@ -1291,13 +1293,13 @@ function caseone(first) {
               c1x(0) -
               getTextWidth(
                 data[searchedAdjRank].key,
-                'bold 13px aktiv-grotesk'
+                'bold 13px Atlas Grotesk Web'
               ) -
               40
             );
           return (
             c1x(0) -
-            getTextWidth(data[searchedAdjRank].key, 'bold 13px aktiv-grotesk') -
+            getTextWidth(data[searchedAdjRank].key, 'bold 13px Atlas Grotesk Web') -
             25
           );
         })
@@ -1318,7 +1320,7 @@ function caseone(first) {
           .transition()
           .attr(
             'x1',
-            c1x(0) - getTextWidth(data[adjRank].key, 'bold 16px aktiv-grotesk')
+            c1x(0) - getTextWidth(data[adjRank].key, 'bold 16px Atlas Grotesk Web')
           )
           .attr('x2', sideD.w)
           .attr('y1', c1y(adjRank) - 5)
@@ -2190,12 +2192,12 @@ function casetwo(first) {
           if (data[adjRank].newseasons[0].season === undefined)
             return (
               c2x(end) -
-              getTextWidth(data[adjRank].metro, 'bold 13px aktiv-grotesk') -
+              getTextWidth(data[adjRank].metro, 'bold 13px Atlas Grotesk Web') -
               15
             );
           return (
             c2x(data[adjRank].newseasons[0].season) -
-            getTextWidth(data[adjRank].metro, 'bold 13px aktiv-grotesk') -
+            getTextWidth(data[adjRank].metro, 'bold 13px Atlas Grotesk Web') -
             15
           );
         })
@@ -2211,12 +2213,12 @@ function casetwo(first) {
           if (data[adjRank].newseasons[0].season === undefined)
             return (
               c2x(end) -
-              getTextWidth(data[adjRank].metro, 'bold 13px aktiv-grotesk') -
+              getTextWidth(data[adjRank].metro, 'bold 13px Atlas Grotesk Web') -
               15
             );
           return (
             c2x(data[adjRank].newseasons[0].season) -
-            getTextWidth(data[adjRank].metro, 'bold 13px aktiv-grotesk') -
+            getTextWidth(data[adjRank].metro, 'bold 13px Atlas Grotesk Web') -
             15
           );
         })
@@ -2262,7 +2264,7 @@ function casetwo(first) {
               c2x(end) -
               getTextWidth(
                 data[searchedAdjRank].metro,
-                'bold 13px aktiv-grotesk'
+                'bold 13px Atlas Grotesk Web'
               ) -
               offset
             );
@@ -2270,7 +2272,7 @@ function casetwo(first) {
             c2x(data[searchedAdjRank].newseasons[0].season) -
             getTextWidth(
               data[searchedAdjRank].metro,
-              'bold 13px aktiv-grotesk'
+              'bold 13px Atlas Grotesk Web'
             ) -
             offset
           );
@@ -2285,7 +2287,7 @@ function casetwo(first) {
               (c2x(end) -
                 getTextWidth(
                   data[searchedAdjRank].metro,
-                  'bold 13px aktiv-grotesk'
+                  'bold 13px Atlas Grotesk Web'
                 ) -
                 offset) +
               5
@@ -2295,7 +2297,7 @@ function casetwo(first) {
             (c2x(data[searchedAdjRank].newseasons[0].season) -
               getTextWidth(
                 data[searchedAdjRank].metro,
-                'bold 13px aktiv-grotesk'
+                'bold 13px Atlas Grotesk Web'
               ) -
               offset) +
             5
@@ -2312,7 +2314,7 @@ function casetwo(first) {
               c2x(end) -
               getTextWidth(
                 data[searchedAdjRank].metro,
-                'bold 13px aktiv-grotesk'
+                'bold 13px Atlas Grotesk Web'
               ) -
               offset
             );
@@ -2320,7 +2322,7 @@ function casetwo(first) {
             c2x(data[searchedAdjRank].newseasons[0].season) -
             getTextWidth(
               data[searchedAdjRank].metro,
-              'bold 13px aktiv-grotesk'
+              'bold 13px Atlas Grotesk Web'
             ) -
             offset
           );
@@ -2339,12 +2341,12 @@ function casetwo(first) {
           if (data[adjRank].newseasons[0] === undefined)
             return (
               c2x(end) -
-              getTextWidth(data[adjRank].metro, 'bold 13px aktiv-grotesk') -
+              getTextWidth(data[adjRank].metro, 'bold 13px Atlas Grotesk Web') -
               15
             );
           return (
             c2x(data[adjRank].newseasons[0].season) -
-            getTextWidth(data[adjRank].metro, 'bold 13px aktiv-grotesk') -
+            getTextWidth(data[adjRank].metro, 'bold 13px Atlas Grotesk Web') -
             15
           );
         })
@@ -2357,12 +2359,12 @@ function casetwo(first) {
             if (data[adjRank].newseasons[0] === undefined)
               return (
                 c2x(end) -
-                getTextWidth(data[adjRank].metro, 'bold 13px aktiv-grotesk') -
+                getTextWidth(data[adjRank].metro, 'bold 13px Atlas Grotesk Web') -
                 15
               );
             return (
               c2x(data[adjRank].newseasons[0].season) -
-              getTextWidth(data[adjRank].metro, 'bold 13px aktiv-grotesk') -
+              getTextWidth(data[adjRank].metro, 'bold 13px Atlas Grotesk Web') -
               15
             );
           })
@@ -3508,12 +3510,12 @@ function casethree(first) {
           if (localData[0].tlq > 1)
             return (
               c3x(1) -
-              getTextWidth(localData[0].key, 'bold 13px aktiv-grotesk') -
+              getTextWidth(localData[0].key, 'bold 13px Atlas Grotesk Web') -
               15
             );
           return (
             c3x(1) +
-            getTextWidth(localData[0].key, 'bold 13px aktiv-grotesk') +
+            getTextWidth(localData[0].key, 'bold 13px Atlas Grotesk Web') +
             15
           );
         })
@@ -3537,12 +3539,12 @@ function casethree(first) {
           if (localData[0].tlq > 1)
             return (
               c3x(1) -
-              getTextWidth(localData[0].key, 'bold 13px aktiv-grotesk') -
+              getTextWidth(localData[0].key, 'bold 13px Atlas Grotesk Web') -
               50
             );
           return (
             c3x(1) +
-            getTextWidth(localData[0].key, 'bold 13px aktiv-grotesk') +
+            getTextWidth(localData[0].key, 'bold 13px Atlas Grotesk Web') +
             50
           );
         })
@@ -3596,13 +3598,13 @@ function casethree(first) {
               c3x(1) -
               getTextWidth(
                 data[searchedAdjRank].key,
-                'bold 13px aktiv-grotesk'
+                'bold 13px Atlas Grotesk Web'
               ) -
               adj
             );
           return (
             c3x(1) +
-            getTextWidth(data[searchedAdjRank].key, 'bold 13px aktiv-grotesk') +
+            getTextWidth(data[searchedAdjRank].key, 'bold 13px Atlas Grotesk Web') +
             adj
           );
         })
@@ -3625,12 +3627,12 @@ function casethree(first) {
             if (data[adjRank].tlq > 1)
               return (
                 c3x(1) -
-                getTextWidth(data[adjRank].key, 'bold 13px aktiv-grotesk') -
+                getTextWidth(data[adjRank].key, 'bold 13px Atlas Grotesk Web') -
                 15
               );
             return (
               c3x(1) +
-              getTextWidth(data[adjRank].key, 'bold 13px aktiv-grotesk') +
+              getTextWidth(data[adjRank].key, 'bold 13px Atlas Grotesk Web') +
               15
             );
           }
@@ -3655,12 +3657,12 @@ function casethree(first) {
             if (data[adjRank].tlq > 1)
               return (
                 c3x(1) -
-                getTextWidth(data[adjRank].key, 'bold 13px aktiv-grotesk') -
+                getTextWidth(data[adjRank].key, 'bold 13px Atlas Grotesk Web') -
                 50
               );
             return (
               c3x(1) +
-              getTextWidth(data[adjRank].key, 'bold 13px aktiv-grotesk') +
+              getTextWidth(data[adjRank].key, 'bold 13px Atlas Grotesk Web') +
               50
             );
           })
@@ -4002,7 +4004,7 @@ function searchWrapUpData(set, data) {
 
 function wrapup(first) {
   wrapupdrawn = true;
-  var wh = 20;
+  var wh = 25;
   var y = d3
       .scaleBand()
       .domain(d3.range(12))

@@ -252,6 +252,7 @@ section#wrapup h1, section#wrapup p {
 
 .footnotes {
   max-width: 40rem;
+	width: 100%
 }
 
 .footnote {
@@ -297,12 +298,33 @@ h5 {
 section.side article {
 	padding: 0 1rem 0 3rem;
 }
+@media screen and (max-width: 768px){
+	section.side article {
+		padding: 0 1rem 0 1rem;
+	}
+	section.side article .step .inner {
+		color: #1b2129;
+	}
+	section.side article .step {
+		opacity: 0.3;
+	}
+	section.side article .step.active {
+		opacity: 1;
+	}
+	section#wrapup, section#title {
+		padding: 0 1rem;
+	}
+}
 
 .wrapup-list, .wrapup-sub {
 	color: #59636c !important;
 }
 
-#wrapup .prose span:hover, a:hover {
+a:hover {
+	color: #59636c;
+}
+
+#wrapup .prose .step_blank:hover {
 	color: #59636c;
 }
 
@@ -339,14 +361,20 @@ a {
 	font-size: 3rem;
 	text-align: center;
 	font-weight: 700;
+	margin-bottom: 0rem;
 }
 
 #wrapup h1 {
 	font-size: 2rem;
 	text-align: center;
 	font-weight: 300;
+	margin-bottom: 2rem;
 }
 
 #wrapup-local {
 	font-weight: 300;
+}
+
+h2 {
+	margin: 0.5rem 0 1rem 0;
 }
