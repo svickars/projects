@@ -752,7 +752,8 @@ function setup() {
   });
   $('#showMoreC1').on('click', function() {
     num += 10;
-    $('#case2_scrolly').css('margin-top', (num - 1) * 30 - 600 + 'px');
+    $('#case2_scrolly').css('margin-top', (num - 1) * 30 - 500 + 'px');
+    // $('#c2hr').css('margin-top', $('#c2hr').css('margin-top') + (num + 1) * 30 + 'px');
     // $("#case1_hr").css("margin-top", ((num - 1) * 30) - 500 + "px")
     caseone();
   });
@@ -792,7 +793,7 @@ function setup() {
   });
   $('#showMoreC2').on('click', function() {
     case2num += 10;
-    $('#case3_scrolly').css('margin-top', (case2num - 1) * 30 - 600 + 'px');
+    $('#case3_scrolly').css('margin-top', (case2num - 1) * 30 - 500 + 'px');
     casetwo();
   });
 
@@ -862,7 +863,7 @@ function setup() {
   });
   $('#showMoreC3').on('click', function() {
     case3num += 10;
-    $('#wrapup_container').css('margin-top', (case3num - 1) * 30 - 600 + 'px');
+    $('#wrapup_container').css('margin-top', (case3num - 1) * 30 - 500 + 'px');
     // var newheight = $("#case3_scrolly").height();
     // newheight += (case3num - 1) * 30
     // $("#case3_scrolly").css("height", newheight + "px")

@@ -156,6 +156,10 @@ h1 {
   height: 3em;
 }
 
+.hr-text.postcase {
+  margin-top: -50px;
+}
+
 .hr-text:before {
   background: linear-gradient(to right, transparent, #59636c, transparent);
 }
