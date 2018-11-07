@@ -1066,7 +1066,7 @@ function caseone(first) {
     .axisTop(c1x)
     .tickSize(num * h)
     .tickFormat(function(d) {
-      if (d === 0) return d + ' titles';
+      if (d === 0 && !small_screen) return d + ' titles';
       return d;
     });
 
@@ -2844,23 +2844,34 @@ function casethree(first) {
     .domain([0, 0.5, 1, 10, 120])
     .range(['#ef4723', '#ed9c2a', '#ece833', '#a9cf3f', '#5bba47']);
 
+  var tickvalues = [
+    2000000,
+    4000000,
+    6000000,
+    8000000,
+    10000000,
+    12000000,
+    14000000,
+    16000000,
+    18000000,
+    20000000,
+    22000000
+  ];
+
+  if (small_screen) tickvalues = [
+    2000000,
+    6000000,
+    10000000,
+    14000000,
+    18000000,
+    22000000
+  ]
+
   var xAxis = d3
     .axisBottom(c3x)
     .tickSize(0)
     .tickFormat(d3.format('.2s'))
-    .tickValues([
-      2000000,
-      4000000,
-      6000000,
-      8000000,
-      10000000,
-      12000000,
-      14000000,
-      16000000,
-      18000000,
-      20000000,
-      22000000
-    ]);
+    .tickValues(tickvalues);
   var yAxis = d3
     .axisLeft(c3y)
     .tickFormat(function(d) {
@@ -3231,8 +3242,8 @@ function casethree(first) {
 
   if (c3status === 'first') {
     if (small_screen) {
-      var large = 22000000,
-        small = 0;
+      var large = 22500000,
+        small = -500000;
     } else {
       var large = 16000000,
         small = 6000000;
@@ -3258,7 +3269,7 @@ function casethree(first) {
         color: accent_colour_light
       }
     ];
-  } else if (c3status === 'scatter_basic' || c3status === 'scatter_tlq') {
+  } else if ((c3status === 'scatter_basic' || c3status === 'scatter_tlq') && !small_screen) {
     notes = [{
       note: {
         title: 'More titles per capita'
@@ -3269,6 +3280,8 @@ function casethree(first) {
       dy: 25,
       color: accent_colour_light
     }];
+  } else {
+    notes = [];
   }
 
   annotations.forEach(function(d) {

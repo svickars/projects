@@ -320,12 +320,37 @@ section.side article {
   section.side article .step {
     opacity: 0.3;
   }
+  section.side article .step.last {
+    min-height: 175vh;
+  }
+  #case3_scrolly section.side article .step.last {
+    min-height: 225vh;
+  }
   section.side article .step.active {
     opacity: 1;
   }
   section#wrapup,
   section#title {
     padding: 0 1rem;
+  }
+  .hr-text {
+    margin-bottom: 150px;
+  }
+  .hr-text.postcase {
+    margin-top: 0;
+    margin-bottom: 200px;
+  }
+  .button.light {
+    color: #59636c;
+    background-color: white;
+    opacity: .75;
+  }
+
+  .button.light.isactive {
+    background-color: white;
+    border-color: #1b2129;
+    color: #1b2129;
+    opacity: 1;
   }
 }
 
