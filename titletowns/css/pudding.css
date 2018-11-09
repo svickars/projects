@@ -1,9 +1,8 @@
 /* FONTS */
 @font-face {
   font-family: 'Canela Web';
-  src: url('{{basepath}}assets/fonts/canela/Canela-Light-Web.woff2')
-      format('woff2'),
-    url('{{basepath}}assets/fonts/canela/Canela-Light-Web.woff') format('woff');
+  src: url('../assets/fonts/canela/Canela-Light-Web.woff2') format('woff2'),
+    url('../assets/fonts/canela/Canela-Light-Web.woff') format('woff');
   font-weight: 300;
   font-style: normal;
   font-stretch: normal;
@@ -347,7 +346,7 @@ section.side article {
   .button.light {
     color: #59636c;
     background-color: white;
-    opacity: .75;
+    opacity: 0.75;
   }
 
   .button.light.isactive {
