@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en-US" class="no-js no-svg">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>The Irregular Outfields of Baseball</title>
+
+    <link href="css/easy-autocomplete.css" rel="stylesheet" />
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-9ralMzdK1QYsk4yBY680hmsb4/hJ98xK3w0TIaJ3ll4POWpWUYaA2bRjGGujGT8w" crossorigin="anonymous">
+
+    <link href="https://fonts.googleapis.com/css?family=Cormorant+Garamond:300|Inconsolata" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.typekit.net/dpo4ptz.css">
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/d3-annotation/1.17.0/d3-annotation.min.css" rel="stylesheet">
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <script src="http://d3js.org/queue.v1.min.js"></script>
+    <script src="https://d3js.org/d3-path.v1.min.js"></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/tabletop.js/1.5.1/tabletop.min.js'></script>
+
+  </head>
+
+  <body>
+
+    <div class="container lead">
+      <section id="title">
+        <div class="intro">
+          <h1>The Irregular Outfields of Baseball</h1>
+        </div>
+        <div class="prose">
+          <p>Baseball is a game rooted in rules, regulations, and meticulous planning and record-keeping. But none of that applies to the parks the boys of summer play in. There are 30 MLB stadiums. No two of them are alike.</p>
+        </div>
+      </section>
+    </div>
+
+    <div class="container">
+      <section class="content">
+        <figure id="outfield_overlay">
+          <div class="header"></div>
+          <div class="outfield_overlay">
+          </div>
+          <div class="prose">
+            <p>Hockey nets are 178 feet apart. Basketball hoops are 10 feet above the hardwood. And American football fields are 100 yards long. In any professional sport, the playing surface and goal size is the same everywhere you play. Any
+              professional sport that is, but baseball. The pitcher’s mound is always 10 inches high, the pitcher always stands 60 and a half feet from home plate, and home is always 90 feet from first base. But once you leave the infield, the major
+              leagues have no discernible rules regarding field size or fence height.</p>
+            <p>Take a look at the overlay of every Major League stadium above — there’s thirty of them, and none are the same.</p>
+            <p>This isn’t really an issue for most fans; in fact, the irregularity is part of the charm. Baseball stadiums are so different because the eras in which they were built are so different.</p>
+          </div>
+        </figure>
+      </section>
+    </div>
+
+    <div class="container full">
+      <section class="side" id="chart1_scrolly">
+        <figure id="chart1_figure">
+          <div class="header" id="chart1_header">
+            <h3>&nbsp;</h3>
+            <h2>&nbsp;</h2>
+          </div>
+          <div class="chart1">
+          </div>
+        </figure>
+        <article>
+          <div class="step light" data-index="0">
+            <div class="inner">
+              <h3>Boston Red Sox | Boston, MA</h3>
+              <h2>Fenway Park</h2>
+              <h3>Built: <div class="button" id="bostonRedSox-1912">
+                  <div class="highlight"></div>1912
+                </div>
+              </h3>
+              <h3>Expanded:
+                <div class="button" id="bostonRedSox-1926">
+                  <div class="highlight"></div>1926
+                </div>
+                <div class="button" id="bostonRedSox-1934">
+                  <div class="highlight"></div>1934
+                </div>
+                <div class="button" id="bostonRedSox-1940">
+                  <div class="highlight"></div>1940
+                </div>
+                <div class="button" id="bostonRedSox-1988">
+                  <div class="highlight"></div>1988
+                </div>
+                <div class="button" id="bostonRedSox-2011">
+                  <div class="highlight"></div>2011
+                </div>
+              </h3>
+            </div>
+          </div>
+          <div class="step light" data-index="1">
+            <div class="inner">
+              Lorem ipsum...
+              <div class="fenway-wall"></div>
+            </div>
+          </div>
+          <div class="step light" data-index="2">
+            <div class="inner">
+              <h3>Chicago Cubs | Wrigleyville, Chicago, IL</h3>
+              <h2>Wrigley Field</h2>
+              <h3>Built: <div class="button" id="chicagoCubs-1913">
+                  <div class="highlight"></div>1914
+                </div>
+              </h3>
+              <h3>Expanded:
+                <div class="button" id="chicagoCubs-1914">
+                  <div class="highlight"></div>1914
+                </div>
+                <div class="button" id="chicagoCubs-1915">
+                  <div class="highlight"></div>1915
+                </div>
+                <div class="button" id="chicagoCubs-1923">
+                  <div class="highlight"></div>1923
+                </div>
+                <div class="button" id="chicagoCubs-1932">
+                  <div class="highlight"></div>1932
+                </div>
+                <div class="button" id="chicagoCubs-1938">
+                  <div class="highlight"></div>1938
+                </div>
+                <div class="button" id="chicagoCubs-1979">
+                  <div class="highlight"></div>1979
+                </div>
+                <div class="button" id="chicagoCubs-2006">
+                  <div class="highlight"></div>2006
+                </div>
+                <div class="button" id="chicagoCubs-2018">
+                  <div class="highlight"></div>2018
+                </div>
+              </h3>
+            </div>
+          </div>
+          <div class="step light" data-index="3">
+            <div class="inner">
+              Lorem ipsum...
+              <div class="wrigley-wall"></div>
+            </div>
+          </div>
+          <div class="step light" data-index="4">
+            <div class="inner">
+              <h4>Headline</h4>
+              Lorem ipsum...
+            </div>
+          </div>
+        </article>
+      </section>
+    </div>
+
+
+    <script src=" //ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js "></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-annotation/1.17.0/d3-annotation.min.js"></script>
+    <!-- <script src="js/jquery.easy-autocomplete.js"></script> -->
+    <script src="js/stickyfill.min.js"></script>
+    <script src="js/enter-view.min.js"></script>
+    <!-- <script src="js/d3-tip-min.js"></script> -->
+    <script src="js/main.js"></script>
+  </body>
+
+</html>

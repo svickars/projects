@@ -1,0 +1,352 @@
+$gray1: #191919;
+$gray2: #333;
+$gray3: #666;
+$gray4: #b5b5b5;
+$gray5: #f9f9fa;
+$red: #E00000;
+$offset: #6c7a89;
+$serif: 'Cardo', serif;
+$sans: 'Lato', sans-serif;
+$mono: "Inconsolata", monospace;
+
+@font-face {
+  font-family: "FontAwesome";
+  font-weight: normal;
+  font-style : normal;
+       src : url("https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/fonts/fontawesome-webfont.eot?v=4.3.0");
+       src : url("https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/fonts/fontawesome-webfont.eot?#iefix&v=4.3.0") format("embedded-opentype"),
+             url("https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/fonts/fontawesome-webfont.woff2?v=4.3.0") format("woff2"),
+             url("https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/fonts/fontawesome-webfont.woff?v=4.3.0") format("woff"),
+             url("https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/fonts/fontawesome-webfont.ttf?v=4.3.0") format("truetype"),
+             url("https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/fonts/fontawesome-webfont.svg?v=4.3.0#fontawesomeregular") format("svg");
+}
+
+// BASICS
+html {
+  height: 100%;
+}
+
+body {
+  height: 100%;
+  font-size: 1rem;
+  font-family: $sans;
+  color: $gray1;
+  // background-color: #1b2129;
+  overflow-x: hidden;
+}
+
+input:focus, select:focus, textarea:focus, button:focus {
+    outline: none;
+}
+
+* {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+   box-sizing: border-box;
+}
+
+.skip-to-main {
+  border: none;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+}
+
+
+// LAYOUT
+
+.container {
+  width: 100%;
+  min-height: -mox-calc(50% - 16px);
+  min-height: -webkit-calc(50% - 16px);
+  min-height: calc(50% - 16px);
+  align-items: center;
+}
+
+section {
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  &#title {
+    padding-top: 15vh;
+    width: 50%;
+    min-width: 345px;
+  }
+
+  &.full {
+    position: relative;
+    margin: 0;
+    width: 100%;
+    padding: 0;
+  }
+}
+
+#scrolly-overlay .scrolly {
+  width: 100%;
+	// max-width: 60rem;
+	// margin: 3rem auto;
+	// background-color: $gray5;
+	padding: 1rem;
+}
+
+article {
+  padding: 0 0;
+  margin: 0 auto;
+  max-width: 40rem;
+  position: relative;
+
+  .step {
+    min-height: 67vh;
+    margin-bottom: 1rem;
+    &:last-of-type {
+      margin-bottom: 0;
+    }
+    &.active {
+      p {
+        color: $gray1;
+      }
+    }
+    p {
+      padding: 1rem;
+      font-size: 1.1rem;
+      line-height: 1.8;
+      margin: 0;
+      background-color: white;
+      color: $gray4;
+      transition: all 250ms ease-in-out;
+    }
+  }
+}
+
+figure.sticky {
+  align-items: center;
+  align-self: flex-start;
+  // display: flex;
+  height: 100vh;
+  margin: 0;
+  width: 100%;
+  justify-content: center;
+  top: 0;
+
+  @media screen and (min-width: 35rem) {
+    position: sticky;
+  }
+}
+
+.intro {
+  text-align: center;
+}
+
+// FONTS
+h1 {
+  font-size: 50px;
+  font-family: $sans;
+  line-height: 1;
+  letter-spacing: 0.025em;
+  margin: 0 0 .75rem 0;
+}
+
+h2 {
+  font-size: 18px;
+  font-family: $sans;
+  letter-spacing: 0.025em;
+  margin: .5rem 0 .5rem 0;
+  color: $gray1;
+}
+
+p {
+  font-family: $serif;
+}
+
+.byline {
+  font-size: 14px;
+}
+
+
+// DORLING
+*{box-sizing:border-box}
+
+// body {
+//   font-family: -apple-system, monospace;
+//   color:#454545;
+//   width:960px;
+//   background:#f4f4f4;
+//   margin:0 auto
+// }
+
+svg {
+  fill: none;
+  margin-top: -8px
+}
+
+h1.info{
+  font-weight: 400;
+  font-size: 18px;
+  position: relative;
+  top: 10px;
+  left: 10px
+}
+
+circle:hover{
+  opacity:.7
+}
+
+svg text{
+  font-size:10px;
+  font-weight:700;
+  font-family: $mono;
+  fill:#f4f4f4;
+  // letter-spacing:2px;
+}
+
+.legend {
+  width: 50%;
+  min-width: 345px;
+  margin: auto;
+  height: 50px;
+  padding-top: 10px;
+
+  svg {
+    width: -mox-calc(100% - 150px);
+    width: -webkit-calc(100% - 150px);
+    width: calc(100% - 150px);
+    height: 100%;
+    display: inline-block;
+
+    text {
+      fill: $gray1;
+      font-size: 12px;
+    }
+  }
+}
+
+// SELECT
+
+.select {
+  position: relative;
+  overflow: hidden;
+  display: block;
+  margin: auto;
+  width: 330px;
+  height: 100%;
+  border-bottom: 0px;
+  border-radius: 3px;
+  font-size: 12px;
+  box-shadow: 0px 1em 2em -1.5em rgba(0, 0, 0, .5);
+
+  .selecttitle, .placeholder {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 100%;
+    padding: 1.5em 2em;
+    background: rgba(255,255,255,1);
+    border-top: 1px solid rgba(0,0,0,.05);
+    cursor: pointer;
+  }
+  &>input {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    display: block;
+    opacity: 0;
+    cursor: pointer;
+    &:checked {
+      div.options label.option .title {
+        display: none!important;
+      }
+    }
+    &:not(:checked) {
+      z-index: 4;
+      ~label.option {
+        >span.title {
+        display: none;
+        }
+      }
+    }
+    &:disabled {
+      cursor: no-drop;
+    }
+  }
+  &>span.placeholder {
+    position: relative;
+    z-index: 0;
+    display: inline-block;
+    width: 100%;
+    color: #999;
+    border-top: 0px;
+  }
+  label.option {
+    display: block;
+    overflow: hidden;
+    z-index: 1;
+    width: 100%;
+    transition: all 1s ease-out;
+    span.title {
+      position: relative;
+      z-index: 2;
+      transition: background .3s ease-out;
+      &:hover {
+        color: #fff;
+        background: rgba(255, 255, 255, .3);
+        box-shadow: inset 0px 1px 0px rgba(0, 0, 0, .1);
+      }
+    }
+  }
+
+}
+
+
+.select {
+    label.option {
+        display: block;
+        overflow: hidden;
+        z-index: 1;
+        width: 100%;
+        transition: all 1s ease-out;
+        span.title {
+            position: relative;
+            z-index: 2;
+            transition: background .3s ease-out;
+            i.icon {
+                padding-right: 8px;
+                color: rgba(146, 168, 209, 1);
+            }
+            &:hover {
+                color: #fff;
+                background: rgba(255, 255, 255, .3);
+                box-shadow: inset 0px 1px 0px rgba(0, 0, 0, .1);
+            }
+        }
+        input {
+            display: none;
+            &:checked~span.title {
+                position: absolute;
+                display: block;
+                z-index: 3;
+                top: 0px;
+                font-size: 12px;
+                background: #fff;
+                border-top: 0px;
+                box-shadow: none;
+                color: inherit;
+                width: 100%;
+            }
+            &:disabled {
+                &~span.title {
+                    background: #f9f9f9!important;
+                    color: #aaa;
+                    &:hover {
+                        color: #aaa;
+                        background: none;
+                        cursor: no-drop;
+                    }
+                }
+            }
